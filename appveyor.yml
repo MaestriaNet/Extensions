@@ -1,0 +1,20 @@
+version: '1.0.0.{build}'
+image: Visual Studio 2017
+configuration: Release
+dotnet_csproj:
+  patch: true
+  file: 'src\Extensions\Extensions.csproj'
+  version: '1.0.0'
+  package_version: '1.0.0'
+  assembly_version: '1.0.0'
+  file_version: '1.0.0'
+  informational_version: '1.0.0'
+before_build:
+  - ps: dotnet --version
+build_script:
+  - ps: dotnet build
+test_script:
+  - ps: dotnet test --test-adapter-path:. --logger:Appveyor
+artifacts:
+  - path: src\Extensions\bin\Release\*.nupkg
+    name: Nuget Package
