@@ -7,7 +7,7 @@
         <Company>Fábio Monteiro Naspolini</Company>
         <Title>Maestria.Data.Extensions</Title>
         <Description>Extension function pack to increase productivity and improve source code writing.</Description>
-        <PackageTags>Extension Extensions Fluent Functional Elegance Productivity Maestria Mastery IEnumerable Enumerable ICollection Collection IList List Array Max Min Highest Smallest Largest</PackageTags>
+        <PackageTags>Extension Extensions Fluent Functional Elegance Productivity Maestria Mastery IEnumerable Enumerable ICollection Collection IList List Array Max Min Highest Smallest Largest String Text Null If In Between</PackageTags>
         <RepositoryUrl>ttps://github.com/MaestriaNet/Extensions</RepositoryUrl>
         <PackageProjectUrl>https://github.com/MaestriaNet/Extensions</PackageProjectUrl>
         <License>https://github.com/MaestriaNet/Extensions/blob/master/LICENSE</License>
@@ -23,6 +23,7 @@
     
     <ItemGroup>
       <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
+      <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
     </ItemGroup>
-
+    
 </Project>
