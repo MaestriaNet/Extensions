@@ -1,27 +1,33 @@
 namespace Maestria.Extensions.Test.``Syntax Extensions``
 open System
-open System
-
 open Maestria.Extensions.Test.Internal.TestUtil
 open Maestria.Extensions
 open NUnit.Framework
 open FsUnit
 
 module In =
-    [<TestCase(10, [|5; 10; 35|])>]
-    [<TestCase(10.0, [|5.0; 10.0; 35.0|])>]
-    let ``Value in array group2``<'a> (value: 'a, values: 'a array) =
+    [<TestCase(MyColor.Red, [| MyColor.Red; MyColor.Green; MyColor.Blue |])>]
+    [<TestCase(MyColor.Green, [| MyColor.Red; MyColor.Green; MyColor.Blue |])>]
+    [<TestCase(MyColor.Blue, [| MyColor.Red; MyColor.Green; MyColor.Blue |])>]
+    let ``Enum in array group`` (value: MyColor, values: MyColor array) =
         value.In(values) |> should be True
 
-    [<Test>]
-    let ``Value in array group``() =
-        MyColor.Red.In(MyColor.Red, MyColor.Green, MyColor.Blue) |> should be True
-        (10).In(5, 10, 35) |> should be True
+    [<TestCase(MyColor.Yellow, [| MyColor.Red; MyColor.Green; MyColor.Blue |])>]
+    let ``Enum not in array group`` (value: MyColor, values: MyColor array) =
+        value.In(values) |> should be False
 
-    [<Test>]
-    let ``Value not in array group``() =
-        MyColor.Yellow.In(MyColor.Red, MyColor.Green, MyColor.Blue) |> should be False
-        (11).In(5, 10, 35) |> should be False
+    [<TestCase(5, [|5; 10; 15|])>]
+    [<TestCase(10, [|5; 10; 15|])>]
+    [<TestCase(15, [|5; 10; 15|])>]
+    let ``Value in array group`` (value: int, values: int array) =
+        value.In(values) |> should be True
+
+    [<TestCase(4, [| 5; 10; 15 |])>]
+    [<TestCase(8, [| 5; 10; 15 |])>]
+    [<TestCase(12, [| 5; 10; 15 |])>]
+    [<TestCase(16, [| 5; 10; 15 |])>]
+    let ``Value not in array group``(value: int, values: int array) =
+        value.In(values) |> should be False
 
 module Between =
     [<TestCase("2019-07-23", "2019-07-20", "2019-07-25")>]
