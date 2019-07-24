@@ -1,4 +1,4 @@
-namespace Biofa.Framework.Utils.Test.``Aggregate Extensions``
+namespace Maestria.Extensions.Test.``Aggregate Extensions``
 open System
 open FsUnit
 open NUnit.Framework

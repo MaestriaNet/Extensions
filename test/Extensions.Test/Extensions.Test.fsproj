@@ -2,13 +2,18 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
-        <AssemblyName>Maestria.Data.Extensions.Test</AssemblyName>
-        <RootNamespace>Maestria.Data.Extensions.Test</RootNamespace>
+        <AssemblyName>Maestria.Extensions.Test</AssemblyName>
+        <RootNamespace>Maestria.Extensions.Test</RootNamespace>
     </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Internal\TestUtil.fs" />
+    </ItemGroup>
 
     <ItemGroup>
         <Compile Include="CollectionUtilsTest.fs" />
         <Compile Include="AggregateExtenionsTest.fs" />
+        <Compile Include="SyntaxExtensionsText.fs" />
     </ItemGroup>
 
     <ItemGroup>
@@ -21,7 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Extensions\Extensions.csproj" />
+        <ProjectReference Include="..\..\src\Extensions\Extensions.csproj" />
     </ItemGroup>
-
+    
 </Project>

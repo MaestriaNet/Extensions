@@ -1,4 +1,4 @@
-namespace Biofa.Framework.Utils.Test.``Collection Extensions``
+namespace Maestria.Extensions.Test.``Collection Extensions``
 open System
 open System.Collections.Generic
 open FsUnit
