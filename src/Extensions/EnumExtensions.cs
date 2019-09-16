@@ -8,7 +8,7 @@ namespace Maestria.Extensions
     public static class EnumExtensions
     {
         /// <summary>
-        /// Retuning value of property Name of <see cref="DisplayAttribute"/>, when not present attribute returns is enum text
+        /// Retuning value of attribute <see cref="DisplayNameAttribute"/> or property Name of <see cref="DisplayAttribute"/>, when not present attribute returns is enum text
         /// </summary>
         /// <param name="value">Tipo enum para buscar atributo</param>
         /// <returns>Propriedade Name do atributo</returns>
@@ -18,15 +18,19 @@ namespace Maestria.Extensions
             var field = value.GetType().GetField(value.ToString());
             if (field == null) return value.ToString();
 
+            var nameAtt = field.GetCustomAttribute<DisplayNameAttribute>();
+            if (nameAtt != null)
+                return nameAtt.DisplayName;
+
             var displayAttr = field.GetCustomAttribute<DisplayAttribute>();
-            if (displayAttr != null && displayAttr.Name.HasValue())
+            if (displayAttr != null)
                 return displayAttr.Name;
 
             return value.ToString();
         }
 
         /// <summary>
-        /// Retuning value of attributes <see cref="DescriptionAttribute"/> or property Description of <see cref="DisplayAttribute"/>, when not present attribute returns is enum text
+        /// Retuning value of attribute <see cref="DescriptionAttribute"/> or property Description of <see cref="DisplayAttribute"/>, when not present attribute returns is enum text
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
@@ -38,11 +42,11 @@ namespace Maestria.Extensions
             if (field == null) return value.ToString();
 
             var descriptionAttr = field.GetCustomAttribute<DescriptionAttribute>();
-            if (descriptionAttr != null && descriptionAttr.Description.HasValue())
+            if (descriptionAttr != null)
                 return descriptionAttr.Description;
 
             var displayAttr = field.GetCustomAttribute<DisplayAttribute>();
-            if (displayAttr != null && displayAttr.Description.HasValue())
+            if (displayAttr != null)
                 return displayAttr.Description;
 
             return value.ToString();

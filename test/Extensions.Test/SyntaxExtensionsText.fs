@@ -4,6 +4,7 @@ open Maestria.Extensions.Test.Internal.TestUtil
 open Maestria.Extensions
 open NUnit.Framework
 open FsUnit
+open NUnit.Framework
 
 module In =
     [<TestCase(MyColor.Red, [| MyColor.Red; MyColor.Green; MyColor.Blue |])>]
@@ -51,3 +52,13 @@ module Between =
     [<TestCase(10, 5, 9)>]
     let ``Value not between interval``(value, starting, ending) =
         value.Between(starting, ending) |> should be False
+
+module NullIf =
+    [<Test>]
+    let ``Null if teste``() =
+        let bb: int = 5
+        let float: float = 5.0
+//        bb.NullIf(1) |> should equal 5
+//        bb.NullIf(5) |> should be Null
+        float.NullIf(1.0) |> should equal 5
+        float.NullIf(5.0) |> should be Null

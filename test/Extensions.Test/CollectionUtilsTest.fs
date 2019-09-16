@@ -10,15 +10,15 @@ module Const =
     let emptyArray = Array.empty<int>
     let nullList: List<int> = null
 
-module ForEach =
+module Iterate =
     [<Test>]
-    let ``Any collection for each execute``() = Const.array.ForEach(fun i -> (Array.contains i [|1;2;3;4;5|]) |> should be True)
+    let ``Any collection for each execute``() = Const.array.Iterate(fun i -> (Array.contains i [|1;2;3;4;5|]) |> should be True)
 
     [<Test>]
-    let ``Empty collection for each execute``() = Const.emptyArray.ForEach(fun i -> i |> ignore)
+    let ``Empty collection for each execute``() = Const.emptyArray.Iterate(fun i -> i |> ignore)
 
     [<Test>]
-    let ``Null collection for each execute``() = (fun () -> CollectionExtensions.ForEach(Const.nullList, fun i -> i |> ignore)) |> should not' (throw typeof<NullReferenceException>)
+    let ``Null collection for each execute``() = (fun () -> CollectionExtensions.Iterate(Const.nullList, fun i -> i |> ignore)) |> should not' (throw typeof<NullReferenceException>)
 
 module IsNullOrEmpty =
     [<Test>]
