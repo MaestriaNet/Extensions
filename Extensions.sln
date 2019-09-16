@@ -8,9 +8,9 @@ EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "src\Extensions\Extensions.csproj", "{EC456516-0310-4F05-8281-45F4E7CEDA0F}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Extensions.Test", "test\Extensions.Test\Extensions.Test.fsproj", "{DC1175A1-DA12-4550-A7D7-F8E0EF1D88AB}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Extensions.Test", "tests\Extensions.Test\Extensions.Test.fsproj", "{DC1175A1-DA12-4550-A7D7-F8E0EF1D88AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions.Test.CSharp", "test\Extensions.Test.CSharp\Extensions.Test.CSharp.csproj", "{3B623C0A-552A-420B-B3BF-E7C3A60F3F9A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions.Test.CSharp", "tests\Extensions.Test.CSharp\Extensions.Test.CSharp.csproj", "{3B623C0A-552A-420B-B3BF-E7C3A60F3F9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
