@@ -114,18 +114,6 @@ namespace Maestria.Extensions
             return string.Format(value, args);
         }
 
-        /// <summary>
-        /// Return only numeric chars at text
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static string OnlyNumbers(this string value)
-        {
-            if (string.IsNullOrEmpty(value))
-                return value;
-            return NonDigitsRegex.Replace(value, "");
-        }
-
         #endregion
 
         #region Value check
@@ -172,59 +160,21 @@ namespace Maestria.Extensions
             return value.Equals(valueToCompare, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        /// <summary>
-        /// Return <paramref name="default"/> text argument if <paramref name="value"/> is null or empty
-        /// </summary>
-        /// <param name="value">Current text value</param>
-        /// <param name="default">Value to return if <paramref name="value"/> is null or empty</param>
-        /// <returns></returns>
-        public static string IfNullOrEmpty(this string value, string @default) =>
-            value.IsNullOrEmpty() ? @default : value;
-
-        /// <summary>
-        /// Return <paramref name="default"/> text argument if <paramref name="value"/> is null or white space
-        /// </summary>
-        /// <param name="value">Current text value</param>
-        /// <param name="default">Value to return if <paramref name="value"/> is null or white space</param>
-        /// <returns></returns>
-        public static string IfNullOrWhiteSpace(this string value, string @default) =>
-            value.IsNullOrWhiteSpace() ? @default : value;
-
-        /// <summary>
-        /// Return null if <paramref name="value"/> is empty string
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static string NullIfEmpty(this string value) => value.IsNullOrEmpty() ? null : value;
-
-        /// <summary>
-        /// Return null if <paramref name="value"/> is white space
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static string NullIfWhiteSpace(this string value) => value.IsNullOrWhiteSpace() ? null : value;
-
-        /// <summary>
-        /// Return null if <paramref name="value"/> is equals to <paramref name="equalityValue"/>
-        /// </summary>
-        /// <param name="value">Current text</param>
-        /// <param name="equalityValue">Text to compare with <paramref name="value"/> and return null if equals</param>
-        /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
-        /// <returns>null if <paramref name="value"/> is equals to <paramref name="equalityValue"/></returns>
-        public static string NullIf(this string value, string equalityValue, bool ignoreCase = true)
-        {
-            if (value == null || equalityValue == null)
-                return value;
-
-            return value.Equals(equalityValue,
-                ignoreCase ? StringComparison.InvariantCultureIgnoreCase : StringComparison.InvariantCulture)
-                ? null
-                : value;
-        }
-
         #endregion
 
-        #region Clear text
+        #region Text patterns
+
+        /// <summary>
+        /// Return only numeric chars at text
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string OnlyNumbers(this string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return value;
+            return NonDigitsRegex.Replace(value, "");
+        }
 
         public static string RemoveAccents(this string text)
         {
