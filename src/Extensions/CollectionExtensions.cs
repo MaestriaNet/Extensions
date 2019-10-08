@@ -6,10 +6,19 @@ using System.Threading.Tasks;
 
 namespace Maestria.Extensions
 {
+    /// <summary>
+    /// Enumerable, Collection and List extensions methods
+    /// </summary>
     public static class CollectionExtensions
     {
         #region IEnumerable Iterate
 
+        /// <summary>
+        /// Iterate collection
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <param name="action"></param>
+        /// <exception cref="Exception"></exception>
         public static void Iterate(this IEnumerable enumerable, Action<object> action)
         {
             if (enumerable == null) return;
@@ -17,6 +26,11 @@ namespace Maestria.Extensions
                 action.Invoke(item);
         }
 
+        /// <summary>
+        /// Iterate collection safe mode
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <param name="action"></param>
         public static void IterateSafe(this IEnumerable enumerable, Action<object> action)
         {
             if (enumerable == null) return;
@@ -34,6 +48,13 @@ namespace Maestria.Extensions
                 }
         }
 
+        /// <summary>
+        /// Iterate collection async
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static async Task IterateAsync(this IEnumerable enumerable, Func<object, Task> action)
         {
             if (enumerable == null) return;
@@ -41,6 +62,12 @@ namespace Maestria.Extensions
                 await action.Invoke(item);
         }
 
+        /// <summary>
+        /// Iterate collection safe and async
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
         public static async Task IterateSafeAsync(this IEnumerable enumerable, Func<object, Task> action)
         {
             if (enumerable == null) return;
@@ -62,6 +89,12 @@ namespace Maestria.Extensions
 
         #region IEnumerable<T> Iterate
 
+        /// <summary>
+        /// Iterate collection
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <param name="action"></param>
+        /// <exception cref="Exception"></exception>
         public static void Iterate<T>(this IEnumerable<T> enumerable, Action<T> action)
         {
             if (enumerable == null) return;
@@ -69,6 +102,11 @@ namespace Maestria.Extensions
                 action.Invoke(item);
         }
 
+        /// <summary>
+        /// Iterate collection safe mode
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <param name="action"></param>
         public static void IterateSafe<T>(this IEnumerable<T> enumerable, Action<T> action)
         {
             if (enumerable == null) return;
@@ -86,6 +124,13 @@ namespace Maestria.Extensions
                 }
         }
 
+        /// <summary>
+        /// Iterate collection async
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static async Task IterateAsync<T>(this IEnumerable<T> enumerable, Func<T, Task> action)
         {
             if (enumerable == null) return;
@@ -93,6 +138,12 @@ namespace Maestria.Extensions
                 await action.Invoke(item);
         }
 
+        /// <summary>
+        /// Iterate collection safe and async
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
         public static async Task IterateSafeAsync<T>(this IEnumerable<T> enumerable, Func<T, Task> action)
         {
             if (enumerable == null) return;
@@ -112,8 +163,20 @@ namespace Maestria.Extensions
 
         #endregion
 
+        /// <summary>
+        /// Check if collection is null or has no items
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable) => enumerable == null || !enumerable.Any();
 
+        /// <summary>
+        /// Check if collection is not null and contains items
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static bool HasItems<T>(this IEnumerable<T> enumerable) => enumerable != null && enumerable.Any();
     }
 }

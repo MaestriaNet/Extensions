@@ -7,13 +7,15 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="ConstTest.fs" />
         <Compile Include="Internal\TestUtil.fs" />
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Include="CollectionUtilsTest.fs" />
         <Compile Include="AggregateExtenionsTest.fs" />
-        <Compile Include="SyntaxExtensionsText.fs" />
+        <Compile Include="CollectionExtensionsTest.fs" />
+        <Compile Include="NullIfExtensionsTest.fs" />
+        <Compile Include="SyntaxExtensionsTest.fs" />
     </ItemGroup>
 
     <ItemGroup>
