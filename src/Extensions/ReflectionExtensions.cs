@@ -96,7 +96,7 @@ namespace Maestria.Extensions
         /// <param name="child"></param>
         /// <param name="parent"></param>
         /// <returns></returns>
-        public static bool IsGenericTypeArgumentsInheritedsFrom(this Type child, Type parent)
+        private static bool IsGenericTypeArgumentsInheritedsFrom(this Type child, Type parent)
         {
             // ATENÇÃO: SE FOR ALTERAR ALGO AQUI, EXECUET O PROJETO DE TESTE UNITÁRIO DO FRAMEWORK!!!
             if (parent.GenericTypeArguments.Length > 0 &&

@@ -2,7 +2,7 @@ using System.Linq;
 
 namespace Maestria.Extensions
 {
-    public static class AggregateExtenions
+    public static class AggregateExtensions
     {
         public static T Max<T>(params T[] values) => values.Max();
 

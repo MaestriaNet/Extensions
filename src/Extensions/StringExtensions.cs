@@ -93,7 +93,7 @@ namespace Maestria.Extensions
         /// Add value to ends of text if the text is not null or white space.
         /// </summary>
         /// <param name="value">Text to manipulate</param>
-        /// <param name="prefix">To concat at the ending of text</param>
+        /// <param name="suffix">To concat at the ending of text</param>
         /// <returns></returns>
         public static string AddToRightIfHasValue(this string value, string suffix) =>
             value.HasValue() ? value + suffix : value;

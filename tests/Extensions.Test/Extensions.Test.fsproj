@@ -12,14 +12,17 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Include="AggregateExtenionsTest.fs" />
+        <Compile Include="AggregateExtensionsTest.fs" />
+        <Compile Include="Base64ExtensionsTest.fs" />
         <Compile Include="CollectionExtensionsTest.fs" />
+        <Compile Include="HashExtensionsTest.fs" />
         <Compile Include="NullIfExtensionsTest.fs" />
         <Compile Include="SyntaxExtensionsTest.fs" />
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="FsUnit" Version="3.4.1" />
+        <PackageReference Include="nunit" Version="3.12.0" />
         <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.1" />
         <PackageReference Include="System.Data.SQLite.Core" Version="1.0.110" />

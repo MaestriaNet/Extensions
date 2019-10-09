@@ -41,52 +41,52 @@ module Const =
 module Max =
     [<Test>]
     let ``Throw exception when you get the largest value of the empty nullable array``() =
-        (fun () -> AggregateExtenions.Max(Const.emptyArray) |> ignore) |> should throw typeof<InvalidOperationException>
+        (fun () -> AggregateExtensions.Max(Const.emptyArray) |> ignore) |> should throw typeof<InvalidOperationException>
 
     [<Test>]
     let ``Success to get the most value``() =
-        AggregateExtenions.Max(Const.oneItemArray) |> should equal Const.minDateExpected
-        AggregateExtenions.Max(Const.twoItemsArray) |> should equal Const.maxDateExpected
-        AggregateExtenions.Max(Const.threeItemsArray) |> should equal Const.maxDateExpected
+        AggregateExtensions.Max(Const.oneItemArray) |> should equal Const.minDateExpected
+        AggregateExtensions.Max(Const.twoItemsArray) |> should equal Const.maxDateExpected
+        AggregateExtensions.Max(Const.threeItemsArray) |> should equal Const.maxDateExpected
 
 module ``Max Nullable`` =
     [<Test>]
     let ``Do not throw exception when you get the largest value of the empty nullable array``() =
-        AggregateExtenions.Max(Const.emptyNullableArray) |> should be Null
+        AggregateExtensions.Max(Const.emptyNullableArray) |> should be Null
 
     [<Test>]
     let ``Do not throw exception when you get the largest value of the array with null items``() =
-        AggregateExtenions.Max(Const.nullItemNullableArray) |> should be Null
+        AggregateExtensions.Max(Const.nullItemNullableArray) |> should be Null
 
     [<Test>]
     let ``Success to get the highest value``() =
-        AggregateExtenions.Max(Const.oneItemNullableArray) |> should equal Const.minDateExpected
-        AggregateExtenions.Max(Const.twoItemsNullableArray) |> should equal Const.maxDateExpected
-        AggregateExtenions.Max(Const.threeItemsNullableArray) |> should equal Const.maxDateExpected
+        AggregateExtensions.Max(Const.oneItemNullableArray) |> should equal Const.minDateExpected
+        AggregateExtensions.Max(Const.twoItemsNullableArray) |> should equal Const.maxDateExpected
+        AggregateExtensions.Max(Const.threeItemsNullableArray) |> should equal Const.maxDateExpected
 
 module Min =
     [<Test>]
     let ``Throw exception when you get the smallest value of the empty nullable array``() =
-        (fun () -> AggregateExtenions.Min(Const.emptyArray) |> ignore) |> should throw typeof<InvalidOperationException>
+        (fun () -> AggregateExtensions.Min(Const.emptyArray) |> ignore) |> should throw typeof<InvalidOperationException>
 
     [<Test>]
     let ``Success for lowest value``() =
-        AggregateExtenions.Min(Const.oneItemArray) |> should equal Const.minDateExpected
-        AggregateExtenions.Min(Const.twoItemsArray) |> should equal Const.minDateExpected
-        AggregateExtenions.Min(Const.threeItemsArray) |> should equal Const.minDateExpected
+        AggregateExtensions.Min(Const.oneItemArray) |> should equal Const.minDateExpected
+        AggregateExtensions.Min(Const.twoItemsArray) |> should equal Const.minDateExpected
+        AggregateExtensions.Min(Const.threeItemsArray) |> should equal Const.minDateExpected
 
 module ``Min Nullable`` =
     [<Test>]
     let ``Do not throw exception when you get the smallest value of the empty nullable array``() =
-            AggregateExtenions.Min(Const.emptyNullableArray) |> should be Null
+            AggregateExtensions.Min(Const.emptyNullableArray) |> should be Null
 
     [<Test>]
     let ``Do not throw exception when you get the smallest value of the array with null items``() =
-        AggregateExtenions.Min(Const.nullItemNullableArray) |> should be Null
+        AggregateExtensions.Min(Const.nullItemNullableArray) |> should be Null
 
     [<Test>]
     let ``Success to get the lowest value``() =
-        AggregateExtenions.Min(Const.oneItemNullableArray) |> should equal Const.minDateExpected
-        AggregateExtenions.Min(Const.twoItemsNullableArray) |> should equal Const.minDateExpected
-        AggregateExtenions.Min(Const.threeItemsNullableArray) |> should equal Const.minDateExpected
+        AggregateExtensions.Min(Const.oneItemNullableArray) |> should equal Const.minDateExpected
+        AggregateExtensions.Min(Const.twoItemsNullableArray) |> should equal Const.minDateExpected
+        AggregateExtensions.Min(Const.threeItemsNullableArray) |> should equal Const.minDateExpected
 
