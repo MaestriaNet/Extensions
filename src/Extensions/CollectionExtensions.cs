@@ -178,5 +178,20 @@ namespace Maestria.Extensions
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         public static bool HasItems<T>(this IEnumerable<T> enumerable) => enumerable != null && enumerable.Any();
+
+        /// <summary>
+        /// Tentar obter valor da chave, caso não exista retornar o valor default indicado em <see cref="@default"/>
+        /// </summary>
+        /// <param name="dictionary"></param>
+        /// <param name="key"></param>
+        /// <param name="default"></param>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <returns></returns>
+        public static TValue TryGetValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary,
+            TKey key, TValue @default = default) =>
+            dictionary != null && dictionary.TryGetValue(key, out var value)
+                ? value
+                : @default;
     }
 }
