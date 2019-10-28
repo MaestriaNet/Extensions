@@ -72,5 +72,25 @@ namespace Maestria.Extensions
 
             return result;
         }
+
+        /// <summary>
+        /// Result array with all itens in enum
+        /// </summary>
+        /// <param name="enumType"></param>
+        /// <returns></returns>
+        public static object[] GetValues(Type enumType)
+        {
+            var values = Enum.GetValues(enumType);
+            var result = new Object[values.Length];
+
+            var i = 0;
+            foreach (var item in values)
+            {
+                result[i] = item;
+                i++;
+            }
+
+            return result;
+        }
     }
 }

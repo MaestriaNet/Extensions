@@ -45,6 +45,13 @@ namespace Maestria.Extensions
         /// <returns>A 128 char long hash.</returns>
         public static string GetHashSha512(this string input) => ComputeHash(HashAlgorithm.Sha512, input);
 
+        /// <summary>
+        /// Calculates the hash for the given string.
+        /// </summary>
+        /// <param name="hashAlgorithm"></param>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static string ComputeHash(HashAlgorithm hashAlgorithm, string input)
         {
             if (input == null)
