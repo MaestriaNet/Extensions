@@ -16,6 +16,7 @@
         <Compile Include="Base64ExtensionsTest.fs" />
         <Compile Include="CollectionExtensionsTest.fs" />
         <Compile Include="HashExtensionsTest.fs" />
+        <Compile Include="IfNullExtensionsTest.fs" />
         <Compile Include="NullIfExtensionsTest.fs" />
         <Compile Include="SyntaxExtensionsTest.fs" />
     </ItemGroup>
