@@ -10,8 +10,11 @@ namespace Maestria.Extensions
         public static T? NullIf<T>(this T value, T equalityValue) where T : struct =>
             EqualityComparer<T>.Default.Equals(value, equalityValue) ? (T?) null : value;
 
+        public static T? NullIf<T>(this T? value, T? equalityValue) where T : struct =>
+            EqualityComparer<T?>.Default.Equals(value, equalityValue) ? (T?) null : value;
+
         public static T NullIf<T>(this object value, T equalityValue) where T : class =>
-            value == equalityValue ? null : (T) value;
+            value != null && equalityValue != null && value.Equals(equalityValue) ? null : (T) value;
 
         public static T? NullIfIn<T>(this T value, params T[] values) where T : struct, IComparable =>
             value.In(values) ? (T? )null : value;
@@ -78,7 +81,7 @@ namespace Maestria.Extensions
         /// <param name="equalityValue">Text to compare with <paramref name="value"/> and return null if equals</param>
         /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
         /// <returns>null if <paramref name="value"/> is equals to <paramref name="equalityValue"/></returns>
-        public static string NullIf(this string value, string equalityValue, bool ignoreCase = true)
+        public static string NullIf(this string value, string equalityValue, bool ignoreCase = false)
         {
             if (value == null || equalityValue == null)
                 return value;
