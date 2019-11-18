@@ -21,9 +21,7 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string RemoveIfStartsWith(this string value, string equality, bool ignoreCase = true)
         {
-            if (value == null || equality == null)
-                return value;
-
+            if (value == null || equality == null) return value;
             return value.StartsWith(equality, ignoreCase, CultureInfo.InvariantCulture)
                 ? value.Remove(0, equality.Length)
                 : value;
@@ -38,9 +36,7 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string RemoveIfEndsWith(this string value, string equality, bool ignoreCase = true)
         {
-            if (value == null || equality == null)
-                return value;
-
+            if (value == null || equality == null) return value;
             return value.EndsWith(equality, ignoreCase, CultureInfo.InvariantCulture)
                 ? value.Remove(value.Length - equality.Length, equality.Length)
                 : value;
@@ -55,9 +51,8 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string AddToLeftIfNotStartsWith(this string value, string equality, bool ignoreCase = true)
         {
-            if (value == null || equality == null)
-                return value;
-
+            if (value == null) return equality;
+            if (equality == null) return value;
             return value.StartsWith(equality, ignoreCase, CultureInfo.InvariantCulture)
                 ? value
                 : equality + value;
@@ -72,9 +67,8 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string AddToRightIfNotEndsWith(this string value, string equality, bool ignoreCase = true)
         {
-            if (value == null || equality == null)
-                return value;
-
+            if (value == null) return equality;
+            if (equality == null) return value;
             return value.EndsWith(equality, ignoreCase, CultureInfo.InvariantCulture)
                 ? value
                 : value + equality;
@@ -108,9 +102,7 @@ namespace Maestria.Extensions
         [StringFormatMethod("value")]
         public static string Format(this string value, params object[] args)
         {
-            if (value.IsNullOrWhiteSpace() || args == null || args.Length == 0)
-                return value;
-
+            if (value.IsNullOrWhiteSpace() || args == null || args.Length == 0) return value;
             return string.Format(value, args);
         }
 
@@ -167,13 +159,23 @@ namespace Maestria.Extensions
         /// <summary>
         /// Return only numeric chars at text
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">Value to clear alphanumeric chars</param>
+        /// <param name="allowFloatingPoint">Return numbers with dot char</param>
+        /// <param name="allowNegativeSign">return numbers with negative sign</param>
+        /// <param name="culture">Culture UI</param>
         /// <returns></returns>
-        public static string OnlyNumbers(this string value)
+        public static string OnlyNumbers(this string value, bool allowFloatingPoint = false, bool allowNegativeSign = false, CultureInfo culture = null)
         {
-            if (string.IsNullOrEmpty(value))
-                return value;
-            return NonDigitsRegex.Replace(value, "");
+            if (string.IsNullOrEmpty(value)) return value;
+            if (!allowFloatingPoint && !allowNegativeSign) return NonDigitsRegex.Replace(value, "");
+
+            var pattern = @"[^\d";
+            if (allowFloatingPoint)
+                pattern += (culture ?? CultureInfo.InvariantCulture).NumberFormat.NumberDecimalSeparator;
+            if (allowNegativeSign)
+                pattern += (culture ?? CultureInfo.InvariantCulture).NumberFormat.NegativeSign;
+            pattern += "]+";
+            return new Regex(pattern).Replace(value, "");
         }
 
         public static string RemoveAccents(this string text)

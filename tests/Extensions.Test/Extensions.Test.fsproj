@@ -18,6 +18,7 @@
         <Compile Include="HashExtensionsTest.fs" />
         <Compile Include="IfNullExtensionsTest.fs" />
         <Compile Include="NullIfExtensionsTest.fs" />
+        <Compile Include="StringExtensionsTest.fs" />
         <Compile Include="SyntaxExtensionsTest.fs" />
     </ItemGroup>
 

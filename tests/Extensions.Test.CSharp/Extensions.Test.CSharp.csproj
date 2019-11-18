@@ -5,6 +5,7 @@
         <IsPackable>false</IsPackable>
         <AssemblyName>Maestria.Extensions.Test.CSharp</AssemblyName>
         <RootNamespace>Maestria.Extensions.Test.CSharp</RootNamespace>
+        <LangVersion>8</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>

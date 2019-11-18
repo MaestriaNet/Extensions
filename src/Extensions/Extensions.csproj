@@ -12,6 +12,7 @@
         <PackageProjectUrl>https://github.com/MaestriaNet/Extensions</PackageProjectUrl>
         <License>https://github.com/MaestriaNet/Extensions/blob/master/LICENSE</License>
         <PackageIconUrl>https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/icon.png</PackageIconUrl>
+        <LangVersion>8</LangVersion>
     </PropertyGroup>
     
     <PropertyGroup>
