@@ -24,6 +24,6 @@ deploy:
     on:
       branch: master
   - provider: Environment
-      name: Maestria NuGet
-      on:
-        APPVEYOR_REPO_TAG: true
+    name: Maestria NuGet
+    on:
+      APPVEYOR_REPO_TAG: true
