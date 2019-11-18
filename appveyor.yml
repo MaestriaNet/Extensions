@@ -1,14 +1,14 @@
-version: '1.0.1.{build}'
+version: '1.0.2.{build}'
 image: Visual Studio 2017
 configuration: Release
 dotnet_csproj:
   patch: true
   file: 'src\Extensions\Extensions.csproj'
-  version: '1.0.1'
-  package_version: '1.0.1'
-  assembly_version: '1.0.1'
-  file_version: '1.0.1'
-  informational_version: '1.0.1'
+  version: '1.0.2'
+  package_version: '1.0.2'
+  assembly_version: '1.0.2'
+  file_version: '1.0.2'
+  informational_version: '1.0.2'
 before_build:
   - ps: dotnet --version
 build_script:
@@ -23,3 +23,7 @@ deploy:
     name: Maestria MyGet
     on:
       branch: master
+  - provider: Environment
+      name: Maestria NuGet
+      on:
+        APPVEYOR_REPO_TAG: true
