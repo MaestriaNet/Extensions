@@ -10,13 +10,13 @@
 
 Extension function pack to increase productivity and improve source code writing.
 
-## What is Maestria Project
+## What is Maestria Project?
 
 This library is part of Maestria Project.
 
 Maestria is a project to provide productivity and elegance to your source code writing.
 
-## How do I get started
+## How do I get started?
 
 First, import "Maestria.Extensions" reference:
 
