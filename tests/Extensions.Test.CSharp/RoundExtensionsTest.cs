@@ -28,15 +28,15 @@ namespace Maestria.Extensions.Test.CSharp
         }
         
         [Test]
-        public void RoundDown()
+        public void Truncate()
         {
-            Assert.AreEqual(1f, 1f.RoundDown());
-            Assert.AreEqual(1f, 1.225f.RoundDown());
-            Assert.AreEqual(1.22f, 1.22f.RoundDown(2));
-            Assert.AreEqual(1.22f, 1.225f.RoundDown(2));
-            Assert.AreEqual(1.23f, 1.235f.RoundDown(2));
-            Assert.AreEqual(1.23f, 1.231f.RoundDown(2));
-            Assert.AreEqual(1.23f, 1.239f.RoundDown(2));
+            Assert.AreEqual(1f, 1f.Truncate());
+            Assert.AreEqual(1f, 1.225f.Truncate());
+            Assert.AreEqual(1.22f, 1.22f.Truncate(2));
+            Assert.AreEqual(1.22f, 1.225f.Truncate(2));
+            Assert.AreEqual(1.23f, 1.235f.Truncate(2));
+            Assert.AreEqual(1.23f, 1.231f.Truncate(2));
+            Assert.AreEqual(1.23f, 1.239f.Truncate(2));
         }
         
         [Test]
@@ -74,15 +74,15 @@ namespace Maestria.Extensions.Test.CSharp
         }
         
         [Test]
-        public void RoundDown()
+        public void Truncate()
         {
-            Assert.AreEqual(1d, 1d.RoundDown());
-            Assert.AreEqual(1d, 1.225d.RoundDown());
-            Assert.AreEqual(1.22d, 1.22d.RoundDown(2));
-            Assert.AreEqual(1.22d, 1.225d.RoundDown(2));
-            Assert.AreEqual(1.23d, 1.235d.RoundDown(2));
-            Assert.AreEqual(1.23d, 1.231d.RoundDown(2));
-            Assert.AreEqual(1.23d, 1.239d.RoundDown(2));
+            Assert.AreEqual(1d, 1d.Truncate());
+            Assert.AreEqual(1d, 1.225d.Truncate());
+            Assert.AreEqual(1.22d, 1.22d.Truncate(2));
+            Assert.AreEqual(1.22d, 1.225d.Truncate(2));
+            Assert.AreEqual(1.23d, 1.235d.Truncate(2));
+            Assert.AreEqual(1.23d, 1.231d.Truncate(2));
+            Assert.AreEqual(1.23d, 1.239d.Truncate(2));
         }
         
         [Test]
@@ -120,15 +120,15 @@ namespace Maestria.Extensions.Test.CSharp
         }
 
         [Test]
-        public void RoundDown()
+        public void Truncate()
         {
-            Assert.AreEqual(1m, 1m.RoundDown());
-            Assert.AreEqual(1m, 1.225m.RoundDown());
-            Assert.AreEqual(1.22m, 1.22m.RoundDown(2));
-            Assert.AreEqual(1.22m, 1.225m.RoundDown(2));
-            Assert.AreEqual(1.23m, 1.235m.RoundDown(2));
-            Assert.AreEqual(1.23m, 1.231m.RoundDown(2));
-            Assert.AreEqual(1.23m, 1.239m.RoundDown(2));
+            Assert.AreEqual(1m, 1m.Truncate());
+            Assert.AreEqual(1m, 1.225m.Truncate());
+            Assert.AreEqual(1.22m, 1.22m.Truncate(2));
+            Assert.AreEqual(1.22m, 1.225m.Truncate(2));
+            Assert.AreEqual(1.23m, 1.235m.Truncate(2));
+            Assert.AreEqual(1.23m, 1.231m.Truncate(2));
+            Assert.AreEqual(1.23m, 1.239m.Truncate(2));
         }
         
         [Test]
@@ -170,15 +170,15 @@ namespace Maestria.Extensions.Test.CSharp
         }
         
         [Test]
-        public void RoundDown()
+        public void Truncate()
         {
-            Assert.AreEqual(1f, new float?(1f).RoundDown());
-            Assert.AreEqual(1f, new float?(1.225f).RoundDown());
-            Assert.AreEqual(1.22f, new float?(1.22f).RoundDown(2));
-            Assert.AreEqual(1.22f, new float?(1.225f).RoundDown(2));
-            Assert.AreEqual(1.23f, new float?(1.235f).RoundDown(2));
-            Assert.AreEqual(1.23f, new float?(1.231f).RoundDown(2));
-            Assert.AreEqual(1.23f, new float?(1.239f).RoundDown(2));
+            Assert.AreEqual(1f, new float?(1f).Truncate());
+            Assert.AreEqual(1f, new float?(1.225f).Truncate());
+            Assert.AreEqual(1.22f, new float?(1.22f).Truncate(2));
+            Assert.AreEqual(1.22f, new float?(1.225f).Truncate(2));
+            Assert.AreEqual(1.23f, new float?(1.235f).Truncate(2));
+            Assert.AreEqual(1.23f, new float?(1.231f).Truncate(2));
+            Assert.AreEqual(1.23f, new float?(1.239f).Truncate(2));
         }
         
         [Test]
@@ -216,15 +216,15 @@ namespace Maestria.Extensions.Test.CSharp
         }
         
         [Test]
-        public void RoundDown()
+        public void Truncate()
         {
-            Assert.AreEqual(1d, new double?(1d).RoundDown());
-            Assert.AreEqual(1d, new double?(1.225d).RoundDown());
-            Assert.AreEqual(1.22d, new double?(1.22d).RoundDown(2));
-            Assert.AreEqual(1.22d, new double?(1.225d).RoundDown(2));
-            Assert.AreEqual(1.23d, new double?(1.235d).RoundDown(2));
-            Assert.AreEqual(1.23d, new double?(1.231d).RoundDown(2));
-            Assert.AreEqual(1.23d, new double?(1.239d).RoundDown(2));
+            Assert.AreEqual(1d, new double?(1d).Truncate());
+            Assert.AreEqual(1d, new double?(1.225d).Truncate());
+            Assert.AreEqual(1.22d, new double?(1.22d).Truncate(2));
+            Assert.AreEqual(1.22d, new double?(1.225d).Truncate(2));
+            Assert.AreEqual(1.23d, new double?(1.235d).Truncate(2));
+            Assert.AreEqual(1.23d, new double?(1.231d).Truncate(2));
+            Assert.AreEqual(1.23d, new double?(1.239d).Truncate(2));
         }
         
         [Test]
@@ -262,15 +262,15 @@ namespace Maestria.Extensions.Test.CSharp
         } 
         
         [Test]
-        public void RoundDown()
+        public void Truncate()
         {
-            Assert.AreEqual(1m, new decimal?(1m).RoundDown());
-            Assert.AreEqual(1m, new decimal?(1.225m).RoundDown());
-            Assert.AreEqual(1.22m, new decimal?(1.22m).RoundDown(2));
-            Assert.AreEqual(1.22m, new decimal?(1.225m).RoundDown(2));
-            Assert.AreEqual(1.23m, new decimal?(1.235m).RoundDown(2));
-            Assert.AreEqual(1.23m, new decimal?(1.231m).RoundDown(2));
-            Assert.AreEqual(1.23m, new decimal?(1.239m).RoundDown(2));
+            Assert.AreEqual(1m, new decimal?(1m).Truncate());
+            Assert.AreEqual(1m, new decimal?(1.225m).Truncate());
+            Assert.AreEqual(1.22m, new decimal?(1.22m).Truncate(2));
+            Assert.AreEqual(1.22m, new decimal?(1.225m).Truncate(2));
+            Assert.AreEqual(1.23m, new decimal?(1.235m).Truncate(2));
+            Assert.AreEqual(1.23m, new decimal?(1.231m).Truncate(2));
+            Assert.AreEqual(1.23m, new decimal?(1.239m).Truncate(2));
         }
         
         [Test]
