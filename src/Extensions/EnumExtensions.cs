@@ -78,15 +78,15 @@ namespace Maestria.Extensions
         /// </summary>
         /// <param name="enumType"></param>
         /// <returns></returns>
-        public static object[] GetValues(Type enumType)
+        public static Enum[] GetValues(Type enumType)
         {
             var values = Enum.GetValues(enumType);
-            var result = new Object[values.Length];
+            var result = new Enum[values.Length];
 
             var i = 0;
             foreach (var item in values)
             {
-                result[i] = item;
+                result[i] = (Enum) item;
                 i++;
             }
 
