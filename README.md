@@ -6,15 +6,18 @@
 
 [![Build History](https://buildstats.info/appveyor/chart/fabionaspolini/extensions?branch=master)](https://ci.appveyor.com/project/fabionaspolini/extensions/history?branch=master)
 
-### What is Maestria Extensions?
+## What is Maestria Extensions?
+
 Extension function pack to increase productivity and improve source code writing.
 
-### What is Maestria Project?
+## What is Maestria Project
+
 This library is part of Maestria Project.
 
 Maestria is a project to provide productivity and elegance to your source code writing.
 
-### How do I get started?
+## How do I get started
+
 First, import "Maestria.Extensions" reference:
 
 ```csharp
@@ -25,12 +28,15 @@ using Maestria.Extensions;
 <Array>.Min();
 
 // Base64Extensions
-Base64Extensions.Encode("value", <Encoding>)
-Base64Extensions.Decode("encoded-value", <Encoding>)
+Base64Extensions.Encode(<byte[]>)
+Base64Extensions.Encode(<string>, <Encoding>)
+Base64Extensions.Decode(<encoded-byte[]>, <Encoding>)
+Base64Extensions.Decode(<encoded-string>, <Encoding>)
 
 // CollectionExtensions
 <IEnumerable>.IsNullOrEmpty()
 <IEnumerable>.HasItems()
+<IDictionary>.TryGetValue(<key>, <@default-value>)
 <IEnumerable>.Iterate((arg) => <action>)
 <IEnumerable>.IterateSafe((arg) => <action>)
 <IEnumerable>.IterateAsync((arg) => <action>)
@@ -40,6 +46,7 @@ Base64Extensions.Decode("encoded-value", <Encoding>)
 <Enum>.GetDisplayName()
 <Enum>.GetDescription()
 EnumExtensions.GetValues<TEnum>()
+EnumExtensions.GetValues(typeof(<TEnum>))
 
 // ExceptionExtensions
 <Exception>.GetMessageWithInner()
@@ -62,21 +69,28 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 <object>.NullIfIn(<comparison-value>)
 <object>.NullIfBetween(<comparison-value>)
 
-// NullIfExtensions to floating point (Float, Double and Decimal)
 <floating-point>.NullIf(<comparison-value>, <tolerance-to-comparasion>)
 
-NullIfExtensions to string
 <string>.NullIf(<comparison-value>, <ignore-case>)
 <string>.NullIfEmpty(<comparison-value>)
 <string>.NullIfWhiteSpace(<comparison-value>)
 
 // ReflectionExtensions
 <type>.IsInheritedOrImplements(<parent-type>)
+ReflectionExtensions.GetAssemblyByName(<name>)
+ReflectionExtensions.Create<T>(<arguments[]>)
+ReflectionExtensions.HasConstructor<T>(<arguments-types[]>)
+ReflectionExtensions.PropertyExist(<object-instance>, <property-name>)
+ReflectionExtensions.SetPropertyValue(<object-instance>, <property-name>, <value>)
+<object> ReflectionExtensions.GetPropertyValue(<object-instance>, <property-name>)
+<T> ReflectionExtensions.GetPropertyValue<T>(<object-instance>, <property-name>)
+<object> ReflectionExtensions.GetTaskResult(<task-instance>)
+<object> ReflectionExtensions.InvokeMethod(<object-instance>, <method-name>, <parameters>)
 
 // RoundExtensions
-<floating-point>.Round()
 <floating-point>.Round(<digits>)
 <floating-point>.Round(<digits>, <MidpointRounding>)
+<floating-point>.RoundUp(<digits>)
 
 // StringExtensions
 <string>.RemoveIfStartsWith(<start-comparison>, <ignore-case>)
@@ -98,25 +112,26 @@ NullIfExtensions to string
 <object>.Between(<starting-value>, <ending-value>)
 
 // TruncateExtensions
-<floating-point>.Truncate()
 <floating-point>.Truncate(<digits>)
 ```
 
 It's possible set default culture format for library, when not configured, default culture is CultureInfo.InvariantCulture:
+
 ```csharp
 Extensions.GlobalSettings.Configure(cfg => cfg
-    .FloatAndDoubleTolerance(default-float-and-double-comparasion-tolerance)    
+    .FloatAndDoubleTolerance(default-float-and-double-comparasion-tolerance)
 ```
 
 Where can I get it?
 
 First, [install NuGet](http://docs.nuget.org/docs/start-here/installing-nuget). Then, install [Maestria Extensions](https://www.nuget.org/packages/Maestria.Extensions/) from the package manager console:
 
-```
+```bash
 PM> Install-Package Maestria.Extensions
 ```
 
 or install from the dotnet cli command line:
-```
+
+```bash
 > dotnet add package Maestria.Extensions
-``` 
+```
