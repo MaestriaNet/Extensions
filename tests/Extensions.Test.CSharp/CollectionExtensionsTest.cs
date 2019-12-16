@@ -18,6 +18,25 @@ namespace Maestria.Extensions.Test.CSharp
             {"key3", 30},
         };
 
+        private void AssetArrayIndex(object item, int index)
+        {
+            switch (item)
+            {
+                case 10:
+                    Assert.AreEqual(0, index);
+                    break;
+                case 20:
+                    Assert.AreEqual(1, index);
+                    break;
+                case 30:
+                    Assert.AreEqual(2, index);
+                    break;
+                default:
+                    Assert.Fail("Unexpected item");
+                    break;
+            }
+        }
+
         [Test]
         public void Iterate()
         {
@@ -25,15 +44,39 @@ namespace Maestria.Extensions.Test.CSharp
             _enumerable.Iterate(item => sum += (int) item);
             Assert.AreEqual(60, sum);
         }
-        
+
         [Test]
-        public void IterateTyped()
+        public void Iterate_WithIndex()
+        {
+            var sum = 0;
+            _enumerable.Iterate((item, index) =>
+            {
+                AssetArrayIndex(item, index);
+                sum += (int) item;
+            });
+            Assert.AreEqual(60, sum);
+        }
+
+        [Test]
+        public void Iterate_Typed()
         {
             var sum = 0;
             _enumerableTyped.Iterate(item => sum += item);
             Assert.AreEqual(60, sum);
         }
-        
+
+        [Test]
+        public void Iterate_Typed_WithIndex()
+        {
+            var sum = 0;
+            _enumerableTyped.Iterate((item, index) =>
+            {
+                AssetArrayIndex(item, index);
+                sum += item;
+            });
+            Assert.AreEqual(60, sum);
+        }
+
         [Test]
         public async Task IterateAsync()
         {
@@ -45,13 +88,39 @@ namespace Maestria.Extensions.Test.CSharp
             });
             Assert.AreEqual(60, sum);
         }
-        
+
         [Test]
-        public async Task IterateTypedAsync()
+        public async Task IterateAsync_WithIndex()
+        {
+            var sum = 0;
+            await _enumerable.IterateAsync(async (item, index) =>
+            {
+                AssetArrayIndex(item, index);
+                Task temp = Task.Factory.StartNew(() => sum += (int) item);
+                await temp;
+            });
+            Assert.AreEqual(60, sum);
+        }
+
+        [Test]
+        public async Task IterateAsync_Typed()
         {
             var sum = 0;
             await _enumerableTyped.IterateAsync(async item =>
             {
+                Task temp = Task.Factory.StartNew(() => sum += item);
+                await temp;
+            });
+            Assert.AreEqual(60, sum);
+        }
+
+        [Test]
+        public async Task IterateAsync_Typed_WithIndex()
+        {
+            var sum = 0;
+            await _enumerableTyped.IterateAsync(async (item, index) =>
+            {
+                AssetArrayIndex(item, index);
                 Task temp = Task.Factory.StartNew(() => sum += item);
                 await temp;
             });

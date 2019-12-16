@@ -11,6 +11,9 @@ namespace Maestria.Extensions
     /// </summary>
     public static class CollectionExtensions
     {
+        public delegate void IterateCollectionDelegate<in T>(T item, int index);
+        public delegate Task IterateCollectionAsyncDelegate<in T>(T item, int index);
+    
         #region IEnumerable Iterate
 
         /// <summary>
@@ -25,6 +28,20 @@ namespace Maestria.Extensions
             foreach (var item in enumerable)
                 action.Invoke(item);
         }
+        
+        /// <summary>
+        /// Iterate collection
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <param name="action"></param>
+        /// <exception cref="Exception"></exception>
+        public static void Iterate(this IEnumerable enumerable, IterateCollectionDelegate<object> action)
+        {
+            if (enumerable == null) return;
+            var index = 0;
+            foreach (var item in enumerable)
+                action.Invoke(item, index++);
+        }
 
         /// <summary>
         /// Iterate collection async
@@ -38,6 +55,21 @@ namespace Maestria.Extensions
             if (enumerable == null) return;
             foreach (var item in enumerable)
                 await action.Invoke(item);
+        }
+        
+        /// <summary>
+        /// Iterate collection async
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static async Task IterateAsync(this IEnumerable enumerable, IterateCollectionAsyncDelegate<object> action)
+        {
+            if (enumerable == null) return;
+            var index = 0;
+            foreach (var item in enumerable)
+                await action.Invoke(item, index++);
         }
         
         #endregion
@@ -56,6 +88,20 @@ namespace Maestria.Extensions
             foreach (var item in enumerable)
                 action.Invoke(item);
         }
+        
+        /// <summary>
+        /// Iterate collection
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <param name="action"></param>
+        /// <exception cref="Exception"></exception>
+        public static void Iterate<T>(this IEnumerable<T> enumerable, IterateCollectionDelegate<T> action)
+        {
+            if (enumerable == null) return;
+            var index = 0;
+            foreach (var item in enumerable)
+                action.Invoke(item, index++);
+        }
 
         /// <summary>
         /// Iterate collection async
@@ -69,6 +115,21 @@ namespace Maestria.Extensions
             if (enumerable == null) return;
             foreach (var item in enumerable)
                 await action.Invoke(item);
+        }
+        
+        /// <summary>
+        /// Iterate collection async
+        /// </summary>
+        /// <param name="enumerable"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static async Task IterateAsync<T>(this IEnumerable<T> enumerable, IterateCollectionAsyncDelegate<T> action)
+        {
+            if (enumerable == null) return;
+            var index = 0;
+            foreach (var item in enumerable)
+                await action.Invoke(item, index++);
         }
         
         #endregion
