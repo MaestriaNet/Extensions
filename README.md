@@ -38,9 +38,7 @@ Base64Extensions.Decode(<encoded-string>, <Encoding>)
 <IEnumerable>.HasItems()
 <IDictionary>.TryGetValue(<key>, <@default-value>)
 <IEnumerable>.Iterate((arg) => <action>)
-<IEnumerable>.IterateSafe((arg) => <action>)
 <IEnumerable>.IterateAsync((arg) => <action>)
-<IEnumerable>.IterateSafeAsync((arg) => <action>)
 
 // EnumExtensions
 <Enum>.GetDisplayName()
@@ -49,7 +47,8 @@ EnumExtensions.GetValues<TEnum>()
 EnumExtensions.GetValues(typeof(<TEnum>))
 
 // ExceptionExtensions
-<Exception>.GetMessageWithInner()
+<Exception>.ToLogString()
+<Exception>.GetMostInner()
 
 // HashExtensions
 "value".GetHashMd5()

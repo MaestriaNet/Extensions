@@ -27,28 +27,6 @@ namespace Maestria.Extensions
         }
 
         /// <summary>
-        /// Iterate collection safe mode
-        /// </summary>
-        /// <param name="enumerable"></param>
-        /// <param name="action"></param>
-        public static void IterateSafe(this IEnumerable enumerable, Action<object> action)
-        {
-            if (enumerable == null) return;
-            foreach (var item in enumerable)
-                try
-                {
-                    action.Invoke(item);
-                }
-                catch (Exception e)
-                {
-                    System.Diagnostics.Debug.WriteLine(e.Message);
-                    System.Diagnostics.Debug.WriteLine(e.StackTrace);
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine(e.StackTrace);
-                }
-        }
-
-        /// <summary>
         /// Iterate collection async
         /// </summary>
         /// <param name="enumerable"></param>
@@ -61,30 +39,7 @@ namespace Maestria.Extensions
             foreach (var item in enumerable)
                 await action.Invoke(item);
         }
-
-        /// <summary>
-        /// Iterate collection safe and async
-        /// </summary>
-        /// <param name="enumerable"></param>
-        /// <param name="action"></param>
-        /// <returns></returns>
-        public static async Task IterateSafeAsync(this IEnumerable enumerable, Func<object, Task> action)
-        {
-            if (enumerable == null) return;
-            foreach (var item in enumerable)
-                try
-                {
-                    await action.Invoke(item);
-                }
-                catch (Exception e)
-                {
-                    System.Diagnostics.Debug.WriteLine(e.Message);
-                    System.Diagnostics.Debug.WriteLine(e.StackTrace);
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine(e.StackTrace);
-                }
-        }
-
+        
         #endregion
 
         #region IEnumerable<T> Iterate
@@ -103,28 +58,6 @@ namespace Maestria.Extensions
         }
 
         /// <summary>
-        /// Iterate collection safe mode
-        /// </summary>
-        /// <param name="enumerable"></param>
-        /// <param name="action"></param>
-        public static void IterateSafe<T>(this IEnumerable<T> enumerable, Action<T> action)
-        {
-            if (enumerable == null) return;
-            foreach (var item in enumerable)
-                try
-                {
-                    action.Invoke(item);
-                }
-                catch (Exception e)
-                {
-                    System.Diagnostics.Debug.WriteLine(e.Message);
-                    System.Diagnostics.Debug.WriteLine(e.StackTrace);
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine(e.StackTrace);
-                }
-        }
-
-        /// <summary>
         /// Iterate collection async
         /// </summary>
         /// <param name="enumerable"></param>
@@ -137,30 +70,7 @@ namespace Maestria.Extensions
             foreach (var item in enumerable)
                 await action.Invoke(item);
         }
-
-        /// <summary>
-        /// Iterate collection safe and async
-        /// </summary>
-        /// <param name="enumerable"></param>
-        /// <param name="action"></param>
-        /// <returns></returns>
-        public static async Task IterateSafeAsync<T>(this IEnumerable<T> enumerable, Func<T, Task> action)
-        {
-            if (enumerable == null) return;
-            foreach (var item in enumerable)
-                try
-                {
-                    await action.Invoke(item);
-                }
-                catch (Exception e)
-                {
-                    System.Diagnostics.Debug.WriteLine(e.Message);
-                    System.Diagnostics.Debug.WriteLine(e.StackTrace);
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine(e.StackTrace);
-                }
-        }
-
+        
         #endregion
 
         /// <summary>
