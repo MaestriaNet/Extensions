@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -104,6 +105,17 @@ namespace Maestria.Extensions
         {
             if (value.IsNullOrWhiteSpace() || args == null || args.Length == 0) return value;
             return string.Format(value, args);
+        }
+
+        /// <summary>
+        /// Join string values
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="separator">Text to separe itens</param>
+        /// <returns></returns>
+        public static string Join(this IEnumerable<string> values, string separator)
+        {
+            return string.Join(separator, values);
         }
 
         #endregion
