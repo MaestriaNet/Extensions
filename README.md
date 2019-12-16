@@ -22,7 +22,11 @@ First, import "Maestria.Extensions" reference:
 
 ```csharp
 using Maestria.Extensions;
+```
 
+Then in your application code, use fluent syntax
+
+```csharp
 // AggregateExtenions
 <Array>.Max();
 <Array>.Min();
@@ -37,8 +41,8 @@ Base64Extensions.Decode(<encoded-string>, <Encoding>)
 <IEnumerable>.IsNullOrEmpty()
 <IEnumerable>.HasItems()
 <IDictionary>.TryGetValue(<key>, <@default-value>)
-<IEnumerable>.Iterate((arg) => <action>)
-<IEnumerable>.IterateAsync((arg) => <action>)
+<IEnumerable>.Iterate((item, index) => <action>)
+<IEnumerable>.IterateAsync((item, index) => <action>)
 
 // EnumExtensions
 <Enum>.GetDisplayName()
@@ -68,8 +72,8 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 <object>.NullIfIn(<comparison-value>)
 <object>.NullIfBetween(<comparison-value>)
 
+// NullIf
 <floating-point>.NullIf(<comparison-value>, <tolerance-to-comparasion>)
-
 <string>.NullIf(<comparison-value>, <ignore-case>)
 <string>.NullIfEmpty(<comparison-value>)
 <string>.NullIfWhiteSpace(<comparison-value>)
@@ -105,6 +109,7 @@ ReflectionExtensions.SetPropertyValue(<object-instance>, <property-name>, <value
 <string>.EqualsIgnoreCase(<camparison-value>, <auto-trim>)
 <string>.OnlyNumbers()
 <string>.RemoveAccents()
+<string>.Join(<separator>)
 
 // SyntaxExtensions
 <object>.In(<array-of-values>)
