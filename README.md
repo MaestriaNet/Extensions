@@ -78,18 +78,6 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 <string>.NullIfEmpty(<comparison-value>)
 <string>.NullIfWhiteSpace(<comparison-value>)
 
-// ReflectionExtensions
-<type>.IsInheritedOrImplements(<parent-type>)
-ReflectionExtensions.GetAssemblyByName(<name>)
-ReflectionExtensions.Create<T>(<arguments[]>)
-ReflectionExtensions.HasConstructor<T>(<arguments-types[]>)
-ReflectionExtensions.PropertyExist(<object-instance>, <property-name>)
-ReflectionExtensions.SetPropertyValue(<object-instance>, <property-name>, <value>)
-<object> ReflectionExtensions.GetPropertyValue(<object-instance>, <property-name>)
-<T> ReflectionExtensions.GetPropertyValue<T>(<object-instance>, <property-name>)
-<object> ReflectionExtensions.GetTaskResult(<task-instance>)
-<object> ReflectionExtensions.InvokeMethod(<object-instance>, <method-name>, <parameters>)
-
 // RoundExtensions
 <floating-point>.Round(<digits>)
 <floating-point>.Round(<digits>, <MidpointRounding>)

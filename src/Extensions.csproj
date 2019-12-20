@@ -2,12 +2,12 @@
 
     <PropertyGroup>
         <PackageId>Maestria.Extensions</PackageId>
-        <Version>1.0.5</Version>
+        <Version>1.0.6</Version>
         <Authors>Fábio Monteiro Naspolini</Authors>
         <Company>Fábio Monteiro Naspolini</Company>
-        <Title>Maestria.Data.Extensions</Title>
+        <Title>Maestria.Extensions</Title>
         <Description>Extension function pack to increase productivity and improve source code writing.</Description>
-        <PackageTags>Extension Extensions Fluent Functional Elegance Productivity Maestria Mastery IEnumerable Enumerable ICollection Collection IList List Array Max Min Highest Smallest Largest String Text IfNull NullIf Null If In Between Truncate Round Hash MD5 SHA1 Enum Aggreagate Exception StackTrace Reflection</PackageTags>
+        <PackageTags>Extension Extensions Fluent Functional Elegance Productivity Maestria Mastery IEnumerable Enumerable ICollection Collection IList List Array Max Min Highest Smallest Largest String Text IfNull NullIf Null If In Between Truncate Round Hash MD5 SHA1 Enum Aggreagate Exception StackTrace</PackageTags>
         <RepositoryUrl>ttps://github.com/MaestriaNet/Extensions</RepositoryUrl>
         <PackageProjectUrl>https://github.com/MaestriaNet/Extensions</PackageProjectUrl>
         <License>https://github.com/MaestriaNet/Extensions/blob/master/LICENSE</License>
