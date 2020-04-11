@@ -9,21 +9,21 @@ namespace Maestria.Extensions.Test.CSharp
         [Display(Name = "Red color", Description = "Red color description")]
         Red,
         
-        [DisplayName("Blue color")]
+        // [DisplayName("Blue color")]
         [System.ComponentModel.Description("Blue color description")]
         Blue,
         
-        [DisplayName("Green color from DisplayNameAttribute")]
+        // [DisplayName("Green color from DisplayNameAttribute")]
         [System.ComponentModel.Description("Green color description from DescriptionAttribute")]
-        [Display(Name = "Not used in this pipeline", Description = "Not used this pipeline")]
+        [Display(Name = "Green color", Description = "Not used this pipeline")]
         Green
     }
     
     public class EnumTest
     {
         [TestCase(Color.Red, "Red color")]
-        [TestCase(Color.Blue, "Blue color")]
-        [TestCase(Color.Green, "Green color from DisplayNameAttribute")]
+        [TestCase(Color.Blue, "Blue")]
+        [TestCase(Color.Green, "Green color")]
         public void GetDisplayName(Color value, string expected) => Assert.AreEqual(expected, value.GetDisplayName());
 
         [TestCase(Color.Red, "Red color description")]
