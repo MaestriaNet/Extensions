@@ -71,7 +71,7 @@ namespace Maestria.Extensions
             foreach (var item in enumerable)
                 await action.Invoke(item, index++);
         }
-        
+
         #endregion
 
         #region IEnumerable<T> Iterate
@@ -131,6 +131,19 @@ namespace Maestria.Extensions
             foreach (var item in enumerable)
                 await action.Invoke(item, index++);
         }
+        
+        /// <summary>
+        /// Return enumerable tuple with index and item for use into foreach
+        /// </summary>
+        /// <param name="source"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <example>foreach (var (item, index) in youtList.WithIndex())
+        /// {
+        /// ...
+        /// }</example>
+        public static IEnumerable<(T item, int index)> WithIndex<T>(this IEnumerable<T> source) =>
+            source.Select((item, index) => (item, index));
         
         #endregion
 

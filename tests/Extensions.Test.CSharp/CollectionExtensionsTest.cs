@@ -141,5 +141,28 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual(0, _dictionary.TryGetValue("invalid key"));
             Assert.AreEqual(-1, _dictionary.TryGetValue("invalid key", -1));
         }
+
+        [Test]
+        public void WithIndex()
+        {
+            foreach (var (item, index) in _enumerableTyped.WithIndex())
+            {
+                switch (index)
+                {
+                    case 0:
+                        Assert.AreEqual(10, item);
+                        break;
+                    case 1:
+                        Assert.AreEqual(20, item);
+                        break;
+                    case 2:
+                        Assert.AreEqual(30, item);
+                        break;
+                    default:
+                        Assert.Fail("Unexpected value");
+                        break;
+                }
+            }
+        }
     }
 }
