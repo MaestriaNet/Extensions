@@ -5,6 +5,11 @@ open Maestria.Extensions
 open NUnit.Framework
 open FsUnit
 
+module SyntaxExtensions =
+    
+    [<TestCase>]
+    let ``Detached Call``() = "teste".DetachedCall(fun i -> i |> should equal "teste") |> should equal "teste"
+
 module In =
     [<TestCase(MyColor.Red, [| MyColor.Red; MyColor.Green; MyColor.Blue |])>]
     [<TestCase(MyColor.Green, [| MyColor.Red; MyColor.Green; MyColor.Blue |])>]
