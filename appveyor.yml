@@ -1,14 +1,14 @@
-version: '1.0.9.{build}'
+version: '1.0.10.{build}'
 image: Visual Studio 2019
 configuration: Release
 dotnet_csproj:
   patch: true
   file: 'src\Extensions.csproj'
-  version: '1.0.9'
-  package_version: '1.0.9'
-  assembly_version: '1.0.9'
-  file_version: '1.0.9'
-  informational_version: '1.0.9'
+  version: '1.0.10'
+  package_version: '1.0.10'
+  assembly_version: '1.0.10'
+  file_version: '1.0.10'
+  informational_version: '1.0.10'
 before_build:
   - ps: dotnet --version
 build_script:
