@@ -102,6 +102,15 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 // SyntaxExtensions
 <object>.In(<array-of-values>)
 <object>.Between(<starting-value>, <ending-value>)
+var value = <string>
+    .OnlyNumbers()
+    .DetachedCall(x => Console.WriteLine(x)) // <<< Call a method with current value and continue execution pipeline
+    .Format("mask"); // value is only the number of string formatted and only numbers are written on console
+
+<string>
+    .OnlyNumbers()
+    .OutVar(out var variableToExternalFromScopeAccess) // <<< Create variable with current value on external scope and continua execution pipeline 
+    .Format("mask"); // value is only the number of string formatted and only numbers are written on console 
 
 // TruncateExtensions
 <floating-point>.Truncate(<digits>)

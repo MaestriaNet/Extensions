@@ -53,5 +53,18 @@ namespace Maestria.Extensions
 
             return value;
         }
+        
+        /// <summary>
+        /// Create output variable from execute pipeline method
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="output"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T OutVar<T>(this T value, out T output)
+        {
+            output = value;
+            return value;
+        }
     }
 }
