@@ -12,13 +12,13 @@ module Const =
 
 module Iterate =
     [<Test>]
-    let ``Any collection for each execute``() = Const.array.Iterate(fun i -> (Array.contains i [|1;2;3;4;5|]) |> should be True) |> should equal Const.array
+    let ``Any collection for each execute``() = Const.array.ForEach(fun i -> (Array.contains i [|1;2;3;4;5|]) |> should be True) |> should equal Const.array
 
     [<Test>]
-    let ``Empty collection for each execute``() = Const.emptyArray.Iterate(fun i -> i |> ignore) |> should equal Const.emptyArray
+    let ``Empty collection for each execute``() = Const.emptyArray.ForEach(fun i -> i |> ignore) |> should equal Const.emptyArray
 
     [<Test>]
-    let ``Null collection for each execute``() = (fun () -> CollectionExtensions.Iterate(Const.nullList, fun i -> i |> ignore) |> should equal Const.nullList) |> should not' (throw typeof<NullReferenceException>)
+    let ``Null collection for each execute``() = (fun () -> CollectionExtensions.ForEach(Const.nullList, fun i -> i |> ignore) |> should equal Const.nullList) |> should not' (throw typeof<NullReferenceException>)
 
 module IsNullOrEmpty =
     [<Test>]

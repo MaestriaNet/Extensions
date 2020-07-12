@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <PackageId>Maestria.Extensions</PackageId>
-        <Version>1.0.10</Version>
+        <Version>1.0.11</Version>
         <Authors>Fábio Monteiro Naspolini</Authors>
         <Company>Fábio Monteiro Naspolini</Company>
         <Title>Maestria.Extensions</Title>
@@ -14,17 +14,17 @@
         <PackageIconUrl>https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/icon.png</PackageIconUrl>
         <LangVersion>8</LangVersion>
     </PropertyGroup>
-    
+
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <AssemblyName>Maestria.Extensions</AssemblyName>
         <RootNamespace>Maestria.Extensions</RootNamespace>
         <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     </PropertyGroup>
-    
+
     <ItemGroup>
       <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
       <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
     </ItemGroup>
-    
+
 </Project>

@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Maestria.Extensions
 {
+    public delegate void IterateCollectionDelegate<in T>(T item, int index);
+    public delegate Task IterateCollectionAsyncDelegate<in T>(T item, int index);
+
     /// <summary>
     /// Enumerable, Collection and List extensions methods
     /// </summary>
     public static class CollectionExtensions
     {
-        public delegate void IterateCollectionDelegate<in T>(T item, int index);
-        public delegate Task IterateCollectionAsyncDelegate<in T>(T item, int index);
-    
-        #region IEnumerable Iterate
+        #region IEnumerable ForEach
 
         /// <summary>
         /// Iterate collection
@@ -22,26 +22,28 @@ namespace Maestria.Extensions
         /// <param name="enumerable"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable Iterate(this IEnumerable enumerable, Action<object> action)
+        public static IEnumerable ForEach(this IEnumerable enumerable, Action<object> action)
         {
-            if (enumerable == null) return null;
-            foreach (var item in enumerable)
-                action.Invoke(item);
+            if (enumerable != null)
+                foreach (var item in enumerable)
+                    action.Invoke(item);
             return enumerable;
         }
-        
+
         /// <summary>
         /// Iterate collection
         /// </summary>
         /// <param name="enumerable"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable Iterate(this IEnumerable enumerable, IterateCollectionDelegate<object> action)
+        public static IEnumerable ForEach(this IEnumerable enumerable, IterateCollectionDelegate<object> action)
         {
-            if (enumerable == null) return null;
-            var index = 0;
-            foreach (var item in enumerable)
-                action.Invoke(item, index++);
+            if (enumerable != null)
+            {
+                var index = 0;
+                foreach (var item in enumerable)
+                    action.Invoke(item, index++);
+            }
             return enumerable;
         }
 
@@ -52,14 +54,14 @@ namespace Maestria.Extensions
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable> IterateAsync(this IEnumerable enumerable, Func<object, Task> action)
+        public static async Task<IEnumerable> ForEach(this IEnumerable enumerable, Func<object, Task> action)
         {
-            if (enumerable == null) return null;
-            foreach (var item in enumerable)
-                await action.Invoke(item);
+            if (enumerable != null)
+                foreach (var item in enumerable)
+                    await action.Invoke(item);
             return enumerable;
         }
-        
+
         /// <summary>
         /// Iterate collection async
         /// </summary>
@@ -67,12 +69,14 @@ namespace Maestria.Extensions
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable> IterateAsync(this IEnumerable enumerable, IterateCollectionAsyncDelegate<object> action)
+        public static async Task<IEnumerable> ForEach(this IEnumerable enumerable, IterateCollectionAsyncDelegate<object> action)
         {
-            if (enumerable == null) return null;
-            var index = 0;
-            foreach (var item in enumerable)
-                await action.Invoke(item, index++);
+            if (enumerable != null)
+            {
+                var index = 0;
+                foreach (var item in enumerable)
+                    await action.Invoke(item, index++);
+            }
             return enumerable;
         }
 
@@ -86,26 +90,28 @@ namespace Maestria.Extensions
         /// <param name="enumerable"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable<T> Iterate<T>(this IEnumerable<T> enumerable, Action<T> action)
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
         {
-            if (enumerable == null) return null;
-            foreach (var item in enumerable)
-                action.Invoke(item);
+            if (enumerable != null)
+                foreach (var item in enumerable)
+                    action.Invoke(item);
             return enumerable;
         }
-        
+
         /// <summary>
         /// Iterate collection
         /// </summary>
         /// <param name="enumerable"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable<T> Iterate<T>(this IEnumerable<T> enumerable, IterateCollectionDelegate<T> action)
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, IterateCollectionDelegate<T> action)
         {
-            if (enumerable == null) return null;
-            var index = 0;
-            foreach (var item in enumerable)
-                action.Invoke(item, index++);
+            if (enumerable != null)
+            {
+                var index = 0;
+                foreach (var item in enumerable)
+                    action.Invoke(item, index++);
+            }
             return enumerable;
         }
 
@@ -116,14 +122,16 @@ namespace Maestria.Extensions
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable<T>> IterateAsync<T>(this IEnumerable<T> enumerable, Func<T, Task> action)
+        public static async Task<IEnumerable<T>> ForEach<T>(this IEnumerable<T> enumerable, Func<T, Task> action)
         {
-            if (enumerable == null) return null;
-            foreach (var item in enumerable)
-                await action.Invoke(item);
+            if (enumerable != null)
+            {
+                foreach (var item in enumerable)
+                    await action.Invoke(item);
+            }
             return enumerable;
         }
-        
+
         /// <summary>
         /// Iterate collection async
         /// </summary>
@@ -131,15 +139,19 @@ namespace Maestria.Extensions
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable<T>> IterateAsync<T>(this IEnumerable<T> enumerable, IterateCollectionAsyncDelegate<T> action)
+        public static async Task<IEnumerable<T>> ForEach<T>(this IEnumerable<T> enumerable, IterateCollectionAsyncDelegate<T> action)
         {
-            if (enumerable == null) return null;
-            var index = 0;
-            foreach (var item in enumerable)
-                await action.Invoke(item, index++);
+            if (enumerable != null)
+            {
+                var index = 0;
+                foreach (var item in enumerable)
+                    await action.Invoke(item, index++);
+            }
             return enumerable;
         }
-        
+
+        #endregion
+
         /// <summary>
         /// Return enumerable tuple with index and item for use into foreach
         /// </summary>
@@ -152,8 +164,6 @@ namespace Maestria.Extensions
         /// }</example>
         public static IEnumerable<(T item, int index)> WithIndex<T>(this IEnumerable<T> source) =>
             source.Select((item, index) => (item, index));
-        
-        #endregion
 
         /// <summary>
         /// Check if collection is null or has no items
