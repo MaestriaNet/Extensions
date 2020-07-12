@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <PackageId>Maestria.Extensions</PackageId>
-        <Version>1.0.11</Version>
+        <Version>1.1.0</Version>
         <Authors>Fábio Monteiro Naspolini</Authors>
         <Company>Fábio Monteiro Naspolini</Company>
         <Title>Maestria.Extensions</Title>
