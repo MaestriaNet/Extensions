@@ -29,6 +29,15 @@ namespace Maestria.Extensions
         }
 
         /// <summary>
+        /// Remove prefix (left part) if text beginning with equality value. The part to remove is exactly checked value.
+        /// </summary>
+        /// <param name="value">Text to manipulate</param>
+        /// <param name="equality">To check and remove from text, if text beginning equals this value</param>
+        /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
+        /// <returns></returns>
+        public static string RemoveIfStartsWith(this string value, char equality, bool ignoreCase = true) => value.RemoveIfStartsWith(equality.ToString(), ignoreCase);
+
+        /// <summary>
         /// Remove suffix (right part) if text ends with equality value. The part to remove is exactly checked value.
         /// </summary>
         /// <param name="value">Text to manipulate</param>
@@ -42,6 +51,15 @@ namespace Maestria.Extensions
                 ? value.Remove(value.Length - equality.Length, equality.Length)
                 : value;
         }
+
+        /// <summary>
+        /// Remove suffix (right part) if text ends with equality value. The part to remove is exactly checked value.
+        /// </summary>
+        /// <param name="value">Text to manipulate</param>
+        /// <param name="equality">To check and remove from text, if text end equals this value</param>
+        /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
+        /// <returns></returns>
+        public static string RemoveIfEndsWith(this string value, char equality, bool ignoreCase = true) => value.RemoveIfEndsWith(equality.ToString(), ignoreCase);
 
         /// <summary>
         /// Add value to start of text if the text not beginning with value.
@@ -60,6 +78,15 @@ namespace Maestria.Extensions
         }
 
         /// <summary>
+        /// Add value to start of text if the text not beginning with value.
+        /// </summary>
+        /// <param name="value">Text to manipulate</param>
+        /// <param name="equality">To check and concat to start of text when text not beginning with this value</param>
+        /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
+        /// <returns></returns>
+        public static string AddToLeftIfNotStartsWith(this string value, char equality, bool ignoreCase = true) => value.AddToLeftIfNotStartsWith(equality.ToString(), ignoreCase);
+
+        /// <summary>
         /// Add value to end of text if the text not end with value.
         /// </summary>
         /// <param name="value">Text to manipulate</param>
@@ -76,6 +103,15 @@ namespace Maestria.Extensions
         }
 
         /// <summary>
+        /// Add value to end of text if the text not end with value.
+        /// </summary>
+        /// <param name="value">Text to manipulate</param>
+        /// <param name="equality">To check and concat to end of text when text not end with this value</param>
+        /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
+        /// <returns></returns>
+        public static string AddToRightIfNotEndsWith(this string value, char equality, bool ignoreCase = true) => value.AddToRightIfNotEndsWith(equality.ToString(), ignoreCase);
+
+        /// <summary>
         /// Add value to beginning of text if the text is not null or white space.
         /// </summary>
         /// <param name="value">Text to manipulate</param>
@@ -85,6 +121,14 @@ namespace Maestria.Extensions
             value.HasValue() ? prefix + value : value;
 
         /// <summary>
+        /// Add value to beginning of text if the text is not null or white space.
+        /// </summary>
+        /// <param name="value">Text to manipulate</param>
+        /// <param name="prefix">To concat at the beginning of text</param>
+        /// <returns></returns>
+        public static string AddToLeftIfHasValue(this string value, char prefix) => value.AddToLeftIfHasValue(prefix.ToString());
+
+        /// <summary>
         /// Add value to ends of text if the text is not null or white space.
         /// </summary>
         /// <param name="value">Text to manipulate</param>
@@ -92,6 +136,14 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string AddToRightIfHasValue(this string value, string suffix) =>
             value.HasValue() ? value + suffix : value;
+
+        /// <summary>
+        /// Add value to ends of text if the text is not null or white space.
+        /// </summary>
+        /// <param name="value">Text to manipulate</param>
+        /// <param name="suffix">To concat at the ending of text</param>
+        /// <returns></returns>
+        public static string AddToRightIfHasValue(this string value, char suffix) => value.AddToRightIfHasValue(suffix.ToString());
 
         /// <summary>
         /// Replaces the format item in a specified string with the string representation of a corresponding object in a specified array.
