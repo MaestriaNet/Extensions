@@ -30,7 +30,7 @@ namespace Maestria.Extensions
         public static bool Between<T>(this T value, T starting, T ending) where T : IComparable =>
             value != null && starting != null && ending != null &&
             value.CompareTo(starting) >= 0 && value.CompareTo(ending) <= 0;
-        
+
         /// <summary>
         /// Call single action method and return current value to continue your build pipeline
         /// </summary>
@@ -41,7 +41,7 @@ namespace Maestria.Extensions
         public static T DetachedCall<T>(this T value, Action<T> action)
         {
             if (value == null) return default;
-            
+
             if (value is IEnumerable enumerable)
             {
                 var e = enumerable.GetEnumerator();
@@ -53,7 +53,7 @@ namespace Maestria.Extensions
 
             return value;
         }
-        
+
         /// <summary>
         /// Create output variable from execute pipeline method
         /// </summary>
