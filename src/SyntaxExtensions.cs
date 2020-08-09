@@ -10,6 +10,20 @@ namespace Maestria.Extensions
     public static class SyntaxExtensions
     {
         /// <summary>
+        /// Check value is null
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsNull(this object value) => value == null;
+
+        /// <summary>
+        /// Check value different of null
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsNotNull(this object value) => value != null;
+
+        /// <summary>
         /// Check if value is contained within expected values
         /// </summary>
         /// <param name="value"></param>

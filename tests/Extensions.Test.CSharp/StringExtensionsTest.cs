@@ -5,6 +5,23 @@ namespace Maestria.Extensions.Test.CSharp
 {
     public class StringExtensionsTest
     {
+        private static object _nullValue = null;
+        private static object _value = new object();
+
+        [Test]
+        public void IsNull()
+        {
+            Assert.IsTrue(_nullValue.IsNull());
+            Assert.IsFalse(_value.IsNull());
+        }
+
+        [Test]
+        public void IsNotNull()
+        {
+            Assert.IsFalse(_nullValue.IsNotNull());
+            Assert.IsTrue(_value.IsNotNull());
+        }
+
         [Test]
         public void JoinArray()
         {
