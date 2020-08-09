@@ -38,7 +38,7 @@ namespace Maestria.Extensions
         /// <param name="action">Action to execute</param>
         /// <typeparam name="T"></typeparam>
         /// <returns>Return is <see cref="value"/></returns>
-        public static T DetachedCall<T>(this T value, Action<T> action)
+        public static T DetachedInvoke<T>(this T value, Action<T> action)
         {
             if (value == null) return default;
 
@@ -53,6 +53,9 @@ namespace Maestria.Extensions
 
             return value;
         }
+
+        [Obsolete("Use 'DetachedInvoke' method")]
+        public static T DetachedCall<T>(this T value, Action<T> action) => DetachedInvoke(value, action);
 
         /// <summary>
         /// Create output variable from execute pipeline method
