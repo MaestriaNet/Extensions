@@ -256,32 +256,38 @@ namespace Maestria.Extensions
         #endregion
 
         /// <summary>
-        /// Obter texto a até a cadeia de caracter indicada. Caso não encontre retorna null.
+        /// Extract substring before first occurrence of text pattern. When not found returns null.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="find"></param>
+        /// <param name="value">Full text</param>
+        /// <param name="find">Find text pattern</param>
+        /// <param name="autoTrim">Apply trim on result</param>
         /// <returns></returns>
-        public static string SubstringBeforeFirstOccurrence(this string value, string find)
+        public static string SubstringBeforeFirstOccurrence(this string value, string find, bool autoTrim = true)
         {
             if (value == null) return null;
             var index = value.IndexOf(find);
             if (index > 0)
-                return value.Substring(0, index);
+                return autoTrim
+                    ? value.Substring(0, index).Trim()
+                    : value.Substring(0, index);
             return null;
         }
 
         /// <summary>
-        /// Obter texto a partir da cadeia de caracter indicada. Caso não encontre retorna null.
+        /// Extract substring after first occurrence of text pattern. When not found returns null.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="find"></param>
+        /// <param name="value">Full text</param>
+        /// <param name="find">Find text pattern</param>
+        /// /// <param name="autoTrim">Apply trim on result</param>
         /// <returns></returns>
-        public static string SubstringAfterFirstOccurrence(this string value, string find)
+        public static string SubstringAfterFirstOccurrence(this string value, string find, bool autoTrim = true)
         {
             if (value == null) return null;
             var index = value.IndexOf(find);
             if (index > 0)
-                return value.Substring(index + find.Length, value.Length - index - find.Length);
+                return autoTrim
+                    ? value.Substring(index + find.Length, value.Length - index - find.Length).Trim()
+                    : value.Substring(index + find.Length, value.Length - index - find.Length);
             return null;
         }
     }
