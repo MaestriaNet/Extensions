@@ -98,8 +98,12 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 <string>.OnlyNumbers()
 <string>.RemoveAccents()
 <string>.Join(<separator>)
+<string>.SubstringBeforeFirstOccurrence("-")
+<string>.SubstringAfterFirstOccurrence("-")
 
 // SyntaxExtensions
+<object>.IsNull()
+<object>.IsNotNull()
 <object>.In(<array-of-values>)
 <object>.Between(<starting-value>, <ending-value>)
 var value = <string>
@@ -116,11 +120,58 @@ var value = <string>
 <floating-point>.Truncate(<digits>)
 ```
 
-It's possible set default culture format for library, when not configured, default culture is CultureInfo.InvariantCulture:
+## Data Types
+
+### ISimpleResult, SimpleResult and SimpleResult<TData> 
+
+This structure has success and message for simple method result, extensible with generic TData on "Data" property.
+
+```csharp
+SimpleResult ok = SimpleResult.Ok(<optional-message>);
+SimpleResult fail = SimpleResult.Fail("Fail message");
+
+// Implict conversions
+SimpleResult ok = true;
+SimpleResult failt = "Fail message"
+
+// Initializer
+var result = new SimpleResult 
+{
+    Success = true,
+    Message = "Processed cuccessfully"
+}
+```
+
+### Try<TSuccess, TFailure>
+
+Auxiliary data type to increment the expressibility of method results when success and failure need different structures.  
+To facilitate development there is support for implicit conversion.  
+
+```csharp
+public void Try<PersonCreated, CustomError> Save(Person value) 
+{
+    ...
+    if (condition)
+        return new CustomError() { Code = 999, Message = "Failure message" }
+    return new PersonCreated { Id = 123 };
+}
+
+...
+
+var result = Save(person);
+if (result)
+    Console.WriteLine(result.Success.Id);
+else
+    Console.WriteLine($"Error {result.Failure.Code}: {result.Failure.Message}");
+```
+
+## Settings
+
+It's possible set default settings for library:
 
 ```csharp
 Extensions.GlobalSettings.Configure(cfg => cfg
-    .FloatAndDoubleTolerance(default-float-and-double-comparasion-tolerance)
+    .FloatAndDoubleTolerance(default-float-and-double-comparasion-tolerance) // Default is 0.00001f
 ```
 
 Where can I get it?
