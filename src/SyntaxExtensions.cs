@@ -21,7 +21,7 @@ namespace Maestria.Extensions
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static bool IsNotNull(this object value) => value != null;
+        public static bool HasValue(this object value) => value != null;
 
         /// <summary>
         /// Check if value is contained within expected values

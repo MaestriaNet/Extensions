@@ -6,7 +6,7 @@ open NUnit.Framework
 open FsUnit
 
 module SyntaxExtensions =
-    
+
     [<TestCase>]
     let ``Detached Call``() = "teste".DetachedCall(fun i -> i |> should equal "teste") |> should equal "teste"
 

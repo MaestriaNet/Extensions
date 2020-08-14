@@ -103,7 +103,7 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 
 // SyntaxExtensions
 <object>.IsNull()
-<object>.IsNotNull()
+<object>.HasValue()
 <object>.In(<array-of-values>)
 <object>.Between(<starting-value>, <ending-value>)
 var value = <string>

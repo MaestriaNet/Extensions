@@ -16,10 +16,10 @@ namespace Maestria.Extensions.Test.CSharp
         }
 
         [Test]
-        public void IsNotNull()
+        public void HasValue()
         {
-            Assert.IsFalse(_nullValue.IsNotNull());
-            Assert.IsTrue(_value.IsNotNull());
+            Assert.IsFalse(_nullValue.HasValue());
+            Assert.IsTrue(_value.HasValue());
         }
 
         [Test]
