@@ -132,13 +132,13 @@ SimpleResult fail = SimpleResult.Fail("Fail message");
 
 // Implict conversions
 SimpleResult ok = true;
-SimpleResult failt = "Fail message"
+SimpleResult fail = "Fail message"
 
 // Initializer
 var result = new SimpleResult 
 {
     Success = true,
-    Message = "Processed cuccessfully"
+    Message = "Successfully processed"
 }
 ```
 
