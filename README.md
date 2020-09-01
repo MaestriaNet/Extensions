@@ -100,6 +100,7 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 <string>.Join(<separator>)
 <string>.SubstringBeforeFirstOccurrence("-")
 <string>.SubstringAfterFirstOccurrence("-")
+<string>.SubstringSafe(<start-index>, <length>)
 
 // SyntaxExtensions
 <object>.IsNull()

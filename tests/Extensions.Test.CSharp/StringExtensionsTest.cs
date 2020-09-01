@@ -25,7 +25,7 @@ namespace Maestria.Extensions.Test.CSharp
         [Test]
         public void JoinArray()
         {
-            var values = new[] {"my", "name", "is", "fabio"};
+            var values = new[] { "my", "name", "is", "fabio" };
             Assert.AreEqual("mynameisfabio", values.Join(""));
             Assert.AreEqual("my name is fabio", values.Join(" "));
         }
@@ -33,7 +33,7 @@ namespace Maestria.Extensions.Test.CSharp
         [Test]
         public void JoinEnumerable()
         {
-            var values = new[] {"my", "name", "is", "fabio"}.AsEnumerable();
+            var values = new[] { "my", "name", "is", "fabio" }.AsEnumerable();
             Assert.AreEqual("mynameisfabio", values.Join(""));
             Assert.AreEqual("my name is fabio", values.Join(" "));
         }
@@ -72,6 +72,19 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual(" part 2", "part 1 - part 2".SubstringAfterFirstOccurrence("-", false));
             Assert.AreEqual(" part 2 - part 3", "part 1 - part 2 - part 3".SubstringAfterFirstOccurrence("-", false));
             Assert.Null("part 1".SubstringAfterFirstOccurrence("x", false));
+        }
+
+        [Test]
+        public void SubstringSafe()
+        {
+            Assert.IsNull("test".SubstringSafe(-1, 1));
+            Assert.IsNull("test".SubstringSafe(5, 1));
+            Assert.IsEmpty("test".SubstringSafe(4, 1));
+            Assert.AreEqual("g", "test substring".SubstringSafe(13, 1));
+            Assert.AreEqual("g", "test substring".SubstringSafe(13, 10));
+            Assert.AreEqual("ng", "test substring".SubstringSafe(12, 2));
+            Assert.AreEqual("ng", "test substring".SubstringSafe(12, 20));
+            Assert.AreEqual(" su", "test substring".SubstringSafe(4, 3));
         }
     }
 }

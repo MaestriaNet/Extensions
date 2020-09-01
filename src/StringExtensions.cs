@@ -290,5 +290,13 @@ namespace Maestria.Extensions
                     : value.Substring(index + find.Length, value.Length - index - find.Length);
             return null;
         }
+
+        public static string SubstringSafe(this string value, int startIndex, int length)
+        {
+            if (startIndex < 0) return null;
+            if (startIndex > value.Length) return null;
+            if (startIndex + length > value.Length) return value.Substring(startIndex);
+            return value.Substring(startIndex, length);
+        }
     }
 }
