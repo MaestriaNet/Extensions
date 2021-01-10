@@ -20,6 +20,12 @@
     /// <inheritdoc/>>
     public struct SimpleResult : ISimpleResult
     {
+        public SimpleResult(bool success, string message = null)
+        {
+            Success = success;
+            Message = message;
+        }
+
         public bool Success { get; set; }
         public string Message { get; set; }
 
@@ -34,6 +40,20 @@
     /// <inheritdoc/>>
     public struct SimpleResult<TData> : ISimpleResult<TData>
     {
+        public SimpleResult(TData data, string message = null)
+        {
+            Success = true;
+            Message = message;
+            Data = data;
+        }
+
+        public SimpleResult(bool success, TData data, string message = null)
+        {
+            Success = success;
+            Message = message;
+            Data = data;
+        }
+
         public bool Success { get; set; }
         public string Message { get; set; }
         public TData Data { get; set; }
