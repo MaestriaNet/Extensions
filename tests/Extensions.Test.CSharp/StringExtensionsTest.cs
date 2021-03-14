@@ -86,5 +86,14 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual("ng", "test substring".SubstringSafe(12, 20));
             Assert.AreEqual(" su", "test substring".SubstringSafe(4, 3));
         }
+
+        [Test]
+        public void EmptyIf()
+        {
+            Assert.IsEmpty("test".EmptyIf("test"));
+            Assert.IsEmpty("test".EmptyIf("TEST", true));
+            Assert.AreEqual("test".EmptyIf("TEST"), "test");
+            Assert.AreEqual("test".EmptyIf("a"), "test");
+        }
     }
 }

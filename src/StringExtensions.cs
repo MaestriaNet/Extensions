@@ -22,7 +22,8 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string RemoveIfStartsWith(this string value, string equality, bool ignoreCase = true)
         {
-            if (value == null || equality == null) return value;
+            if (value == null || equality == null) 
+                return value;
             return value.StartsWith(equality, ignoreCase, CultureInfo.InvariantCulture)
                 ? value.Remove(0, equality.Length)
                 : value;
@@ -46,7 +47,8 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string RemoveIfEndsWith(this string value, string equality, bool ignoreCase = true)
         {
-            if (value == null || equality == null) return value;
+            if (value == null || equality == null) 
+                return value;
             return value.EndsWith(equality, ignoreCase, CultureInfo.InvariantCulture)
                 ? value.Remove(value.Length - equality.Length, equality.Length)
                 : value;
@@ -70,8 +72,10 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string AddToLeftIfNotStartsWith(this string value, string equality, bool ignoreCase = true)
         {
-            if (value == null) return equality;
-            if (equality == null) return value;
+            if (value == null)
+                return equality;
+            if (equality == null)
+                return value;
             return value.StartsWith(equality, ignoreCase, CultureInfo.InvariantCulture)
                 ? value
                 : equality + value;
@@ -155,7 +159,8 @@ namespace Maestria.Extensions
         [StringFormatMethod("value")]
         public static string Format(this string value, params object[] args)
         {
-            if (value.IsNullOrWhiteSpace() || args == null || args.Length == 0) return value;
+            if (value.IsNullOrWhiteSpace() || args == null || args.Length == 0) 
+                return value;
             return string.Format(value, args);
         }
 
@@ -216,6 +221,24 @@ namespace Maestria.Extensions
             return value.Equals(valueToCompare, StringComparison.InvariantCultureIgnoreCase);
         }
 
+        /// <summary>
+        /// Return empty if <paramref name="value"/> is equals to <paramref name="equalityValue"/>
+        /// </summary>
+        /// <param name="value">Current text</param>
+        /// <param name="equalityValue">Text to compare with <paramref name="value"/> and return empty if equals</param>
+        /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
+        /// <returns>Empty string if <paramref name="value"/> is equals to <paramref name="equalityValue"/></returns>
+        public static string EmptyIf(this string value, string equalityValue, bool ignoreCase = false)
+        {
+            if (value == null || equalityValue == null)
+                return value;
+
+            return value.Equals(equalityValue,
+                ignoreCase ? StringComparison.InvariantCultureIgnoreCase : StringComparison.InvariantCulture)
+                ? string.Empty
+                : value;
+        }
+
         #endregion
 
         #region Text patterns
@@ -255,6 +278,8 @@ namespace Maestria.Extensions
 
         #endregion
 
+        #region Substring
+
         /// <summary>
         /// Extract substring before first occurrence of text pattern. When not found returns null.
         /// </summary>
@@ -290,7 +315,6 @@ namespace Maestria.Extensions
                     : value.Substring(index + find.Length, value.Length - index - find.Length);
             return null;
         }
-
         public static string SubstringSafe(this string value, int startIndex, int length)
         {
             if (startIndex < 0) return null;
@@ -298,5 +322,7 @@ namespace Maestria.Extensions
             if (startIndex + length > value.Length) return value.Substring(startIndex);
             return value.Substring(startIndex, length);
         }
+
+        #endregion
     }
 }
