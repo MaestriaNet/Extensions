@@ -7,10 +7,14 @@
     /// <typeparam name="TFailure"></typeparam>
     public struct Try<TSuccess, TFailure>
     {
-        public bool Successfully => Success != null;
-        public bool Failed => Failure != null;
-        public TSuccess Success { get; private set; }
-        public TFailure Failure { get; private set; }
+        private bool? _successfully;
+        private TSuccess _success;
+        private TFailure _failure;
+
+        public bool Successfully => _successfully != null && _successfully.Value;
+        public bool Failed => _successfully != null && !_successfully.Value;
+        public TSuccess Success { get => _success; private set { _success = value; _successfully = true;} }
+        public TFailure Failure { get => _failure; private set { _failure = value; _successfully = false; } }
 
         public static Try<TSuccess, TFailure> Ok(TSuccess value) => new Try<TSuccess, TFailure> { Success = value };
         public static Try<TSuccess, TFailure> Fail(TFailure value) => new Try<TSuccess, TFailure> { Failure = value };
