@@ -14,7 +14,7 @@ namespace Maestria.Extensions
     /// </summary>
     public static class CollectionExtensions
     {
-        #region IEnumerable ForEach
+        #region IEnumerable Iterate
 
         /// <summary>
         /// Iterate collection
@@ -22,7 +22,7 @@ namespace Maestria.Extensions
         /// <param name="enumerable"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable ForEach(this IEnumerable enumerable, Action<object> action)
+        public static IEnumerable Iterate(this IEnumerable enumerable, Action<object> action)
         {
             if (enumerable != null)
                 foreach (var item in enumerable)
@@ -36,7 +36,7 @@ namespace Maestria.Extensions
         /// <param name="enumerable"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable ForEach(this IEnumerable enumerable, IterateCollectionDelegate<object> action)
+        public static IEnumerable Iterate(this IEnumerable enumerable, IterateCollectionDelegate<object> action)
         {
             if (enumerable != null)
             {
@@ -54,7 +54,7 @@ namespace Maestria.Extensions
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable> ForEach(this IEnumerable enumerable, Func<object, Task> action)
+        public static async Task<IEnumerable> Iterate(this IEnumerable enumerable, Func<object, Task> action)
         {
             if (enumerable != null)
                 foreach (var item in enumerable)
@@ -69,7 +69,7 @@ namespace Maestria.Extensions
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable> ForEach(this IEnumerable enumerable, IterateCollectionAsyncDelegate<object> action)
+        public static async Task<IEnumerable> Iterate(this IEnumerable enumerable, IterateCollectionAsyncDelegate<object> action)
         {
             if (enumerable != null)
             {
@@ -90,7 +90,7 @@ namespace Maestria.Extensions
         /// <param name="enumerable"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
+        public static IEnumerable<T> Iterate<T>(this IEnumerable<T> enumerable, Action<T> action)
         {
             if (enumerable != null)
                 foreach (var item in enumerable)
@@ -104,7 +104,7 @@ namespace Maestria.Extensions
         /// <param name="enumerable"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, IterateCollectionDelegate<T> action)
+        public static IEnumerable<T> Iterate<T>(this IEnumerable<T> enumerable, IterateCollectionDelegate<T> action)
         {
             if (enumerable != null)
             {
@@ -122,7 +122,7 @@ namespace Maestria.Extensions
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable<T>> ForEach<T>(this IEnumerable<T> enumerable, Func<T, Task> action)
+        public static async Task<IEnumerable<T>> Iterate<T>(this IEnumerable<T> enumerable, Func<T, Task> action)
         {
             if (enumerable != null)
             {
@@ -139,7 +139,7 @@ namespace Maestria.Extensions
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable<T>> ForEach<T>(this IEnumerable<T> enumerable, IterateCollectionAsyncDelegate<T> action)
+        public static async Task<IEnumerable<T>> Iterate<T>(this IEnumerable<T> enumerable, IterateCollectionAsyncDelegate<T> action)
         {
             if (enumerable != null)
             {

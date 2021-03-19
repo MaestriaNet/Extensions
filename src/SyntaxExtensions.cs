@@ -68,9 +68,6 @@ namespace Maestria.Extensions
             return value;
         }
 
-        [Obsolete("Use 'DetachedInvoke' method")]
-        public static T DetachedCall<T>(this T value, Action<T> action) => DetachedInvoke(value, action);
-
         /// <summary>
         /// Create output variable from execute pipeline method
         /// </summary>

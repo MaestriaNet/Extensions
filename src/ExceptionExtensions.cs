@@ -13,11 +13,11 @@ namespace Maestria.Extensions
         /// <param name="includeClassType">Output with exception class full name.</param>
         /// <param name="includeStackTrace"></param>
         /// <returns></returns>
-        public static string ToLogString(this Exception exception, string additionalInfo = null, 
+        public static string ToLogString(this Exception exception, string additionalInfo = null,
             bool includeClassType = true, bool includeStackTrace = true)
         {
             if (exception == null) return string.Empty;
-            
+
             var msg = new StringBuilder();
             var stackTrace = new StringBuilder();
             if (additionalInfo.HasValue())
@@ -29,7 +29,7 @@ namespace Maestria.Extensions
 
             if (exception.StackTrace.HasValue())
                 stackTrace.AppendLine(exception.StackTrace);
-            
+
             if (exception.InnerException != null)
             {
                 var innerCount = 0;

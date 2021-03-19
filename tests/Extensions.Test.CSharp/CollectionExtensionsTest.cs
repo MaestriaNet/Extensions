@@ -41,7 +41,7 @@ namespace Maestria.Extensions.Test.CSharp
         public void Iterate()
         {
             var sum = 0;
-            _enumerable.ForEach(item => sum += (int) item);
+            _enumerable.Iterate(item => sum += (int) item);
             Assert.AreEqual(60, sum);
         }
 
@@ -49,7 +49,7 @@ namespace Maestria.Extensions.Test.CSharp
         public void Iterate_WithIndex()
         {
             var sum = 0;
-            _enumerable.ForEach((item, index) =>
+            _enumerable.Iterate((item, index) =>
             {
                 AssetArrayIndex(item, index);
                 sum += (int) item;
@@ -61,7 +61,7 @@ namespace Maestria.Extensions.Test.CSharp
         public void Iterate_Typed()
         {
             var sum = 0;
-            _enumerableTyped.ForEach(item => sum += item);
+            _enumerableTyped.Iterate(item => sum += item);
             Assert.AreEqual(60, sum);
         }
 
@@ -69,7 +69,7 @@ namespace Maestria.Extensions.Test.CSharp
         public void Iterate_Typed_WithIndex()
         {
             var sum = 0;
-            _enumerableTyped.ForEach((item, index) =>
+            _enumerableTyped.Iterate((item, index) =>
             {
                 AssetArrayIndex(item, index);
                 sum += item;
@@ -81,7 +81,7 @@ namespace Maestria.Extensions.Test.CSharp
         public async Task IterateAsync()
         {
             var sum = 0;
-            await _enumerable.ForEach(async item =>
+            await _enumerable.Iterate(async item =>
             {
                 Task temp = Task.Factory.StartNew(() => sum += (int) item);
                 await temp;
@@ -93,7 +93,7 @@ namespace Maestria.Extensions.Test.CSharp
         public async Task IterateAsync_WithIndex()
         {
             var sum = 0;
-            await _enumerable.ForEach(async (item, index) =>
+            await _enumerable.Iterate(async (item, index) =>
             {
                 AssetArrayIndex(item, index);
                 Task temp = Task.Factory.StartNew(() => sum += (int) item);
@@ -106,7 +106,7 @@ namespace Maestria.Extensions.Test.CSharp
         public async Task IterateAsync_Typed()
         {
             var sum = 0;
-            await _enumerableTyped.ForEach(async item =>
+            await _enumerableTyped.Iterate(async item =>
             {
                 Task temp = Task.Factory.StartNew(() => sum += item);
                 await temp;
@@ -118,7 +118,7 @@ namespace Maestria.Extensions.Test.CSharp
         public async Task IterateAsync_Typed_WithIndex()
         {
             var sum = 0;
-            await _enumerableTyped.ForEach(async (item, index) =>
+            await _enumerableTyped.Iterate(async (item, index) =>
             {
                 AssetArrayIndex(item, index);
                 Task temp = Task.Factory.StartNew(() => sum += item);

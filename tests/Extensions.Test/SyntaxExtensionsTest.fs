@@ -8,7 +8,7 @@ open FsUnit
 module SyntaxExtensions =
 
     [<TestCase>]
-    let ``Detached Call``() = "teste".DetachedCall(fun i -> i |> should equal "teste") |> should equal "teste"
+    let ``Detached Invoke``() = "teste".DetachedInvoke(fun i -> i |> should equal "teste") |> should equal "teste"
 
 module In =
     [<TestCase(MyColor.Red, [| MyColor.Red; MyColor.Green; MyColor.Blue |])>]

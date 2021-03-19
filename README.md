@@ -41,8 +41,10 @@ Base64Extensions.Decode(<encoded-string>, <Encoding>)
 <IEnumerable>.IsNullOrEmpty()
 <IEnumerable>.HasItems()
 <IDictionary>.TryGetValue(<key>, <@default-value>)
-<IEnumerable>.ForEach((item, index) => <action>)
-<IEnumerable>.ForEach(async (item, index) => await <action>)
+<IEnumerable>.Iterate(item => <action>)
+await <IEnumerable>.Iterate(async item => await <action>)
+<IEnumerable>.Iterate((item, index) => <action>)
+await <IEnumerable>.Iterate(async (item, index) => await <action>)
 
 // EnumExtensions
 <Enum>.GetDisplayName()
