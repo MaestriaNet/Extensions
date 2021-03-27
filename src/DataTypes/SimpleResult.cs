@@ -13,11 +13,11 @@ namespace Maestria.Extensions.DataTypes
     }
 
     /// <summary>
-    /// This structure has success and message for simple method result, extensible with generic TData on "Data" property.
+    /// This structure has success and message for simple method result, extensible with generic TValue on "Value" property.
     /// </summary>
-    public interface ISimpleResult<TData> : ISimpleResult
+    public interface ISimpleResult<TValue> : ISimpleResult
     {
-        public TData Data { get; set; }
+        public TValue Value { get; set; }
     }
 
     /// <inheritdoc/>>
@@ -44,39 +44,39 @@ namespace Maestria.Extensions.DataTypes
     }
 
     /// <inheritdoc/>>
-    public struct SimpleResult<TData> : ISimpleResult<TData>
+    public struct SimpleResult<TValue> : ISimpleResult<TValue>
     {
-        public SimpleResult(TData data, string message = null)
+        public SimpleResult(TValue value, string message = null)
         {
             Success = true;
             Message = message;
             Exception = null;
-            Data = data;
+            Value = value;
         }
 
-        public SimpleResult(bool success, TData data, string message = null, Exception exception = null)
+        public SimpleResult(bool success, TValue value, string message = null, Exception exception = null)
         {
             Success = success;
             Message = message;
             Exception = exception;
-            Data = data;
+            Value = value;
         }
 
         public bool Success { get; set; }
         public string Message { get; set; }
         public Exception Exception { get; set; }
-        public TData Data { get; set; }
+        public TValue Value { get; set; }
 
-        public static SimpleResult<TData> Ok(TData data, string message = null) => new SimpleResult<TData> { Success = true, Message = message, Data = data };
-        public static SimpleResult<TData> Ok(string message = null) => new SimpleResult<TData> { Success = true, Message = message };
-        public static SimpleResult<TData> Fail(string message, Exception exception = null) => new SimpleResult<TData> { Success = false, Message = message, Exception = exception };
+        public static SimpleResult<TValue> Ok(TValue value, string message = null) => new SimpleResult<TValue> { Success = true, Message = message, Value = value };
+        public static SimpleResult<TValue> Ok(string message = null) => new SimpleResult<TValue> { Success = true, Message = message };
+        public static SimpleResult<TValue> Fail(string message, Exception exception = null) => new SimpleResult<TValue> { Success = false, Message = message, Exception = exception };
 
-        public static implicit operator SimpleResult<TData>(bool success) => new SimpleResult<TData> { Success = success };
-        public static implicit operator SimpleResult<TData>(TData data) => new SimpleResult<TData> { Success = true, Data = data };
-        public static implicit operator SimpleResult<TData>(string failMessage) => Fail(failMessage);
-        public static implicit operator SimpleResult<TData>(Exception exception) => Fail(exception.ToLogString(), exception);
-        public static implicit operator SimpleResult(SimpleResult<TData> result) => new SimpleResult { Success = result.Success, Message = result.Message, Exception = result.Exception };
-        public static implicit operator bool(SimpleResult<TData> value) => value.Success;
-        public static implicit operator TData(SimpleResult<TData> value) => value.Data;
+        public static implicit operator SimpleResult<TValue>(bool success) => new SimpleResult<TValue> { Success = success };
+        public static implicit operator SimpleResult<TValue>(TValue value) => new SimpleResult<TValue> { Success = true, Value = value };
+        public static implicit operator SimpleResult<TValue>(string failMessage) => Fail(failMessage);
+        public static implicit operator SimpleResult<TValue>(Exception exception) => Fail(exception.ToLogString(), exception);
+        public static implicit operator SimpleResult(SimpleResult<TValue> result) => new SimpleResult { Success = result.Success, Message = result.Message, Exception = result.Exception };
+        public static implicit operator bool(SimpleResult<TValue> value) => value.Success;
+        public static implicit operator TValue(SimpleResult<TValue> value) => value.Value;
     }
 }

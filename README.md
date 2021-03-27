@@ -126,9 +126,9 @@ var value = <string>
 
 ## Data Types
 
-### ISimpleResult, SimpleResult and SimpleResult<TData> 
+### ISimpleResult, SimpleResult and SimpleResult<TValue>
 
-This structure has success and message for simple method result, extensible with generic TData on "Data" property.
+This structure has success and message for simple method result, extensible with generic TValue on "Value" property.
 
 ```csharp
 SimpleResult ok = SimpleResult.Ok(<optional-message>);
@@ -139,7 +139,7 @@ SimpleResult ok = true;
 SimpleResult fail = "Fail message"
 
 // Initializer
-var result = new SimpleResult 
+var result = new SimpleResult
 {
     Success = true,
     Message = "Successfully processed"
