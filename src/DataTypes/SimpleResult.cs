@@ -17,7 +17,10 @@ namespace Maestria.Extensions.DataTypes
     /// </summary>
     public interface ISimpleResult<TValue> : ISimpleResult
     {
-        public TValue Value { get; set; }
+        public TValue Value { get; }
+
+        [Obsolete("Use property 'Value'. This will removed in future versions.")]
+        public TValue Data { get; }
     }
 
     /// <inheritdoc/>>
@@ -27,6 +30,13 @@ namespace Maestria.Extensions.DataTypes
         {
             Success = success;
             Message = message;
+            Exception = exception;
+        }
+
+        public SimpleResult(Exception exception, string message = null)
+        {
+            Success = false;
+            Message = message ?? exception.ToLogString();
             Exception = exception;
         }
 
@@ -62,10 +72,21 @@ namespace Maestria.Extensions.DataTypes
             Value = value;
         }
 
+        public SimpleResult(Exception exception, string message = null)
+        {
+            Success = false;
+            Message = message ?? exception.ToLogString();
+            Exception = exception;
+            Value = default;
+        }
+
         public bool Success { get; set; }
         public string Message { get; set; }
         public Exception Exception { get; set; }
         public TValue Value { get; set; }
+
+        [Obsolete("Use property 'Value'. This will removed in future versions.")]
+        public TValue Data => Value;
 
         public static SimpleResult<TValue> Ok(TValue value, string message = null) => new SimpleResult<TValue> { Success = true, Message = message, Value = value };
         public static SimpleResult<TValue> Ok(string message = null) => new SimpleResult<TValue> { Success = true, Message = message };
