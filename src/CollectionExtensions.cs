@@ -158,12 +158,12 @@ namespace Maestria.Extensions
         /// <param name="source"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        /// <example>foreach (var (item, index) in youtList.WithIndex())
+        /// <example>foreach (var (Value, Index) in youtList.WithIndex())
         /// {
         /// ...
         /// }</example>
-        public static IEnumerable<(T item, int index)> WithIndex<T>(this IEnumerable<T> source) =>
-            source.Select((item, index) => (item, index));
+        public static IEnumerable<(T Value, int Index)> WithIndex<T>(this IEnumerable<T> source) =>
+            source.Select((Item, Index) => (Item, Index));
 
         /// <summary>
         /// Check if collection is null or has no items
