@@ -6,12 +6,14 @@ namespace Maestria.Extensions.Test.CSharp
     public class StringExtensionsTest
     {
         private static object _nullValue = null;
+        private static string _nullString = null;
         private static object _value = new object();
 
         [Test]
         public void IsNull()
         {
             Assert.IsTrue(_nullValue.IsNull());
+            Assert.IsTrue(_nullString.IsNull());
             Assert.IsFalse(_value.IsNull());
         }
 
@@ -19,6 +21,7 @@ namespace Maestria.Extensions.Test.CSharp
         public void HasValue()
         {
             Assert.IsFalse(_nullValue.HasValue());
+            Assert.IsFalse(_nullString.HasValue());
             Assert.IsTrue(_value.HasValue());
         }
 
@@ -44,7 +47,8 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual("part 1", "part 1-part 2".SubstringBeforeFirstOccurrence("-"));
             Assert.AreEqual("part 1", "part 1-part 2".SubstringBeforeFirstOccurrence("-"));
             Assert.AreEqual("part 1", "part 1-part 2-part 3".SubstringBeforeFirstOccurrence("-"));
-            Assert.Null("part 1".SubstringBeforeFirstOccurrence("x"));
+            Assert.IsNull("part 1".SubstringBeforeFirstOccurrence("x"));
+            Assert.IsNull(_nullString.SubstringBeforeFirstOccurrence("x"));
         }
 
         [Test]
@@ -53,7 +57,8 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual("part 1 ", "part 1 - part 2".SubstringBeforeFirstOccurrence("-", false));
             Assert.AreEqual("part 1 ", "part 1 - part 2".SubstringBeforeFirstOccurrence("-", false));
             Assert.AreEqual("part 1 ", "part 1 - part 2-part 3".SubstringBeforeFirstOccurrence("-", false));
-            Assert.Null("part 1".SubstringBeforeFirstOccurrence("x", false));
+            Assert.IsNull("part 1".SubstringBeforeFirstOccurrence("x", false));
+            Assert.IsNull(_nullString.SubstringBeforeFirstOccurrence("x", false));
         }
 
         [Test]
@@ -62,7 +67,8 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual("part 2", "part 1-part 2".SubstringAfterFirstOccurrence("-"));
             Assert.AreEqual("part 2", "part 1-part 2".SubstringAfterFirstOccurrence("-"));
             Assert.AreEqual("part 2-part 3", "part 1-part 2-part 3".SubstringAfterFirstOccurrence("-"));
-            Assert.Null("part 1".SubstringAfterFirstOccurrence("x"));
+            Assert.IsNull("part 1".SubstringAfterFirstOccurrence("x"));
+            Assert.IsNull(_nullString.SubstringAfterFirstOccurrence("x"));
         }
 
         [Test]
@@ -71,7 +77,8 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual(" part 2", "part 1 - part 2".SubstringAfterFirstOccurrence("-", false));
             Assert.AreEqual(" part 2", "part 1 - part 2".SubstringAfterFirstOccurrence("-", false));
             Assert.AreEqual(" part 2 - part 3", "part 1 - part 2 - part 3".SubstringAfterFirstOccurrence("-", false));
-            Assert.Null("part 1".SubstringAfterFirstOccurrence("x", false));
+            Assert.IsNull("part 1".SubstringAfterFirstOccurrence("x", false));
+            Assert.IsNull(_nullString.SubstringAfterFirstOccurrence("x", false));
         }
 
         [Test]
@@ -85,6 +92,7 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual("ng", "test substring".SubstringSafe(12, 2));
             Assert.AreEqual("ng", "test substring".SubstringSafe(12, 20));
             Assert.AreEqual(" su", "test substring".SubstringSafe(4, 3));
+            Assert.IsNull(_nullString.SubstringSafe(1,2));
         }
 
         [Test]
@@ -94,6 +102,7 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.IsEmpty("test".EmptyIf("TEST", true));
             Assert.AreEqual("test".EmptyIf("TEST"), "test");
             Assert.AreEqual("test".EmptyIf("a"), "test");
+            Assert.IsNull(_nullString.EmptyIf("a"));
         }
     }
 }

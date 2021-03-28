@@ -317,6 +317,7 @@ namespace Maestria.Extensions
         }
         public static string SubstringSafe(this string value, int startIndex, int length)
         {
+            if (value == null) return null;
             if (startIndex < 0) return null;
             if (startIndex > value.Length) return null;
             if (startIndex + length > value.Length) return value.Substring(startIndex);
