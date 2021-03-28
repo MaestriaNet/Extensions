@@ -92,6 +92,7 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual("ng", "test substring".SubstringSafe(12, 2));
             Assert.AreEqual("ng", "test substring".SubstringSafe(12, 20));
             Assert.AreEqual(" su", "test substring".SubstringSafe(4, 3));
+            Assert.AreEqual("test", "test substring".SubstringSafe(0, 4));
             Assert.IsNull(_nullString.SubstringSafe(1,2));
         }
 
