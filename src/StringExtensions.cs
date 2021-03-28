@@ -22,7 +22,7 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string RemoveIfStartsWith(this string value, string equality, bool ignoreCase = true)
         {
-            if (value == null || equality == null) 
+            if (value == null || equality == null)
                 return value;
             return value.StartsWith(equality, ignoreCase, CultureInfo.InvariantCulture)
                 ? value.Remove(0, equality.Length)
@@ -47,7 +47,7 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string RemoveIfEndsWith(this string value, string equality, bool ignoreCase = true)
         {
-            if (value == null || equality == null) 
+            if (value == null || equality == null)
                 return value;
             return value.EndsWith(equality, ignoreCase, CultureInfo.InvariantCulture)
                 ? value.Remove(value.Length - equality.Length, equality.Length)
@@ -159,7 +159,7 @@ namespace Maestria.Extensions
         [StringFormatMethod("value")]
         public static string Format(this string value, params object[] args)
         {
-            if (value.IsNullOrWhiteSpace() || args == null || args.Length == 0) 
+            if (value.IsNullOrWhiteSpace() || args == null || args.Length == 0)
                 return value;
             return string.Format(value, args);
         }
@@ -284,13 +284,31 @@ namespace Maestria.Extensions
         /// Extract substring before first occurrence of text pattern. When not found returns null.
         /// </summary>
         /// <param name="value">Full text</param>
-        /// <param name="find">Find text pattern</param>
+        /// <param name="separator">Find text pattern</param>
         /// <param name="autoTrim">Apply trim on result</param>
         /// <returns></returns>
-        public static string SubstringBeforeFirstOccurrence(this string value, string find, bool autoTrim = true)
+        public static string SubstringBeforeFirstOccurrence(this string value, string separator, bool autoTrim = true)
         {
             if (value == null) return null;
-            var index = value.IndexOf(find);
+            var index = value.IndexOf(separator);
+            if (index > 0)
+                return autoTrim
+                    ? value.Substring(0, index).Trim()
+                    : value.Substring(0, index);
+            return null;
+        }
+
+        /// <summary>
+        /// Extract substring before last occurrence of text pattern. When not found returns null.
+        /// </summary>
+        /// <param name="value">Full text</param>
+        /// <param name="separator">Find text pattern</param>
+        /// <param name="autoTrim">Apply trim on result</param>
+        /// <returns></returns>
+        public static string SubstringBeforeLastOccurrence(this string value, string separator, bool autoTrim = true)
+        {
+            if (value == null) return null;
+            var index = value.LastIndexOf(separator);
             if (index > 0)
                 return autoTrim
                     ? value.Substring(0, index).Trim()
@@ -302,19 +320,55 @@ namespace Maestria.Extensions
         /// Extract substring after first occurrence of text pattern. When not found returns null.
         /// </summary>
         /// <param name="value">Full text</param>
-        /// <param name="find">Find text pattern</param>
-        /// /// <param name="autoTrim">Apply trim on result</param>
+        /// <param name="separator">Find text pattern</param>
+        /// <param name="autoTrim">Apply trim on result</param>
         /// <returns></returns>
-        public static string SubstringAfterFirstOccurrence(this string value, string find, bool autoTrim = true)
+        public static string SubstringAfterFirstOccurrence(this string value, string separator, bool autoTrim = true)
         {
             if (value == null) return null;
-            var index = value.IndexOf(find);
+            var index = value.IndexOf(separator);
             if (index > 0)
                 return autoTrim
-                    ? value.Substring(index + find.Length, value.Length - index - find.Length).Trim()
-                    : value.Substring(index + find.Length, value.Length - index - find.Length);
+                    ? value.Substring(index + separator.Length, value.Length - index - separator.Length).Trim()
+                    : value.Substring(index + separator.Length, value.Length - index - separator.Length);
             return null;
         }
+
+        /// <summary>
+        /// Extract substring after last occurrence of text pattern. When not found returns null.
+        /// </summary>
+        /// <param name="value">Full text</param>
+        /// <param name="separator">Find text pattern</param>
+        /// <param name="autoTrim">Apply trim on result</param>
+        /// <returns></returns>
+        public static string SubstringAfterLastOccurrence(this string value, string separator, bool autoTrim = true)
+        {
+            if (value == null) return null;
+            var index = value.LastIndexOf(separator);
+            if (index > 0)
+                return autoTrim
+                    ? value.Substring(index + separator.Length, value.Length - index - separator.Length).Trim()
+                    : value.Substring(index + separator.Length, value.Length - index - separator.Length);
+            return null;
+        }
+
+        /// <summary>
+        /// Split <see cref="value"/> by <see cref="separator"/> and return <see cref="occurrenceIndex"/> occurrence index. This is a safe method and returns null when then <see cref="occurrenceIndex"/> was not satisfied.
+        /// </summary>
+        /// <param name="value">Full text</param>
+        /// <param name="separator">Find text pattern</param>
+        /// <param name="autoTrim">Apply trim on result</param>
+        /// <returns></returns>
+        public static string SubstringAtOccurrenceIndex(this string value, string separator, int occurrenceIndex, bool autoTrim = true, StringSplitOptions options = StringSplitOptions.None)
+        {
+            if (value == null || occurrenceIndex < 0)
+                return null;
+            var splited = value.Split(new[] { separator }, options);
+            if ( occurrenceIndex >= splited.Length)
+                return null;
+            return autoTrim ? splited[occurrenceIndex].Trim() : splited[occurrenceIndex];
+        }
+
         public static string SubstringSafe(this string value, int startIndex, int length)
         {
             if (value == null) return null;

@@ -45,7 +45,6 @@ namespace Maestria.Extensions.Test.CSharp
         public void SubstringBeforeFirstOccurrence_Default()
         {
             Assert.AreEqual("part 1", "part 1-part 2".SubstringBeforeFirstOccurrence("-"));
-            Assert.AreEqual("part 1", "part 1-part 2".SubstringBeforeFirstOccurrence("-"));
             Assert.AreEqual("part 1", "part 1-part 2-part 3".SubstringBeforeFirstOccurrence("-"));
             Assert.IsNull("part 1".SubstringBeforeFirstOccurrence("x"));
             Assert.IsNull(_nullString.SubstringBeforeFirstOccurrence("x"));
@@ -55,10 +54,27 @@ namespace Maestria.Extensions.Test.CSharp
         public void SubstringBeforeFirstOccurrence_DisabledTrim()
         {
             Assert.AreEqual("part 1 ", "part 1 - part 2".SubstringBeforeFirstOccurrence("-", false));
-            Assert.AreEqual("part 1 ", "part 1 - part 2".SubstringBeforeFirstOccurrence("-", false));
             Assert.AreEqual("part 1 ", "part 1 - part 2-part 3".SubstringBeforeFirstOccurrence("-", false));
             Assert.IsNull("part 1".SubstringBeforeFirstOccurrence("x", false));
             Assert.IsNull(_nullString.SubstringBeforeFirstOccurrence("x", false));
+        }
+
+        [Test]
+        public void SubstringBeforeLastOccurrence_Default()
+        {
+            Assert.AreEqual("part 1", "part 1-part 2".SubstringBeforeLastOccurrence("-"));
+            Assert.AreEqual("part 1-part 2", "part 1-part 2-part 3".SubstringBeforeLastOccurrence("-"));
+            Assert.IsNull("part 1".SubstringBeforeLastOccurrence("x"));
+            Assert.IsNull(_nullString.SubstringBeforeLastOccurrence("x"));
+        }
+
+        [Test]
+        public void SubstringBeforeLastOccurrence_DisabledTrim()
+        {
+            Assert.AreEqual("part 1 ", "part 1 - part 2".SubstringBeforeLastOccurrence("-", false));
+            Assert.AreEqual("part 1 - part 2", "part 1 - part 2-part 3".SubstringBeforeLastOccurrence("-", false));
+            Assert.IsNull("part 1".SubstringBeforeLastOccurrence("x", false));
+            Assert.IsNull(_nullString.SubstringBeforeLastOccurrence("x", false));
         }
 
         [Test]
@@ -75,10 +91,52 @@ namespace Maestria.Extensions.Test.CSharp
         public void SubstringAfterFirstOccurrence_DisabledTrim()
         {
             Assert.AreEqual(" part 2", "part 1 - part 2".SubstringAfterFirstOccurrence("-", false));
-            Assert.AreEqual(" part 2", "part 1 - part 2".SubstringAfterFirstOccurrence("-", false));
             Assert.AreEqual(" part 2 - part 3", "part 1 - part 2 - part 3".SubstringAfterFirstOccurrence("-", false));
             Assert.IsNull("part 1".SubstringAfterFirstOccurrence("x", false));
             Assert.IsNull(_nullString.SubstringAfterFirstOccurrence("x", false));
+        }
+
+        [Test]
+        public void SubstringAfterLastOccurrence_Default()
+        {
+            Assert.AreEqual("part 2", "part 1-part 2".SubstringAfterLastOccurrence("-"));
+            Assert.AreEqual("part 3", "part 1-part 2-part 3".SubstringAfterLastOccurrence("-"));
+            Assert.IsNull("part 1".SubstringAfterLastOccurrence("x"));
+            Assert.IsNull(_nullString.SubstringAfterLastOccurrence("x"));
+        }
+
+        [Test]
+        public void SubstringAfterLastOccurrence_DisabledTrim()
+        {
+            Assert.AreEqual(" part 2", "part 1 - part 2".SubstringAfterLastOccurrence("-", false));
+            Assert.AreEqual(" part 3", "part 1 - part 2 - part 3".SubstringAfterLastOccurrence("-", false));
+            Assert.AreEqual(" part 3", "part 1 - part 2 - part 3".SubstringAfterLastOccurrence("-", false));
+            Assert.IsNull("part 1".SubstringAfterLastOccurrence("x", false));
+            Assert.IsNull(_nullString.SubstringAfterLastOccurrence("x", false));
+        }
+
+        [Test]
+        public void SubstringAtOccurrenceIndex_Default()
+        {
+            const string value = "parte 1 - part 2 - part 3 - part 4";
+            Assert.AreEqual("parte 1", value.SubstringAtOccurrenceIndex("-", 0));
+            Assert.AreEqual("part 2", value.SubstringAtOccurrenceIndex("-", 1));
+            Assert.AreEqual("part 3", value.SubstringAtOccurrenceIndex("-", 2));
+            Assert.AreEqual("part 4", value.SubstringAtOccurrenceIndex("-", 3));
+            Assert.IsNull(value.SubstringAtOccurrenceIndex("-", 4, false));
+            Assert.IsNull(_nullString.SubstringAtOccurrenceIndex("-", 0, false));
+        }
+
+        [Test]
+        public void SubstringAtOccurrenceIndex_DisabledTrim()
+        {
+            const string value = "parte 1 - part 2 - part 3 - part 4";
+            Assert.AreEqual("parte 1 ", value.SubstringAtOccurrenceIndex("-", 0, false));
+            Assert.AreEqual(" part 2 ", value.SubstringAtOccurrenceIndex("-", 1, false));
+            Assert.AreEqual(" part 3 ", value.SubstringAtOccurrenceIndex("-", 2, false));
+            Assert.AreEqual(" part 4", value.SubstringAtOccurrenceIndex("-", 3, false));
+            Assert.IsNull(value.SubstringAtOccurrenceIndex("-", 4, false));
+            Assert.IsNull(_nullString.SubstringAtOccurrenceIndex("-", 0, false));
         }
 
         [Test]

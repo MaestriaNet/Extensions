@@ -102,7 +102,10 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 <string>.RemoveAccents()
 <string>.Join(<separator>)
 <string>.SubstringBeforeFirstOccurrence("-")
+<string>.SubstringBeforeLastOccurrence("-")
 <string>.SubstringAfterFirstOccurrence("-")
+<string>.SubstringAfterLastOccurrence("-")
+<string>.SubstringAtOccurrenceIndex("-", 1)
 <string>.SubstringSafe(<start-index>, <length>)
 
 // SyntaxExtensions
