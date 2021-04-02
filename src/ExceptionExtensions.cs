@@ -13,10 +13,11 @@ namespace Maestria.Extensions
         /// <param name="includeClassType">Output with exception class full name.</param>
         /// <param name="includeStackTrace"></param>
         /// <returns></returns>
-        public static string ToLogString(this Exception exception, string additionalInfo = null,
+        public static string GetAllMessages(this Exception exception, string additionalInfo = null,
             bool includeClassType = true, bool includeStackTrace = true)
         {
-            if (exception == null) return string.Empty;
+            if (exception == null)
+                return string.Empty;
 
             var msg = new StringBuilder();
             var stackTrace = new StringBuilder();
@@ -60,6 +61,10 @@ namespace Maestria.Extensions
 
             return msg.ToString();
         }
+
+        [Obsolete("Use 'GetAllMessages'")]
+        public static string ToLogString(this Exception exception, string additionalInfo = null,
+            bool includeClassType = true, bool includeStackTrace = true) => GetAllMessages(exception, additionalInfo, includeClassType, includeStackTrace);
 
         /// <summary>
         /// Gets the most inner (deepest) exception of a given Exception object

@@ -7,7 +7,7 @@ namespace Maestria.Extensions.Test.CSharp
     public class ExceptionExtensionsTest
     {
         #region Nested classes to test
-        
+
         public class MyExceptionTest
         {
             public void Execute(string value) => int.Parse(value);
@@ -17,14 +17,14 @@ namespace Maestria.Extensions.Test.CSharp
         {
             public void Execute(string value) => new MyExceptionTest().Execute(value);
         }
-    
+
         public class MyExceptionTest3
         {
             public void Execute(string value) => new MyExceptionTest2().Execute(value);
         }
-        
+
         #endregion
-        
+
         //[Test]
         public void ToLogString()
         {
@@ -35,7 +35,7 @@ namespace Maestria.Extensions.Test.CSharp
             }
             catch (Exception ex)
             {
-                var logMsg = ex.ToLogString();
+                var logMsg = ex.GetAllMessages();
                 string expected = $@"Input string was not in a correct format.
 Type: System.FormatException
 StackTrace:    at System.Number.StringToNumber(ReadOnlySpan`1 str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
@@ -65,7 +65,7 @@ StackTrace:    at System.Number.StringToNumber(ReadOnlySpan`1 str, NumberStyles 
                 }
                 catch (Exception ex2)
                 {
-                    var logMsg = ex2.ToLogString();
+                    var logMsg = ex2.GetAllMessages();
                     string expected = $@"Error to execute my method
 Type: System.Exception
 Inner: System.FormatException -> Input string was not in a correct format.
@@ -77,11 +77,11 @@ StackTrace:    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogS
    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest2.Execute(String value) in {_currentFilePath}:line 18
    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest3.Execute(String value) in {_currentFilePath}:line 23
    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogString_OneInner() in {_currentFilePath}:line 58";
-                    Assert.AreEqual(expected.Replace("\r\n", "\n"), logMsg.Replace("\r\n", "\n"));   
+                    Assert.AreEqual(expected.Replace("\r\n", "\n"), logMsg.Replace("\r\n", "\n"));
                 }
             }
         }
-        
+
         //[Test]
         public void ToLogString_TwoInner()
         {
@@ -105,7 +105,7 @@ StackTrace:    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogS
                 }
                 catch (Exception ex2)
                 {
-                    var logMsg = ex2.ToLogString();
+                    var logMsg = ex2.GetAllMessages();
                     string expected = $@"Second exception
 Type: System.Exception
 Inner 1: System.Exception -> First exception
@@ -119,7 +119,7 @@ StackTrace:    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogS
    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest2.Execute(String value) in {_currentFilePath}:line 18
    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest3.Execute(String value) in {_currentFilePath}:line 23
    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogString_TwoInner() in {_currentFilePath}:line 91";
-                    Assert.AreEqual(expected.Replace("\r\n", "\n"), logMsg.Replace("\r\n", "\n"));   
+                    Assert.AreEqual(expected.Replace("\r\n", "\n"), logMsg.Replace("\r\n", "\n"));
                 }
             }
         }
@@ -128,7 +128,7 @@ StackTrace:    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogS
         [OneTimeSetUp]
         public void Init()
         {
-            _currentFilePath = new System.Diagnostics.StackTrace(true).GetFrame(0).GetFileName(); 
+            _currentFilePath = new System.Diagnostics.StackTrace(true).GetFrame(0).GetFileName();
         }
 
         [Test]

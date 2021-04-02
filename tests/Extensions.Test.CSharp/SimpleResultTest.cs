@@ -21,7 +21,7 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.False(result.Success);
             Assert.False(result);
             Assert.AreEqual(ErrorMessage, result.Message);
-            Assert.AreEqual(ExceptionStack, result.Exception.ToLogString());
+            Assert.AreEqual(ExceptionStack, result.Exception.GetAllMessages());
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.False(result.Success);
             Assert.False(result);
             Assert.AreEqual(ErrorMessage, result.Message);
-            Assert.AreEqual(ExceptionStack, result.Exception.ToLogString());
+            Assert.AreEqual(ExceptionStack, result.Exception.GetAllMessages());
         }
     }
 }
