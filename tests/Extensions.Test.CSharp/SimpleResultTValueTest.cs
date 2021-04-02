@@ -23,7 +23,8 @@ namespace Maestria.Extensions.Test.CSharp
             result = new SimpleResult<Person>(new Exception(ErrorMessage));
             Assert.False(result.Success);
             Assert.False(result);
-            Assert.AreEqual(ExceptionStack, result.Message);
+            Assert.AreEqual(ErrorMessage, result.Message);
+            Assert.AreEqual(ExceptionStack, result.Exception.ToLogString());
             Assert.IsNull(result.Value);
         }
 
@@ -77,7 +78,8 @@ namespace Maestria.Extensions.Test.CSharp
             result = new Exception(ErrorMessage);
             Assert.False(result.Success);
             Assert.False(result);
-            Assert.AreEqual(ExceptionStack, result.Message);
+            Assert.AreEqual(ErrorMessage, result.Message);
+            Assert.AreEqual(ExceptionStack, result.Exception.ToLogString());
             Assert.IsNull(result.Value);
         }
 
@@ -105,7 +107,8 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual(result1.Exception, result2.Exception);
 
             Assert.AreEqual(false, result2.Success);
-            Assert.AreEqual(ExceptionStack, result2.Message);
+            Assert.AreEqual(ErrorMessage, result2.Message);
+            Assert.AreEqual(ExceptionStack, result2.Exception.ToLogString());
             Assert.IsNotNull(result2.Exception);
         }
     }
