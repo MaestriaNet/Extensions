@@ -107,6 +107,8 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 <string>.SubstringAfterLastOccurrence("-")
 <string>.SubstringAtOccurrenceIndex("-", 1)
 <string>.SubstringSafe(<start-index>, <length>)
+<string>.Limit(<length>)
+<string>.LimitEnd(<length>)
 
 // SyntaxExtensions
 <object>.IsNull()

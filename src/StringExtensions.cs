@@ -364,7 +364,7 @@ namespace Maestria.Extensions
             if (value == null || occurrenceIndex < 0)
                 return null;
             var splited = value.Split(new[] { separator }, options);
-            if ( occurrenceIndex >= splited.Length)
+            if (occurrenceIndex >= splited.Length)
                 return null;
             return autoTrim ? splited[occurrenceIndex].Trim() : splited[occurrenceIndex];
         }
@@ -377,6 +377,22 @@ namespace Maestria.Extensions
             if (startIndex + length > value.Length) return value.Substring(startIndex);
             return value.Substring(startIndex, length);
         }
+
+        /// <summary>
+        /// Limit <see cref="value"/> with <see cref="length"/> character number safe.
+        /// </summary>
+        /// <param name="value">Full text</param>
+        /// <param name="length">Max size of return value</param>
+        /// <returns></returns>
+        public static string Limit(this string value, int length) => value.SubstringSafe(0, length);
+
+        /// <summary>
+        /// Limit <see cref="value"/> with <see cref="length"/> character number safe from right to left.
+        /// </summary>
+        /// <param name="value">Full text</param>
+        /// <param name="length">Max size of return value</param>
+        /// <returns></returns>
+        public static string LimitEnd(this string value, int length) => value?.SubstringSafe(AggregateExtensions.Max(value.Length - length, 0), length);
 
         #endregion
     }

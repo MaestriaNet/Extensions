@@ -151,7 +151,7 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual("ng", "test substring".SubstringSafe(12, 20));
             Assert.AreEqual(" su", "test substring".SubstringSafe(4, 3));
             Assert.AreEqual("test", "test substring".SubstringSafe(0, 4));
-            Assert.IsNull(_nullString.SubstringSafe(1,2));
+            Assert.IsNull(_nullString.SubstringSafe(1, 2));
         }
 
         [Test]
@@ -162,6 +162,22 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual("test".EmptyIf("TEST"), "test");
             Assert.AreEqual("test".EmptyIf("a"), "test");
             Assert.IsNull(_nullString.EmptyIf("a"));
+        }
+
+        [Test]
+        public void LimitTest()
+        {
+            Assert.AreEqual("tes", "test limit".Limit(3));
+            Assert.AreEqual("test limit", "test limit".Limit(100));
+            Assert.IsNull(_nullString.Limit(5));
+        }
+
+        [Test]
+        public void LimitEndTest()
+        {
+            Assert.AreEqual("mit", "test limit".LimitEnd(3));
+            Assert.AreEqual("test limit", "test limit".LimitEnd(100));
+            Assert.IsNull(_nullString.LimitEnd(5));
         }
     }
 }
