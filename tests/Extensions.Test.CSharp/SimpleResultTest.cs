@@ -61,5 +61,21 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual(ErrorMessage, result.Message);
             Assert.AreEqual(ExceptionStack, result.Exception.GetAllMessages());
         }
+
+        [Test]
+        public void ImplicitConversionTest()
+        {
+            var source = new SimpleResult(true, "Test");
+            var sourceValue = new SimpleResult<int>(true, 15, "Test");
+
+            SimpleResult<int> destinationLostingValue = source;
+            SimpleResult destinationWhitoutValue = sourceValue;
+
+            Assert.IsTrue(destinationLostingValue.Success);
+            Assert.IsTrue(destinationWhitoutValue.Success);
+            Assert.AreEqual("Test", destinationLostingValue.Message);
+            Assert.AreEqual("Test", destinationWhitoutValue.Message);
+            Assert.AreEqual(0, destinationLostingValue.Value);
+        }
     }
 }
