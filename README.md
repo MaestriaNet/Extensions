@@ -204,10 +204,7 @@ or install from the dotnet cli command line:
 ```
 
 ![buy-me-a-coffee](resources/buy-me-a-coffee.png) 
-
-<img src="/resources/smile2.png"></img>     
-
-![smile >](resources/smile2.png)
+<img style="marginLeft: 10px" src="/resources/smile2.png"></img>
 
 If my contributions have helped you, please help me buying a coffee :D 
 
@@ -216,9 +213,3 @@ If my contributions have helped you, please help me buying a coffee :D
     <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
     <img alt="" border="0" src="https://www.paypal.com/en_BR/i/scr/pixel.gif" width="1" height="1" />
 </form>
-
-<style>
-    img[alt$=">"] {
-    float: right;
-    }
-</style>
