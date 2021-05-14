@@ -6,6 +6,12 @@
 
 [![Build History](https://buildstats.info/appveyor/chart/fabionaspolini/extensions?branch=master)](https://ci.appveyor.com/project/fabionaspolini/extensions/history?branch=master)
 
+<form action="https://www.paypal.com/donate" method="post" target="_top">
+    <input type="hidden" name="hosted_button_id" value="8RSES6GAYH9BL" />
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+    <img alt="" border="0" src="https://www.paypal.com/en_BR/i/scr/pixel.gif" width="1" height="1" />
+</form>
+
 ## What is Maestria Extensions?
 
 Extension function pack to increase productivity and improve source code writing.
@@ -196,3 +202,23 @@ or install from the dotnet cli command line:
 ```bash
 > dotnet add package Maestria.Extensions
 ```
+
+![buy-me-a-coffee](resources/buy-me-a-coffee.png) 
+
+<img src="/resources/smile2.png"></img>     
+
+![smile >](resources/smile2.png)
+
+If my contributions have helped you, please help me buying a coffee :D 
+
+<form action="https://www.paypal.com/donate" method="post" target="_top">
+    <input type="hidden" name="hosted_button_id" value="8RSES6GAYH9BL" />
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+    <img alt="" border="0" src="https://www.paypal.com/en_BR/i/scr/pixel.gif" width="1" height="1" />
+</form>
+
+<style>
+    img[alt$=">"] {
+    float: right;
+    }
+</style>
