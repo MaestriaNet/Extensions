@@ -1,31 +1,7 @@
 namespace Maestria.Extensions
 {
-    public static class IfNullExtensions
+    public static partial class IfNullExtensions
     {
-        #region Default
-
-        /// <summary>
-        /// Return <paramref name="default"/> if argument <paramref name="value"/> is null/>
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="default"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static T IfNull<T>(this T? value, T @default) where T : struct => value ?? @default;
-
-        /// <summary>
-        /// Return <paramref name="default"/> if argument <paramref name="value"/> is null/>
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="default"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static T IfNull<T>(this T value, T @default) where T : class => value ?? @default;
-
-        #endregion
-
-        #region String
-
         /// <summary>
         /// Return <paramref name="default"/> text argument if <paramref name="value"/> is null or empty
         /// </summary>
@@ -43,7 +19,5 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string IfNullOrWhiteSpace(this string value, string @default) =>
             value.IsNullOrWhiteSpace() ? @default : value;
-
-        #endregion
     }
 }
