@@ -202,6 +202,6 @@ or install from the dotnet cli command line:
 [![buy-me-a-coffee](resources/buy-me-a-coffee.png)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)
 [![smile.png](resources/smile.png)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)
 
-If my contributions have helped you, please help me buying a coffee :D
+If my contributions helped you, please help me buy a coffee :D
 
 [![donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)
