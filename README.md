@@ -199,8 +199,10 @@ or install from the dotnet cli command line:
 > dotnet add package Maestria.Extensions
 ```
 
+<a href="https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL">
 ![buy-me-a-coffee](resources/buy-me-a-coffee.png)
 ![smile.png](resources/smile.png)
+</a>
 
 If my contributions have helped you, please help me buying a coffee :D 
 
