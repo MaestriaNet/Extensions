@@ -173,18 +173,11 @@ namespace Maestria.Extensions.Test.CSharp
         }
 
         [Test]
-        public void LimitEndTest()
+        public void LimitReverseTest()
         {
-            Assert.AreEqual("mit", "test limit".LimitEnd(3));
-            Assert.AreEqual("test limit", "test limit".LimitEnd(100));
-            Assert.IsNull(_nullString.LimitEnd(5));
+            Assert.AreEqual("mit", "test limit".LimitReverse(3));
+            Assert.AreEqual("test limit", "test limit".LimitReverse(100));
+            Assert.IsNull(_nullString.LimitReverse(5));
         }
-
-        //[Test]
-        //public void TrimStart()
-        //{
-        //    string test = null;
-        //    Assert.AreEqual("bio", test.TrimEnd('a', 'f'));
-        //}
     }
 }
