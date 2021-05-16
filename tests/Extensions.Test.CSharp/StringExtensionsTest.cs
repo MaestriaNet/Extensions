@@ -142,8 +142,8 @@ namespace Maestria.Extensions.Test.CSharp
         [Test]
         public void SubstringSafe()
         {
-            Assert.IsNull("test".SubstringSafe(-1, 1));
-            Assert.IsNull("test".SubstringSafe(5, 1));
+            Assert.AreEqual("t", "test".SubstringSafe(-1, 1));
+            Assert.IsEmpty("test".SubstringSafe(5, 1));
             Assert.IsEmpty("test".SubstringSafe(4, 1));
             Assert.AreEqual("g", "test substring".SubstringSafe(13, 1));
             Assert.AreEqual("g", "test substring".SubstringSafe(13, 10));

@@ -13,7 +13,8 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string SubstringBeforeFirstOccurrence(this string value, string separator, bool autoTrim = true)
         {
-            if (value == null) return null;
+            if (value == null)
+                return null;
             var index = value.IndexOf(separator);
             if (index > 0)
                 return autoTrim
@@ -31,7 +32,8 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string SubstringBeforeLastOccurrence(this string value, string separator, bool autoTrim = true)
         {
-            if (value == null) return null;
+            if (value == null)
+                return null;
             var index = value.LastIndexOf(separator);
             if (index > 0)
                 return autoTrim
@@ -49,7 +51,8 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string SubstringAfterFirstOccurrence(this string value, string separator, bool autoTrim = true)
         {
-            if (value == null) return null;
+            if (value == null)
+                return null;
             var index = value.IndexOf(separator);
             if (index > 0)
                 return autoTrim
@@ -67,7 +70,8 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string SubstringAfterLastOccurrence(this string value, string separator, bool autoTrim = true)
         {
-            if (value == null) return null;
+            if (value == null)
+                return null;
             var index = value.LastIndexOf(separator);
             if (index > 0)
                 return autoTrim
@@ -102,10 +106,15 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static string SubstringSafe(this string value, int startIndex, int length)
         {
-            if (value == null) return null;
-            if (startIndex < 0) return null;
-            if (startIndex > value.Length) return null;
-            if (startIndex + length > value.Length) return value.Substring(startIndex);
+            if (value.IsNullOrEmpty())
+                return value;
+            if (startIndex > value.Length)
+                return string.Empty;
+
+            if (startIndex < 0)
+                startIndex = 0;
+            if (startIndex + length > value.Length)
+                return value.Substring(startIndex);
             return value.Substring(startIndex, length);
         }
     }
