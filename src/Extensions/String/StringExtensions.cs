@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -188,5 +189,29 @@ namespace Maestria.Extensions
         /// <param name="length">Max size of return value</param>
         /// <returns></returns>
         public static string LimitReverse(this string value, int length) => value?.SubstringSafe(AggregateExtensions.Max(value.Length - length, 0), length);
+
+        /// <summary>
+        /// Save string content on disk
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="fileName"></param>
+        /// <param name="append"></param>
+        public static void SaveAs(this string value, string fileName, bool append = false)
+        {
+            using var tw = new StreamWriter(fileName, append);
+            tw.Write(value ?? string.Empty);
+        }
+
+        /// <summary>
+        /// Save string content on disk
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="file"></param>
+        /// <param name="append"></param>
+        public static void SaveAs(this string value, FileInfo file, bool append = false)
+        {
+            using var tw = new StreamWriter(file.FullName, append);
+            tw.Write(value ?? string.Empty);
+        }
     }
 }
