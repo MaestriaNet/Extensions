@@ -1,35 +1,28 @@
 namespace Maestria.Extensions.Test.``String Extensions``
-open System
 open System.Globalization
-open Maestria.Extensions.Test.Internal.TestUtil
 open Maestria.Extensions
 open NUnit.Framework
 open FsUnit
-open Maestria.Extensions
-open Maestria.Extensions
 open Maestria.Extensions.Test
-open Maestria.Extensions.Test
-open Maestria.Extensions.Test
-open Maestria.Extensions.Test
-open Microsoft.VisualStudio.TestPlatform.ObjectModel
-open NUnit.Framework.Internal
 
 module ``String check and manipulate`` =
     [<Test>]
-    let RemoveIfStartsWith() =
-        "TestValue".RemoveIfStartsWith("Test") |> should equal "Value"
-        "TestValue".RemoveIfStartsWith("Value") |> should equal "TestValue"
-        "TestValue".RemoveIfStartsWith(Const.NullString) |> should equal "TestValue"
-        Const.NullString.RemoveIfStartsWith("Test") |> should be Null
-        Const.NullString.RemoveIfStartsWith(Const.NullString) |> should be Null
+    let TrimStart() =
+        "TestValue".TrimStart("Test") |> should equal "Value"
+        "TestValue".TrimStart("Value") |> should equal "TestValue"
+        "TestValue".TrimStart(Const.NullString) |> should equal "TestValue"
+        Const.NullString.TrimStart("Test") |> should be Null
+        Const.NullString.TrimStart(Const.NullString) |> should be Null
+        "TestTestValue".TrimStart("Test") |> should equal "Value"
 
     [<Test>]
-    let RemoveIfEndsWith() =
-        "TestValue".RemoveIfEndsWith("Value") |> should equal "Test"
-        "TestValue".RemoveIfEndsWith("Test") |> should equal "TestValue"
-        "TestValue".RemoveIfEndsWith(Const.NullString) |> should equal "TestValue"
-        Const.NullString.RemoveIfEndsWith("Value") |> should be Null
-        Const.NullString.RemoveIfEndsWith(Const.NullString) |> should be Null
+    let TrimEnd() =
+        "TestValue".TrimEnd("Value") |> should equal "Test"
+        "TestValue".TrimEnd("Test") |> should equal "TestValue"
+        "TestValue".TrimEnd(Const.NullString) |> should equal "TestValue"
+        Const.NullString.TrimEnd("Value") |> should be Null
+        Const.NullString.TrimEnd(Const.NullString) |> should be Null
+        "TestValueValue".TrimEnd("Value") |> should equal "Test"
 
     [<Test>]
     let AddToLeftIfNotStartsWith() =

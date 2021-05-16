@@ -7,62 +7,12 @@ using JetBrains.Annotations;
 
 namespace Maestria.Extensions
 {
-    public static class StringExtensions
+    public static partial class StringExtensions
     {
         private static readonly Regex NonDigitsRegex = new Regex(@"[^\d]+");
 
         #region String check and manipulate
-
-        /// <summary>
-        /// Remove prefix (left part) if text beginning with equality value. The part to remove is exactly checked value.
-        /// </summary>
-        /// <param name="value">Text to manipulate</param>
-        /// <param name="equality">To check and remove from text, if text beginning equals this value</param>
-        /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
-        /// <returns></returns>
-        public static string RemoveIfStartsWith(this string value, string equality, bool ignoreCase = true)
-        {
-            if (value == null || equality == null)
-                return value;
-            return value.StartsWith(equality, ignoreCase, CultureInfo.InvariantCulture)
-                ? value.Remove(0, equality.Length)
-                : value;
-        }
-
-        /// <summary>
-        /// Remove prefix (left part) if text beginning with equality value. The part to remove is exactly checked value.
-        /// </summary>
-        /// <param name="value">Text to manipulate</param>
-        /// <param name="equality">To check and remove from text, if text beginning equals this value</param>
-        /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
-        /// <returns></returns>
-        public static string RemoveIfStartsWith(this string value, char equality, bool ignoreCase = true) => value.RemoveIfStartsWith(equality.ToString(), ignoreCase);
-
-        /// <summary>
-        /// Remove suffix (right part) if text ends with equality value. The part to remove is exactly checked value.
-        /// </summary>
-        /// <param name="value">Text to manipulate</param>
-        /// <param name="equality">To check and remove from text, if text end equals this value</param>
-        /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
-        /// <returns></returns>
-        public static string RemoveIfEndsWith(this string value, string equality, bool ignoreCase = true)
-        {
-            if (value == null || equality == null)
-                return value;
-            return value.EndsWith(equality, ignoreCase, CultureInfo.InvariantCulture)
-                ? value.Remove(value.Length - equality.Length, equality.Length)
-                : value;
-        }
-
-        /// <summary>
-        /// Remove suffix (right part) if text ends with equality value. The part to remove is exactly checked value.
-        /// </summary>
-        /// <param name="value">Text to manipulate</param>
-        /// <param name="equality">To check and remove from text, if text end equals this value</param>
-        /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
-        /// <returns></returns>
-        public static string RemoveIfEndsWith(this string value, char equality, bool ignoreCase = true) => value.RemoveIfEndsWith(equality.ToString(), ignoreCase);
-
+        
         /// <summary>
         /// Add value to start of text if the text not beginning with value.
         /// </summary>

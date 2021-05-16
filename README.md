@@ -10,7 +10,8 @@
 
 ## What is Maestria Extensions?
 
-Extension function pack to increase productivity and improve source code writing.
+Extension function pack to increase productivity and improve source code writing.  
+By default, all extension methods are safe.
 
 ## What is Maestria Project?
 

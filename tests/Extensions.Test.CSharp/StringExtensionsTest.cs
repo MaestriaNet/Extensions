@@ -179,5 +179,12 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual("test limit", "test limit".LimitEnd(100));
             Assert.IsNull(_nullString.LimitEnd(5));
         }
+
+        //[Test]
+        //public void TrimStart()
+        //{
+        //    string test = null;
+        //    Assert.AreEqual("bio", test.TrimEnd('a', 'f'));
+        //}
     }
 }
