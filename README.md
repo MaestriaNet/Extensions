@@ -145,6 +145,8 @@ SimpleResult fail = SimpleResult.Fail("Fail message");
 // Implict conversions
 SimpleResult ok = true;
 SimpleResult fail = "Fail message"
+SimpleResult fail = new Exception("Fail message")
+
 
 // Initializer
 var result = new SimpleResult
@@ -152,6 +154,52 @@ var result = new SimpleResult
     Success = true,
     Message = "Successfully processed"
 }
+```
+
+Use cases:
+
+```csharp
+public SimpleResult Execute(Args args) 
+{
+    if (args == null)
+        return "Argument cannot be null";  // <===== Implicit cast to failure result
+    try
+    {
+        // Execute actions
+    } 
+    catch (Exception e)
+    {
+        return e; // <===== Implicit cast to failure result
+    } 
+    return true; // <===== Implicit cast success result
+}
+
+public SimpleResult<int> Execute2(Args args) 
+{
+    if (args == null)
+        return "Argument cannot be null";  // <===== Implicit cast to failure result
+    try
+    {
+        // Execute actions
+    } 
+    catch (Exception e)
+    {
+        return e; // <===== Implicit cast to failure result
+    } 
+    return 10; // <===== Implicit cast success result
+}
+
+// ...
+
+var result = Execute(...);
+var result2 = Execute2(...);
+
+if (result && result2) // <===== Implicit cast to boolean
+{
+    // ...
+}
+
+
 ```
 
 ### Try<TSuccess, TFailure>
