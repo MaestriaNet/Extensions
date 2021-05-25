@@ -128,6 +128,20 @@ namespace Maestria.Extensions
         }
 
         /// <summary>
+        /// Return empty string if <paramref name="value"/> is null
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string EmptyIfNull(this string value) => value == null ? string.Empty : value;
+
+        /// <summary>
+        /// Return empty string if <paramref name="value"/> is null or white space
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string EmptyIfNullOrWhiteSpace(this string value) => string.IsNullOrWhiteSpace(value) ? string.Empty : value;
+
+        /// <summary>
         /// Replaces the format item in a specified string with the string representation of a corresponding object in a specified array.
         /// </summary>
         /// <param name="value">A <see cref="~/docs/standard/base-types/composite-formatting.md">composite format string</see>.</param>

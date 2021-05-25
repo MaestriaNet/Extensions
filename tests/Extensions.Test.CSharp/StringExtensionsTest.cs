@@ -165,6 +165,24 @@ namespace Maestria.Extensions.Test.CSharp
         }
 
         [Test]
+        public void EmptyIfNull()
+        {
+            Assert.IsEmpty(_nullString.EmptyIfNull());
+            Assert.IsNotEmpty("test".EmptyIfNull());
+            Assert.AreEqual("test", "test".EmptyIfNull());
+            Assert.AreEqual(" ", " ".EmptyIfNull());
+        }
+
+        [Test]
+        public void EmptyIfNullOrWhiteSpace()
+        {
+            Assert.IsEmpty(_nullString.EmptyIfNullOrWhiteSpace());
+            Assert.IsNotEmpty("test".EmptyIfNullOrWhiteSpace());
+            Assert.AreEqual("test", "test".EmptyIfNullOrWhiteSpace());
+            Assert.IsEmpty(" ".EmptyIfNullOrWhiteSpace());
+        }
+
+        [Test]
         public void LimitTest()
         {
             Assert.AreEqual("tes", "test limit".Limit(3));
