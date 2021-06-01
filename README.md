@@ -120,6 +120,19 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 <object>.HasValue()
 <object>.In(<array-of-values>)
 <object>.Between(<starting-value>, <ending-value>)
+
+// Inline conditionals
+<IComparable>.IfGreater(10).Then(5)
+<IComparable>.IfGreaterOrEqual(10).Then(5)
+<IComparable>.IfLest(10).Then(5)
+<IComparable>.IfLessOrEqual(10).Then(5)
+<IComparable>.If(10).Then(5)
+<IComparable>.IfNot(10).Then(5)
+
+// TruncateExtensions
+<floating-point>.Truncate(<digits>)
+
+// Pipelines
 var value = <string>
     .OnlyNumbers()
     .DetachedCall(x => Console.WriteLine(x)) // <<< Call a method with current value and continue execution pipeline
@@ -129,9 +142,6 @@ var value = <string>
     .OnlyNumbers()
     .OutVar(out var variableToExternalFromScopeAccess) // <<< Create variable with current value on external scope and continua execution pipeline 
     .Format("mask"); // value is only the number of string formatted and only numbers are written on console 
-
-// TruncateExtensions
-<floating-point>.Truncate(<digits>)
 ```
 
 ## Data Types

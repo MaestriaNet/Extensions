@@ -24,6 +24,13 @@ namespace Maestria.Extensions
         public static bool HasValue(this object value) => value != null;
 
         /// <summary>
+        /// Check value different of null
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsNotNull(this object value) => value != null;
+
+        /// <summary>
         /// Check if value is contained within expected values
         /// </summary>
         /// <param name="value"></param>
@@ -44,6 +51,8 @@ namespace Maestria.Extensions
         public static bool Between<T>(this T value, T starting, T ending) where T : IComparable =>
             value != null && starting != null && ending != null &&
             value.CompareTo(starting) >= 0 && value.CompareTo(ending) <= 0;
+
+        public static T LimitTo<T> (this T value, T maxValue) where T : IComparable => value.CompareTo(maxValue) > 0 ? maxValue : value;
 
         /// <summary>
         /// Call single action method and return current value to continue your build pipeline
