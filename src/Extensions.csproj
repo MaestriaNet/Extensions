@@ -8,7 +8,7 @@
         <Title>Maestria.Extensions</Title>
         <Description>Extension function pack to increase productivity and improve source code writing.</Description>
         <PackageTags>ExtensionMethod ExtensionMethods HelperMethods Helper Extension Extensions Fluent Functional Elegance Productivity Maestria Mastery IEnumerable Enumerable ICollection Collection IList List Array Max Min Highest Smallest Largest String Text IfNull NullIf Null If In Between Truncate Round Hash MD5 SHA1 Enum Aggreagate Exception StackTrace C# .NET CSharp Method Methods</PackageTags>
-        <RepositoryUrl>ttps://github.com/MaestriaNet/Extensions</RepositoryUrl>
+        <RepositoryUrl>https://github.com/MaestriaNet/Extensions</RepositoryUrl>
         <PackageProjectUrl>https://github.com/MaestriaNet/Extensions</PackageProjectUrl>
         <License>https://github.com/MaestriaNet/Extensions/blob/master/LICENSE</License>
         <PackageIconUrl>https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/icon.png</PackageIconUrl>
