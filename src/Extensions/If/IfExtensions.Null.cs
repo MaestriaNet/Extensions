@@ -1,6 +1,6 @@
 namespace Maestria.Extensions
 {
-    public static partial class IfNullExtensions
+    public static partial class IfExtensions
     {
         /// <summary>
         /// Return <paramref name="default"/> if argument <paramref name="value"/> is null/>

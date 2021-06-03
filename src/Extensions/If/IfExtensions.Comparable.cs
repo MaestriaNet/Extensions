@@ -12,7 +12,7 @@ namespace Maestria.Extensions
         LessOrEqual
     }
 
-    public static class IfExtensions
+    public static partial class IfExtensions
     {
         // IfGreater
         public static ThenPromise<T> IfGreater<T>(this T value, T compareTo) where T : struct, IComparable => new ThenPromise<T>(value, compareTo, ComparisonOperation.Greater);
