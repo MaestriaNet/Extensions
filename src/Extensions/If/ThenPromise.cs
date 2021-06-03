@@ -2,10 +2,15 @@ using System;
 
 namespace Maestria.Extensions
 {
-    public interface IThenPromise<TValue> where TValue : struct
+    public interface IThenPromiseNullable<TValue> where TValue : struct
+    {
+        TValue? Then(TValue? newValue);
+    }
+
+    public interface IThenPromise<TValue> : IThenPromiseNullable<TValue> 
+        where TValue : struct
     {
         TValue Then(TValue newValue);
-        TValue? Then(TValue? newValue);
     }
 
     public struct ThenPromise<TValue> : IThenPromise<TValue>
@@ -73,7 +78,7 @@ namespace Maestria.Extensions
         }
     }
 
-    public struct ThenPromiseValueNullable<TValue> : IThenPromise<TValue>
+    public struct ThenPromiseValueNullable<TValue> : IThenPromiseNullable<TValue>
         where TValue : struct, IComparable
     {
         private TValue? _value;
@@ -106,7 +111,7 @@ namespace Maestria.Extensions
         }
     }
 
-    public struct ThenPromiseNullable<TValue> : IThenPromise<TValue>
+    public struct ThenPromiseNullable<TValue> : IThenPromiseNullable<TValue>
         where TValue : struct, IComparable
     {
         private TValue? _value;

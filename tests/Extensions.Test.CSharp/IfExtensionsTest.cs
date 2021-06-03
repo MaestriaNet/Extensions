@@ -358,24 +358,60 @@ namespace Maestria.Extensions.Test.CSharp
         [Test]
         public void IfWithNullValues() 
         {
+            // If
             Assert.AreEqual(value1, nullValue.If(nullValue).Then(value1));
+            Assert.IsNull(nullValue.If(value1).Then(value1));
+            Assert.IsNull(nullValue.If(value1).Then(value1Nullable));
+            Assert.AreEqual(value1, value1.If(nullValue).Then(value2));
+            Assert.AreEqual(value1, value1.If(nullValue).Then(value2Nullable));
+
+            // IfNot
+            Assert.IsNull(nullValue.IfNot(nullValue).Then(value1));
             Assert.AreEqual(value1, nullValue.IfNot(value2).Then(value1));
             Assert.AreEqual(value1, value2.IfNot(nullValue).Then(value1));
+            Assert.AreEqual(value1Nullable, value2.IfNot(nullValue).Then(value1Nullable));
 
-            Assert.AreEqual(value1, value1.IfGreater(nullValue).Then(value2));
-            Assert.AreEqual(value1, value1.IfGreaterOrEqual(nullValue).Then(value2));
-            Assert.AreEqual(value1, value1.IfLess(nullValue).Then(value2));
-            Assert.AreEqual(value1, value1.IfLessOrEqual(nullValue).Then(value2));
-
-            Assert.AreEqual(0, nullValue.IfGreater(value1).Then(value2));
-            Assert.AreEqual(0, nullValue.IfGreaterOrEqual(value1).Then(value2));
-            Assert.AreEqual(0, nullValue.IfLess(value1).Then(value2));
-            Assert.AreEqual(0, nullValue.IfLessOrEqual(value1).Then(value2));
+            // Expressions always false - null value
+            Assert.IsNull(nullValue.IfGreater(value1).Then(value2));
+            Assert.IsNull(nullValue.IfGreaterOrEqual(value1).Then(value2));
+            Assert.IsNull(nullValue.IfLess(value1).Then(value2));
+            Assert.IsNull(nullValue.IfLessOrEqual(value1).Then(value2));
 
             Assert.IsNull(nullValue.IfGreater(value1).Then(value2Nullable));
             Assert.IsNull(nullValue.IfGreaterOrEqual(value1).Then(value2Nullable));
             Assert.IsNull(nullValue.IfLess(value1).Then(value2Nullable));
             Assert.IsNull(nullValue.IfLessOrEqual(value1).Then(value2Nullable));
+
+            Assert.IsNull(nullValue.IfGreater(nullValue).Then(value2));
+            Assert.IsNull(nullValue.IfGreaterOrEqual(nullValue).Then(value2));
+            Assert.IsNull(nullValue.IfLess(nullValue).Then(value2));
+            Assert.IsNull(nullValue.IfLessOrEqual(nullValue).Then(value2));
+
+            Assert.IsNull(nullValue.IfGreater(nullValue).Then(value2Nullable));
+            Assert.IsNull(nullValue.IfGreaterOrEqual(nullValue).Then(value2Nullable));
+            Assert.IsNull(nullValue.IfLess(nullValue).Then(value2Nullable));
+            Assert.IsNull(nullValue.IfLessOrEqual(nullValue).Then(value2Nullable));
+
+            // Expressions always false - null value compare
+            Assert.AreEqual(value1, value1.IfGreater(nullValue).Then(value2));
+            Assert.AreEqual(value1, value1.IfGreaterOrEqual(nullValue).Then(value2));
+            Assert.AreEqual(value1, value1.IfLess(nullValue).Then(value2));
+            Assert.AreEqual(value1, value1.IfLessOrEqual(nullValue).Then(value2));
+
+            Assert.AreEqual(value1, value1.IfGreater(nullValue).Then(value2Nullable));
+            Assert.AreEqual(value1, value1.IfGreaterOrEqual(nullValue).Then(value2Nullable));
+            Assert.AreEqual(value1, value1.IfLess(nullValue).Then(value2Nullable));
+            Assert.AreEqual(value1, value1.IfLessOrEqual(nullValue).Then(value2Nullable));
+
+            Assert.IsNull(nullValue.IfGreater(nullValue).Then(value2));
+            Assert.IsNull(nullValue.IfGreaterOrEqual(nullValue).Then(value2));
+            Assert.IsNull(nullValue.IfLess(nullValue).Then(value2));
+            Assert.IsNull(nullValue.IfLessOrEqual(nullValue).Then(value2));
+
+            Assert.IsNull(nullValue.IfGreater(nullValue).Then(value2Nullable));
+            Assert.IsNull(nullValue.IfGreaterOrEqual(nullValue).Then(value2Nullable));
+            Assert.IsNull(nullValue.IfLess(nullValue).Then(value2Nullable));
+            Assert.IsNull(nullValue.IfLessOrEqual(nullValue).Then(value2Nullable));
         }
     }
 }
