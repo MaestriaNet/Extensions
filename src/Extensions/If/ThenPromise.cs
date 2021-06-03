@@ -21,11 +21,7 @@ namespace Maestria.Extensions
             _operation = operation;
         }
 
-        public TValue Then(TValue newValue)
-        {
-            var result = Then((TValue?) newValue);
-            return result.Value;
-        }
+        public TValue Then(TValue newValue) => Then((TValue?)newValue).GetValueOrDefault();
 
         public TValue? Then(TValue? newValue)
         {
@@ -56,14 +52,13 @@ namespace Maestria.Extensions
             _operation = operation;
         }
 
-        public TValue Then(TValue newValue)
-        {
-            var result = Then((TValue?) newValue);
-            return result.Value;
-        }
+        public TValue Then(TValue newValue) => Then((TValue?)newValue).GetValueOrDefault();
 
         public TValue? Then(TValue? newValue)
         {
+            if (_compareTo == null)
+                return _operation == ComparisonOperation.NotEqual ? newValue : _value;
+
             TValue? result = _operation switch
             {
                 ComparisonOperation.Greater => _value.CompareTo(_compareTo.Value) > 0 ? newValue : _value,
@@ -90,9 +85,13 @@ namespace Maestria.Extensions
             _compareTo = compareTo;
             _operation = operation;
         }
+        public TValue Then(TValue newValue) => Then((TValue?)newValue).GetValueOrDefault();
 
         public TValue? Then(TValue? newValue)
         {
+            if (_value == null)
+                return _operation == ComparisonOperation.NotEqual ? newValue : _value;
+
             TValue? result = _operation switch
             {
                 ComparisonOperation.Greater => _value.Value.CompareTo(_compareTo) > 0 ? newValue : _value,
@@ -104,12 +103,6 @@ namespace Maestria.Extensions
                 _ => throw new ArgumentOutOfRangeException(nameof(_operation), $"Not expected operation value: {_operation}"),
             };
             return result;
-        }
-
-        public TValue Then(TValue newValue)
-        {
-            var result = Then((TValue?) newValue);
-            return result.Value;
         }
     }
 
@@ -126,8 +119,16 @@ namespace Maestria.Extensions
             _operation = operation;
         }
 
+        public TValue Then(TValue newValue) => Then((TValue?)newValue).GetValueOrDefault();
+
         public TValue? Then(TValue? newValue)
         {
+            if (_value == null && _compareTo == null)
+                return _operation == ComparisonOperation.Equal ? newValue : _value;
+
+            if (_value == null || _compareTo == null)
+                return _operation == ComparisonOperation.NotEqual ? newValue : _value;
+
             TValue? result = _operation switch
             {
                 ComparisonOperation.Greater => _value.Value.CompareTo(_compareTo.Value) > 0 ? newValue : _value,
@@ -139,12 +140,6 @@ namespace Maestria.Extensions
                 _ => throw new ArgumentOutOfRangeException(nameof(_operation), $"Not expected operation value: {_operation}"),
             };
             return result;
-        }
-
-        public TValue Then(TValue newValue)
-        {
-            var result = Then((TValue?) newValue);
-            return result.Value;
         }
     }
 }

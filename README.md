@@ -162,6 +162,7 @@ Rules:
 - When `<value>` or `<value-to-compare>` is null:
     - Result only `true` if both are `null` and comparison is equality operation `If`.
     - When an only value is `null`, the result is `true` if the operation is not equality comparison `IfNot`.
+    - When `<value>` is `null`, `<result-if-compare-is-true>` is `not Nullable<>` value and if comparison expression is false, return is defaut of `<value>` data type.
     - All other operations comparisons result in `false`.
 - It's possible return `null` value at `<result-if-compare-is-true>`, but then indicated syntax is `<value>.NullIf(<value-to-compare>)`.
 

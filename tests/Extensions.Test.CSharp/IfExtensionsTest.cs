@@ -354,5 +354,28 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual(value1Nullable, value2Nullable.IfNot(value1Nullable).Then(value1Nullable));
             Assert.AreEqual(value2Nullable, value2Nullable.IfNot(value2Nullable).Then(value1Nullable));
         }
+
+        [Test]
+        public void IfWithNullValues() 
+        {
+            Assert.AreEqual(value1, nullValue.If(nullValue).Then(value1));
+            Assert.AreEqual(value1, nullValue.IfNot(value2).Then(value1));
+            Assert.AreEqual(value1, value2.IfNot(nullValue).Then(value1));
+
+            Assert.AreEqual(value1, value1.IfGreater(nullValue).Then(value2));
+            Assert.AreEqual(value1, value1.IfGreaterOrEqual(nullValue).Then(value2));
+            Assert.AreEqual(value1, value1.IfLess(nullValue).Then(value2));
+            Assert.AreEqual(value1, value1.IfLessOrEqual(nullValue).Then(value2));
+
+            Assert.AreEqual(0, nullValue.IfGreater(value1).Then(value2));
+            Assert.AreEqual(0, nullValue.IfGreaterOrEqual(value1).Then(value2));
+            Assert.AreEqual(0, nullValue.IfLess(value1).Then(value2));
+            Assert.AreEqual(0, nullValue.IfLessOrEqual(value1).Then(value2));
+
+            Assert.IsNull(nullValue.IfGreater(value1).Then(value2Nullable));
+            Assert.IsNull(nullValue.IfGreaterOrEqual(value1).Then(value2Nullable));
+            Assert.IsNull(nullValue.IfLess(value1).Then(value2Nullable));
+            Assert.IsNull(nullValue.IfLessOrEqual(value1).Then(value2Nullable));
+        }
     }
 }
