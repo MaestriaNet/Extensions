@@ -19,6 +19,20 @@ This library is part of Maestria Project.
 
 Maestria is a project to provide productivity and elegance to your source code writing.
 
+## Where can I get it?
+
+First, [install NuGet](http://docs.nuget.org/docs/start-here/installing-nuget). Then, install [Maestria Extensions](https://www.nuget.org/packages/Maestria.Extensions/) from the package manager console:
+
+```bash
+PM> Install-Package Maestria.Extensions
+```
+
+or install from the dotnet cli command line:
+
+```bash
+> dotnet add package Maestria.Extensions
+```
+
 ## How do I get started?
 
 First, import "Maestria.Extensions" reference:
@@ -121,14 +135,6 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 <object>.In(<array-of-values>)
 <object>.Between(<starting-value>, <ending-value>)
 
-// Inline conditionals
-<IComparable>.IfGreater(10).Then(5)
-<IComparable>.IfGreaterOrEqual(10).Then(5)
-<IComparable>.IfLest(10).Then(5)
-<IComparable>.IfLessOrEqual(10).Then(5)
-<IComparable>.If(10).Then(5)
-<IComparable>.IfNot(10).Then(5)
-
 // TruncateExtensions
 <floating-point>.Truncate(<digits>)
 
@@ -142,6 +148,32 @@ var value = <string>
     .OnlyNumbers()
     .OutVar(out var variableToExternalFromScopeAccess) // <<< Create variable with current value on external scope and continua execution pipeline 
     .Format("mask"); // value is only the number of string formatted and only numbers are written on console 
+```
+
+## If fluent expressions
+
+It's possible to execute fluent comparisons expression with the syntax: `<value>.IfGreater(<value-to-compare>).Then(<result-if-compare-is-true>)`.
+
+The methods for comparison operations are: `IfGreater`,` IfGreaterOrEqual`, `IfLest`. `IfLessOrEqual`,` If` and `IfNot`.
+
+Rules:
+
+- When condition it's `false`, result the pipeline is `<value>`.
+- When `<value>` or `<value-to-compare>` is null:
+    - Result only `true` if both are `null` and comparison is equality operation `If`.
+    - When an only value is `null`, the result is `true` if the operation is not equality comparison `IfNot`.
+    - All other operations comparisons result in `false`.
+- It's possible return `null` value at `<result-if-compare-is-true>`, but then indicated syntax is `<value>.NullIf(<value-to-compare>)`.
+
+Examples:
+
+```csharp
+<IComparable>.IfGreater(10).Then(5)
+<IComparable>.IfGreaterOrEqual(10).Then(5)
+<IComparable>.IfLest(10).Then(5)
+<IComparable>.IfLessOrEqual(10).Then(5)
+<IComparable>.If(10).Then(5)
+<IComparable>.IfNot(10).Then(5)
 ```
 
 ## Data Types
@@ -244,20 +276,6 @@ It's possible set default settings for library:
 ```csharp
 Extensions.GlobalSettings.Configure(cfg => cfg
     .FloatAndDoubleTolerance(default-float-and-double-comparasion-tolerance) // Default is 0.00001f
-```
-
-Where can I get it?
-
-First, [install NuGet](http://docs.nuget.org/docs/start-here/installing-nuget). Then, install [Maestria Extensions](https://www.nuget.org/packages/Maestria.Extensions/) from the package manager console:
-
-```bash
-PM> Install-Package Maestria.Extensions
-```
-
-or install from the dotnet cli command line:
-
-```bash
-> dotnet add package Maestria.Extensions
 ```
 
 [![buy-me-a-coffee](resources/buy-me-a-coffee.png)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)
