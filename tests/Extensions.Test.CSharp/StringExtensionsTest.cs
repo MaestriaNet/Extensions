@@ -185,17 +185,17 @@ namespace Maestria.Extensions.Test.CSharp
         [Test]
         public void LimitTest()
         {
-            Assert.AreEqual("tes", "test limit".Limit(3));
-            Assert.AreEqual("test limit", "test limit".Limit(100));
-            Assert.IsNull(_nullString.Limit(5));
+            Assert.AreEqual("tes", "test limit".LimitLen(3));
+            Assert.AreEqual("test limit", "test limit".LimitLen(100));
+            Assert.IsNull(_nullString.LimitLen(5));
         }
 
         [Test]
         public void LimitReverseTest()
         {
-            Assert.AreEqual("mit", "test limit".LimitReverse(3));
-            Assert.AreEqual("test limit", "test limit".LimitReverse(100));
-            Assert.IsNull(_nullString.LimitReverse(5));
+            Assert.AreEqual("mit", "test limit".LimitLenReverse(3));
+            Assert.AreEqual("test limit", "test limit".LimitLenReverse(100));
+            Assert.IsNull(_nullString.LimitLenReverse(5));
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Maestria.Extensions
 {
-    public static class ExceptionExtensions
+    public static partial class ExceptionExtensions
     {
         /// <summary>
         /// Obtain message with inner exception cascade message.
@@ -62,10 +62,6 @@ namespace Maestria.Extensions
             return msg.ToString();
         }
 
-        [Obsolete("Use 'GetAllMessages'")]
-        public static string ToLogString(this Exception exception, string additionalInfo = null,
-            bool includeClassType = true, bool includeStackTrace = true) => GetAllMessages(exception, additionalInfo, includeClassType, includeStackTrace);
-
         /// <summary>
         /// Gets the most inner (deepest) exception of a given Exception object
         /// </summary>
@@ -73,12 +69,5 @@ namespace Maestria.Extensions
         /// <returns></returns>
         public static Exception GetMostInner(this Exception ex) =>
             ex.InnerException == null ? ex : ex.InnerException.GetMostInner();
-
-        // public static string PrettifyStackTrace(this Exception ex) => PrettifyStackTrace(ex.StackTrace);
-
-        // public static string PrettifyStackTrace(string stackTrace)
-        // {
-        //     return stackTrace;
-        // }
     }
 }

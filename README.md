@@ -71,7 +71,7 @@ EnumExtensions.GetValues<TEnum>()
 EnumExtensions.GetValues(typeof(<TEnum>))
 
 // ExceptionExtensions
-<Exception>.ToLogString()
+<Exception>.GetAllMessages()
 <Exception>.GetMostInner()
 
 // HashExtensions
@@ -97,6 +97,7 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 <string>.AddToBeginningIfHasValue(<start-comparison>, <prefix>)
 <string>.AddToEndIfNotEndsWith(<start-comparison>, <ignore-case>)
 <string>.AddToEndIfHasValue(<start-comparison>, <prefix>)
+<string>.EscapeXml()
 <string>.Format(<values-to-format>)
 <string>.IsNullOrEmpty()
 <string>.IsNullOrWhiteSpace()
@@ -114,8 +115,8 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 <string>.SubstringAfterLastOccurrence("-")
 <string>.SubstringAtOccurrenceIndex("-", 1)
 <string>.SubstringSafe(<start-index>, <length>)
-<string>.Limit(<length>)
-<string>.LimitReverse(<length>)
+<string>.LimitLen(<length>)
+<string>.LimitLenReverse(<length>)
 
 // SyntaxExtensions
 <object>.IsNull()

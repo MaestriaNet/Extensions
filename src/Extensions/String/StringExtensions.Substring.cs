@@ -81,7 +81,7 @@ namespace Maestria.Extensions
         }
 
         /// <summary>
-        /// Split <see cref="value"/> by <see cref="separator"/> and return <see cref="occurrenceIndex"/> occurrence index. This is a safe method and returns null when then <see cref="occurrenceIndex"/> was not satisfied.
+        /// Split <paramref name="value"/> by <paramref name="separator"/> and return <paramref name="occurrenceIndex"/> occurrence index. This is a safe method and returns null when then <paramref name="occurrenceIndex"/> was not satisfied.
         /// </summary>
         /// <param name="value">Full text</param>
         /// <param name="separator">Find text pattern</param>

@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Maestria.Extensions
 {
-    public partial class Base64Extensions
+    public static partial class Base64Extensions
     {
         public static string ToBase64(this byte[] plainText) => Convert.ToBase64String(plainText);
 

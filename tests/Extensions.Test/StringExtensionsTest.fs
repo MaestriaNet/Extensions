@@ -25,32 +25,32 @@ module ``String check and manipulate`` =
         "TestValueValue".TrimEnd("Value") |> should equal "Test"
 
     [<Test>]
-    let AddToLeftIfNotStartsWith() =
-        "TestValue".AddToLeftIfNotStartsWith("Test") |> should equal "TestValue"
-        "Value".AddToLeftIfNotStartsWith("Test") |> should equal "TestValue"
-        Const.NullString.AddToLeftIfNotStartsWith("TestValue") |> should equal "TestValue"
-        "TestValue".AddToLeftIfNotStartsWith(Const.NullString) |> should equal "TestValue"
-        Const.NullString.AddToLeftIfNotStartsWith(Const.NullString) |> should be Null
+    let AddToBeginningIfNotStartsWith() =
+        "TestValue".AddToBeginningIfNotStartsWith("Test") |> should equal "TestValue"
+        "Value".AddToBeginningIfNotStartsWith("Test") |> should equal "TestValue"
+        Const.NullString.AddToBeginningIfNotStartsWith("TestValue") |> should equal "TestValue"
+        "TestValue".AddToBeginningIfNotStartsWith(Const.NullString) |> should equal "TestValue"
+        Const.NullString.AddToBeginningIfNotStartsWith(Const.NullString) |> should be Null
 
     [<Test>]
-    let AddToRightIfNotEndsWith() =
-        "TestValue".AddToRightIfNotEndsWith("Value") |> should equal "TestValue"
-        "Test".AddToRightIfNotEndsWith("Value") |> should equal "TestValue"
-        Const.NullString.AddToRightIfNotEndsWith("TestValue") |> should equal "TestValue"
-        "TestValue".AddToRightIfNotEndsWith(Const.NullString) |> should equal "TestValue"
-        Const.NullString.AddToRightIfNotEndsWith(Const.NullString) |> should be Null
+    let AddToEndIfNotEndsWith() =
+        "TestValue".AddToEndIfNotEndsWith("Value") |> should equal "TestValue"
+        "Test".AddToEndIfNotEndsWith("Value") |> should equal "TestValue"
+        Const.NullString.AddToEndIfNotEndsWith("TestValue") |> should equal "TestValue"
+        "TestValue".AddToEndIfNotEndsWith(Const.NullString) |> should equal "TestValue"
+        Const.NullString.AddToEndIfNotEndsWith(Const.NullString) |> should be Null
 
     [<Test>]
-    let AddToLeftIfHasValue() =
-        "".AddToLeftIfHasValue("Mrs.") |> should equal ""
-        "Jhon".AddToLeftIfHasValue("Mrs. ") |> should equal "Mrs. Jhon"
-        Const.NullString.AddToLeftIfHasValue("Mrs.") |> should be Null
+    let AddToBeginningIfHasValue() =
+        "".AddToBeginningIfHasValue("Mrs.") |> should equal ""
+        "Jhon".AddToBeginningIfHasValue("Mrs. ") |> should equal "Mrs. Jhon"
+        Const.NullString.AddToBeginningIfHasValue("Mrs.") |> should be Null
 
     [<Test>]
-    let AddToRightIfHasValue() =
-        "".AddToRightIfHasValue("Jhon") |> should equal ""
-        "Mrs. ".AddToRightIfHasValue("Jhon") |> should equal "Mrs. Jhon"
-        Const.NullString.AddToRightIfHasValue("Jhon") |> should be Null
+    let AddToEndIfHasValue() =
+        "".AddToEndIfHasValue("Jhon") |> should equal ""
+        "Mrs. ".AddToEndIfHasValue("Jhon") |> should equal "Mrs. Jhon"
+        Const.NullString.AddToEndIfHasValue("Jhon") |> should be Null
 
     [<Test>]
     let Format() =

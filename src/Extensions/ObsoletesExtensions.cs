@@ -42,6 +42,12 @@ namespace Maestria.Extensions
 
         [Obsolete("Use 'AddToEndIfHasValue'")]
         public static string AddToRightIfHasValue(this string value, char suffix) => value.AddToEndIfHasValue(suffix);
+
+        [Obsolete("use 'LimitLen")]
+        public static string Limit(this string value, int length) => value.SubstringSafe(0, length);
+        
+        [Obsolete("Use 'LimitLenReverse")]
+        public static string LimitReverse(this string value, int length) => value?.SubstringSafe(AggregateExtensions.Max(value.Length - length, 0), length);
     }
 
     public static partial class Base64Extensions
@@ -57,5 +63,12 @@ namespace Maestria.Extensions
 
         [Obsolete("Use extension 'FromBase64")]
         public static string Decode(string base64EncodedData, Encoding encoding = null) => base64EncodedData.FromBase64(encoding);
+    }
+
+    public static partial class ExceptionExtensions
+    {
+        [Obsolete("Use 'GetAllMessages'")]
+        public static string ToLogString(this Exception exception, string additionalInfo = null,
+            bool includeClassType = true, bool includeStackTrace = true) => GetAllMessages(exception, additionalInfo, includeClassType, includeStackTrace);
     }
 }

@@ -17,24 +17,20 @@ let Base64EncodedBytes = Base64EncodedText |> Encoding.UTF8.GetBytes
 /// Encode tests
 /// ===========================================
 [<Test>]
-let ``Encode string``() = PlainText
-                          |> Base64Extensions.Encode
+let ``Encode string``() = PlainText.ToBase64()
                           |> should equal Base64EncodedText
 
 [<Test>]
-let ``Encode bytes``() = PlainBytes
-                          |> Base64Extensions.Encode
+let ``Encode bytes``() = PlainBytes.ToBase64()
                           |> should equal Base64EncodedBytes
 
 /// ===========================================
 /// Decode tests
 /// ===========================================
 [<Test>]
-let ``Decode string``() = Base64EncodedText
-                          |> Base64Extensions.Decode
+let ``Decode string``() = Base64EncodedText.FromBase64()
                           |> should equal PlainText
 
 [<Test>]
-let ``Decode bytes``() = Base64EncodedBytes
-                          |> Base64Extensions.Decode
+let ``Decode bytes``() = Base64EncodedBytes.FromBase64()
                           |> should equal PlainBytes
