@@ -49,10 +49,11 @@ Then in your application code, use fluent syntax
 <Array>.Min();
 
 // Base64Extensions
-Base64Extensions.Encode(<byte[]>)
-Base64Extensions.Encode(<string>, <Encoding>)
-Base64Extensions.Decode(<encoded-byte[]>, <Encoding>)
-Base64Extensions.Decode(<encoded-string>, <Encoding>)
+<byte[]>.ToBase64(<byte[]>)
+<string>.ToBase64(<string>, <Encoding>)
+
+var decoded = <byte[]>.FromBase64(<encoded-byte[]>, <Encoding>)
+var decoded = <string>.FromBase64(<encoded-string>, <Encoding>)
 
 // CollectionExtensions
 <IEnumerable>.IsNullOrEmpty()

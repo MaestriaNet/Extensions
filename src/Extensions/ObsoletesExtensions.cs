@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Maestria.Extensions
 {
@@ -41,5 +42,20 @@ namespace Maestria.Extensions
 
         [Obsolete("Use 'AddToEndIfHasValue'")]
         public static string AddToRightIfHasValue(this string value, char suffix) => value.AddToEndIfHasValue(suffix);
+    }
+
+    public static partial class Base64Extensions
+    {
+        [Obsolete("Use extension 'ToBase64")]
+        public static string Encode(byte[] plainText) => plainText.ToBase64();
+
+        [Obsolete("Use extension 'ToBase64")]
+        public static string Encode(string plainText, Encoding encoding = null) => plainText.ToBase64(encoding);
+
+        [Obsolete("Use extension 'FromBase64")]
+        public static byte[] Decode(byte[] base64EncodedData, Encoding encoding = null) => base64EncodedData.FromBase64(encoding);
+
+        [Obsolete("Use extension 'FromBase64")]
+        public static string Decode(string base64EncodedData, Encoding encoding = null) => base64EncodedData.FromBase64(encoding);
     }
 }
