@@ -52,7 +52,23 @@ namespace Maestria.Extensions
             value != null && starting != null && ending != null &&
             value.CompareTo(starting) >= 0 && value.CompareTo(ending) <= 0;
 
-        public static T LimitTo<T> (this T value, T maxValue) where T : IComparable => value.CompareTo(maxValue) > 0 ? maxValue : value;
+        /// <summary>
+        /// If <paramref name="maxValue"/> it's bigger of <paramref name="value"/> return <paramref name="maxValue"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="maxValue">Highest value limit</param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T LimitMaxAt<T> (this T value, T maxValue) where T : IComparable => value.CompareTo(maxValue) > 0 ? maxValue : value;
+
+        /// <summary>
+        /// If <paramref name="minValue"/> it's smaller of <paramref name="value"/> return <paramref name="minValue"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="minValue">Lower value limit</param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T LimitMinAt<T>(this T value, T minValue) where T : IComparable => value.CompareTo(minValue) < 0 ? minValue : value;
 
         /// <summary>
         /// Call single action method and return current value to continue your build pipeline

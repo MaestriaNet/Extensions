@@ -157,7 +157,7 @@ namespace Maestria.Extensions
         }
 
         /// <summary>
-        /// Return only numeric chars at text
+        /// Return only numeric chars at text. It's preserved <paramref name="culture"/> decimal separator and negative sign.
         /// </summary>
         /// <param name="value">Value to clear alphanumeric chars</param>
         /// <param name="allowFloatingPoint">Return numbers with dot char</param>

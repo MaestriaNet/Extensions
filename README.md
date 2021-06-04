@@ -81,26 +81,13 @@ EnumExtensions.GetValues(typeof(<TEnum>))
 "value".GetHashSha512()
 HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 
-// IfNullExtensions
-<object>.IfNull(<output-value-when-null>)
-<string>.IfNullOrEmpty(<output-value-when-null-or-empty-string>)
-<string>.IfNullOrWhiteSpace(<output-value-when-null-or-empty-white-space>)
-
-// NullIfExtensions
-<object>.NullIf(<comparison-value>)
-<object>.NullIfIn(<comparison-value>)
-<object>.NullIfBetween(<comparison-value>)
-
-// NullIf
-<floating-point>.NullIf(<comparison-value>, <tolerance-to-comparasion>)
-<string>.NullIf(<comparison-value>, <ignore-case>)
-<string>.NullIfEmpty(<comparison-value>)
-<string>.NullIfWhiteSpace(<comparison-value>)
-
 // RoundExtensions
 <floating-point>.Round(<digits>)
 <floating-point>.Round(<digits>, <MidpointRounding>)
 <floating-point>.RoundUp(<digits>)
+
+// TruncateExtensions
+<floating-point>.Truncate(<digits>)
 
 // StringExtensions
 <string>.TrimStart(<start-comparison>, <ignore-case>)
@@ -115,7 +102,7 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 <string>.EmptyIf(<string>)
 <string>.EmptyIfNull()
 <string>.EmptyIfNullOrWhiteSpace()
-<string>.HasValue()
+<string>.HasValue() // Check if text is not null and not white space
 <string>.EqualsIgnoreCase(<camparison-value>, <auto-trim>)
 <string>.OnlyNumbers()
 <string>.RemoveAccents()
@@ -131,12 +118,11 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 
 // SyntaxExtensions
 <object>.IsNull()
-<object>.HasValue()
+<object>.HasValue() or <object>.IsNotNull() // Same result
 <object>.In(<array-of-values>)
-<object>.Between(<starting-value>, <ending-value>)
-
-// TruncateExtensions
-<floating-point>.Truncate(<digits>)
+<IComparable>.Between(<starting-value>, <ending-value>)
+<IComparable>.LimitMaxAt(<max-value>)
+<IComparable>.LimitMinAt(<min-value>)
 
 // Pipelines
 var value = <string>
@@ -176,6 +162,26 @@ Examples:
 <IComparable>.IfLessOrEqual(10).Then(5)
 <IComparable>.If(10).Then(5)
 <IComparable>.IfNot(10).Then(5)
+```
+
+Other fluent comparison operations:
+
+```charp
+// IfNullExtensions
+<object>.IfNull(<output-value-when-null>)
+<string>.IfNullOrEmpty(<output-value-when-null-or-empty-string>)
+<string>.IfNullOrWhiteSpace(<output-value-when-null-or-empty-white-space>)
+
+// NullIfExtensions
+<object>.NullIf(<comparison-value>)
+<floating-point>.NullIf(<comparison-value>, <tolerance-to-comparasion>)
+
+<string>.NullIf(<comparison-value>, <ignore-case>)
+<string>.NullIfEmpty(<comparison-value>)
+<string>.NullIfWhiteSpace(<comparison-value>)
+
+<IComparable>.NullIfIn(<comparison-value>)
+<IComparable>.NullIfBetween(<comparison-value>)
 ```
 
 ## Data Types
