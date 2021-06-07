@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <PackageId>Maestria.Extensions</PackageId>
-        <Version>2.1.0</Version>
+        <Version>2.1.1</Version>
         <Authors>Fábio Monteiro Naspolini</Authors>
         <Company>Fábio Monteiro Naspolini</Company>
         <Title>Maestria.Extensions</Title>
@@ -20,6 +20,7 @@
         <AssemblyName>Maestria.Extensions</AssemblyName>
         <RootNamespace>Maestria.Extensions</RootNamespace>
         <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
