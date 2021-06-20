@@ -182,7 +182,7 @@ namespace Maestria.Extensions
         public static bool HasItems<T>(this IEnumerable<T> enumerable) => enumerable != null && enumerable.Any();
 
         /// <summary>
-        /// Tentar obter valor da chave, caso não exista retornar o valor default indicado em <see cref="@default"/>
+        /// Tentar obter valor da chave, caso não exista retornar o valor default indicado em <paramref name="default"/>
         /// </summary>
         /// <param name="dictionary"></param>
         /// <param name="key"></param>

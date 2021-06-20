@@ -76,7 +76,7 @@ namespace Maestria.Extensions
         /// <param name="value"></param>
         /// <param name="action">Action to execute</param>
         /// <typeparam name="T"></typeparam>
-        /// <returns>Return is <see cref="value"/></returns>
+        /// <returns>Return is <paramref name="value"/></returns>
         public static T DetachedInvoke<T>(this T value, Action<T> action)
         {
             if (value == null) return default;

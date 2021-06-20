@@ -47,10 +47,10 @@ namespace Maestria.Extensions
         /// <summary>
         /// Replaces the format item in a specified string with the string representation of a corresponding object in a specified array.
         /// </summary>
-        /// <param name="value">A <see cref="~/docs/standard/base-types/composite-formatting.md">composite format string</see>.</param>
+        /// <param name="value">A composite format string.</param>
         /// <param name="args">An object array that contains zero or more objects to format.</param>
-        /// <returns>A copy of <paramref name="format">format</paramref> in which the format items have been replaced by the string representation of the corresponding objects in <paramref name="args">args</paramref>.</returns>
-        /// <exception cref="T:System.FormatException"><paramref name="format">format</paramref> is invalid.   -or-   The index of a format item is less than zero, or greater than or equal to the length of the <paramref name="args">args</paramref> array.</exception>
+        /// <returns>A copy of <paramref name="value">format</paramref> in which the format items have been replaced by the string representation of the corresponding objects in <paramref name="args">args</paramref>.</returns>
+        /// <exception cref="T:System.FormatException"><paramref name="value">format</paramref> is invalid.   -or-   The index of a format item is less than zero, or greater than or equal to the length of the <paramref name="args">args</paramref> array.</exception>
         [StringFormatMethod("value")]
         public static string Format(this string value, params object[] args)
         {
@@ -92,7 +92,7 @@ namespace Maestria.Extensions
         }
 
         /// <summary>
-        /// Limit <see cref="value"/> with <see cref="length"/> character number safe.
+        /// Limit <paramref name="value"/>with <paramref name="length"/> character number safe.
         /// </summary>
         /// <param name="value">Full text</param>
         /// <param name="length">Max size of return value</param>
@@ -100,7 +100,7 @@ namespace Maestria.Extensions
         public static string LimitLen(this string value, int length) => value.SubstringSafe(0, length);
 
         /// <summary>
-        /// Limit <see cref="value"/> with <see cref="length"/> character number safe from right to left.
+        /// Limit <paramref name="value"/> with <paramref name="value"/> character number safe from right to left.
         /// </summary>
         /// <param name="value">Full text</param>
         /// <param name="length">Max size of return value</param>
@@ -134,7 +134,7 @@ namespace Maestria.Extensions
         /// <summary>
         /// Escape <paramref name="value"/> as XML replacing special chars by escape codes.
         /// </summary>
-        /// <param name="this"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
         public static string EscapeXml(this string value) => value
             .Replace("&", "&amp;")

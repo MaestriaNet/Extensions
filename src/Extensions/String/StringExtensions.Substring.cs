@@ -85,7 +85,9 @@ namespace Maestria.Extensions
         /// </summary>
         /// <param name="value">Full text</param>
         /// <param name="separator">Find text pattern</param>
+        /// <param name="occurrenceIndex"></param>
         /// <param name="autoTrim">Apply trim on result</param>
+        /// <param name="options"></param>
         /// <returns></returns>
         public static string SubstringAtOccurrenceIndex(this string value, string separator, int occurrenceIndex, bool autoTrim = true, StringSplitOptions options = StringSplitOptions.None)
         {
