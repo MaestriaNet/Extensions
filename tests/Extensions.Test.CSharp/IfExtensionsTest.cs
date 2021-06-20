@@ -1,5 +1,3 @@
-using System;
-using Maestria.Extensions;
 using NUnit.Framework;
 
 namespace Maestria.Extensions.Test.CSharp
@@ -13,7 +11,7 @@ namespace Maestria.Extensions.Test.CSharp
         private readonly int? value2Nullable = 2;
         private readonly int? value3Nullable = 3;
         private int? nullValue = null;
-        
+
 
         [Test]
         public void IfGreater()
@@ -356,7 +354,7 @@ namespace Maestria.Extensions.Test.CSharp
         }
 
         [Test]
-        public void IfWithNullValues() 
+        public void IfWithNullValues()
         {
             // If
             Assert.AreEqual(value1, nullValue.If(nullValue).Then(value1));

@@ -167,6 +167,17 @@ Examples:
 <IComparable>.IfNot(10).Then(5)
 ```
 
+Delegates expression only executes when the condition it's true.
+
+```csharp
+<IComparable>.IfGreater(10).Then(() => 5)
+<IComparable>.IfGreaterOrEqual(10).Then(() => 5)
+<IComparable>.IfLest(10).Then(() => 5)
+<IComparable>.IfLessOrEqual(10).Then(() => 5)
+<IComparable>.If(10).Then(() => 5)
+<IComparable>.IfNot(10).Then(() => 5)
+```
+
 Other fluent comparison operations:
 
 ```charp
