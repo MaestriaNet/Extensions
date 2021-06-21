@@ -24,8 +24,8 @@ namespace Maestria.Extensions
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static bool HasValue(this string value) => !string.IsNullOrWhiteSpace(value); 
-        
+        public static bool HasValue(this string value) => !string.IsNullOrWhiteSpace(value);
+
         /// <summary>
         /// Return empty if <paramref name="value"/> is equals to <paramref name="equalityValue"/>
         /// </summary>

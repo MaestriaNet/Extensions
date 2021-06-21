@@ -200,7 +200,7 @@ Other fluent comparison operations:
 
 ## Data Types
 
-### ISimpleResult, SimpleResult and SimpleResult<TValue>
+### ISimpleResult, SimpleResult and SimpleResult< TValue>
 
 This structure has success and message for simple method result, extensible with generic TValue on "Value" property.
 
@@ -225,33 +225,33 @@ var result = new SimpleResult
 Use cases:
 
 ```csharp
-public SimpleResult Execute(Args args) 
+public SimpleResult Execute(Args args)
 {
     if (args == null)
         return "Argument cannot be null";  // <===== Implicit cast to failure result
     try
     {
         // Execute actions
-    } 
+    }
     catch (Exception e)
     {
         return e; // <===== Implicit cast to failure result
-    } 
+    }
     return true; // <===== Implicit cast success result
 }
 
-public SimpleResult<int> Execute2(Args args) 
+public SimpleResult<int> Execute2(Args args)
 {
     if (args == null)
         return "Argument cannot be null";  // <===== Implicit cast to failure result
     try
     {
         // Execute actions
-    } 
+    }
     catch (Exception e)
     {
         return e; // <===== Implicit cast to failure result
-    } 
+    }
     return 10; // <===== Implicit cast success result
 }
 

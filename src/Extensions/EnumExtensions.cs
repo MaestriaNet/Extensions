@@ -35,7 +35,7 @@ namespace Maestria.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetDescription<T>(this T value)
+        public static string GetDescription(this Enum value)
         {
             if (value == null) return string.Empty;
             var field = value.GetType().GetField(value.ToString());
