@@ -143,7 +143,30 @@ namespace Maestria.Extensions.Test.CSharp
         }
 
         [Test]
-        public void WithIndex()
+        public void WithIndex_Untyped()
+        {
+            foreach (var (item, index) in _enumerable.WithIndex())
+            {
+                switch (index)
+                {
+                    case 0:
+                        Assert.AreEqual(10, item);
+                        break;
+                    case 1:
+                        Assert.AreEqual(20, item);
+                        break;
+                    case 2:
+                        Assert.AreEqual(30, item);
+                        break;
+                    default:
+                        Assert.Fail("Unexpected value");
+                        break;
+                }
+            }
+        }
+
+        [Test]
+        public void WithIndex_Typed()
         {
             foreach (var (item, index) in _enumerableTyped.WithIndex())
             {

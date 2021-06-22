@@ -162,6 +162,19 @@ namespace Maestria.Extensions
         /// {
         /// ...
         /// }</example>
+        public static IEnumerable<(object Value, int Index)> WithIndex(this IEnumerable source) =>
+            source.Cast<object>().Select((Item, Index) => (Item, Index));
+
+        /// <summary>
+        /// Return enumerable tuple with index and item for use into foreach
+        /// </summary>
+        /// <param name="source"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <example>foreach (var (Value, Index) in youtList.WithIndex())
+        /// {
+        /// ...
+        /// }</example>
         public static IEnumerable<(T Value, int Index)> WithIndex<T>(this IEnumerable<T> source) =>
             source.Select((Item, Index) => (Item, Index));
 
