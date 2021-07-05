@@ -204,6 +204,7 @@ Other fluent comparison operations:
 
 This structure has success and message for simple method result, extensible with generic TValue on "Value" property.
 
+
 ```csharp
 SimpleResult ok = SimpleResult.Ok(<optional-message>);
 SimpleResult fail = SimpleResult.Fail("Fail message");
@@ -221,6 +222,15 @@ var result = new SimpleResult
     Message = "Successfully processed"
 }
 ```
+
+To improve then development experience, there are implicit conversions:
+
+- `bool`: To set or verify property `Success`.
+- `string`: To set fail message and `Success` to `false`.
+- `Exception`: To set fail message, Exception and `Success` to `false`.
+- `TValue`: To set value and `Success` to `true` even if null.
+
+The property `SuccessAndHasValue` check if `Success == true and Value != null` in `SimpleResult<TValue>`.
 
 Use cases:
 

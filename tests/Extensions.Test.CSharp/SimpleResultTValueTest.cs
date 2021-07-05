@@ -10,6 +10,7 @@ namespace Maestria.Extensions.Test.CSharp
         const string ExceptionStack = "Test\r\nType: System.Exception\r\n";
 
         private readonly Person _person = new Person(1, "Fábio");
+        private readonly Person _nullPerson = null;
 
         [Test]
         public void FailConstructorTest()
@@ -36,12 +37,14 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.True(result);
             Assert.IsNull(result.Message);
             Assert.AreEqual(_person, result.Value);
+            Assert.IsTrue(result.SuccessAndHasValue);
 
             result = new SimpleResult<Person>(true, _person);
             Assert.True(result.Success);
             Assert.True(result);
             Assert.IsNull(result.Message);
             Assert.AreEqual(_person, result.Value);
+            Assert.IsTrue(result.SuccessAndHasValue);
         }
 
         [Test]
@@ -52,12 +55,32 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.True(result);
             Assert.IsNull(result.Message);
             Assert.IsNull(result.Value);
+            Assert.IsFalse(result.SuccessAndHasValue);
 
             result = _person;
             Assert.True(result.Success);
             Assert.True(result);
             Assert.IsNull(result.Message);
             Assert.AreEqual(_person, result.Value);
+            Assert.IsTrue(result.SuccessAndHasValue);
+        }
+
+        [Test]
+        public void SuccessImpliciWithNullValueTest()
+        {
+            SimpleResult<Person> result = _nullPerson;
+            Assert.True(result.Success);
+            Assert.True(result);
+            Assert.IsNull(result.Message);
+            Assert.IsNull(result.Value);
+            Assert.IsFalse(result.SuccessAndHasValue);
+
+            result = _person;
+            Assert.True(result.Success);
+            Assert.True(result);
+            Assert.IsNull(result.Message);
+            Assert.AreEqual(_person, result.Value);
+            Assert.IsTrue(result.SuccessAndHasValue);
         }
 
         [Test]
@@ -68,12 +91,14 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.False(result);
             Assert.IsNull(result.Message);
             Assert.IsNull(result.Value);
+            Assert.IsFalse(result.SuccessAndHasValue);
 
             result = ErrorMessage;
             Assert.False(result.Success);
             Assert.False(result);
             Assert.AreEqual(ErrorMessage, result.Message);
             Assert.IsNull(result.Value);
+            Assert.IsFalse(result.SuccessAndHasValue);
 
             result = new Exception(ErrorMessage);
             Assert.False(result.Success);
@@ -81,6 +106,7 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual(ErrorMessage, result.Message);
             Assert.AreEqual(ExceptionStack, result.Exception.GetAllMessages());
             Assert.IsNull(result.Value);
+            Assert.IsFalse(result.SuccessAndHasValue);
         }
 
         [Test]

@@ -18,9 +18,7 @@ namespace Maestria.Extensions.DataTypes
     public interface ISimpleResult<TValue> : ISimpleResult
     {
         public TValue Value { get; }
-
-        [Obsolete("Use property 'Value'. This will removed in future versions.")]
-        public TValue Data { get; }
+        public bool SuccessAndHasValue { get; }
     }
 
     /// <inheritdoc/>>
@@ -85,8 +83,10 @@ namespace Maestria.Extensions.DataTypes
         public Exception Exception { get; set; }
         public TValue Value { get; set; }
 
-        [Obsolete("Use property 'Value'. This will removed in future versions.")]
-        public TValue Data => Value;
+        /// <summary>
+        /// True if Success and Value != null
+        /// </summary>
+        public bool SuccessAndHasValue => Success && Value != null;
 
         public static SimpleResult<TValue> Ok(TValue value, string message = null) => new SimpleResult<TValue> { Success = true, Message = message, Value = value };
         public static SimpleResult<TValue> Ok(string message = null) => new SimpleResult<TValue> { Success = true, Message = message };

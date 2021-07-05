@@ -156,7 +156,6 @@ namespace Maestria.Extensions
         /// Return enumerable tuple with index and item for use into foreach
         /// </summary>
         /// <param name="source"></param>
-        /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         /// <example>foreach (var (Value, Index) in youtList.WithIndex())
         /// {

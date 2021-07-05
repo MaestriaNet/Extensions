@@ -32,7 +32,6 @@ namespace Maestria.Extensions
         /// <summary>
         /// Retuning value of attribute <see cref="DescriptionAttribute"/> or property Description of <see cref="DisplayAttribute"/>, when not present attribute returns is enum text
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         /// <returns></returns>
         public static string GetDescription(this Enum value)
