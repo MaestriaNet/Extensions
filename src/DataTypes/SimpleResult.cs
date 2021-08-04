@@ -7,9 +7,9 @@ namespace Maestria.Extensions.DataTypes
     /// </summary>
     public interface ISimpleResult
     {
-        public bool Success { get; }
-        public string Message { get; }
-        public Exception Exception { get; }
+        bool Success { get; }
+        string Message { get; }
+        Exception Exception { get; }
     }
 
     /// <summary>
@@ -17,8 +17,8 @@ namespace Maestria.Extensions.DataTypes
     /// </summary>
     public interface ISimpleResult<TValue> : ISimpleResult
     {
-        public TValue Value { get; }
-        public bool SuccessAndHasValue { get; }
+        TValue Value { get; }
+        bool SuccessAndHasValue { get; }
     }
 
     /// <inheritdoc/>>
@@ -49,6 +49,7 @@ namespace Maestria.Extensions.DataTypes
         public static implicit operator SimpleResult(string failMessage) => Fail(failMessage);
         public static implicit operator SimpleResult(Exception exception) => Fail(exception?.Message, exception);
         public static implicit operator bool(SimpleResult value) => value.Success;
+        public static implicit operator Exception(SimpleResult value) => value.Exception;
     }
 
     /// <inheritdoc/>>
@@ -84,7 +85,12 @@ namespace Maestria.Extensions.DataTypes
         public TValue Value { get; set; }
 
         /// <summary>
-        /// True if Success and Value != null
+        ///     <para>
+        ///         True if Success and Value != null.
+        ///     </para>
+        ///     <para>
+        ///         This is used by implict operator when convert to bool.
+        ///     </para>
         /// </summary>
         public bool SuccessAndHasValue => Success && Value != null;
 
@@ -98,7 +104,8 @@ namespace Maestria.Extensions.DataTypes
         public static implicit operator SimpleResult<TValue>(Exception exception) => Fail(exception?.Message, exception);
         public static implicit operator SimpleResult<TValue>(SimpleResult result) => new SimpleResult<TValue> { Success = result.Success, Message = result.Message, Exception = result.Exception, Value = default };
         public static implicit operator SimpleResult(SimpleResult<TValue> result) => new SimpleResult { Success = result.Success, Message = result.Message, Exception = result.Exception };
-        public static implicit operator bool(SimpleResult<TValue> value) => value.Success;
+        public static implicit operator bool(SimpleResult<TValue> value) => value.SuccessAndHasValue;
         public static implicit operator TValue(SimpleResult<TValue> value) => value.Value;
+        public static implicit operator Exception(SimpleResult<TValue> value) => value.Exception;
     }
 }

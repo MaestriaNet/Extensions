@@ -13,7 +13,7 @@
 
         public bool Successfully => _successfully != null && _successfully.Value;
         public bool Failed => _successfully != null && !_successfully.Value;
-        public TSuccess Success { get => _success; private set { _success = value; _successfully = true;} }
+        public TSuccess Success { get => _success; private set { _success = value; _successfully = true; } }
         public TFailure Failure { get => _failure; private set { _failure = value; _successfully = false; } }
 
         public static Try<TSuccess, TFailure> Ok(TSuccess value) => new Try<TSuccess, TFailure> { Success = value };

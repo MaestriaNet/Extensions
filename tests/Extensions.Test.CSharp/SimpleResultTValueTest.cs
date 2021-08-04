@@ -52,7 +52,7 @@ namespace Maestria.Extensions.Test.CSharp
         {
             SimpleResult<Person> result = true;
             Assert.True(result.Success);
-            Assert.True(result);
+            Assert.False(result);
             Assert.IsNull(result.Message);
             Assert.IsNull(result.Value);
             Assert.IsFalse(result.SuccessAndHasValue);
@@ -70,7 +70,7 @@ namespace Maestria.Extensions.Test.CSharp
         {
             SimpleResult<Person> result = _nullPerson;
             Assert.True(result.Success);
-            Assert.True(result);
+            Assert.False(result);
             Assert.IsNull(result.Message);
             Assert.IsNull(result.Value);
             Assert.IsFalse(result.SuccessAndHasValue);

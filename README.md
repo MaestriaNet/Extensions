@@ -223,14 +223,25 @@ var result = new SimpleResult
 }
 ```
 
-To improve then development experience, there are implicit conversions:
+To improve then development experience, there are implicit conversions to assign data **from**:
 
 - `bool`: To set or verify property `Success`.
 - `string`: To set fail message and `Success` to `false`.
 - `Exception`: To set fail message, Exception and `Success` to `false`.
-- `TValue`: To set value and `Success` to `true` even if null.
+- `TValue`: To set value and `Success` to `true` (Even if null).
 
-The property `SuccessAndHasValue` check if `Success == true and Value != null` in `SimpleResult<TValue>`.
+And implicit conversions to assingn data **to**:
+
+- `bool`:
+    - `SimpleResult`: Get data from property `Success`.
+    - `SimpleResult<TValue>`: Get data from property `SuccessAndHasValue`
+- `Exception`: Get data from property `Exception`
+- `TValue`: Get data from property `Value`
+
+> *The property `SuccessAndHasValue` check if `Success == true and Value != null` in `SimpleResult<TValue>`.*
+
+> ***Caution on `SimpleResult<TValue>`:*** *Implicit comparison `if (mySimpleResultVariable)` is equivalent to `if (mySimpleResultVariable.SuccessAndHasValue)`.*  
+*Use explicit `if (mySimpleResultVariable.Success)` when result value can be null with success is true*
 
 Use cases:
 
