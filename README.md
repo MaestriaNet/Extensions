@@ -253,12 +253,12 @@ public SimpleResult Execute(Args args)
     try
     {
         // Execute actions
+        return true; // <===== Implicit cast success result
     }
     catch (Exception e)
     {
         return e; // <===== Implicit cast to failure result
     }
-    return true; // <===== Implicit cast success result
 }
 
 public SimpleResult<int> Execute2(Args args)
@@ -268,12 +268,12 @@ public SimpleResult<int> Execute2(Args args)
     try
     {
         // Execute actions
+        return 10; // <===== Implicit cast success result
     }
     catch (Exception e)
     {
         return e; // <===== Implicit cast to failure result
     }
-    return 10; // <===== Implicit cast success result
 }
 
 // ...
