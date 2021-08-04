@@ -307,7 +307,7 @@ public void Try<PersonCreated, CustomError> Save(Person value)
 
 var result = Save(person);
 if (result)
-    Console.WriteLine(result.Success.Id);
+    Console.WriteLine(result.Value.Id);
 else
     Console.WriteLine($"Error {result.Failure.Code}: {result.Failure.Message}");
 ```

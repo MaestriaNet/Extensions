@@ -11,14 +11,14 @@ namespace Maestria.Extensions.Test.CSharp
             var result = TryTestMock(true);
             if (result)
             {
-                Assert.NotNull(result.Success);
+                Assert.NotNull(result.Value);
                 Assert.Null(result.Failure);
-                Assert.AreEqual(true, result.Successfully);
+                Assert.AreEqual(true, result.Success);
                 Assert.AreEqual(false, result.Failed);
 
                 TestOk implicitCastSuccess = result;
                 TestError implicitCastFailure = result;
-                Assert.AreEqual(result.Success, implicitCastSuccess);
+                Assert.AreEqual(result.Value, implicitCastSuccess);
                 Assert.AreEqual(result.Failure, implicitCastFailure);
             }
             else
@@ -33,14 +33,14 @@ namespace Maestria.Extensions.Test.CSharp
                 Assert.Fail();
             else
             {
-                Assert.Null(result.Success);
+                Assert.Null(result.Value);
                 Assert.NotNull(result.Failure);
-                Assert.AreEqual(false, result.Successfully);
+                Assert.AreEqual(false, result.Success);
                 Assert.AreEqual(true, result.Failed);
 
                 TestOk implicitCastSuccess = result;
                 TestError implicitCastFailure = result;
-                Assert.AreEqual(result.Success, implicitCastSuccess);
+                Assert.AreEqual(result.Value, implicitCastSuccess);
                 Assert.AreEqual(result.Failure, implicitCastFailure);
             }
         }
@@ -51,12 +51,12 @@ namespace Maestria.Extensions.Test.CSharp
             var result = TryTestMockStruct(true);
             if (result)
             {
-                Assert.AreEqual(true, result.Successfully);
+                Assert.AreEqual(true, result.Success);
                 Assert.AreEqual(false, result.Failed);
 
                 TestOkStruct implicitCastSuccess = result;
                 TestErrorStruct implicitCastFailure = result;
-                Assert.AreEqual(result.Success, implicitCastSuccess);
+                Assert.AreEqual(result.Value, implicitCastSuccess);
                 Assert.AreEqual(result.Failure, implicitCastFailure);
             }
             else
@@ -71,12 +71,12 @@ namespace Maestria.Extensions.Test.CSharp
                 Assert.Fail();
             else
             {
-                Assert.AreEqual(false, result.Successfully);
+                Assert.AreEqual(false, result.Success);
                 Assert.AreEqual(true, result.Failed);
 
                 TestOkStruct implicitCastSuccess = result;
                 TestErrorStruct implicitCastFailure = result;
-                Assert.AreEqual(result.Success, implicitCastSuccess);
+                Assert.AreEqual(result.Value, implicitCastSuccess);
                 Assert.AreEqual(result.Failure, implicitCastFailure);
             }
         }
