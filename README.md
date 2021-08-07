@@ -180,7 +180,7 @@ Delegates expression only executes when the condition it's true.
 
 Other fluent comparison operations:
 
-```charp
+```csharp
 // IfNullExtensions
 <object>.IfNull(<output-value-when-null>)
 <string>.IfNullOrEmpty(<output-value-when-null-or-empty-string>)
