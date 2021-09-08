@@ -18,65 +18,65 @@ namespace Maestria.Extensions
         /// <summary>
         /// Iterate collection
         /// </summary>
-        /// <param name="enumerable"></param>
+        /// <param name="values"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable Iterate(this IEnumerable enumerable, Action<object> action)
+        public static IEnumerable Iterate(this IEnumerable values, Action<object> action)
         {
-            if (enumerable != null)
-                foreach (var item in enumerable)
+            if (values != null)
+                foreach (var item in values)
                     action.Invoke(item);
-            return enumerable;
+            return values;
         }
 
         /// <summary>
         /// Iterate collection
         /// </summary>
-        /// <param name="enumerable"></param>
+        /// <param name="values"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable Iterate(this IEnumerable enumerable, IterateCollectionDelegate<object> action)
+        public static IEnumerable Iterate(this IEnumerable values, IterateCollectionDelegate<object> action)
         {
-            if (enumerable != null)
+            if (values != null)
             {
                 var index = 0;
-                foreach (var item in enumerable)
+                foreach (var item in values)
                     action.Invoke(item, index++);
             }
-            return enumerable;
+            return values;
         }
 
         /// <summary>
         /// Iterate collection async
         /// </summary>
-        /// <param name="enumerable"></param>
+        /// <param name="values"></param>
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable> Iterate(this IEnumerable enumerable, Func<object, Task> action)
+        public static async Task<IEnumerable> Iterate(this IEnumerable values, Func<object, Task> action)
         {
-            if (enumerable != null)
-                foreach (var item in enumerable)
+            if (values != null)
+                foreach (var item in values)
                     await action.Invoke(item);
-            return enumerable;
+            return values;
         }
 
         /// <summary>
         /// Iterate collection async
         /// </summary>
-        /// <param name="enumerable"></param>
+        /// <param name="values"></param>
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable> Iterate(this IEnumerable enumerable, IterateCollectionAsyncDelegate<object> action)
+        public static async Task<IEnumerable> Iterate(this IEnumerable values, IterateCollectionAsyncDelegate<object> action)
         {
-            if (enumerable != null)
+            if (values != null)
             {
                 var index = 0;
-                foreach (var item in enumerable)
+                foreach (var item in values)
                     await action.Invoke(item, index++);
             }
-            return enumerable;
+            return values;
         }
 
         #endregion
@@ -86,65 +86,65 @@ namespace Maestria.Extensions
         /// <summary>
         /// Iterate collection
         /// </summary>
-        /// <param name="enumerable"></param>
+        /// <param name="values"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable<T> Iterate<T>(this IEnumerable<T> enumerable, Action<T> action)
+        public static IEnumerable<T> Iterate<T>(this IEnumerable<T> values, Action<T> action)
         {
-            if (enumerable != null)
-                foreach (var item in enumerable)
+            if (values != null)
+                foreach (var item in values)
                     action.Invoke(item);
-            return enumerable;
+            return values;
         }
 
         /// <summary>
         /// Iterate collection
         /// </summary>
-        /// <param name="enumerable"></param>
+        /// <param name="values"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable<T> Iterate<T>(this IEnumerable<T> enumerable, IterateCollectionDelegate<T> action)
+        public static IEnumerable<T> Iterate<T>(this IEnumerable<T> values, IterateCollectionDelegate<T> action)
         {
-            if (enumerable != null)
+            if (values != null)
             {
                 var index = 0;
-                foreach (var item in enumerable)
+                foreach (var item in values)
                     action.Invoke(item, index++);
             }
-            return enumerable;
+            return values;
         }
 
         /// <summary>
         /// Iterate collection async
         /// </summary>
-        /// <param name="enumerable"></param>
+        /// <param name="values"></param>
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable<T>> Iterate<T>(this IEnumerable<T> enumerable, Func<T, Task> action)
+        public static async Task<IEnumerable<T>> Iterate<T>(this IEnumerable<T> values, Func<T, Task> action)
         {
-            if (enumerable != null)
-                foreach (var item in enumerable)
+            if (values != null)
+                foreach (var item in values)
                     await action.Invoke(item);
-            return enumerable;
+            return values;
         }
 
         /// <summary>
         /// Iterate collection async
         /// </summary>
-        /// <param name="enumerable"></param>
+        /// <param name="values"></param>
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable<T>> Iterate<T>(this IEnumerable<T> enumerable, IterateCollectionAsyncDelegate<T> action)
+        public static async Task<IEnumerable<T>> Iterate<T>(this IEnumerable<T> values, IterateCollectionAsyncDelegate<T> action)
         {
-            if (enumerable != null)
+            if (values != null)
             {
                 var index = 0;
-                foreach (var item in enumerable)
+                foreach (var item in values)
                     await action.Invoke(item, index++);
             }
-            return enumerable;
+            return values;
         }
 
         #endregion

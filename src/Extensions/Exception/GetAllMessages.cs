@@ -8,15 +8,15 @@ namespace Maestria.Extensions
         /// <summary>
         /// Obtain message with inner exception cascade message.
         /// </summary>
-        /// <param name="exception"></param>
+        /// <param name="value"></param>
         /// <param name="additionalInfo">Text to write into first line when not is empty.</param>
         /// <param name="includeClassType">Output with exception class full name.</param>
         /// <param name="includeStackTrace"></param>
         /// <returns></returns>
-        public static string GetAllMessages(this Exception exception, string additionalInfo = null,
+        public static string GetAllMessages(this Exception value, string additionalInfo = null,
             bool includeClassType = true, bool includeStackTrace = true)
         {
-            if (exception == null)
+            if (value == null)
                 return string.Empty;
 
             var msg = new StringBuilder();
@@ -24,21 +24,21 @@ namespace Maestria.Extensions
             if (additionalInfo.HasValue())
                 msg.AppendLine(additionalInfo);
 
-            msg.AppendLine(exception.Message);
+            msg.AppendLine(value.Message);
             if (includeClassType)
-                msg.AppendLine("Type: " + exception.GetType().FullName);
+                msg.AppendLine("Type: " + value.GetType().FullName);
 
-            if (exception.StackTrace.HasValue())
-                stackTrace.AppendLine(exception.StackTrace);
+            if (value.StackTrace.HasValue())
+                stackTrace.AppendLine(value.StackTrace);
 
-            if (exception.InnerException != null)
+            if (value.InnerException != null)
             {
                 var innerCount = 0;
-                for (var ex = exception.InnerException; ex != null; ex = ex.InnerException)
+                for (var ex = value.InnerException; ex != null; ex = ex.InnerException)
                     innerCount++;
 
                 int innerLevel = 1;
-                for (var ex = exception.InnerException; ex != null; ex = ex.InnerException)
+                for (var ex = value.InnerException; ex != null; ex = ex.InnerException)
                 {
                     if (innerCount > 1)
                         msg.Append($@"Inner {innerCount - innerLevel}");

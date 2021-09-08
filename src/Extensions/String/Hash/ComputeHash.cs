@@ -8,33 +8,33 @@ namespace Maestria.Extensions
         /// <summary>
         /// Calculates the hash for the given string.
         /// </summary>
-        /// <param name="hashAlgorithm"></param>
-        /// <param name="input"></param>
+        /// <param name="algorithm"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static string ComputeHash(this string input, HashAlgorithm hashAlgorithm)
+        public static string ComputeHash(this string value, HashAlgorithm algorithm)
         {
-            if (input == null)
-                throw new ArgumentNullException(nameof(input), "Null value to encrypt not suported.");
+            if (value == null)
+                throw new ArgumentNullException(nameof(value), "Null value to encrypt not suported.");
 
-            using var hasher = hashAlgorithm.CreateHasher();
-            return input.ComputeHash(hasher);
+            using var hasher = algorithm.CreateHasher();
+            return value.ComputeHash(hasher);
         }
 
         /// <summary>
         /// Calculates the hash for the given string.
         /// </summary>
-        /// <param name="hashAlgorithm"></param>
-        /// <param name="input"></param>
+        /// <param name="algorithm"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static string ComputeHash(this string input, System.Security.Cryptography.HashAlgorithm hashAlgorithm)
+        public static string ComputeHash(this string value, System.Security.Cryptography.HashAlgorithm algorithm)
         {
-            if (input == null)
-                throw new ArgumentNullException(nameof(input), "Null value to encrypt not suported.");
+            if (value == null)
+                throw new ArgumentNullException(nameof(value), "Null value to encrypt not suported.");
 
-            var inputBytes = Encoding.UTF8.GetBytes(input);
-            var hashBytes = hashAlgorithm.ComputeHash(inputBytes);
+            var inputBytes = Encoding.UTF8.GetBytes(value);
+            var hashBytes = algorithm.ComputeHash(inputBytes);
             var hash = new StringBuilder();
             foreach (var b in hashBytes)
                 hash.Append($"{b:x2}");

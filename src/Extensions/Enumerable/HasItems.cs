@@ -9,16 +9,16 @@ namespace Maestria.Extensions
         /// <summary>
         /// Check if collection is not null and contains items
         /// </summary>
-        /// <param name="enumerable"></param>
+        /// <param name="values"></param>
         /// <returns></returns>
-        public static bool HasItems(this IEnumerable enumerable) => enumerable != null && enumerable.Cast<object>().Any();
+        public static bool HasItems(this IEnumerable values) => values != null && values.Cast<object>().Any();
 
         /// <summary>
         /// Check if collection is not null and contains items
         /// </summary>
-        /// <param name="enumerable"></param>
+        /// <param name="values"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static bool HasItems<T>(this IEnumerable<T> enumerable) => enumerable != null && enumerable.Any();
+        public static bool HasItems<T>(this IEnumerable<T> values) => values != null && values.Any();
     }
 }
