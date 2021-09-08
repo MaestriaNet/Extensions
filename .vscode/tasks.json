@@ -9,7 +9,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/tests/Extensions.Test.CSharp/Extensions.Test.CSharp.csproj",
+                "${workspaceFolder}/Extensions.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

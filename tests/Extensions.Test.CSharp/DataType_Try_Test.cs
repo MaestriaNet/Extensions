@@ -1,4 +1,4 @@
-﻿using Maestria.Extensions.DataTypes;
+﻿using Maestria.Extensions;
 using NUnit.Framework;
 
 namespace Maestria.Extensions.Test.CSharp

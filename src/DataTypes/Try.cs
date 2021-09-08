@@ -1,4 +1,4 @@
-﻿namespace Maestria.Extensions.DataTypes
+﻿namespace Maestria.Extensions
 {
     /// <summary>
     /// Auxiliary data type to increment the expressibility of method results when success and failure need different structures.

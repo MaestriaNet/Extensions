@@ -18,7 +18,7 @@ module Iterate =
     let ``Empty collection for each execute``() = Const.emptyArray.Iterate(fun i -> i |> ignore) |> should equal Const.emptyArray
 
     [<Test>]
-    let ``Null collection for each execute``() = (fun () -> CollectionExtensions.Iterate(Const.nullList, fun i -> i |> ignore) |> should equal Const.nullList) |> should not' (throw typeof<NullReferenceException>)
+    let ``Null collection for each execute``() = (fun () -> MaestriaExtensions.Iterate(Const.nullList, fun i -> i |> ignore) |> should equal Const.nullList) |> should not' (throw typeof<NullReferenceException>)
 
 module IsNullOrEmpty =
     [<Test>]

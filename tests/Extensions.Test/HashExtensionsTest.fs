@@ -37,5 +37,5 @@ let ``SHA384 hash test``() = InputValue.GetHashSha384() |> should equal Sha384Ex
 let ``SHA512 hash test``() = InputValue.GetHashSha512() |> should equal Sha512Expected
 
 [<Test>]
-let ``Null not suported exception``() = (fun () -> HashExtensions.ComputeHash(HashAlgorithm.Md5, null) |> ignore)
+let ``Null not suported exception``() = (fun () -> MaestriaExtensions.ComputeHash(null, HashAlgorithm.Md5) |> ignore)
                                         |> should throw typeof<ArgumentNullException>

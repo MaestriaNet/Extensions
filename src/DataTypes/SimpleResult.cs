@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Maestria.Extensions.DataTypes
+namespace Maestria.Extensions
 {
     /// <summary>
     /// This structure has success and message for simple method result.

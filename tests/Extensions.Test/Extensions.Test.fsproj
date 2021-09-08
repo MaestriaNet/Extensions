@@ -12,7 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Include="AggregateExtensionsTest.fs" />
         <Compile Include="Base64ExtensionsTest.fs" />
         <Compile Include="CollectionExtensionsTest.fs" />
         <Compile Include="HashExtensionsTest.fs" />
