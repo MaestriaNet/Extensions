@@ -119,6 +119,13 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 <string>.LimitLen(<length>)
 <string>.LimitLenReverse(<length>)
 
+// Guid
+<Guid>.IsEmpty()
+<Guid?>.IsNullOrEmpty()
+<string>.IsNullOrWhiteSpace()
+<Guid>.IfEmpty(<value>)
+<Guid?>.IfNullOrEmpty(<value>)
+
 // SyntaxExtensions
 <object>.IsNull()
 <object>.HasValue() or <object>.IsNotNull() // Same result
