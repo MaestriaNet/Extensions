@@ -328,6 +328,18 @@ Extensions.GlobalSettings.Configure(cfg => cfg
     .FloatAndDoubleTolerance(default-float-and-double-comparasion-tolerance) // Default is 0.00001f
 ```
 
+## Development Guidelines
+
+- Create file with extensions method name
+- `this` argument name must be `value` for single object or `values` to IEnumerable inheritances
+- Put new file into folder `/src/Extensions/<extended-data-type>`
+    - Expressions methods like `If`, `NullIf`, `Is`, `In`, `EmptyIf`, `Between`, must be located in `src/Extensions/Comparable` folder
+    - `Numbers` extensions methods must bet located in `src/Extensions/Number`
+- The `I` prefix for interfaces must be omitted from the folder name.
+- `src\Settings\MaestriaExtensionSettings`: File to configure global defaults behaviors
+
+---
+
 [![buy-me-a-coffee](resources/buy-me-a-coffee.png)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)
 [![smile.png](resources/smile.png)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)
 
