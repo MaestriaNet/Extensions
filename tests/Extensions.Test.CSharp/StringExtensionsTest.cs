@@ -197,5 +197,14 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual("test limit", "test limit".LimitLenReverse(100));
             Assert.IsNull(_nullString.LimitLenReverse(5));
         }
+
+        [Test]
+        public void OnlyLettersOrNumbersOrUnderscoresOrHyphensTest()
+        {
+            Assert.AreEqual("Test", "Test".OnlyLettersOrNumbersOrUnderscoresOrHyphens());
+            Assert.AreEqual("Test", "{Test}".OnlyLettersOrNumbersOrUnderscoresOrHyphens());
+            Assert.AreEqual("Test_123", "{Test}_12-3".OnlyLettersOrNumbersOrUnderscoresOrHyphens());
+            Assert.AreEqual("áéíóú", "".OnlyLettersOrNumbersOrUnderscoresOrHyphens());
+        }
     }
 }

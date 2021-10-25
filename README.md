@@ -118,6 +118,7 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 <string>.SubstringSafe(<start-index>, <length>)
 <string>.LimitLen(<length>)
 <string>.LimitLenReverse(<length>)
+<string>.OnlyLettersOrNumbersOrUnderscoresOrHyphensTest(<string>)
 
 // Guid
 <Guid>.IsEmpty()
