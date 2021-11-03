@@ -1,14 +1,13 @@
-using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace Maestria.Extensions
 {
     public static partial class MaestriaExtensions
     {
-        private static readonly Regex Regex = new Regex(@"[^a-zA-Z0-9_]+");
+        private static readonly Regex Regex = new Regex(@"[^a-zA-Z0-9_-]+");
 
         /// <summary>
-        /// Return only numerics (0-9), chars (a-Z) or underscores (_) at text.
+        /// Return only numerics (0-9), chars (a-Z), underscores (_) or hyphens (-) at text.
         /// </summary>
         /// <param name="value">Value to clear</param>
         /// <returns></returns>

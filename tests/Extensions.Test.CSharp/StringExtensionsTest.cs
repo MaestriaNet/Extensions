@@ -203,8 +203,7 @@ namespace Maestria.Extensions.Test.CSharp
         {
             Assert.AreEqual("Test", "Test".OnlyLettersOrNumbersOrUnderscoresOrHyphens());
             Assert.AreEqual("Test", "{Test}".OnlyLettersOrNumbersOrUnderscoresOrHyphens());
-            Assert.AreEqual("Test_123", "{Test}_12-3".OnlyLettersOrNumbersOrUnderscoresOrHyphens());
-            Assert.AreEqual("áéíóú", "".OnlyLettersOrNumbersOrUnderscoresOrHyphens());
+            Assert.AreEqual("Test_12-3", "{Test}_12-3".OnlyLettersOrNumbersOrUnderscoresOrHyphens());
         }
     }
 }
