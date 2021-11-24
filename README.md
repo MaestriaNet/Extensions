@@ -242,14 +242,14 @@ And implicit conversions to assingn data **to**:
 
 - `bool`:
     - `SimpleResult`: Get data from property `Success`.
-    - `SimpleResult<TValue>`: Get data from property `SuccessAndHasValue`
+    - `SimpleResult<TValue>`: Get data from property `Success`
 - `Exception`: Get data from property `Exception`
 - `TValue`: Get data from property `Value`
 
 > *The property `SuccessAndHasValue` check if `Success == true and Value != null` in `SimpleResult<TValue>`.*
 
-> ***Caution on `SimpleResult<TValue>`:*** *Implicit comparison `if (mySimpleResultVariable)` is equivalent to `if (mySimpleResultVariable.SuccessAndHasValue)`.*  
-*Use explicit `if (mySimpleResultVariable.Success)` when result value can be null with success is true*
+> ***Caution on `SimpleResult<TValue>`:*** *Implicit comparison `if (mySimpleResultVariable)` is equivalent to `if (mySimpleResultVariable.Success)`.*  
+*Use explicit `if (mySimpleResultVariable.SuccessAndHasValue)` when result value can be null with success is true*
 
 Use cases:
 

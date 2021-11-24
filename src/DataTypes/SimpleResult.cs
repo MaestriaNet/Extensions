@@ -19,6 +19,7 @@ namespace Maestria.Extensions
     {
         TValue Value { get; }
         bool SuccessAndHasValue { get; }
+        bool HasValue { get; }
     }
 
     /// <inheritdoc/>>
@@ -83,6 +84,7 @@ namespace Maestria.Extensions
         public string Message { get; set; }
         public Exception Exception { get; set; }
         public TValue Value { get; set; }
+        public bool HasValue => Value != null;
 
         /// <summary>
         ///     <para>
@@ -92,7 +94,7 @@ namespace Maestria.Extensions
         ///         This is used by implict operator when convert to bool.
         ///     </para>
         /// </summary>
-        public bool SuccessAndHasValue => Success && Value != null;
+        public bool SuccessAndHasValue => Success && HasValue;
 
         public static SimpleResult<TValue> Ok(TValue value, string message = null) => new SimpleResult<TValue>(true, value, message);
         public static SimpleResult<TValue> Ok(string message = null) => new SimpleResult<TValue>(true, default, message);
@@ -115,7 +117,7 @@ namespace Maestria.Extensions
             Message = result.Message,
             Exception = result.Exception
         };
-        public static implicit operator bool(SimpleResult<TValue> value) => value.SuccessAndHasValue;
+        public static implicit operator bool(SimpleResult<TValue> value) => value.Success;
         public static implicit operator TValue(SimpleResult<TValue> value) => value.Value;
         public static implicit operator Exception(SimpleResult<TValue> value) => value.Exception;
     }
