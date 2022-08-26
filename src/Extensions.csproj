@@ -1,32 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <PackageId>Maestria.Extensions</PackageId>
-        <Version>3.2.0</Version>
         <Authors>Fábio Monteiro Naspolini</Authors>
         <Company>Fábio Monteiro Naspolini</Company>
-        <Title>Maestria.Extensions</Title>
-        <NoWarn>CS1591</NoWarn>
         <Description>Extension function pack to increase productivity and improve source code writing.</Description>
+        <License>https://github.com/MaestriaNet/Extensions/blob/master/LICENSE</License>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageIconUrl>https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/icon.png</PackageIconUrl>
+        <PackageId>Maestria.Extensions</PackageId>
+        <PackageProjectUrl>https://github.com/MaestriaNet/Extensions</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>ExtensionMethod ExtensionMethods HelperMethods Helper Extension Extensions Fluent Functional Elegance Productivity Maestria Mastery IEnumerable Enumerable ICollection Collection IList List Array Max Min Highest Smallest Largest String Text IfNull NullIf Null If In Between Truncate Round Hash MD5 SHA1 Enum Aggreagate Exception StackTrace C# .NET CSharp Method Methods</PackageTags>
         <RepositoryUrl>https://github.com/MaestriaNet/Extensions</RepositoryUrl>
-        <PackageProjectUrl>https://github.com/MaestriaNet/Extensions</PackageProjectUrl>
-        <License>https://github.com/MaestriaNet/Extensions/blob/master/LICENSE</License>
-        <PackageIconUrl>https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/icon.png</PackageIconUrl>
-        <LangVersion>9</LangVersion>
+        <Title>Maestria.Extensions</Title>
+        <Version>3.2.1</Version>
     </PropertyGroup>
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
         <AssemblyName>Maestria.Extensions</AssemblyName>
-        <RootNamespace>Maestria.Extensions</RootNamespace>
-        <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
         <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+        <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+        <LangVersion>9</LangVersion>
+        <NoWarn>CS1591</NoWarn>
+        <RootNamespace>Maestria.Extensions</RootNamespace>
+        <TargetFramework>netstandard2.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="JetBrains.Annotations" Version="2020.1.0" />
-      <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+        <None Include="..\resources\icon.png" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="JetBrains.Annotations" Version="2020.1.0" />
+        <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
     </ItemGroup>
 
 </Project>

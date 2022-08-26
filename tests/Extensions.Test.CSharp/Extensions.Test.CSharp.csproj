@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
-        <IsPackable>false</IsPackable>
         <AssemblyName>Maestria.Extensions.Test.CSharp</AssemblyName>
+        <IsPackable>false</IsPackable>
+        <LangVersion>9</LangVersion>
         <RootNamespace>Maestria.Extensions.Test.CSharp</RootNamespace>
-        <LangVersion>8</LangVersion>
+        <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Extensions.csproj" />
+        <ProjectReference Include="..\..\src\Extensions.csproj" />
     </ItemGroup>
 
 </Project>
