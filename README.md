@@ -1,11 +1,11 @@
 # Maestria.Extensions
 
-[![Build status](https://ci.appveyor.com/api/projects/status/mvosd40vqsgrvkr0/branch/master?svg=true)](https://ci.appveyor.com/project/fabionaspolini/extensions/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/mvosd40vqsgrvkr0/branch/master?svg=true)](https://ci.appveyor.com/project/fabionaspolini/maestria-extensions/branch/master)
 [![NuGet](https://buildstats.info/nuget/Maestria.Extensions)](https://www.nuget.org/packages/Maestria.Extensions)
 [![MyGet](https://img.shields.io/myget/maestrianet/v/Maestria.Extensions?label=MyGet)](https://www.myget.org/feed/maestrianet/package/nuget/Maestria.Extensions)
 [![Apimundo](https://img.shields.io/badge/Maestria.Extensions%20API-Apimundo-728199.svg)](https://apimundo.com/organizations/nuget-org/nuget-feeds/public/packages/Maestria.Extensions/versions/latest?tab=types)
 
-[![Build History](https://buildstats.info/appveyor/chart/fabionaspolini/extensions?branch=master)](https://ci.appveyor.com/project/fabionaspolini/extensions/history?branch=master)
+[![Build History](https://buildstats.info/appveyor/chart/fabionaspolini/maestria-extensions?branch=master)](https://ci.appveyor.com/project/fabionaspolini/maestria-extensions/history?branch=master)
 
 [![donate](https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/btn_donate.gif)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)
 
