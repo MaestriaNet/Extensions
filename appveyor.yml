@@ -1,14 +1,14 @@
-version: '3.2.2.{build}'
+version: '3.2.3.{build}'
 image: Visual Studio 2019
 configuration: Release
 dotnet_csproj:
   patch: true
   file: 'src\Extensions.csproj'
-  version: '3.2.2'
-  package_version: '3.2.2'
-  assembly_version: '3.2.2'
-  file_version: '3.2.2'
-  informational_version: '3.2.2'
+  version: '3.2.3'
+  package_version: '3.2.3'
+  assembly_version: '3.2.3'
+  file_version: '3.2.3'
+  informational_version: '3.2.3'
 before_build:
   - ps: dotnet --version --configuration Release
 build_script:
