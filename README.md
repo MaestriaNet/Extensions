@@ -22,7 +22,7 @@ Maestria is a project to provide productivity and elegance to your source code w
 
 ## Where can I get it?
 
-First, [install NuGet](http://docs.nuget.org/docs/start-here/installing-nuget). Then, install [Maestria Extensions](https://www.nuget.org/packages/Maestria.Extensions/) from the package manager console:
+First, [install NuGet](http://docs.nuget.org/docs/start-here/installing-nuget). Then, install [Maestria.Extensions](https://www.nuget.org/packages/Maestria.Extensions/) from the package manager console:
 
 ```bash
 PM> Install-Package Maestria.Extensions
