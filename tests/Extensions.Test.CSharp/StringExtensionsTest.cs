@@ -225,6 +225,8 @@ namespace Maestria.Extensions.Test.CSharp
         [TestCase("Value_Test_123", "value_test_123")]
         [TestCase("1ValueTest", "1_value_test")]
         [TestCase("123ValueTest", "123_value_test")]
+        [TestCase("", "")]
+        [TestCase(null, null)]
         public void ToSnakeCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToSnakeCase());
     }
 }
