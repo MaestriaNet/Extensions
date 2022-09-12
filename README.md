@@ -119,6 +119,7 @@ HashExtensions.ComputeHash(<HashAlgorithm>, "value")
 <string>.LimitLen(<length>)
 <string>.LimitLenReverse(<length>)
 <string>.OnlyLettersOrNumbersOrUnderscoresOrHyphensTest(<string>)
+<string>.ToSnakeCase()
 
 // Guid
 <Guid>.IsEmpty()

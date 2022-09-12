@@ -213,5 +213,18 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual("T  es t", "{T  es t}".OnlyLettersOrNumbersOrUnderscoresOrHyphensOrSpaces());
             Assert.AreEqual("Test  _12- 3", "{Test}  _12- 3!!".OnlyLettersOrNumbersOrUnderscoresOrHyphensOrSpaces());
         }
+
+        [TestCase("ValueTest", "value_test")]
+        [TestCase("Value_Test", "value_test")]
+        [TestCase("value_test", "value_test")]
+        [TestCase("ValueTest1", "value_test_1")]
+        [TestCase("ValueTest123", "value_test_123")]
+        [TestCase("Value1Test", "value_1_test")]
+        [TestCase("Value123Test", "value_123_test")]
+        [TestCase("Value_Test_1", "value_test_1")]
+        [TestCase("Value_Test_123", "value_test_123")]
+        [TestCase("1ValueTest", "1_value_test")]
+        [TestCase("123ValueTest", "123_value_test")]
+        public void ToSnakeCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToSnakeCase());
     }
 }
