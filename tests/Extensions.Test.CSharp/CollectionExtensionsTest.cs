@@ -142,6 +142,20 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual(-1, _dictionary.TryGetValue("invalid key", -1));
         }
 
+        [TestCase("key1", 10)]
+        [TestCase("key2", 20)]
+        [TestCase("key3", 30)]
+        public void TryGetValueFunc(string key, int expectedValue)
+        {
+            Assert.AreEqual(expectedValue, _dictionary.TryGetValue(key));
+        }
+
+        [Test]
+        public void TryGetValueFunc_InvalidKey()
+        {
+            Assert.AreEqual(-1, _dictionary.TryGetValue("invalid key", () => -1));
+        }
+
         [Test]
         public void WithIndex_Untyped()
         {
