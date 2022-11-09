@@ -10,7 +10,7 @@ dotnet_csproj:
   file_version: '3.4.0'
   informational_version: '3.4.0'
 before_build:
-  - ps: dotnet --version --configuration Release
+  - ps: dotnet --version
 build_script:
   - ps: dotnet build
 test_script:
