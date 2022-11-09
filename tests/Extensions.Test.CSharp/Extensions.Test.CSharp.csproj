@@ -3,7 +3,7 @@
     <PropertyGroup>
         <AssemblyName>Maestria.Extensions.Test.CSharp</AssemblyName>
         <IsPackable>false</IsPackable>
-        <LangVersion>9</LangVersion>
+        <LangVersion>10</LangVersion>
         <RootNamespace>Maestria.Extensions.Test.CSharp</RootNamespace>
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>

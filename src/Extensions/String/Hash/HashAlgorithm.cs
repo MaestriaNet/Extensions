@@ -1,11 +1,10 @@
-namespace Maestria.Extensions
+namespace Maestria.Extensions;
+
+public enum HashAlgorithm
 {
-    public enum HashAlgorithm
-    {
-        Md5,
-        Sha1,
-        Sha256,
-        Sha384,
-        Sha512
-    }
+    Md5,
+    Sha1,
+    Sha256,
+    Sha384,
+    Sha512
 }

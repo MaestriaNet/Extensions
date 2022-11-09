@@ -1,12 +1,11 @@
-namespace Maestria.Extensions
+namespace Maestria.Extensions;
+
+public enum ComparisonOperation
 {
-    public enum ComparisonOperation
-    {
-        Greater,
-        GreaterOrEqual,
-        Equal,
-        NotEqual,
-        Less,
-        LessOrEqual
-    }
+    Greater,
+    GreaterOrEqual,
+    Equal,
+    NotEqual,
+    Less,
+    LessOrEqual
 }
