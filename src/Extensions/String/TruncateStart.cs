@@ -21,5 +21,5 @@ public static partial class MaestriaExtensions
     /// <param name="length">Max size of return value</param>
     /// <returns></returns>
     [Obsolete("Use 'TruncateStart'")]
-    public static string? LimitLenReverse(this string? value, int length) => value?.SubstringSafe(new[] { value.Length - length, 0 }.Max(), length);
+    public static string LimitLenReverse(this string? value, int length) => value?.SubstringSafe(new[] { value.Length - length, 0 }.Max(), length) ?? string.Empty;
 }

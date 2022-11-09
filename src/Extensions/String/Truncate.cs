@@ -11,7 +11,7 @@ public static partial class MaestriaExtensions
     /// <param name="value">Full text</param>
     /// <param name="length">Max size of return value</param>
     /// <returns>If input is null value, returns is empty string</returns>
-    public static string Truncate(this string? value, int length) => value.SubstringSafe(0, length) ?? string.Empty;
+    public static string Truncate(this string? value, int length) => value.SubstringSafe(0, length);
 
     /// <summary>
     /// Limit <paramref name="value"/>with <paramref name="length"/> character number safe.
@@ -20,5 +20,5 @@ public static partial class MaestriaExtensions
     /// <param name="length">Max size of return value</param>
     /// <returns></returns>
     [Obsolete("Use 'Truncate'")]
-    public static string? LimitLen(this string? value, int length) => value.SubstringSafe(0, length);
+    public static string LimitLen(this string? value, int length) => value.SubstringSafe(0, length);
 }
