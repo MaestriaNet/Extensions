@@ -10,8 +10,8 @@ public static partial class MaestriaExtensions
     /// <param name="value">Current text value</param>
     /// <param name="default">Value to return if <paramref name="value"/> is null or empty</param>
     /// <returns></returns>
-    public static string IfNullOrEmpty(this string value, string @default) =>
-        value.IsNullOrEmpty() ? @default : value;
+    public static string IfNullOrEmpty(this string? value, string @default) =>
+        value.IsNullOrEmpty() ? @default : value!;
 
     /// <summary>
     /// Return <paramref name="default"/> Guid argument if <paramref name="value"/> is null or empty

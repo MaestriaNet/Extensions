@@ -13,14 +13,14 @@ public static partial class MaestriaExtensions
     /// <param name="occurrenceIndex"></param>
     /// <param name="autoTrim">Apply trim on result</param>
     /// <param name="options"></param>
-    /// <returns></returns>
-    public static string? SubstringAtOccurrenceIndex(this string? value, string separator, int occurrenceIndex, bool autoTrim = true, StringSplitOptions options = StringSplitOptions.None)
+    /// <returns>If input is null value, returns is empty string</returns>
+    public static string SubstringAtOccurrenceIndex(this string? value, string separator, int occurrenceIndex, bool autoTrim = true, StringSplitOptions options = StringSplitOptions.None)
     {
         if (value == null || occurrenceIndex < 0)
-            return null;
+            return string.Empty;
         var splited = value.Split(new[] { separator }, options);
         if (occurrenceIndex >= splited.Length)
-            return null;
+            return string.Empty;
         return autoTrim ? splited[occurrenceIndex].Trim() : splited[occurrenceIndex];
     }
 }

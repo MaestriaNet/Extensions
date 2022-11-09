@@ -9,11 +9,11 @@ public static partial class MaestriaExtensions
     /// <param name="value"></param>
     /// <param name="startIndex"></param>
     /// <param name="length"></param>
-    /// <returns></returns>
-    public static string? SubstringSafe(this string? value, int startIndex, int length)
+    /// <returns>If input is null value, returns is empty string</returns>
+    public static string SubstringSafe(this string? value, int startIndex, int length)
     {
         if (value.IsNullOrEmpty())
-            return value;
+            return value ?? string.Empty;
         if (startIndex > value!.Length)
             return string.Empty;
 

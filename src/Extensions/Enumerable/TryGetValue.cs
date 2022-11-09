@@ -14,7 +14,7 @@ public static partial class MaestriaExtensions
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TValue"></typeparam>
     /// <returns></returns>
-    public static TValue? TryGetValue<TKey, TValue>(this IDictionary<TKey, TValue>? values, TKey key, TValue? @default = default) =>
+    public static TValue TryGetValue<TKey, TValue>(this IDictionary<TKey, TValue>? values, TKey key, TValue @default = default!) =>
         values != null && values.TryGetValue(key, out var value)
             ? value
             : @default;
@@ -28,7 +28,7 @@ public static partial class MaestriaExtensions
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TValue"></typeparam>
     /// <returns></returns>
-    public static TValue? TryGetValue<TKey, TValue>(this IDictionary<TKey, TValue>? values, TKey key, Func<TValue?> @default) =>
+    public static TValue TryGetValue<TKey, TValue>(this IDictionary<TKey, TValue>? values, TKey key, Func<TValue> @default) =>
         values != null && values.TryGetValue(key, out var value)
             ? value
             : @default();

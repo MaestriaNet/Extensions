@@ -4,10 +4,15 @@ namespace Maestria.Extensions;
 
 public static partial class MaestriaExtensions
 {
-    public static string? ToSnakeCase(this string? value)
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>If input is null value, returns is empty string</returns>
+    public static string ToSnakeCase(this string? value)
     {
         if (value.IsNullOrWhiteSpace())
-            return value;
+            return value ?? string.Empty;
         return value.Select((x, i) =>
         {
             if (i > 0 && value![i - 1] != '_')

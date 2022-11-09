@@ -11,8 +11,8 @@ module ``String check and manipulate`` =
         "TestValue".TrimStart("Test") |> should equal "Value"
         "TestValue".TrimStart("Value") |> should equal "TestValue"
         "TestValue".TrimStart(Const.NullString) |> should equal "TestValue"
-        Const.NullString.TrimStart("Test") |> should be Null
-        Const.NullString.TrimStart(Const.NullString) |> should be Null
+        Const.NullString.TrimStart("Test") |> should equal ""
+        Const.NullString.TrimStart(Const.NullString) |> should equal ""
         "TestTestValue".TrimStart("Test") |> should equal "Value"
 
     [<Test>]
@@ -20,8 +20,8 @@ module ``String check and manipulate`` =
         "TestValue".TrimEnd("Value") |> should equal "Test"
         "TestValue".TrimEnd("Test") |> should equal "TestValue"
         "TestValue".TrimEnd(Const.NullString) |> should equal "TestValue"
-        Const.NullString.TrimEnd("Value") |> should be Null
-        Const.NullString.TrimEnd(Const.NullString) |> should be Null
+        Const.NullString.TrimEnd("Value") |> should equal ""
+        Const.NullString.TrimEnd(Const.NullString) |> should equal ""
         "TestValueValue".TrimEnd("Value") |> should equal "Test"
 
     [<Test>]
@@ -30,7 +30,7 @@ module ``String check and manipulate`` =
         "Value".AddToBeginningIfNotStartsWith("Test") |> should equal "TestValue"
         Const.NullString.AddToBeginningIfNotStartsWith("TestValue") |> should equal "TestValue"
         "TestValue".AddToBeginningIfNotStartsWith(Const.NullString) |> should equal "TestValue"
-        Const.NullString.AddToBeginningIfNotStartsWith(Const.NullString) |> should be Null
+        Const.NullString.AddToBeginningIfNotStartsWith(Const.NullString) |> should equal ""
 
     [<Test>]
     let AddToEndIfNotEndsWith() =
@@ -38,25 +38,25 @@ module ``String check and manipulate`` =
         "Test".AddToEndIfNotEndsWith("Value") |> should equal "TestValue"
         Const.NullString.AddToEndIfNotEndsWith("TestValue") |> should equal "TestValue"
         "TestValue".AddToEndIfNotEndsWith(Const.NullString) |> should equal "TestValue"
-        Const.NullString.AddToEndIfNotEndsWith(Const.NullString) |> should be Null
+        Const.NullString.AddToEndIfNotEndsWith(Const.NullString) |> should equal ""
 
     [<Test>]
     let AddToBeginningIfHasValue() =
         "".AddToBeginningIfHasValue("Mrs.") |> should equal ""
         "Jhon".AddToBeginningIfHasValue("Mrs. ") |> should equal "Mrs. Jhon"
-        Const.NullString.AddToBeginningIfHasValue("Mrs.") |> should be Null
+        Const.NullString.AddToBeginningIfHasValue("Mrs.") |> should equal ""
 
     [<Test>]
     let AddToEndIfHasValue() =
         "".AddToEndIfHasValue("Jhon") |> should equal ""
         "Mrs. ".AddToEndIfHasValue("Jhon") |> should equal "Mrs. Jhon"
-        Const.NullString.AddToEndIfHasValue("Jhon") |> should be Null
+        Const.NullString.AddToEndIfHasValue("Jhon") |> should equal ""
 
     [<Test>]
     let Format() =
         "My first name is {0} and my last name is {1}".Format("Jhon", "Smith") |> should equal "My first name is Jhon and my last name is Smith"
         "My first name is {0} and my last name is {1}".Format() |> should equal "My first name is {0} and my last name is {1}"
-        Const.NullString.Format("Jhon", "Smith") |> should be Null
+        Const.NullString.Format("Jhon", "Smith") |> should equal ""
 
 module ``Value check`` =
     [<Test>]
@@ -94,7 +94,7 @@ module ``Value check`` =
 module ``Text patterns`` =
     [<TestCase("0123456789", "0123456789")>]
     [<TestCase("a0a1a2a3a4a5a6a7a8a9", "0123456789")>]
-    [<TestCase(Const.NullString, Const.NullString)>]
+    [<TestCase(Const.NullString, "")>]
     [<TestCase("123.456", "123456")>]
     let ``Only numbers``(value: string, expected: string) =
         value.OnlyNumbers() |> should equal expected

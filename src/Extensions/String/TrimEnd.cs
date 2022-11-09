@@ -10,11 +10,11 @@ public static partial class MaestriaExtensions
     /// <param name="value">Text to manipulate</param>
     /// <param name="equality">To check and remove from text, if text end equals this value</param>
     /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
-    /// <returns></returns>
-    public static string? TrimEnd(this string? value, string equality, bool ignoreCase = true)
+    /// <returns>If input is null value, returns is empty string</returns>
+    public static string TrimEnd(this string? value, string equality, bool ignoreCase = true)
     {
         if (value == null || equality == null)
-            return value;
+            return value ?? string.Empty;
         while (value.EndsWith(equality, ignoreCase, CultureInfo.InvariantCulture))
             value = value.Remove(value.Length - equality.Length, equality.Length);
         return value;
@@ -26,6 +26,6 @@ public static partial class MaestriaExtensions
     /// <param name="value">Text to manipulate</param>
     /// <param name="equality">To check and remove from text, if text end equals this value</param>
     /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
-    /// <returns></returns>
-    public static string? TrimEnd(this string? value, char equality, bool ignoreCase = true) => value.TrimEnd(equality.ToString(), ignoreCase);
+    /// <returns>If input is null value, returns is empty string</returns>
+    public static string TrimEnd(this string? value, char equality, bool ignoreCase = true) => value.TrimEnd(equality.ToString(), ignoreCase);
 }

@@ -339,6 +339,7 @@ Extensions.GlobalSettings.Configure(cfg => cfg
     - `Numbers` extensions methods must bet located in `src/Extensions/Number`
 - The `I` prefix for interfaces must be omitted from the folder name.
 - `src\Settings\MaestriaExtensionSettings`: File to configure global defaults behaviors
+- String extensions methods should use nullable input and non-nullable output.
 
 ## Breaking Changes
 

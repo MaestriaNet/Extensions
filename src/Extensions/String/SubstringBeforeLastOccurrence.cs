@@ -9,16 +9,16 @@ public static partial class MaestriaExtensions
     /// <param name="value">Full text</param>
     /// <param name="separator">Find text pattern</param>
     /// <param name="autoTrim">Apply trim on result</param>
-    /// <returns></returns>
-    public static string? SubstringBeforeLastOccurrence(this string? value, string separator, bool autoTrim = true)
+    /// <returns>If input is null value, returns is empty string</returns>
+    public static string SubstringBeforeLastOccurrence(this string? value, string separator, bool autoTrim = true)
     {
         if (value == null)
-            return null;
+            return string.Empty;
         var index = value.LastIndexOf(separator);
         if (index > 0)
             return autoTrim
                 ? value.Substring(0, index).Trim()
                 : value.Substring(0, index);
-        return null;
+        return string.Empty;
     }
 }

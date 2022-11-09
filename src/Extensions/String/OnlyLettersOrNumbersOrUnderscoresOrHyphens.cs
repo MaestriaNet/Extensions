@@ -10,9 +10,9 @@ public static partial class MaestriaExtensions
     /// Return only numerics (0-9), chars (a-Z), underscores (_) or hyphens (-) at text.
     /// </summary>
     /// <param name="value">Value to clear</param>
-    /// <returns></returns>
-    public static string? OnlyLettersOrNumbersOrUnderscoresOrHyphens(this string? value) =>
+    /// <returns>If input is null value, returns is empty string</returns>
+    public static string OnlyLettersOrNumbersOrUnderscoresOrHyphens(this string? value) =>
         value != null
             ? OnlyLettersOrNumbersOrUnderscoresOrHyphensRegex.Replace(value, "")
-            : null;
+            : string.Empty;
 }

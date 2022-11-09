@@ -10,7 +10,7 @@ public class StringExtensionsTest
     private static object _value = new object();
 
     [Test]
-    public void IsNull()
+    public void IsNullCheck()
     {
         Assert.IsTrue(_nullValue.IsNull());
         Assert.IsTrue(_nullString.IsNull());
@@ -46,8 +46,8 @@ public class StringExtensionsTest
     {
         Assert.AreEqual("part 1", "part 1-part 2".SubstringBeforeFirstOccurrence("-"));
         Assert.AreEqual("part 1", "part 1-part 2-part 3".SubstringBeforeFirstOccurrence("-"));
-        Assert.IsNull("part 1".SubstringBeforeFirstOccurrence("x"));
-        Assert.IsNull(_nullString.SubstringBeforeFirstOccurrence("x"));
+        Assert.IsEmpty("part 1".SubstringBeforeFirstOccurrence("x"));
+        Assert.IsEmpty(_nullString.SubstringBeforeFirstOccurrence("x"));
     }
 
     [Test]
@@ -55,8 +55,8 @@ public class StringExtensionsTest
     {
         Assert.AreEqual("part 1 ", "part 1 - part 2".SubstringBeforeFirstOccurrence("-", false));
         Assert.AreEqual("part 1 ", "part 1 - part 2-part 3".SubstringBeforeFirstOccurrence("-", false));
-        Assert.IsNull("part 1".SubstringBeforeFirstOccurrence("x", false));
-        Assert.IsNull(_nullString.SubstringBeforeFirstOccurrence("x", false));
+        Assert.IsEmpty("part 1".SubstringBeforeFirstOccurrence("x", false));
+        Assert.IsEmpty(_nullString.SubstringBeforeFirstOccurrence("x", false));
     }
 
     [Test]
@@ -64,8 +64,8 @@ public class StringExtensionsTest
     {
         Assert.AreEqual("part 1", "part 1-part 2".SubstringBeforeLastOccurrence("-"));
         Assert.AreEqual("part 1-part 2", "part 1-part 2-part 3".SubstringBeforeLastOccurrence("-"));
-        Assert.IsNull("part 1".SubstringBeforeLastOccurrence("x"));
-        Assert.IsNull(_nullString.SubstringBeforeLastOccurrence("x"));
+        Assert.IsEmpty("part 1".SubstringBeforeLastOccurrence("x"));
+        Assert.IsEmpty(_nullString.SubstringBeforeLastOccurrence("x"));
     }
 
     [Test]
@@ -73,8 +73,8 @@ public class StringExtensionsTest
     {
         Assert.AreEqual("part 1 ", "part 1 - part 2".SubstringBeforeLastOccurrence("-", false));
         Assert.AreEqual("part 1 - part 2", "part 1 - part 2-part 3".SubstringBeforeLastOccurrence("-", false));
-        Assert.IsNull("part 1".SubstringBeforeLastOccurrence("x", false));
-        Assert.IsNull(_nullString.SubstringBeforeLastOccurrence("x", false));
+        Assert.IsEmpty("part 1".SubstringBeforeLastOccurrence("x", false));
+        Assert.IsEmpty(_nullString.SubstringBeforeLastOccurrence("x", false));
     }
 
     [Test]
@@ -83,8 +83,8 @@ public class StringExtensionsTest
         Assert.AreEqual("part 2", "part 1-part 2".SubstringAfterFirstOccurrence("-"));
         Assert.AreEqual("part 2", "part 1-part 2".SubstringAfterFirstOccurrence("-"));
         Assert.AreEqual("part 2-part 3", "part 1-part 2-part 3".SubstringAfterFirstOccurrence("-"));
-        Assert.IsNull("part 1".SubstringAfterFirstOccurrence("x"));
-        Assert.IsNull(_nullString.SubstringAfterFirstOccurrence("x"));
+        Assert.IsEmpty("part 1".SubstringAfterFirstOccurrence("x"));
+        Assert.IsEmpty(_nullString.SubstringAfterFirstOccurrence("x"));
     }
 
     [Test]
@@ -92,8 +92,8 @@ public class StringExtensionsTest
     {
         Assert.AreEqual(" part 2", "part 1 - part 2".SubstringAfterFirstOccurrence("-", false));
         Assert.AreEqual(" part 2 - part 3", "part 1 - part 2 - part 3".SubstringAfterFirstOccurrence("-", false));
-        Assert.IsNull("part 1".SubstringAfterFirstOccurrence("x", false));
-        Assert.IsNull(_nullString.SubstringAfterFirstOccurrence("x", false));
+        Assert.IsEmpty("part 1".SubstringAfterFirstOccurrence("x", false));
+        Assert.IsEmpty(_nullString.SubstringAfterFirstOccurrence("x", false));
     }
 
     [Test]
@@ -101,8 +101,8 @@ public class StringExtensionsTest
     {
         Assert.AreEqual("part 2", "part 1-part 2".SubstringAfterLastOccurrence("-"));
         Assert.AreEqual("part 3", "part 1-part 2-part 3".SubstringAfterLastOccurrence("-"));
-        Assert.IsNull("part 1".SubstringAfterLastOccurrence("x"));
-        Assert.IsNull(_nullString.SubstringAfterLastOccurrence("x"));
+        Assert.IsEmpty("part 1".SubstringAfterLastOccurrence("x"));
+        Assert.IsEmpty(_nullString.SubstringAfterLastOccurrence("x"));
     }
 
     [Test]
@@ -111,8 +111,8 @@ public class StringExtensionsTest
         Assert.AreEqual(" part 2", "part 1 - part 2".SubstringAfterLastOccurrence("-", false));
         Assert.AreEqual(" part 3", "part 1 - part 2 - part 3".SubstringAfterLastOccurrence("-", false));
         Assert.AreEqual(" part 3", "part 1 - part 2 - part 3".SubstringAfterLastOccurrence("-", false));
-        Assert.IsNull("part 1".SubstringAfterLastOccurrence("x", false));
-        Assert.IsNull(_nullString.SubstringAfterLastOccurrence("x", false));
+        Assert.IsEmpty("part 1".SubstringAfterLastOccurrence("x", false));
+        Assert.IsEmpty(_nullString.SubstringAfterLastOccurrence("x", false));
     }
 
     [Test]
@@ -123,8 +123,8 @@ public class StringExtensionsTest
         Assert.AreEqual("part 2", value.SubstringAtOccurrenceIndex("-", 1));
         Assert.AreEqual("part 3", value.SubstringAtOccurrenceIndex("-", 2));
         Assert.AreEqual("part 4", value.SubstringAtOccurrenceIndex("-", 3));
-        Assert.IsNull(value.SubstringAtOccurrenceIndex("-", 4, false));
-        Assert.IsNull(_nullString.SubstringAtOccurrenceIndex("-", 0, false));
+        Assert.IsEmpty(value.SubstringAtOccurrenceIndex("-", 4, false));
+        Assert.IsEmpty(_nullString.SubstringAtOccurrenceIndex("-", 0, false));
     }
 
     [Test]
@@ -135,8 +135,8 @@ public class StringExtensionsTest
         Assert.AreEqual(" part 2 ", value.SubstringAtOccurrenceIndex("-", 1, false));
         Assert.AreEqual(" part 3 ", value.SubstringAtOccurrenceIndex("-", 2, false));
         Assert.AreEqual(" part 4", value.SubstringAtOccurrenceIndex("-", 3, false));
-        Assert.IsNull(value.SubstringAtOccurrenceIndex("-", 4, false));
-        Assert.IsNull(_nullString.SubstringAtOccurrenceIndex("-", 0, false));
+        Assert.IsEmpty(value.SubstringAtOccurrenceIndex("-", 4, false));
+        Assert.IsEmpty(_nullString.SubstringAtOccurrenceIndex("-", 0, false));
     }
 
     [Test]
@@ -151,7 +151,7 @@ public class StringExtensionsTest
         Assert.AreEqual("ng", "test substring".SubstringSafe(12, 20));
         Assert.AreEqual(" su", "test substring".SubstringSafe(4, 3));
         Assert.AreEqual("test", "test substring".SubstringSafe(0, 4));
-        Assert.IsNull(_nullString.SubstringSafe(1, 2));
+        Assert.IsEmpty(_nullString.SubstringSafe(1, 2));
     }
 
     [Test]
@@ -187,7 +187,7 @@ public class StringExtensionsTest
     {
         Assert.AreEqual("tes", "test limit".Truncate(3));
         Assert.AreEqual("test limit", "test limit".Truncate(100));
-        Assert.IsNull(_nullString.Truncate(5));
+        Assert.IsEmpty(_nullString.Truncate(5));
     }
 
     [Test]
@@ -195,7 +195,7 @@ public class StringExtensionsTest
     {
         Assert.AreEqual("mit", "test limit".TruncateStart(3));
         Assert.AreEqual("test limit", "test limit".TruncateStart(100));
-        Assert.IsNull(_nullString.TruncateStart(5));
+        Assert.IsEmpty(_nullString.TruncateStart(5));
     }
 
     [Test]
@@ -226,6 +226,6 @@ public class StringExtensionsTest
     [TestCase("1ValueTest", "1_value_test")]
     [TestCase("123ValueTest", "123_value_test")]
     [TestCase("", "")]
-    [TestCase(null, null)]
+    [TestCase(null, "")]
     public void ToSnakeCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToSnakeCase());
 }

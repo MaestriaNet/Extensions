@@ -10,13 +10,13 @@ public static partial class MaestriaExtensions
     /// <param name="value">Text to manipulate</param>
     /// <param name="equality">To check and concat to end of text when text not end with this value</param>
     /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
-    /// <returns></returns>
-    public static string? AddToEndIfNotEndsWith(this string? value, string equality, bool ignoreCase = true)
+    /// <returns>If input is null value, returns is empty string</returns>
+    public static string AddToEndIfNotEndsWith(this string? value, string equality, bool ignoreCase = true)
     {
         if (value == null)
-            return equality;
+            return equality ?? string.Empty;
         if (equality == null)
-            return value;
+            return value ?? string.Empty;
         return value.EndsWith(equality, ignoreCase, CultureInfo.InvariantCulture)
             ? value
             : value + equality;
@@ -28,6 +28,6 @@ public static partial class MaestriaExtensions
     /// <param name="value">Text to manipulate</param>
     /// <param name="equality">To check and concat to end of text when text not end with this value</param>
     /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
-    /// <returns></returns>
-    public static string? AddToEndIfNotEndsWith(this string? value, char equality, bool ignoreCase = true) => value.AddToEndIfNotEndsWith(equality.ToString(), ignoreCase);
+    /// <returns>If input is null value, returns is empty string</returns>
+    public static string AddToEndIfNotEndsWith(this string? value, char equality, bool ignoreCase = true) => value.AddToEndIfNotEndsWith(equality.ToString(), ignoreCase);
 }

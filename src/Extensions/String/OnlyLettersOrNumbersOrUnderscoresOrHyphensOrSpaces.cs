@@ -11,8 +11,8 @@ public static partial class MaestriaExtensions
     /// </summary>
     /// <param name="value">Value to clear</param>
     /// <returns></returns>
-    public static string? OnlyLettersOrNumbersOrUnderscoresOrHyphensOrSpaces(this string? value) =>
+    public static string OnlyLettersOrNumbersOrUnderscoresOrHyphensOrSpaces(this string? value) =>
      value != null
         ? OnlyLettersOrNumbersOrUnderscoresOrHyphensOrSpacesRegex.Replace(value, "")
-        : null;
+        : string.Empty;
 }

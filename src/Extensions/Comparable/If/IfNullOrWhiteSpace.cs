@@ -8,6 +8,6 @@ public static partial class MaestriaExtensions
     /// <param name="value">Current text value</param>
     /// <param name="default">Value to return if <paramref name="value"/> is null or white space</param>
     /// <returns></returns>
-    public static string IfNullOrWhiteSpace(this string value, string @default) =>
-        value.IsNullOrWhiteSpace() ? @default : value;
+    public static string IfNullOrWhiteSpace(this string? value, string @default) =>
+        value.IsNullOrWhiteSpace() ? @default : value!;
 }

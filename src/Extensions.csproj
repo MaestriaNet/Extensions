@@ -14,7 +14,7 @@
         <PackageTags>ExtensionMethod ExtensionMethods HelperMethods Helper Extension Extensions Fluent Functional Elegance Productivity Maestria Mastery IEnumerable Enumerable ICollection Collection IList List Array Max Min Highest Smallest Largest String Text IfNull NullIf Null If In Between Truncate Round Hash MD5 SHA1 Enum Aggreagate Exception StackTrace C# .NET CSharp Method Methods</PackageTags>
         <RepositoryUrl>https://github.com/MaestriaNet/Extensions</RepositoryUrl>
         <Title>Maestria.Extensions</Title>
-        <Version>3.4.1</Version>
+        <Version>3.4.2-pre-5</Version>
     </PropertyGroup>
 
     <PropertyGroup>
