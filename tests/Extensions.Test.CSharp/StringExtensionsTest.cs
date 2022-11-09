@@ -183,19 +183,19 @@ public class StringExtensionsTest
     }
 
     [Test]
-    public void LimitTest()
+    public void TruncateTest()
     {
-        Assert.AreEqual("tes", "test limit".LimitLen(3));
-        Assert.AreEqual("test limit", "test limit".LimitLen(100));
-        Assert.IsNull(_nullString.LimitLen(5));
+        Assert.AreEqual("tes", "test limit".Truncate(3));
+        Assert.AreEqual("test limit", "test limit".Truncate(100));
+        Assert.IsNull(_nullString.Truncate(5));
     }
 
     [Test]
-    public void LimitReverseTest()
+    public void TruncateStartTest()
     {
-        Assert.AreEqual("mit", "test limit".LimitLenReverse(3));
-        Assert.AreEqual("test limit", "test limit".LimitLenReverse(100));
-        Assert.IsNull(_nullString.LimitLenReverse(5));
+        Assert.AreEqual("mit", "test limit".TruncateStart(3));
+        Assert.AreEqual("test limit", "test limit".TruncateStart(100));
+        Assert.IsNull(_nullString.TruncateStart(5));
     }
 
     [Test]
