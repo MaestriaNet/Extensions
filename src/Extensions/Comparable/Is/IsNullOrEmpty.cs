@@ -12,21 +12,21 @@ namespace Maestria.Extensions
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static bool IsNullOrEmpty(this string value) => string.IsNullOrEmpty(value);
+        public static bool IsNullOrEmpty([NotNullWhen(false)] this string? value) => string.IsNullOrEmpty(value);
 
         /// <summary>
         /// Check Guid is null or empty
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static bool IsNullOrEmpty(this Guid? value) => value == null || value == Guid.Empty;
+        public static bool IsNullOrEmpty([NotNullWhen(false)] this Guid? value) => value == null || value == Guid.Empty;
 
         /// <summary>
         /// Check if collection is null or has no items
         /// </summary>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static bool IsNullOrEmpty(this IEnumerable values) => values == null || !values.Cast<object>().Any();
+        public static bool IsNullOrEmpty([NotNullWhen(false)] this IEnumerable? values) => values == null || !values.Cast<object>().Any();
 
         /// <summary>
         /// Check if collection is null or has no items
@@ -34,6 +34,6 @@ namespace Maestria.Extensions
         /// <param name="values"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static bool IsNullOrEmpty<T>(this IEnumerable<T> values) => values == null || !values.Any();
+        public static bool IsNullOrEmpty<T>([NotNullWhen(false)] this IEnumerable<T>? values) => values == null || !values.Any();
     }
 }

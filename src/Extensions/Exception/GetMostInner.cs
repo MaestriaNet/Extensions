@@ -11,7 +11,7 @@ namespace Maestria.Extensions
         /// </summary>
         /// <param name="value">Source Exception</param>
         /// <returns></returns>
-        public static Exception GetMostInner(this Exception value) =>
-            value.InnerException == null ? value : value.InnerException.GetMostInner();
+        public static Exception? GetMostInner(this Exception? value) =>
+            value?.InnerException == null ? value : value.InnerException.GetMostInner();
     }
 }

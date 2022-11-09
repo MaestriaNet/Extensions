@@ -7,6 +7,6 @@ namespace Maestria.Extensions
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string EmptyIfNullOrWhiteSpace(this string value) => string.IsNullOrWhiteSpace(value) ? string.Empty : value;
+        public static string EmptyIfNullOrWhiteSpace(this string? value) => string.IsNullOrWhiteSpace(value) ? string.Empty : value!;
     }
 }

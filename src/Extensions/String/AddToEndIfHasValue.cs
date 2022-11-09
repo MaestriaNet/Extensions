@@ -11,7 +11,7 @@ namespace Maestria.Extensions
         /// <param name="value">Text to manipulate</param>
         /// <param name="suffix">To concat at the ending of text</param>
         /// <returns></returns>
-        public static string AddToEndIfHasValue(this string value, string suffix) =>
+        public static string? AddToEndIfHasValue(this string? value, string suffix) =>
             value.HasValue() ? value + suffix : value;
 
         /// <summary>
@@ -20,6 +20,6 @@ namespace Maestria.Extensions
         /// <param name="value">Text to manipulate</param>
         /// <param name="suffix">To concat at the ending of text</param>
         /// <returns></returns>
-        public static string AddToEndIfHasValue(this string value, char suffix) => value.AddToEndIfHasValue(suffix.ToString());
+        public static string? AddToEndIfHasValue(this string? value, char suffix) => value.AddToEndIfHasValue(suffix.ToString());
     }
 }

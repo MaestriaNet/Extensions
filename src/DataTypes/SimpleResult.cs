@@ -8,8 +8,8 @@ namespace Maestria.Extensions
     public interface ISimpleResult
     {
         bool Success { get; }
-        string Message { get; }
-        Exception Exception { get; }
+        string? Message { get; }
+        Exception? Exception { get; }
     }
 
     /// <summary>
@@ -17,7 +17,7 @@ namespace Maestria.Extensions
     /// </summary>
     public interface ISimpleResult<TValue> : ISimpleResult
     {
-        TValue Value { get; }
+        TValue? Value { get; }
         bool SuccessAndHasValue { get; }
         bool HasValue { get; }
     }
@@ -25,14 +25,14 @@ namespace Maestria.Extensions
     /// <inheritdoc/>>
     public struct SimpleResult : ISimpleResult
     {
-        public SimpleResult(bool success, string message = null, Exception exception = null)
+        public SimpleResult(bool success, string? message = null, Exception? exception = null)
         {
             Success = success;
             Message = message ?? exception?.Message;
             Exception = exception;
         }
 
-        public SimpleResult(Exception exception, string message = null)
+        public SimpleResult(Exception exception, string? message = null)
         {
             Success = false;
             Message = message ?? exception?.Message;
@@ -40,23 +40,23 @@ namespace Maestria.Extensions
         }
 
         public bool Success { get; set; }
-        public string Message { get; set; }
-        public Exception Exception { get; set; }
+        public string? Message { get; set; }
+        public Exception? Exception { get; set; }
 
-        public static SimpleResult Ok(string message = null) => new SimpleResult(true, message);
-        public static SimpleResult Fail(string message, Exception exception = null) => new SimpleResult(false, message, exception);
+        public static SimpleResult Ok(string? message = null) => new SimpleResult(true, message);
+        public static SimpleResult Fail(string? message, Exception? exception = null) => new SimpleResult(false, message, exception);
 
         public static implicit operator SimpleResult(bool success) => new SimpleResult(success);
         public static implicit operator SimpleResult(string failMessage) => Fail(failMessage);
-        public static implicit operator SimpleResult(Exception exception) => Fail(exception?.Message, exception);
+        public static implicit operator SimpleResult(Exception? exception) => Fail(exception?.Message, exception);
         public static implicit operator bool(SimpleResult value) => value.Success;
-        public static implicit operator Exception(SimpleResult value) => value.Exception;
+        public static implicit operator Exception?(SimpleResult value) => value.Exception;
     }
 
     /// <inheritdoc/>>
     public struct SimpleResult<TValue> : ISimpleResult<TValue>
     {
-        public SimpleResult(TValue value, string message = null)
+        public SimpleResult(TValue? value, string? message = null)
         {
             Success = true;
             Message = message;
@@ -64,7 +64,7 @@ namespace Maestria.Extensions
             Value = value;
         }
 
-        public SimpleResult(bool success, TValue value, string message = null, Exception exception = null)
+        public SimpleResult(bool success, TValue? value, string? message = null, Exception? exception = null)
         {
             Success = success;
             Message = message ?? exception?.Message;
@@ -72,7 +72,7 @@ namespace Maestria.Extensions
             Value = value;
         }
 
-        public SimpleResult(Exception exception, string message = null)
+        public SimpleResult(Exception? exception, string? message = null)
         {
             Success = false;
             Message = message ?? exception?.Message;
@@ -81,9 +81,9 @@ namespace Maestria.Extensions
         }
 
         public bool Success { get; set; }
-        public string Message { get; set; }
-        public Exception Exception { get; set; }
-        public TValue Value { get; set; }
+        public string? Message { get; set; }
+        public Exception? Exception { get; set; }
+        public TValue? Value { get; set; }
         public bool HasValue => Value != null;
 
         /// <summary>
@@ -96,14 +96,14 @@ namespace Maestria.Extensions
         /// </summary>
         public bool SuccessAndHasValue => Success && HasValue;
 
-        public static SimpleResult<TValue> Ok(TValue value, string message = null) => new SimpleResult<TValue>(true, value, message);
-        public static SimpleResult<TValue> Ok(string message = null) => new SimpleResult<TValue>(true, default, message);
-        public static SimpleResult<TValue> Fail(string message, Exception exception = null) => new SimpleResult<TValue>(false, default, message, exception);
+        public static SimpleResult<TValue> Ok(TValue? value, string? message = null) => new SimpleResult<TValue>(true, value, message);
+        public static SimpleResult<TValue> Ok(string? message = null) => new SimpleResult<TValue>(true, default, message);
+        public static SimpleResult<TValue> Fail(string? message, Exception? exception = null) => new SimpleResult<TValue>(false, default, message, exception);
 
         public static implicit operator SimpleResult<TValue>(bool success) => new SimpleResult<TValue>(success, default);
-        public static implicit operator SimpleResult<TValue>(TValue value) => Ok(value);
-        public static implicit operator SimpleResult<TValue>(string failMessage) => Fail(failMessage);
-        public static implicit operator SimpleResult<TValue>(Exception exception) => Fail(exception?.Message, exception);
+        public static implicit operator SimpleResult<TValue>(TValue? value) => Ok(value);
+        public static implicit operator SimpleResult<TValue>(string? failMessage) => Fail(failMessage);
+        public static implicit operator SimpleResult<TValue>(Exception? exception) => Fail(exception?.Message, exception);
         public static implicit operator SimpleResult<TValue>(SimpleResult result) => new SimpleResult<TValue>
         {
             Success = result.Success,
@@ -118,7 +118,7 @@ namespace Maestria.Extensions
             Exception = result.Exception
         };
         public static implicit operator bool(SimpleResult<TValue> value) => value.Success;
-        public static implicit operator TValue(SimpleResult<TValue> value) => value.Value;
-        public static implicit operator Exception(SimpleResult<TValue> value) => value.Exception;
+        public static implicit operator TValue?(SimpleResult<TValue> value) => value.Value;
+        public static implicit operator Exception?(SimpleResult<TValue> value) => value.Exception;
     }
 }

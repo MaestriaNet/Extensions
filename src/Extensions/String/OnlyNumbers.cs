@@ -15,9 +15,10 @@ namespace Maestria.Extensions
         /// <param name="allowNegativeSign">return numbers with negative sign</param>
         /// <param name="culture">Culture UI</param>
         /// <returns></returns>
-        public static string OnlyNumbers(this string value, bool allowFloatingPoint = false, bool allowNegativeSign = false, CultureInfo culture = null)
+        public static string? OnlyNumbers(this string? value, bool allowFloatingPoint = false, bool allowNegativeSign = false, CultureInfo? culture = null)
         {
-            if (string.IsNullOrEmpty(value)) return value;
+            if (string.IsNullOrEmpty(value))
+                return value;
             if (!allowFloatingPoint && !allowNegativeSign) return NonDigitsRegex.Replace(value, "");
 
             var pattern = @"[^\d";

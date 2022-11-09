@@ -13,7 +13,7 @@ namespace Maestria.Extensions
         /// <returns>A copy of <paramref name="value">format</paramref> in which the format items have been replaced by the string representation of the corresponding objects in <paramref name="args">args</paramref>.</returns>
         /// <exception cref="T:System.FormatException"><paramref name="value">format</paramref> is invalid.   -or-   The index of a format item is less than zero, or greater than or equal to the length of the <paramref name="args">args</paramref> array.</exception>
         [StringFormatMethod("value")]
-        public static string Format(this string value, params object[] args)
+        public static string? Format(this string? value, params object[] args)
         {
             if (value.IsNullOrWhiteSpace() || args == null || args.Length == 0)
                 return value;

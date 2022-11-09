@@ -11,11 +11,11 @@ namespace Maestria.Extensions
         /// <param name="startIndex"></param>
         /// <param name="length"></param>
         /// <returns></returns>
-        public static string SubstringSafe(this string value, int startIndex, int length)
+        public static string? SubstringSafe(this string? value, int startIndex, int length)
         {
             if (value.IsNullOrEmpty())
                 return value;
-            if (startIndex > value.Length)
+            if (startIndex > value!.Length)
                 return string.Empty;
 
             if (startIndex < 0)

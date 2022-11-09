@@ -11,7 +11,7 @@ namespace Maestria.Extensions
         /// </summary>
         /// <param name="value">Value to clear</param>
         /// <returns></returns>
-        public static string OnlyLettersOrNumbersOrUnderscoresOrHyphens(this string value) =>
+        public static string? OnlyLettersOrNumbersOrUnderscoresOrHyphens(this string? value) =>
             value != null
                 ? OnlyLettersOrNumbersOrUnderscoresOrHyphensRegex.Replace(value, "")
                 : null;

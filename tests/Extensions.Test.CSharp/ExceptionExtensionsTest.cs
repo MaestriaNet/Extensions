@@ -2,6 +2,8 @@ using System;
 using System.Diagnostics;
 using NUnit.Framework;
 
+#pragma warning disable CS0618
+
 namespace Maestria.Extensions.Test.CSharp
 {
     public class ExceptionExtensionsTest
@@ -142,3 +144,5 @@ StackTrace:    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogS
         }
     }
 }
+
+#pragma warning restore CS0618

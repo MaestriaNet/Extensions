@@ -340,6 +340,10 @@ Extensions.GlobalSettings.Configure(cfg => cfg
 - The `I` prefix for interfaces must be omitted from the folder name.
 - `src\Settings\MaestriaExtensionSettings`: File to configure global defaults behaviors
 
+## Breaking Changes
+
+[Breaking-Changes.md](Breaking-Changes.md)
+
 ---
 
 [![buy-me-a-coffee](https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/buy-me-a-coffee.png)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)

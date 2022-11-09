@@ -161,7 +161,7 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.IsEmpty("test".EmptyIf("TEST", true));
             Assert.AreEqual("test".EmptyIf("TEST"), "test");
             Assert.AreEqual("test".EmptyIf("a"), "test");
-            Assert.IsNull(_nullString.EmptyIf("a"));
+            Assert.IsEmpty(_nullString.EmptyIf("a"));
         }
 
         [Test]

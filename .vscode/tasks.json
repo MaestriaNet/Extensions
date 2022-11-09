@@ -20,6 +20,20 @@
             }
         },
         {
+            "label": "rebuild",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "--no-incremental",
+                "${workspaceFolder}/Extensions.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build"
+        },
+        {
             "label": "test",
             "command": "dotnet",
             "type": "shell",
@@ -28,10 +42,7 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "group": {
-                "kind": "test",
-                "isDefault": true
-            },
+            "group": "build",
             "presentation": {
                 "reveal": "always"
             },

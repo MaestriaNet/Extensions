@@ -5,7 +5,7 @@ namespace Maestria.Extensions
     public static partial class MaestriaExtensions
     {
         /// <summary>
-        /// Check Guid is empty
+        /// Check Guid is empty (default is default value)
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>

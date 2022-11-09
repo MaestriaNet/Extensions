@@ -11,9 +11,7 @@ namespace Maestria.Extensions
         /// <param name="valueToCompare"></param>
         /// <param name="autoTrim"></param>
         /// <returns></returns>
-        public static bool EqualsIgnoreCase(this string value,
-                                            string valueToCompare,
-                                            bool autoTrim = true)
+        public static bool EqualsIgnoreCase(this string? value, string? valueToCompare, bool autoTrim = true)
         {
             value = value ?? string.Empty;
             valueToCompare = valueToCompare ?? string.Empty;

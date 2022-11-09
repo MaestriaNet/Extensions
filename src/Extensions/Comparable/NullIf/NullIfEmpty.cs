@@ -9,7 +9,7 @@ namespace Maestria.Extensions
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string NullIfEmpty(this string value) => value.IsNullOrEmpty() ? null : value;
+        public static string? NullIfEmpty(this string? value) => value.IsNullOrEmpty() ? null : value;
 
         /// <summary>
         /// Return null if <paramref name="value"/> is empty string

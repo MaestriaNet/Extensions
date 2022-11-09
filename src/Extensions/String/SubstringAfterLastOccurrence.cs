@@ -10,7 +10,7 @@ namespace Maestria.Extensions
         /// <param name="separator">Find text pattern</param>
         /// <param name="autoTrim">Apply trim on result</param>
         /// <returns></returns>
-        public static string SubstringAfterLastOccurrence(this string value, string separator, bool autoTrim = true)
+        public static string? SubstringAfterLastOccurrence(this string? value, string separator, bool autoTrim = true)
         {
             if (value == null)
                 return null;

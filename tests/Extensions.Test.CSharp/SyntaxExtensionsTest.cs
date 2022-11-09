@@ -17,7 +17,7 @@ namespace Maestria.Extensions.Test.CSharp
         }
 
         [Test]
-        public void LimitMaxAtTest() 
+        public void LimitMaxAtTest()
         {
             Assert.AreEqual(10, 10.LimitMaxAt(15));
             Assert.AreEqual(15, 15.LimitMaxAt(15));
@@ -25,7 +25,7 @@ namespace Maestria.Extensions.Test.CSharp
         }
 
         [Test]
-        public void LimitMinAtTest() 
+        public void LimitMinAtTest()
         {
             Assert.AreEqual(15, 10.LimitMinAt(15));
             Assert.AreEqual(15, 15.LimitMinAt(15));

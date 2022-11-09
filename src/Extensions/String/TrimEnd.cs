@@ -11,7 +11,7 @@ namespace Maestria.Extensions
         /// <param name="equality">To check and remove from text, if text end equals this value</param>
         /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
         /// <returns></returns>
-        public static string TrimEnd(this string value, string equality, bool ignoreCase = true)
+        public static string? TrimEnd(this string? value, string equality, bool ignoreCase = true)
         {
             if (value == null || equality == null)
                 return value;
@@ -27,6 +27,6 @@ namespace Maestria.Extensions
         /// <param name="equality">To check and remove from text, if text end equals this value</param>
         /// <param name="ignoreCase">Ignore char case at the invariant culture</param>
         /// <returns></returns>
-        public static string TrimEnd(this string value, char equality, bool ignoreCase = true) => value.TrimEnd(equality.ToString(), ignoreCase);
+        public static string? TrimEnd(this string? value, char equality, bool ignoreCase = true) => value.TrimEnd(equality.ToString(), ignoreCase);
     }
 }

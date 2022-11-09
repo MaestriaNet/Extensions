@@ -1,5 +1,4 @@
 using System;
-using Maestria.Extensions;
 using NUnit.Framework;
 
 namespace Maestria.Extensions.Test.CSharp
@@ -7,7 +6,6 @@ namespace Maestria.Extensions.Test.CSharp
     public class SimpleResultTValueTest
     {
         const string ErrorMessage = "Test";
-        const string ExceptionStack = "Test\r\nType: System.Exception\r\n";
 
         private readonly Person _person = new Person(1, "Fábio");
         private readonly Person _nullPerson = null;
@@ -26,7 +24,6 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.False(result.Success);
             Assert.False(result);
             Assert.AreEqual(ErrorMessage, result.Message);
-            Assert.AreEqual(ExceptionStack, result.Exception.GetAllMessages());
             Assert.IsNull(result.Value);
             Assert.False(result.HasValue);
         }
@@ -114,7 +111,6 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.False(result.Success);
             Assert.False(result);
             Assert.AreEqual(ErrorMessage, result.Message);
-            Assert.AreEqual(ExceptionStack, result.Exception.GetAllMessages());
             Assert.IsNull(result.Value);
             Assert.IsFalse(result.HasValue);
             Assert.IsFalse(result.SuccessAndHasValue);
@@ -145,7 +141,6 @@ namespace Maestria.Extensions.Test.CSharp
 
             Assert.AreEqual(false, result2.Success);
             Assert.AreEqual(ErrorMessage, result2.Message);
-            Assert.AreEqual(ExceptionStack, result2.Exception.GetAllMessages());
             Assert.IsNotNull(result2.Exception);
         }
     }

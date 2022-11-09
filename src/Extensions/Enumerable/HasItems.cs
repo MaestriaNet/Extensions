@@ -11,7 +11,7 @@ namespace Maestria.Extensions
         /// </summary>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static bool HasItems(this IEnumerable values) => values != null && values.Cast<object>().Any();
+        public static bool HasItems([NotNullWhen(true)] this IEnumerable? values) => values != null && values.Cast<object>().Any();
 
         /// <summary>
         /// Check if collection is not null and contains items
@@ -19,6 +19,6 @@ namespace Maestria.Extensions
         /// <param name="values"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static bool HasItems<T>(this IEnumerable<T> values) => values != null && values.Any();
+        public static bool HasItems<T>([NotNullWhen(true)] this IEnumerable<T>? values) => values != null && values.Any();
     }
 }

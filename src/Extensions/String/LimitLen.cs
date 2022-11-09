@@ -9,6 +9,6 @@ namespace Maestria.Extensions
         /// <param name="value">Full text</param>
         /// <param name="length">Max size of return value</param>
         /// <returns></returns>
-        public static string LimitLen(this string value, int length) => value.SubstringSafe(0, length);
+        public static string? LimitLen(this string? value, int length) => value.SubstringSafe(0, length);
     }
 }

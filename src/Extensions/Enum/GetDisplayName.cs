@@ -12,7 +12,7 @@ namespace Maestria.Extensions
         /// </summary>
         /// <param name="value">Tipo enum para buscar atributo</param>
         /// <returns>Propriedade Name do atributo</returns>
-        public static string GetDisplayName(this Enum value)
+        public static string? GetDisplayName(this Enum value)
         {
             if (value == null) return string.Empty;
             var field = value.GetType().GetField(value.ToString());

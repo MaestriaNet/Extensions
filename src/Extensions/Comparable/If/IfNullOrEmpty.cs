@@ -20,6 +20,6 @@ namespace Maestria.Extensions
         /// <param name="default">Value to return if <paramref name="value"/> is null or empty</param>
         /// <returns></returns>
         public static Guid IfNullOrEmpty(this Guid? value, Guid @default) =>
-            value.IsNullOrEmpty() ? @default : value.Value;
+            value.IsNullOrEmpty() ? @default : value!.Value;
     }
 }

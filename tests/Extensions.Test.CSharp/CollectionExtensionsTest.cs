@@ -18,6 +18,14 @@ namespace Maestria.Extensions.Test.CSharp
             {"key3", 30},
         };
 
+        private readonly IDictionary<string, int?> _dictionaryWithNullable = new Dictionary<string, int?>
+        {
+            {"key1", 10},
+            {"key2", 20},
+            {"key3", 30},
+            {"key4", null},
+        };
+
         private void AssetArrayIndex(object item, int index)
         {
             switch (item)
@@ -135,6 +143,16 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.AreEqual(expectedValue, _dictionary.TryGetValue(key));
         }
 
+        [TestCase("key1", 10)]
+        [TestCase("key2", 20)]
+        [TestCase("key3", 30)]
+        [TestCase("key3", 30)]
+        [TestCase("key4", null)]
+        public void TryGetValueInDictionaryWithNullable(string key, int? expectedValue)
+        {
+            Assert.AreEqual(expectedValue, _dictionaryWithNullable.TryGetValue(key));
+        }
+
         [Test]
         public void TryGetValue_InvalidKey()
         {
@@ -148,6 +166,15 @@ namespace Maestria.Extensions.Test.CSharp
         public void TryGetValueFunc(string key, int expectedValue)
         {
             Assert.AreEqual(expectedValue, _dictionary.TryGetValue(key));
+        }
+
+        [TestCase("key1", 10)]
+        [TestCase("key2", 20)]
+        [TestCase("key3", 30)]
+        [TestCase("key4", null)]
+        public void TryGetValueInDictionaryWithNullableFunc(string key, int? expectedValue)
+        {
+            Assert.AreEqual(expectedValue, _dictionaryWithNullable.TryGetValue(key));
         }
 
         [Test]

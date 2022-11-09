@@ -13,7 +13,8 @@ namespace Maestria.Extensions
         /// <param name="includeClassType">Output with exception class full name.</param>
         /// <param name="includeStackTrace"></param>
         /// <returns></returns>
-        public static string GetAllMessages(this Exception value, string additionalInfo = null,
+        [Obsolete("Create similiar method in your project")]
+        public static string GetAllMessages(this Exception value, string? additionalInfo = null,
             bool includeClassType = true, bool includeStackTrace = true)
         {
             if (value == null)

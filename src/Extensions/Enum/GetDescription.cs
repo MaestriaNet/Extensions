@@ -12,9 +12,11 @@ namespace Maestria.Extensions
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetDescription(this Enum value)
+        public static string? GetDescription(this Enum value)
         {
-            if (value == null) return string.Empty;
+            if (value == null)
+                return string.Empty;
+
             var field = value.GetType().GetField(value.ToString());
             if (field == null) return value.ToString();
 

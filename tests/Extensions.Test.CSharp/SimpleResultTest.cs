@@ -1,5 +1,4 @@
 using System;
-using Maestria.Extensions;
 using NUnit.Framework;
 
 namespace Maestria.Extensions.Test.CSharp
@@ -7,7 +6,6 @@ namespace Maestria.Extensions.Test.CSharp
     public class SimpleResultTest
     {
         const string ErrorMessage = "Test";
-        const string ExceptionStack = "Test\r\nType: System.Exception\r\n";
 
         [Test]
         public void FailConstructorTest()
@@ -21,7 +19,6 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.False(result.Success);
             Assert.False(result);
             Assert.AreEqual(ErrorMessage, result.Message);
-            Assert.AreEqual(ExceptionStack, result.Exception.GetAllMessages());
         }
 
         [Test]
@@ -59,7 +56,6 @@ namespace Maestria.Extensions.Test.CSharp
             Assert.False(result.Success);
             Assert.False(result);
             Assert.AreEqual(ErrorMessage, result.Message);
-            Assert.AreEqual(ExceptionStack, result.Exception.GetAllMessages());
         }
 
         [Test]

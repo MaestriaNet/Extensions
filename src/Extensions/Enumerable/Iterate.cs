@@ -21,7 +21,7 @@ namespace Maestria.Extensions
         /// <param name="values"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable Iterate(this IEnumerable values, Action<object> action)
+        public static IEnumerable? Iterate(this IEnumerable? values, Action<object> action)
         {
             if (values != null)
                 foreach (var item in values)
@@ -35,7 +35,7 @@ namespace Maestria.Extensions
         /// <param name="values"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable Iterate(this IEnumerable values, IterateCollectionDelegate<object> action)
+        public static IEnumerable? Iterate(this IEnumerable? values, IterateCollectionDelegate<object> action)
         {
             if (values != null)
             {
@@ -53,7 +53,7 @@ namespace Maestria.Extensions
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable> Iterate(this IEnumerable values, Func<object, Task> action)
+        public static async Task<IEnumerable?> Iterate(this IEnumerable? values, Func<object, Task> action)
         {
             if (values != null)
                 foreach (var item in values)
@@ -68,7 +68,7 @@ namespace Maestria.Extensions
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable> Iterate(this IEnumerable values, IterateCollectionAsyncDelegate<object> action)
+        public static async Task<IEnumerable?> Iterate(this IEnumerable? values, IterateCollectionAsyncDelegate<object> action)
         {
             if (values != null)
             {
@@ -89,7 +89,7 @@ namespace Maestria.Extensions
         /// <param name="values"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable<T> Iterate<T>(this IEnumerable<T> values, Action<T> action)
+        public static IEnumerable<T>? Iterate<T>(this IEnumerable<T>? values, Action<T> action)
         {
             if (values != null)
                 foreach (var item in values)
@@ -103,7 +103,7 @@ namespace Maestria.Extensions
         /// <param name="values"></param>
         /// <param name="action"></param>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable<T> Iterate<T>(this IEnumerable<T> values, IterateCollectionDelegate<T> action)
+        public static IEnumerable<T>? Iterate<T>(this IEnumerable<T>? values, IterateCollectionDelegate<T> action)
         {
             if (values != null)
             {
@@ -121,7 +121,7 @@ namespace Maestria.Extensions
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable<T>> Iterate<T>(this IEnumerable<T> values, Func<T, Task> action)
+        public static async Task<IEnumerable<T>?> Iterate<T>(this IEnumerable<T>? values, Func<T, Task> action)
         {
             if (values != null)
                 foreach (var item in values)
@@ -136,7 +136,7 @@ namespace Maestria.Extensions
         /// <param name="action"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task<IEnumerable<T>> Iterate<T>(this IEnumerable<T> values, IterateCollectionAsyncDelegate<T> action)
+        public static async Task<IEnumerable<T>?> Iterate<T>(this IEnumerable<T>? values, IterateCollectionAsyncDelegate<T> action)
         {
             if (values != null)
             {

@@ -8,7 +8,7 @@ namespace Maestria.Extensions
         /// <param name="value">Text to manipulate</param>
         /// <param name="prefix">To concat at the beginning of text</param>
         /// <returns></returns>
-        public static string AddToBeginningIfHasValue(this string value, string prefix) =>
+        public static string? AddToBeginningIfHasValue(this string? value, string prefix) =>
             value.HasValue() ? prefix + value : value;
 
         /// <summary>
@@ -17,6 +17,6 @@ namespace Maestria.Extensions
         /// <param name="value">Text to manipulate</param>
         /// <param name="prefix">To concat at the beginning of text</param>
         /// <returns></returns>
-        public static string AddToBeginningIfHasValue(this string value, char prefix) => value.AddToBeginningIfHasValue(prefix.ToString());
+        public static string? AddToBeginningIfHasValue(this string? value, char prefix) => value.AddToBeginningIfHasValue(prefix.ToString());
     }
 }

@@ -7,6 +7,6 @@ namespace Maestria.Extensions
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static bool IsNull(this object value) => value == null;
+        public static bool IsNull([NotNullWhen(false)] this object? value) => value == null;
     }
 }
