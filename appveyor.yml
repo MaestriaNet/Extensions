@@ -1,14 +1,14 @@
-version: '3.4.2.{build}'
+version: '3.5.0.{build}'
 image: Visual Studio 2022
 configuration: Release
 dotnet_csproj:
   patch: true
   file: 'src\Extensions.csproj'
-  version: '3.4.2'
-  package_version: '3.4.2'
-  assembly_version: '3.4.2'
-  file_version: '3.4.2'
-  informational_version: '3.4.2'
+  version: '3.5.0'
+  package_version: '3.5.0'
+  assembly_version: '3.5.0'
+  file_version: '3.5.0'
+  informational_version: '3.5.0'
 before_build:
   - ps: dotnet --version
 build_script:
