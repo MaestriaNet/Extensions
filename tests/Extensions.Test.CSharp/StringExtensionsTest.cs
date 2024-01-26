@@ -214,18 +214,65 @@ public class StringExtensionsTest
         Assert.AreEqual("Test  _12- 3", "{Test}  _12- 3!!".OnlyLettersOrNumbersOrUnderscoresOrHyphensOrSpaces());
     }
 
+    // ----- To Snake Case -----
+
+    [TestCase("", "")]
+    [TestCase(null, "")]
+    public void ToSnakeCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToSnakeCase());
+
     [TestCase("ValueTest", "value_test")]
-    [TestCase("Value_Test", "value_test")]
-    [TestCase("value_test", "value_test")]
     [TestCase("ValueTest1", "value_test_1")]
     [TestCase("ValueTest123", "value_test_123")]
     [TestCase("Value1Test", "value_1_test")]
     [TestCase("Value123Test", "value_123_test")]
-    [TestCase("Value_Test_1", "value_test_1")]
-    [TestCase("Value_Test_123", "value_test_123")]
     [TestCase("1ValueTest", "1_value_test")]
     [TestCase("123ValueTest", "123_value_test")]
+    public void PascalCaseToSnakeCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToSnakeCase());
+
+    [TestCase("value_test", "value_test")]
+    [TestCase("value_test_1", "value_test_1")]
+    [TestCase("value_test_123", "value_test_123")]
+    [TestCase("Value_Test", "value_test")]
+    [TestCase("Value_Test_1", "value_test_1")]
+    [TestCase("Value_Test_123", "value_test_123")]
+    public void SnakeCaseToSnakeCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToSnakeCase());
+
+    [TestCase("value-test", "value_test")]
+    [TestCase("value-test-1", "value_test_1")]
+    [TestCase("value-test-123", "value_test_123")]
+    [TestCase("Value-Test", "value_test")]
+    [TestCase("Value-Test-1", "value_test_1")]
+    [TestCase("Value-Test-123", "value_test_123")]
+    public void KebabCaseToSnakeCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToSnakeCase());
+
+    // ----- To Kebab Case -----
+
     [TestCase("", "")]
     [TestCase(null, "")]
-    public void ToSnakeCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToSnakeCase());
+    public void ToKebabCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToKebabCase());
+
+    [TestCase("ValueTest", "value-test")]
+    [TestCase("ValueTest1", "value-test-1")]
+    [TestCase("ValueTest123", "value-test-123")]
+    [TestCase("Value1Test", "value-1-test")]
+    [TestCase("Value123Test", "value-123-test")]
+    [TestCase("1ValueTest", "1-value-test")]
+    [TestCase("123ValueTest", "123-value-test")]
+    public void PascalCaseToKebabCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToKebabCase());
+
+    [TestCase("value_test", "value-test")]
+    [TestCase("value_test_1", "value-test-1")]
+    [TestCase("value_test_123", "value-test-123")]
+    [TestCase("Value_Test", "value-test")]
+    [TestCase("Value_Test_1", "value-test-1")]
+    [TestCase("Value_Test_123", "value-test-123")]
+    public void SnakeCaseToKebabCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToKebabCase());
+
+    [TestCase("value-test", "value-test")]
+    [TestCase("value-test-1", "value-test-1")]
+    [TestCase("value-test-123", "value-test-123")]
+    [TestCase("Value-Test", "value-test")]
+    [TestCase("Value-Test-1", "value-test-1")]
+    [TestCase("Value-Test-123", "value-test-123")]
+    public void KebabCaseToKebabCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToKebabCase());
 }
