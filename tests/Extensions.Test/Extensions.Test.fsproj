@@ -4,6 +4,7 @@
         <AssemblyName>Maestria.Extensions.Test</AssemblyName>
         <RootNamespace>Maestria.Extensions.Test</RootNamespace>
         <TargetFramework>net5.0</TargetFramework>
+        <RollForward>LatestMajor</RollForward>
     </PropertyGroup>
 
     <ItemGroup>
