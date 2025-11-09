@@ -20,7 +20,7 @@
     <PropertyGroup>
         <AssemblyName>Maestria.Extensions</AssemblyName>
         <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-        <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+<!--        <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>-->
         <LangVersion>10</LangVersion>
         <NoWarn>CS1591</NoWarn>
         <RootNamespace>Maestria.Extensions</RootNamespace>
