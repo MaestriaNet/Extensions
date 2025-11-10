@@ -43,8 +43,8 @@ jobs:
           VERSION_PREFIX="${GITHUB_REF_NAME##*/}"          
           VERSION_SUFFIX="preview-${GITHUB_RUN_NUMBER}"
           
-          echo "VERSION_PREFIX: VERSION_PREFIX"
-          echo "VERSION_SUFFIX: VERSION_SUFFIX"
+          echo "VERSION_PREFIX: $VERSION_PREFIX"
+          echo "VERSION_SUFFIX: $VERSION_SUFFIX"
           
           echo "VERSION_PREFIX=$VERSION_PREFIX" >> $GITHUB_ENV
           echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
@@ -59,7 +59,8 @@ jobs:
           path: src/bin/Release/*.nupkg
 
       - name: Publish release preview to MyGet
-        run: dotnet nuget push src/bin/Release/*.nupkg --source https://www.myget.org/F/maestria/api/v3/index.json --api-key ${{ secrets.MYGET_API_KEY }}
+        run: dotnet nuget push src/bin/Release/*.nupkg --source https://www.myget.org/F/maestrianet/api/v3/index.json --api-key "${{ secrets.MYGET_API_KEY }}"
+                                                                
 #
 #      - name: Publish to NuGet
 #        if: startsWith(github.ref, 'refs/tags/')
