@@ -1,0 +1,5 @@
+<Project>
+    <PropertyGroup Label="Version - Change only the release branch!">
+        <VersionPrefix>3.5.1</VersionPrefix>
+    </PropertyGroup>
+</Project>

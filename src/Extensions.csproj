@@ -1,9 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup Label="Version - DOT NOT CHANGE!">
-        <VersionPrefix>3.5.0</VersionPrefix>
-    </PropertyGroup>
-
+    <Import Project=".\Version.props" />
+    
     <PropertyGroup>
         <Authors>Fábio Monteiro Naspolini</Authors>
         <Company>Fábio Monteiro Naspolini</Company>
