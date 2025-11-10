@@ -29,7 +29,7 @@ jobs:
           
       - name: "Determine version: preview - Publish release branch"
         id: version-preview
-        if: startsWith(github.ref_name, 'release/xx/')
+        if: startsWith(github.ref_name, 'release/')
         run: |
           # Obtém o prefixo da versão a partir do nome do branch de release
           VERSION_PREFIX="${GITHUB_REF_NAME##*/}"          
@@ -65,19 +65,18 @@ jobs:
         if: steps.version-preview.outputs.version_determined == '' && steps.version-stable.outputs.version_determined == ''
         uses: actions/github-script@v8
         with:
-          script: core.setFailed("Version could not be determined from branch name.");
+          script: core.setFailed("Version could not be determined to branch workflow.");
 
       - name: Validate determined version prefix with csproj file # Validação de segurança
-        uses: actions/github-script@v8
-        with:
-          script: |
-            CSPROJ_VERSION_PREFIX=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" src/Version.props)
-            CSPROJ_VERSION_PREFIX="aaa"
-            echo "CSPROJ_VERSION_PREFIX: $CSPROJ_VERSION_PREFIX"
-            
-            if [ "$CSPROJ_VERSION_PREFIX" != "$VERSION_PREFIX" ]; then
-              core.setFailed("Version prefix in csproj file ($CSPROJ_VERSION_PREFIX) does not match witch the determined version suffix from branch name ($VERSION_PREFIX)."); 
-            fi
+        run: |
+          CSPROJ_VERSION_PREFIX=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" src/Version.props)
+          CSPROJ_VERSION_PREFIX="aaa"
+          echo "CSPROJ_VERSION_PREFIX: $CSPROJ_VERSION_PREFIX"
+          
+          if [ "$CSPROJ_VERSION_PREFIX" != "$VERSION_PREFIX" ]; then
+            echo "::error::Version prefix in csproj file ($CSPROJ_VERSION_PREFIX) does not match witch the determined version prefix from branch name ($VERSION_PREFIX)."
+            exit 1
+          fi
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
