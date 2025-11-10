@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ '**' ]
+    branches: [ 'release/**' ]
 #    tags: [ '*' ]
 #  pull_request:
 #    branches: [ master ]
@@ -27,10 +27,23 @@ jobs:
 
       - name: Test
         run: dotnet test --configuration Release --no-build
+        
+      - name: Determine version suffix
+        id: version_suffix
+        run: |
+          branch="${GITHUB_REF##*/}"
+          echo "Current branch: $branch"
+          
+          suffix=""
+          if [[ $branch == release* ]]; then
+            suffix="preview-${GITHUB_RUN_NUMBER}"
+          fi
+          
+          echo "Determined version suffix: $suffix"
+          echo "suffix=preview" >> $GITHUB_OUTPUT
 
       - name: Pack
-        run: dotnet pack src/Extensions.csproj --configuration Release --no-build
-        #      run: dotnet pack src/Extensions.csproj --configuration Release --no-build -p:Version=${{ env.VERSION }} -p:PackageVersion=${{ env.VERSION }} -p:AssemblyVersion=${{ env.VERSION }} -p:FileVersion=${{ env.VERSION }} -p:InformationalVersion=${{ env.VERSION }}
+        run: dotnet pack src/Extensions.csproj --configuration Release --no-build --version-suffix ${{ steps.version_suffix.outputs.suffix }}
 
       - name: Upload NuGet Artifact
         uses: actions/upload-artifact@v4
@@ -38,10 +51,9 @@ jobs:
           name: nuget-package
           path: src/bin/Release/*.nupkg
 
-#      - name: Publish to MyGet
-#        if: github.ref == 'refs/heads/master'
-#        run: |
-#          dotnet nuget push src/bin/Release/*.nupkg --source https://www.myget.org/F/maestria/api/v3/index.json --api-key ${{ secrets.MYGET_API_KEY }}
+      - name: Publish to MyGet
+        if: github.ref == 'refs/heads/master'
+        run: dotnet nuget push src/bin/Release/*.nupkg --source https://www.myget.org/F/maestria/api/v3/index.json --api-key ${{ secrets.MYGET_API_KEY }}
 #
 #      - name: Publish to NuGet
 #        if: startsWith(github.ref, 'refs/tags/')
