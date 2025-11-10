@@ -2,10 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ 'release/**' ]
-#    tags: [ '*' ]
-#  pull_request:
-#    branches: [ master ]
+    branches: [ "release/**" ]
+  pull_request: 
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -18,6 +17,8 @@ jobs:
         run: |
           echo "GITHUB_REF: $GITHUB_REF"
           echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
+          echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
+          echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
           echo "GITHUB_SHA: $GITHUB_SHA"
           echo "GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER"
           echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
@@ -25,7 +26,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '9.0.x'
+          dotnet-version: "9.0.x"
 
       - name: Display .NET Version
         run: dotnet --version
@@ -36,12 +37,29 @@ jobs:
       - name: Test
         run: dotnet test --configuration Release --no-build
 
-      - name: Determine version - To release publish
-        id: version
+      - name: Determine version (preview) - To release branch publish
         if: startsWith(github.ref_name, 'release/')
         run: |
+          # Obtém o prefixo da versão a partir do nome do branch de release
           VERSION_PREFIX="${GITHUB_REF_NAME##*/}"          
           VERSION_SUFFIX="preview-${GITHUB_RUN_NUMBER}"
+          
+          echo "VERSION_PREFIX: $VERSION_PREFIX"
+          echo "VERSION_SUFFIX: $VERSION_SUFFIX"
+          
+          echo "VERSION_PREFIX=$VERSION_PREFIX" >> $GITHUB_ENV
+          echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
+        
+      - name: Determine version (stable) - To main branch publish from release pull request
+        if: |
+          github.event_name == 'pull_request' &&
+          github.base_ref == 'main' &&
+          github.event.pull_request.merged == true &&
+          startsWith(github.head_ref, 'release/')
+        run: |
+          # Obtém o prefixo da versão a partir do nome do branch de origem do pull request
+          VERSION_PREFIX="${GITHUB_HEAD_REF##*/}"          
+          VERSION_SUFFIX=""
           
           echo "VERSION_PREFIX: $VERSION_PREFIX"
           echo "VERSION_SUFFIX: $VERSION_SUFFIX"
@@ -71,9 +89,7 @@ jobs:
       - name: Publish release preview to MyGet
         run: dotnet nuget push src/bin/Release/*.nupkg --source https://www.myget.org/F/maestrianet/api/v3/index.json --api-key "${{ secrets.MYGET_API_KEY }}"
                                                                 
-#
-#      - name: Publish to NuGet
-#        if: startsWith(github.ref, 'refs/tags/')
-#        run: |
-#          dotnet nuget push src/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
-
+      - name: Publish to NuGet
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          dotnet nuget push src/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}

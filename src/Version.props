@@ -1,5 +1,9 @@
 <Project>
     <PropertyGroup Label="Version - Change only the release branch!">
-        <VersionPrefix>3.5.1</VersionPrefix>
+        <!-- 
+            Double validation is used only as a safety measure to ensure 
+            that the release branch name matches the expected version. 
+        -->
+        <VersionPrefix>3.6.0</VersionPrefix>
     </PropertyGroup>
 </Project>
