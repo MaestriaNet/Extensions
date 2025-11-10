@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Display workflow envs
+      - name: Display github actions variables
         run: |
           echo "GITHUB_REF: $GITHUB_REF"
           echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
@@ -42,8 +42,8 @@ jobs:
         run: dotnet test --configuration Release --no-build
 
       - name: "Determine version: preview - Publish release branch"
-        id: determine_version
-        if: startsWith(github.ref_name, 'release/')
+        id: version-preview
+        if: startsWith(github.ref_name, 'release/xx/')
         run: |
           # Obtém o prefixo da versão a partir do nome do branch de release
           VERSION_PREFIX="${GITHUB_REF_NAME##*/}"          
@@ -52,11 +52,12 @@ jobs:
           echo "VERSION_PREFIX: $VERSION_PREFIX"
           echo "VERSION_SUFFIX: $VERSION_SUFFIX"
           
+          echo "version_determined=true" >> $GITHUB_OUTPUT
           echo "VERSION_PREFIX=$VERSION_PREFIX" >> $GITHUB_ENV
           echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
 
       - name: "Determine version: stable - Publish main branch, after release pull request is merged"
-        id: determine_version
+        id: version-stable
         if: |
           github.event_name == 'pull_request' &&
           github.base_ref == 'main' &&
@@ -70,17 +71,29 @@ jobs:
           echo "VERSION_PREFIX: $VERSION_PREFIX"
           echo "VERSION_SUFFIX: $VERSION_SUFFIX"
           
+          echo "version_determined=true" >> $GITHUB_OUTPUT
           echo "VERSION_PREFIX=$VERSION_PREFIX" >> $GITHUB_ENV
           echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
 
+      - name: Abort if version was indetermined
+        if: ${{ !(steps.version-preview.outputs.version_determined == 'true') && !(steps.version-stable.outputs.version_determined == 'true') }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            core.setFailed("Version could not be determined from branch name.");
+#        run: |
+#          if [ "${{ steps.version-preview.outputs.version_determined }}" != "true" ] && [ "${{ steps.version-stable.outputs.version_determined }}" != "true" ]; then
+#            echo "Version could not be determined from branch name. Exiting."
+#            exit 1
+#          fi
+          
       - name: Validate determined version prefix with csproj file # Validação de segurança
-        needs: determine_version
         run: |
           CSPROJ_VERSION_PREFIX=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" src/Version.props)
           echo "CSPROJ_VERSION_PREFIX: $CSPROJ_VERSION_PREFIX"
           
           if [ "$CSPROJ_VERSION_PREFIX" != "$VERSION_PREFIX" ]; then
-            echo "Version prefix in csproj file ($CSPROJ_VERSION_PREFIX) does not match the determined version suffix ($VERSION_PREFIX)"
+            echo "Version prefix in csproj file ($CSPROJ_VERSION_PREFIX) does not match witch the determined version suffix from branch name ($VERSION_PREFIX)"
             exit 1
           fi
 
