@@ -13,6 +13,14 @@ jobs:
     
     steps:
       - uses: actions/checkout@v5
+        
+      - name: Display workflow envs
+        run: |
+          echo "GITHUB_REF: $GITHUB_REF"
+          echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
+          echo "GITHUB_SHA: $GITHUB_SHA"
+          echo "GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER"
+          echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
@@ -27,23 +35,22 @@ jobs:
 
       - name: Test
         run: dotnet test --configuration Release --no-build
-        
-      - name: Determine version suffix
-        id: version_suffix
+
+      - name: Determine version - To release publish
+        id: version
+        if: startsWith(github.ref_name, 'release/')
         run: |
-          branch="${GITHUB_REF##*/}"
-          echo "Current branch: $branch"
+          VERSION_PREFIX="${GITHUB_REF_NAME##*/}"          
+          VERSION_SUFFIX="preview-${GITHUB_RUN_NUMBER}"
           
-          suffix=""
-          if [[ $branch == release* ]]; then
-            suffix="preview-${GITHUB_RUN_NUMBER}"
-          fi
+          echo "VERSION_PREFIX: VERSION_PREFIX"
+          echo "VERSION_SUFFIX: VERSION_SUFFIX"
           
-          echo "Determined version suffix: $suffix"
-          echo "suffix=preview" >> $GITHUB_OUTPUT
+          echo "VERSION_PREFIX=$VERSION_PREFIX" >> $GITHUB_ENV
+          echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
 
       - name: Pack
-        run: dotnet pack src/Extensions.csproj --configuration Release --no-build --version-suffix ${{ steps.version_suffix.outputs.suffix }}
+        run: dotnet pack src/Extensions.csproj --configuration Release --no-build -p:VersionPrefix="$VERSION_PREFIX" -p:VersionSuffix="$VERSION_SUFFIX"
 
       - name: Upload NuGet Artifact
         uses: actions/upload-artifact@v4
@@ -51,8 +58,7 @@ jobs:
           name: nuget-package
           path: src/bin/Release/*.nupkg
 
-      - name: Publish to MyGet
-        if: github.ref == 'refs/heads/master'
+      - name: Publish release preview to MyGet
         run: dotnet nuget push src/bin/Release/*.nupkg --source https://www.myget.org/F/maestria/api/v3/index.json --api-key ${{ secrets.MYGET_API_KEY }}
 #
 #      - name: Publish to NuGet
