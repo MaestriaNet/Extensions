@@ -125,14 +125,15 @@ jobs:
         
       - name: Create pull request
         if: startsWith(github.ref_name, 'release/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
           gh pr create \
             -B main \
             -H "$GITHUB_HEAD_REF" \
-            --title "Merge ${GITHUB_HEAD_REF} into main" \
+            --title "Merge '${GITHUB_HEAD_REF}' into main" \
             --body "Created by Github action"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish version to NuGet (stable)
         if: |
