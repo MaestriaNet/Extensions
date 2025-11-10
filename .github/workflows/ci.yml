@@ -16,6 +16,11 @@ jobs:
     
     steps:
       - uses: actions/checkout@v5
+        
+      - name: Show branch and commit
+        run: |
+          git rev-parse --abbrev-ref HEAD
+          git rev-parse HEAD
 
       - name: Display github actions variables
         run: |
@@ -105,7 +110,7 @@ jobs:
         
       - name: Create pull request
         if: startsWith(github.ref_name, 'release/')
-        run: gh pr create -B main -H "$GITHUB_HEAD_REF" --title 'Merge $GITHUB_HEAD_REF into main' --body 'Created by Github action'
+        run: gh pr create -B main -H "$GITHUB_HEAD_REF" --title "Merge $GITHUB_HEAD_REF into main" --body "Created by Github action"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -116,3 +121,17 @@ jobs:
           startsWith(github.head_ref, 'release/') &&
           github.event.pull_request.merged == true
         run: dotnet nuget push src/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
+        
+      - name: Create release
+        if: |
+          github.event_name == 'pull_request' &&
+          github.base_ref == 'main' &&
+          startsWith(github.head_ref, 'release/') &&
+          github.event.pull_request.merged == true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$VERSION_PREFIX" \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="v${VERSION_PREFIX}" \
+              --generate-notes
