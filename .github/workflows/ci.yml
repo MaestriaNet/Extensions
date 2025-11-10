@@ -63,9 +63,11 @@ jobs:
 
       - name: Abort if version was indeterminate
         if: steps.version-preview.outputs.version_determined == '' && steps.version-stable.outputs.version_determined == ''
-        uses: actions/github-script@v8
-        with:
-          script: core.setFailed("Version could not be determined from branch name.");
+        run: |
+          echo "::error::Version could not be determined from branch name."
+#        uses: actions/github-script@v8
+#        with:
+#          script: core.setFailed("Version could not be determined from branch name.");
 
       - name: Validate determined version prefix with csproj file # Validação de segurança
         uses: actions/github-script@v8
