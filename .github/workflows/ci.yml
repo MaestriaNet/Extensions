@@ -80,7 +80,7 @@ jobs:
       - name: Pack
         run: dotnet pack src/Extensions.csproj --configuration Release --no-build -p:VersionPrefix="$VERSION_PREFIX" -p:VersionSuffix="$VERSION_SUFFIX"
 
-      - name: Upload NuGet Artifact
+      - name: Upload nupkg artifact to github
         uses: actions/upload-artifact@v4
         with:
           name: nuget-package
