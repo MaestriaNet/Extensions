@@ -70,7 +70,6 @@ jobs:
       - name: Validate determined version prefix with csproj file # Validação de segurança
         run: |
           CSPROJ_VERSION_PREFIX=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" src/Version.props)
-          CSPROJ_VERSION_PREFIX="aaa"
           echo "CSPROJ_VERSION_PREFIX: $CSPROJ_VERSION_PREFIX"
           
           if [ "$CSPROJ_VERSION_PREFIX" != "$VERSION_PREFIX" ]; then
