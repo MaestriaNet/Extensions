@@ -27,7 +27,8 @@ jobs:
           github.event.pull_request.merged == true
         uses: actions/checkout@v5
         with:
-          ref: ${{ github.head_ref }}
+          # branch name  (head_ref) já foi excluído devido a configurações de merge do repositório, então faz checkout direto no commit id
+          ref: ${{ github.event.pull_request.head.sha }}
         
       - name: Show branch and commit
         run: |
