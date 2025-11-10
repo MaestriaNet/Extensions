@@ -110,7 +110,12 @@ jobs:
         
       - name: Create pull request
         if: startsWith(github.ref_name, 'release/')
-        run: gh pr create -B main -H "$GITHUB_HEAD_REF" --title "Merge $GITHUB_HEAD_REF into main" --body "Created by Github action"
+        run: |
+          gh pr create \
+            -B main \
+            -H "$GITHUB_HEAD_REF" \
+            --title "Merge ${GITHUB_HEAD_REF} into main" \
+            --body "Created by Github action"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
