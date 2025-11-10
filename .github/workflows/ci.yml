@@ -15,6 +15,18 @@ jobs:
       (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     
     steps:
+      - name: Display github actions variables
+        run: |
+          echo "GITHUB_REF: $GITHUB_REF"
+          echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
+          echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
+          echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
+          echo "GITHUB_SHA: $GITHUB_SHA"
+          echo "GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER"
+          echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
+          echo "github.event.pull_request.head.ref: ${{ github.event.pull_request.head.ref }}"
+          echo "github.event.pull_request.head.sha: ${{ github.event.pull_request.head.sha }}"
+        
       - name: Checkout code - Preview version
         if: startsWith(github.ref_name, 'release/')
         uses: actions/checkout@v5
@@ -34,16 +46,6 @@ jobs:
         run: |
           git rev-parse --abbrev-ref HEAD
           git rev-parse HEAD
-
-      - name: Display github actions variables
-        run: |
-          echo "GITHUB_REF: $GITHUB_REF"
-          echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
-          echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
-          echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
-          echo "GITHUB_SHA: $GITHUB_SHA"
-          echo "GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER"
-          echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
           
       - name: "Determine version: preview - Publish release branch"
         id: version-preview
