@@ -48,6 +48,16 @@ jobs:
           
           echo "VERSION_PREFIX=$VERSION_PREFIX" >> $GITHUB_ENV
           echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
+          
+      - name: Validate determined version suffix with csproj file # Validação de segurança
+        run: |
+          CSPROJ_VERSION_PREFIX=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" src/Extensions.csproj)
+          echo "CSPROJ_VERSION_PREFIX: $CSPROJ_VERSION_PREFIX"
+          
+          if [ "CSPROJ_VERSION_PREFIX" != "VERSION_PREFIX" ]; then
+            echo "Version prefix in csproj file (CSPROJ_VERSION_PREFIX) does not match the determined version suffix (VERSION_PREFIX)"
+            exit 1
+          fi
 
       - name: Pack
         run: dotnet pack src/Extensions.csproj --configuration Release --no-build -p:VersionPrefix="$VERSION_PREFIX" -p:VersionSuffix="$VERSION_SUFFIX"
