@@ -41,7 +41,8 @@ jobs:
       - name: Test
         run: dotnet test --configuration Release --no-build
 
-      - name: Determine version (preview) - To release branch publish
+      - name: "Determine version: preview - Publish release branch"
+        id: determine_version
         if: startsWith(github.ref_name, 'release/')
         run: |
           # Obtém o prefixo da versão a partir do nome do branch de release
@@ -54,12 +55,13 @@ jobs:
           echo "VERSION_PREFIX=$VERSION_PREFIX" >> $GITHUB_ENV
           echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
 
-      - name: Determine version (stable) - To main branch publish from release pull request
+      - name: "Determine version: stable - Publish main branch, after release pull request is merged"
+        id: determine_version
         if: |
           github.event_name == 'pull_request' &&
           github.base_ref == 'main' &&
-          github.event.pull_request.merged == true &&
-          startsWith(github.head_ref, 'release/')
+          startsWith(github.head_ref, 'release/') &&
+          github.event.pull_request.merged == true
         run: |
           # Obtém o prefixo da versão a partir do nome do branch de origem do pull request
           VERSION_PREFIX="${GITHUB_HEAD_REF##*/}"          
@@ -72,6 +74,7 @@ jobs:
           echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
 
       - name: Validate determined version prefix with csproj file # Validação de segurança
+        needs: determine_version
         run: |
           CSPROJ_VERSION_PREFIX=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" src/Version.props)
           echo "CSPROJ_VERSION_PREFIX: $CSPROJ_VERSION_PREFIX"
@@ -90,10 +93,13 @@ jobs:
           name: nuget-package
           path: src/bin/Release/*.nupkg
 
-      - name: Publish release preview to MyGet
+      - name: Publish version to MyGet (preview)
         run: dotnet nuget push src/bin/Release/*.nupkg --source https://www.myget.org/F/maestrianet/api/v3/index.json --api-key "${{ secrets.MYGET_API_KEY }}"
 
-      - name: Publish to NuGet
-        if: startsWith(github.ref, 'refs/tags/')
-        run: |
-          dotnet nuget push src/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
+      - name: Publish version to NuGet (stable)
+        if: |
+          github.event_name == 'pull_request' &&
+          github.base_ref == 'main' &&
+          startsWith(github.head_ref, 'release/') &&
+          github.event.pull_request.merged == true
+        run: dotnet nuget push src/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
