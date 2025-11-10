@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+    <Import Project=".\Version.props" />
+    
     <PropertyGroup>
         <Authors>Fábio Monteiro Naspolini</Authors>
         <Company>Fábio Monteiro Naspolini</Company>
@@ -14,19 +16,15 @@
         <PackageTags>ExtensionMethod ExtensionMethods HelperMethods Helper Extension Extensions Fluent Functional Elegance Productivity Maestria Mastery IEnumerable Enumerable ICollection Collection IList List Array Max Min Highest Smallest Largest String Text IfNull NullIf Null If In Between Truncate Round Hash MD5 SHA1 Enum Aggreagate Exception StackTrace C# .NET CSharp Method Methods</PackageTags>
         <RepositoryUrl>https://github.com/MaestriaNet/Extensions</RepositoryUrl>
         <Title>Maestria.Extensions</Title>
-        <Version>3.5.0</Version>
     </PropertyGroup>
 
     <PropertyGroup>
         <AssemblyName>Maestria.Extensions</AssemblyName>
         <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-<!--        <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>-->
         <LangVersion>10</LangVersion>
         <NoWarn>CS1591</NoWarn>
         <RootNamespace>Maestria.Extensions</RootNamespace>
         <TargetFrameworks>net5.0;netstandard2.0</TargetFrameworks>
-        <!-- <TargetFramework>net5.0</TargetFramework> -->
-        <!-- <TargetFramework>netstandard2.0</TargetFramework> -->
     </PropertyGroup>
 
     <ItemGroup>
