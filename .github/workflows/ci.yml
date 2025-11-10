@@ -131,8 +131,8 @@ jobs:
           echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
           gh pr create \
             -B main \
-            -H "$GITHUB_HEAD_REF" \
-            --title "Merge '${GITHUB_HEAD_REF}' into main" \
+            -H "$GITHUB_REF_NAME" \
+            --title "Merge $GITHUB_REF_NAME into main" \
             --body "Created by Github action"
 
       - name: Publish version to NuGet (stable)
