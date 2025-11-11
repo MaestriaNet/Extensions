@@ -26,3 +26,5 @@
   - CI para publicar versão preview.
 - Novas features devem ser iniciadas a partir da **main**.
 - Correções emergencias devem iniciar a partir da ultima tag.
+
+- teste
