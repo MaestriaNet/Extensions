@@ -128,11 +128,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr create \
-            -B main \
-            -H "$GITHUB_REF_NAME" \
-            --title "Merge \"$GITHUB_REF_NAME\" into main" \
-            --body "Created by Github action"
+          pr_url=$(gh pr list --head "${GITHUB_REF_NAME}" --base "main" --state open --json url --jq .[].url)
+          if [[ -n "${pr_url}" ]]; then
+            echo "Pull Request already exists for branch '${GITHUB_REF_NAME}' to 'main': ${pr_url}"
+          else
+            gh pr create \
+              -B main \
+              -H "$GITHUB_REF_NAME" \
+              --title "Merge \"$GITHUB_REF_NAME\" into main" \
+              --body "Created by Github action"
+          fi
 
       - name: Publish version to NuGet (stable)
         if: |
