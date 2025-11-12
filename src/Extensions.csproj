@@ -2,12 +2,21 @@
 
     <Import Project=".\Version.props" />
     
-    <PropertyGroup>
+    <PropertyGroup Label="Build">
+        <TargetFrameworks>net10.0;net9.0;net8.0;net6.0;net5.0;netstandard2.0</TargetFrameworks>
+        <AssemblyName>Maestria.Extensions</AssemblyName>
+        <RootNamespace>Maestria.Extensions</RootNamespace>
+        <LangVersion>10</LangVersion>
+        <Nullable>enable</Nullable>
+        <NoWarn>CS1591</NoWarn>
+    </PropertyGroup>
+    
+    <PropertyGroup Label="Package info">
         <Authors>Fábio Monteiro Naspolini</Authors>
         <Company>Fábio Monteiro Naspolini</Company>
         <Description>Extension function pack to increase productivity and improve source code writing.</Description>
+        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
         <License>https://github.com/MaestriaNet/Extensions/blob/master/LICENSE</License>
-        <Nullable>enable</Nullable>
         <PackageIcon>icon.png</PackageIcon>
         <PackageIconUrl>https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/icon.png</PackageIconUrl>
         <PackageId>Maestria.Extensions</PackageId>
@@ -18,16 +27,7 @@
         <Title>Maestria.Extensions</Title>
     </PropertyGroup>
 
-    <PropertyGroup>
-        <AssemblyName>Maestria.Extensions</AssemblyName>
-        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-        <LangVersion>10</LangVersion>
-        <NoWarn>CS1591</NoWarn>
-        <RootNamespace>Maestria.Extensions</RootNamespace>
-        <TargetFrameworks>net10.0;net9.0;net8.0;net6.0;net5.0;netstandard2.0</TargetFrameworks>
-    </PropertyGroup>
-
-    <ItemGroup>
+    <ItemGroup Label="Package files">
         <None Include="..\README.md" Pack="true" PackagePath="\" />
         <None Include="..\resources\icon.png" Pack="true" PackagePath="\" />
     </ItemGroup>
