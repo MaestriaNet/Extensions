@@ -3,9 +3,13 @@ name: publish-versions
 on:
   push:
     branches: [ "release/**" ]
+    paths:
+      - src/**
   pull_request:
     types: [ closed ]
     branches: [ "main" ]
+    paths:
+      - src/**
 
 jobs:
   publish:
