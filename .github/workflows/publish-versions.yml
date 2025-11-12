@@ -172,6 +172,7 @@ jobs:
           gh release create "$VERSION_PREFIX" \
               --repo="$GITHUB_REPOSITORY" \
               --title="v${VERSION_PREFIX}" \
+              --target="${GITHUB_SHA}" \
               --generate-notes
 
   # Job to validate that publish completed successfully and allow merge to main (branch gate requirement on GitHub setting)
