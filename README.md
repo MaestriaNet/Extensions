@@ -1,13 +1,8 @@
 # Maestria.Extensions
 
-[![Build status](https://ci.appveyor.com/api/projects/status/mvosd40vqsgrvkr0/branch/master?svg=true)](https://ci.appveyor.com/project/fabionaspolini/maestria-extensions/branch/master)
-[![NuGet](https://buildstats.info/nuget/Maestria.Extensions)](https://www.nuget.org/packages/Maestria.Extensions)
-[![MyGet](https://img.shields.io/myget/maestrianet/v/Maestria.Extensions?label=MyGet)](https://www.myget.org/feed/maestrianet/package/nuget/Maestria.Extensions)
+[![NuGet Version](https://img.shields.io/nuget/v/Maestria.Extensions)](https://www.nuget.org/packages/Maestria.Extensions/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Maestria.Extensions)](https://www.nuget.org/packages/Maestria.Extensions/)
 [![Apimundo](https://img.shields.io/badge/Maestria.Extensions%20API-Apimundo-728199.svg)](https://apimundo.com/organizations/nuget-org/nuget-feeds/public/packages/Maestria.Extensions/versions/latest?tab=types)
-
-[![Build History](https://buildstats.info/appveyor/chart/fabionaspolini/maestria-extensions?branch=master)](https://ci.appveyor.com/project/fabionaspolini/maestria-extensions/history?branch=master)
-
-[![donate](https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/btn_donate.gif)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)
 
 ## What is Maestria.Extensions?
 
@@ -330,20 +325,15 @@ Extensions.GlobalSettings.Configure(cfg => cfg
     .FloatAndDoubleTolerance(default-float-and-double-comparasion-tolerance) // Default is 0.00001f
 ```
 
-## Development Guidelines
 
-- Create file with extensions method name
-- `this` argument name must be `value` for single object or `values` to IEnumerable inheritances
-- Put new file into folder `/src/Extensions/<extended-data-type>`
-    - Expressions methods like `If`, `NullIf`, `Is`, `In`, `EmptyIf`, `Between`, must be located in `src/Extensions/Comparable` folder
-    - `Numbers` extensions methods must bet located in `src/Extensions/Number`
-- The `I` prefix for interfaces must be omitted from the folder name.
-- `src\Settings\MaestriaExtensionSettings`: File to configure global defaults behaviors
-- String extensions methods should use nullable input and non-nullable output.
 
-## Breaking Changes
+## Documentations
 
-[Breaking-Changes.md](Breaking-Changes.md)
+See additional documentations at [docs](docs) folder.
+
+- [changelog.md](docs/changelog.md): List of changes by version and breaking changes.
+- [ci-workflow.md](docs/ci-workflow.md): Description of the CI workflow used in the project.
+- [contributing.md](docs/contributing.md): How to contribute to the project.
 
 ---
 

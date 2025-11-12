@@ -1,3 +1,8 @@
+#
+# 1. Fork pull request don't have permision to publish.
+# 2. Only pull requests from release/* to main are valid to publish stable versions.
+#
+
 name: publish-versions
 
 on:
