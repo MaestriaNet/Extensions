@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Extensions.Test.CSharp/Extensions.Test.CSharp.csproj" />
+    <Project Path="tests/Extensions.Test/Extensions.Test.fsproj" />
+  </Folder>
+  <Project Path="src/Extensions.csproj" />
+</Solution>
