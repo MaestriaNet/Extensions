@@ -1,13 +1,13 @@
 using Maestria.Extensions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Extensions.Test.CSharp;
 
 public class NullIfTest
 {
-    [Test]
+    [Fact]
     public void NullIf_ReturningNull() => Assert.Null(Consts.Guid.NullIf(Consts.Guid));
 
-    [Test]
-    public void NullIf_DontReturningNull() => Assert.AreEqual(Consts.Guid, Consts.Guid.NullIf(Consts.EmptyGuid));
+    [Fact]
+    public void NullIf_DontReturningNull() => Assert.Equal(Consts.Guid, Consts.Guid.NullIf(Consts.EmptyGuid));
 }

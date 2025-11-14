@@ -1,5 +1,5 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace Maestria.Extensions.Test.CSharp;
 
@@ -9,270 +9,278 @@ public class StringExtensionsTest
     private static string _nullString = null;
     private static object _value = new object();
 
-    [Test]
+    [Fact]
     public void IsNullCheck()
     {
-        Assert.IsTrue(_nullValue.IsNull());
-        Assert.IsTrue(_nullString.IsNull());
-        Assert.IsFalse(_value.IsNull());
+        Assert.True(_nullValue.IsNull());
+        Assert.True(_nullString.IsNull());
+        Assert.False(_value.IsNull());
     }
 
-    [Test]
+    [Fact]
     public void HasValue()
     {
-        Assert.IsFalse(_nullValue.HasValue());
-        Assert.IsFalse(_nullString.HasValue());
-        Assert.IsTrue(_value.HasValue());
+        Assert.False(_nullValue.HasValue());
+        Assert.False(_nullString.HasValue());
+        Assert.True(_value.HasValue());
     }
 
-    [Test]
+    [Fact]
     public void JoinArray()
     {
         var values = new[] { "my", "name", "is", "fabio" };
-        Assert.AreEqual("mynameisfabio", values.Join(""));
-        Assert.AreEqual("my name is fabio", values.Join(" "));
+        Assert.Equal("mynameisfabio", values.Join(""));
+        Assert.Equal("my name is fabio", values.Join(" "));
     }
 
-    [Test]
+    [Fact]
     public void JoinEnumerable()
     {
         var values = new[] { "my", "name", "is", "fabio" }.AsEnumerable();
-        Assert.AreEqual("mynameisfabio", values.Join(""));
-        Assert.AreEqual("my name is fabio", values.Join(" "));
+        Assert.Equal("mynameisfabio", values.Join(""));
+        Assert.Equal("my name is fabio", values.Join(" "));
     }
 
-    [Test]
+    [Fact]
     public void SubstringBeforeFirstOccurrence_Default()
     {
-        Assert.AreEqual("part 1", "part 1-part 2".SubstringBeforeFirstOccurrence("-"));
-        Assert.AreEqual("part 1", "part 1-part 2-part 3".SubstringBeforeFirstOccurrence("-"));
-        Assert.IsEmpty("part 1".SubstringBeforeFirstOccurrence("x"));
-        Assert.IsEmpty(_nullString.SubstringBeforeFirstOccurrence("x"));
+        Assert.Equal("part 1", "part 1-part 2".SubstringBeforeFirstOccurrence("-"));
+        Assert.Equal("part 1", "part 1-part 2-part 3".SubstringBeforeFirstOccurrence("-"));
+        Assert.Empty("part 1".SubstringBeforeFirstOccurrence("x"));
+        Assert.Empty(_nullString.SubstringBeforeFirstOccurrence("x"));
     }
 
-    [Test]
+    [Fact]
     public void SubstringBeforeFirstOccurrence_DisabledTrim()
     {
-        Assert.AreEqual("part 1 ", "part 1 - part 2".SubstringBeforeFirstOccurrence("-", false));
-        Assert.AreEqual("part 1 ", "part 1 - part 2-part 3".SubstringBeforeFirstOccurrence("-", false));
-        Assert.IsEmpty("part 1".SubstringBeforeFirstOccurrence("x", false));
-        Assert.IsEmpty(_nullString.SubstringBeforeFirstOccurrence("x", false));
+        Assert.Equal("part 1 ", "part 1 - part 2".SubstringBeforeFirstOccurrence("-", false));
+        Assert.Equal("part 1 ", "part 1 - part 2-part 3".SubstringBeforeFirstOccurrence("-", false));
+        Assert.Empty("part 1".SubstringBeforeFirstOccurrence("x", false));
+        Assert.Empty(_nullString.SubstringBeforeFirstOccurrence("x", false));
     }
 
-    [Test]
+    [Fact]
     public void SubstringBeforeLastOccurrence_Default()
     {
-        Assert.AreEqual("part 1", "part 1-part 2".SubstringBeforeLastOccurrence("-"));
-        Assert.AreEqual("part 1-part 2", "part 1-part 2-part 3".SubstringBeforeLastOccurrence("-"));
-        Assert.IsEmpty("part 1".SubstringBeforeLastOccurrence("x"));
-        Assert.IsEmpty(_nullString.SubstringBeforeLastOccurrence("x"));
+        Assert.Equal("part 1", "part 1-part 2".SubstringBeforeLastOccurrence("-"));
+        Assert.Equal("part 1-part 2", "part 1-part 2-part 3".SubstringBeforeLastOccurrence("-"));
+        Assert.Empty("part 1".SubstringBeforeLastOccurrence("x"));
+        Assert.Empty(_nullString.SubstringBeforeLastOccurrence("x"));
     }
 
-    [Test]
+    [Fact]
     public void SubstringBeforeLastOccurrence_DisabledTrim()
     {
-        Assert.AreEqual("part 1 ", "part 1 - part 2".SubstringBeforeLastOccurrence("-", false));
-        Assert.AreEqual("part 1 - part 2", "part 1 - part 2-part 3".SubstringBeforeLastOccurrence("-", false));
-        Assert.IsEmpty("part 1".SubstringBeforeLastOccurrence("x", false));
-        Assert.IsEmpty(_nullString.SubstringBeforeLastOccurrence("x", false));
+        Assert.Equal("part 1 ", "part 1 - part 2".SubstringBeforeLastOccurrence("-", false));
+        Assert.Equal("part 1 - part 2", "part 1 - part 2-part 3".SubstringBeforeLastOccurrence("-", false));
+        Assert.Empty("part 1".SubstringBeforeLastOccurrence("x", false));
+        Assert.Empty(_nullString.SubstringBeforeLastOccurrence("x", false));
     }
 
-    [Test]
+    [Fact]
     public void SubstringAfterFirstOccurrence_Default()
     {
-        Assert.AreEqual("part 2", "part 1-part 2".SubstringAfterFirstOccurrence("-"));
-        Assert.AreEqual("part 2", "part 1-part 2".SubstringAfterFirstOccurrence("-"));
-        Assert.AreEqual("part 2-part 3", "part 1-part 2-part 3".SubstringAfterFirstOccurrence("-"));
-        Assert.IsEmpty("part 1".SubstringAfterFirstOccurrence("x"));
-        Assert.IsEmpty(_nullString.SubstringAfterFirstOccurrence("x"));
+        Assert.Equal("part 2", "part 1-part 2".SubstringAfterFirstOccurrence("-"));
+        Assert.Equal("part 2", "part 1-part 2".SubstringAfterFirstOccurrence("-"));
+        Assert.Equal("part 2-part 3", "part 1-part 2-part 3".SubstringAfterFirstOccurrence("-"));
+        Assert.Empty("part 1".SubstringAfterFirstOccurrence("x"));
+        Assert.Empty(_nullString.SubstringAfterFirstOccurrence("x"));
     }
 
-    [Test]
+    [Fact]
     public void SubstringAfterFirstOccurrence_DisabledTrim()
     {
-        Assert.AreEqual(" part 2", "part 1 - part 2".SubstringAfterFirstOccurrence("-", false));
-        Assert.AreEqual(" part 2 - part 3", "part 1 - part 2 - part 3".SubstringAfterFirstOccurrence("-", false));
-        Assert.IsEmpty("part 1".SubstringAfterFirstOccurrence("x", false));
-        Assert.IsEmpty(_nullString.SubstringAfterFirstOccurrence("x", false));
+        Assert.Equal(" part 2", "part 1 - part 2".SubstringAfterFirstOccurrence("-", false));
+        Assert.Equal(" part 2 - part 3", "part 1 - part 2 - part 3".SubstringAfterFirstOccurrence("-", false));
+        Assert.Empty("part 1".SubstringAfterFirstOccurrence("x", false));
+        Assert.Empty(_nullString.SubstringAfterFirstOccurrence("x", false));
     }
 
-    [Test]
+    [Fact]
     public void SubstringAfterLastOccurrence_Default()
     {
-        Assert.AreEqual("part 2", "part 1-part 2".SubstringAfterLastOccurrence("-"));
-        Assert.AreEqual("part 3", "part 1-part 2-part 3".SubstringAfterLastOccurrence("-"));
-        Assert.IsEmpty("part 1".SubstringAfterLastOccurrence("x"));
-        Assert.IsEmpty(_nullString.SubstringAfterLastOccurrence("x"));
+        Assert.Equal("part 2", "part 1-part 2".SubstringAfterLastOccurrence("-"));
+        Assert.Equal("part 3", "part 1-part 2-part 3".SubstringAfterLastOccurrence("-"));
+        Assert.Empty("part 1".SubstringAfterLastOccurrence("x"));
+        Assert.Empty(_nullString.SubstringAfterLastOccurrence("x"));
     }
 
-    [Test]
+    [Fact]
     public void SubstringAfterLastOccurrence_DisabledTrim()
     {
-        Assert.AreEqual(" part 2", "part 1 - part 2".SubstringAfterLastOccurrence("-", false));
-        Assert.AreEqual(" part 3", "part 1 - part 2 - part 3".SubstringAfterLastOccurrence("-", false));
-        Assert.AreEqual(" part 3", "part 1 - part 2 - part 3".SubstringAfterLastOccurrence("-", false));
-        Assert.IsEmpty("part 1".SubstringAfterLastOccurrence("x", false));
-        Assert.IsEmpty(_nullString.SubstringAfterLastOccurrence("x", false));
+        Assert.Equal(" part 2", "part 1 - part 2".SubstringAfterLastOccurrence("-", false));
+        Assert.Equal(" part 3", "part 1 - part 2 - part 3".SubstringAfterLastOccurrence("-", false));
+        Assert.Equal(" part 3", "part 1 - part 2 - part 3".SubstringAfterLastOccurrence("-", false));
+        Assert.Empty("part 1".SubstringAfterLastOccurrence("x", false));
+        Assert.Empty(_nullString.SubstringAfterLastOccurrence("x", false));
     }
 
-    [Test]
+    [Fact]
     public void SubstringAtOccurrenceIndex_Default()
     {
         const string value = "parte 1 - part 2 - part 3 - part 4";
-        Assert.AreEqual("parte 1", value.SubstringAtOccurrenceIndex("-", 0));
-        Assert.AreEqual("part 2", value.SubstringAtOccurrenceIndex("-", 1));
-        Assert.AreEqual("part 3", value.SubstringAtOccurrenceIndex("-", 2));
-        Assert.AreEqual("part 4", value.SubstringAtOccurrenceIndex("-", 3));
-        Assert.IsEmpty(value.SubstringAtOccurrenceIndex("-", 4, false));
-        Assert.IsEmpty(_nullString.SubstringAtOccurrenceIndex("-", 0, false));
+        Assert.Equal("parte 1", value.SubstringAtOccurrenceIndex("-", 0));
+        Assert.Equal("part 2", value.SubstringAtOccurrenceIndex("-", 1));
+        Assert.Equal("part 3", value.SubstringAtOccurrenceIndex("-", 2));
+        Assert.Equal("part 4", value.SubstringAtOccurrenceIndex("-", 3));
+        Assert.Empty(value.SubstringAtOccurrenceIndex("-", 4, false));
+        Assert.Empty(_nullString.SubstringAtOccurrenceIndex("-", 0, false));
     }
 
-    [Test]
+    [Fact]
     public void SubstringAtOccurrenceIndex_DisabledTrim()
     {
         const string value = "parte 1 - part 2 - part 3 - part 4";
-        Assert.AreEqual("parte 1 ", value.SubstringAtOccurrenceIndex("-", 0, false));
-        Assert.AreEqual(" part 2 ", value.SubstringAtOccurrenceIndex("-", 1, false));
-        Assert.AreEqual(" part 3 ", value.SubstringAtOccurrenceIndex("-", 2, false));
-        Assert.AreEqual(" part 4", value.SubstringAtOccurrenceIndex("-", 3, false));
-        Assert.IsEmpty(value.SubstringAtOccurrenceIndex("-", 4, false));
-        Assert.IsEmpty(_nullString.SubstringAtOccurrenceIndex("-", 0, false));
+        Assert.Equal("parte 1 ", value.SubstringAtOccurrenceIndex("-", 0, false));
+        Assert.Equal(" part 2 ", value.SubstringAtOccurrenceIndex("-", 1, false));
+        Assert.Equal(" part 3 ", value.SubstringAtOccurrenceIndex("-", 2, false));
+        Assert.Equal(" part 4", value.SubstringAtOccurrenceIndex("-", 3, false));
+        Assert.Empty(value.SubstringAtOccurrenceIndex("-", 4, false));
+        Assert.Empty(_nullString.SubstringAtOccurrenceIndex("-", 0, false));
     }
 
-    [Test]
+    [Fact]
     public void SubstringSafe()
     {
-        Assert.AreEqual("t", "test".SubstringSafe(-1, 1));
-        Assert.IsEmpty("test".SubstringSafe(5, 1));
-        Assert.IsEmpty("test".SubstringSafe(4, 1));
-        Assert.AreEqual("g", "test substring".SubstringSafe(13, 1));
-        Assert.AreEqual("g", "test substring".SubstringSafe(13, 10));
-        Assert.AreEqual("ng", "test substring".SubstringSafe(12, 2));
-        Assert.AreEqual("ng", "test substring".SubstringSafe(12, 20));
-        Assert.AreEqual(" su", "test substring".SubstringSafe(4, 3));
-        Assert.AreEqual("test", "test substring".SubstringSafe(0, 4));
-        Assert.IsEmpty(_nullString.SubstringSafe(1, 2));
+        Assert.Equal("t", "test".SubstringSafe(-1, 1));
+        Assert.Empty("test".SubstringSafe(5, 1));
+        Assert.Empty("test".SubstringSafe(4, 1));
+        Assert.Equal("g", "test substring".SubstringSafe(13, 1));
+        Assert.Equal("g", "test substring".SubstringSafe(13, 10));
+        Assert.Equal("ng", "test substring".SubstringSafe(12, 2));
+        Assert.Equal("ng", "test substring".SubstringSafe(12, 20));
+        Assert.Equal(" su", "test substring".SubstringSafe(4, 3));
+        Assert.Equal("test", "test substring".SubstringSafe(0, 4));
+        Assert.Empty(_nullString.SubstringSafe(1, 2));
     }
 
-    [Test]
+    [Fact]
     public void EmptyIf()
     {
-        Assert.IsEmpty("test".EmptyIf("test"));
-        Assert.IsEmpty("test".EmptyIf("TEST", true));
-        Assert.AreEqual("test".EmptyIf("TEST"), "test");
-        Assert.AreEqual("test".EmptyIf("a"), "test");
-        Assert.IsEmpty(_nullString.EmptyIf("a"));
+        Assert.Empty("test".EmptyIf("test"));
+        Assert.Empty("test".EmptyIf("TEST", true));
+        Assert.Equal("test".EmptyIf("TEST"), "test");
+        Assert.Equal("test".EmptyIf("a"), "test");
+        Assert.Empty(_nullString.EmptyIf("a"));
     }
 
-    [Test]
+    [Fact]
     public void EmptyIfNull()
     {
-        Assert.IsEmpty(_nullString.EmptyIfNull());
-        Assert.IsNotEmpty("test".EmptyIfNull());
-        Assert.AreEqual("test", "test".EmptyIfNull());
-        Assert.AreEqual(" ", " ".EmptyIfNull());
+        Assert.Empty(_nullString.EmptyIfNull());
+        Assert.NotEmpty("test".EmptyIfNull());
+        Assert.Equal("test", "test".EmptyIfNull());
+        Assert.Equal(" ", " ".EmptyIfNull());
     }
 
-    [Test]
+    [Fact]
     public void EmptyIfNullOrWhiteSpace()
     {
-        Assert.IsEmpty(_nullString.EmptyIfNullOrWhiteSpace());
-        Assert.IsNotEmpty("test".EmptyIfNullOrWhiteSpace());
-        Assert.AreEqual("test", "test".EmptyIfNullOrWhiteSpace());
-        Assert.IsEmpty(" ".EmptyIfNullOrWhiteSpace());
+        Assert.Empty(_nullString.EmptyIfNullOrWhiteSpace());
+        Assert.NotEmpty("test".EmptyIfNullOrWhiteSpace());
+        Assert.Equal("test", "test".EmptyIfNullOrWhiteSpace());
+        Assert.Empty(" ".EmptyIfNullOrWhiteSpace());
     }
 
-    [Test]
+    [Fact]
     public void TruncateTest()
     {
-        Assert.AreEqual("tes", "test limit".Truncate(3));
-        Assert.AreEqual("test limit", "test limit".Truncate(100));
-        Assert.IsEmpty(_nullString.Truncate(5));
+        Assert.Equal("tes", "test limit".Truncate(3));
+        Assert.Equal("test limit", "test limit".Truncate(100));
+        Assert.Empty(_nullString.Truncate(5));
     }
 
-    [Test]
+    [Fact]
     public void TruncateStartTest()
     {
-        Assert.AreEqual("mit", "test limit".TruncateStart(3));
-        Assert.AreEqual("test limit", "test limit".TruncateStart(100));
-        Assert.IsEmpty(_nullString.TruncateStart(5));
+        Assert.Equal("mit", "test limit".TruncateStart(3));
+        Assert.Equal("test limit", "test limit".TruncateStart(100));
+        Assert.Empty(_nullString.TruncateStart(5));
     }
 
-    [Test]
+    [Fact]
     public void OnlyLettersOrNumbersOrUnderscoresOrHyphensTest()
     {
-        Assert.AreEqual("Test", "Test".OnlyLettersOrNumbersOrUnderscoresOrHyphens());
-        Assert.AreEqual("Test", "{Test}".OnlyLettersOrNumbersOrUnderscoresOrHyphens());
-        Assert.AreEqual("Test_12-3", "{Test}_12-3!!".OnlyLettersOrNumbersOrUnderscoresOrHyphens());
+        Assert.Equal("Test", "Test".OnlyLettersOrNumbersOrUnderscoresOrHyphens());
+        Assert.Equal("Test", "{Test}".OnlyLettersOrNumbersOrUnderscoresOrHyphens());
+        Assert.Equal("Test_12-3", "{Test}_12-3!!".OnlyLettersOrNumbersOrUnderscoresOrHyphens());
     }
 
-    [Test]
+    [Fact]
     public void OnlyLettersOrNumbersOrUnderscoresOrHyphensOrSpacesTest()
     {
-        Assert.AreEqual("T  es t", "T  es t".OnlyLettersOrNumbersOrUnderscoresOrHyphensOrSpaces());
-        Assert.AreEqual("T  es t", "{T  es t}".OnlyLettersOrNumbersOrUnderscoresOrHyphensOrSpaces());
-        Assert.AreEqual("Test  _12- 3", "{Test}  _12- 3!!".OnlyLettersOrNumbersOrUnderscoresOrHyphensOrSpaces());
+        Assert.Equal("T  es t", "T  es t".OnlyLettersOrNumbersOrUnderscoresOrHyphensOrSpaces());
+        Assert.Equal("T  es t", "{T  es t}".OnlyLettersOrNumbersOrUnderscoresOrHyphensOrSpaces());
+        Assert.Equal("Test  _12- 3", "{Test}  _12- 3!!".OnlyLettersOrNumbersOrUnderscoresOrHyphensOrSpaces());
     }
 
     // ----- To Snake Case -----
 
-    [TestCase("", "")]
-    [TestCase(null, "")]
-    public void ToSnakeCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToSnakeCase());
+    [Theory]
+    [InlineData("", "")]
+    [InlineData(null, "")]
+    public void ToSnakeCaseTest(string value, string expected) => Assert.Equal(expected, value.ToSnakeCase());
 
-    [TestCase("ValueTest", "value_test")]
-    [TestCase("ValueTest1", "value_test_1")]
-    [TestCase("ValueTest123", "value_test_123")]
-    [TestCase("Value1Test", "value_1_test")]
-    [TestCase("Value123Test", "value_123_test")]
-    [TestCase("1ValueTest", "1_value_test")]
-    [TestCase("123ValueTest", "123_value_test")]
-    public void PascalCaseToSnakeCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToSnakeCase());
+    [Theory]
+    [InlineData("ValueTest", "value_test")]
+    [InlineData("ValueTest1", "value_test_1")]
+    [InlineData("ValueTest123", "value_test_123")]
+    [InlineData("Value1Test", "value_1_test")]
+    [InlineData("Value123Test", "value_123_test")]
+    [InlineData("1ValueTest", "1_value_test")]
+    [InlineData("123ValueTest", "123_value_test")]
+    public void PascalCaseToSnakeCaseTest(string value, string expected) => Assert.Equal(expected, value.ToSnakeCase());
 
-    [TestCase("value_test", "value_test")]
-    [TestCase("value_test_1", "value_test_1")]
-    [TestCase("value_test_123", "value_test_123")]
-    [TestCase("Value_Test", "value_test")]
-    [TestCase("Value_Test_1", "value_test_1")]
-    [TestCase("Value_Test_123", "value_test_123")]
-    public void SnakeCaseToSnakeCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToSnakeCase());
+    [Theory]
+    [InlineData("value_test", "value_test")]
+    [InlineData("value_test_1", "value_test_1")]
+    [InlineData("value_test_123", "value_test_123")]
+    [InlineData("Value_Test", "value_test")]
+    [InlineData("Value_Test_1", "value_test_1")]
+    [InlineData("Value_Test_123", "value_test_123")]
+    public void SnakeCaseToSnakeCaseTest(string value, string expected) => Assert.Equal(expected, value.ToSnakeCase());
 
-    [TestCase("value-test", "value_test")]
-    [TestCase("value-test-1", "value_test_1")]
-    [TestCase("value-test-123", "value_test_123")]
-    [TestCase("Value-Test", "value_test")]
-    [TestCase("Value-Test-1", "value_test_1")]
-    [TestCase("Value-Test-123", "value_test_123")]
-    public void KebabCaseToSnakeCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToSnakeCase());
+    [Theory]
+    [InlineData("value-test", "value_test")]
+    [InlineData("value-test-1", "value_test_1")]
+    [InlineData("value-test-123", "value_test_123")]
+    [InlineData("Value-Test", "value_test")]
+    [InlineData("Value-Test-1", "value_test_1")]
+    [InlineData("Value-Test-123", "value_test_123")]
+    public void KebabCaseToSnakeCaseTest(string value, string expected) => Assert.Equal(expected, value.ToSnakeCase());
 
     // ----- To Kebab Case -----
 
-    [TestCase("", "")]
-    [TestCase(null, "")]
-    public void ToKebabCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToKebabCase());
+    [Theory]
+    [InlineData("", "")]
+    [InlineData(null, "")]
+    public void ToKebabCaseTest(string value, string expected) => Assert.Equal(expected, value.ToKebabCase());
 
-    [TestCase("ValueTest", "value-test")]
-    [TestCase("ValueTest1", "value-test-1")]
-    [TestCase("ValueTest123", "value-test-123")]
-    [TestCase("Value1Test", "value-1-test")]
-    [TestCase("Value123Test", "value-123-test")]
-    [TestCase("1ValueTest", "1-value-test")]
-    [TestCase("123ValueTest", "123-value-test")]
-    public void PascalCaseToKebabCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToKebabCase());
+    [Theory]
+    [InlineData("ValueTest", "value-test")]
+    [InlineData("ValueTest1", "value-test-1")]
+    [InlineData("ValueTest123", "value-test-123")]
+    [InlineData("Value1Test", "value-1-test")]
+    [InlineData("Value123Test", "value-123-test")]
+    [InlineData("1ValueTest", "1-value-test")]
+    [InlineData("123ValueTest", "123-value-test")]
+    public void PascalCaseToKebabCaseTest(string value, string expected) => Assert.Equal(expected, value.ToKebabCase());
 
-    [TestCase("value_test", "value-test")]
-    [TestCase("value_test_1", "value-test-1")]
-    [TestCase("value_test_123", "value-test-123")]
-    [TestCase("Value_Test", "value-test")]
-    [TestCase("Value_Test_1", "value-test-1")]
-    [TestCase("Value_Test_123", "value-test-123")]
-    public void SnakeCaseToKebabCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToKebabCase());
+    [Theory]
+    [InlineData("value_test", "value-test")]
+    [InlineData("value_test_1", "value-test-1")]
+    [InlineData("value_test_123", "value-test-123")]
+    [InlineData("Value_Test", "value-test")]
+    [InlineData("Value_Test_1", "value-test-1")]
+    [InlineData("Value_Test_123", "value-test-123")]
+    public void SnakeCaseToKebabCaseTest(string value, string expected) => Assert.Equal(expected, value.ToKebabCase());
 
-    [TestCase("value-test", "value-test")]
-    [TestCase("value-test-1", "value-test-1")]
-    [TestCase("value-test-123", "value-test-123")]
-    [TestCase("Value-Test", "value-test")]
-    [TestCase("Value-Test-1", "value-test-1")]
-    [TestCase("Value-Test-123", "value-test-123")]
-    public void KebabCaseToKebabCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToKebabCase());
+    [Theory]
+    [InlineData("value-test", "value-test")]
+    [InlineData("value-test-1", "value-test-1")]
+    [InlineData("value-test-123", "value-test-123")]
+    [InlineData("Value-Test", "value-test")]
+    [InlineData("Value-Test-1", "value-test-1")]
+    [InlineData("Value-Test-123", "value-test-123")]
+    public void KebabCaseToKebabCaseTest(string value, string expected) => Assert.Equal(expected, value.ToKebabCase());
 }

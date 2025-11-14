@@ -1,5 +1,5 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 
 #pragma warning disable CS0618
 
@@ -7,6 +7,8 @@ namespace Maestria.Extensions.Test.CSharp;
 
 public class ExceptionExtensionsTest
 {
+    private readonly string _currentFilePath = new System.Diagnostics.StackTrace(true).GetFrame(0)!.GetFileName();
+
     #region Nested classes to test
 
     public class MyExceptionTest
@@ -26,7 +28,7 @@ public class ExceptionExtensionsTest
 
     #endregion
 
-    //[Test]
+    //[Fact]
     public void ToLogString()
     {
         try
@@ -46,11 +48,11 @@ StackTrace:    at System.Number.StringToNumber(ReadOnlySpan`1 str, NumberStyles 
    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest2.Execute(String value) in {_currentFilePath}:line 18
    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest3.Execute(String value) in {_currentFilePath}:line 23
    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogString() in {_currentFilePath}:line 34";
-            Assert.AreEqual(expected.Replace("\r\n", "\n"), logMsg.Replace("\r\n", "\n"));
+            Assert.Equal(expected.Replace("\r\n", "\n"), logMsg.Replace("\r\n", "\n"));
         }
     }
 
-    //[Test]
+    //[Fact]
     public void ToLogString_OneInner()
     {
         try
@@ -78,12 +80,12 @@ StackTrace:    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogS
    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest2.Execute(String value) in {_currentFilePath}:line 18
    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest3.Execute(String value) in {_currentFilePath}:line 23
    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogString_OneInner() in {_currentFilePath}:line 58";
-                Assert.AreEqual(expected.Replace("\r\n", "\n"), logMsg.Replace("\r\n", "\n"));
+                Assert.Equal(expected.Replace("\r\n", "\n"), logMsg.Replace("\r\n", "\n"));
             }
         }
     }
 
-    //[Test]
+    //[Fact]
     public void ToLogString_TwoInner()
     {
         try
@@ -120,26 +122,19 @@ StackTrace:    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogS
    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest2.Execute(String value) in {_currentFilePath}:line 18
    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest3.Execute(String value) in {_currentFilePath}:line 23
    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogString_TwoInner() in {_currentFilePath}:line 91";
-                Assert.AreEqual(expected.Replace("\r\n", "\n"), logMsg.Replace("\r\n", "\n"));
+                Assert.Equal(expected.Replace("\r\n", "\n"), logMsg.Replace("\r\n", "\n"));
             }
         }
     }
 
-    private string _currentFilePath;
-    [OneTimeSetUp]
-    public void Init()
-    {
-        _currentFilePath = new System.Diagnostics.StackTrace(true).GetFrame(0).GetFileName();
-    }
-
-    [Test]
+    [Fact]
     public void GetMostInner()
     {
         var ex1 = new Exception("exception 1");
         var ex2 = new Exception("exception 2", ex1);
         var ex3 = new Exception("exception 3", ex2);
-        Assert.AreSame(ex1, ex3.GetMostInner());
-        Assert.AreSame(ex1, ex1.GetMostInner());
+        Assert.Same(ex1, ex3.GetMostInner());
+        Assert.Same(ex1, ex1.GetMostInner());
     }
 }
 

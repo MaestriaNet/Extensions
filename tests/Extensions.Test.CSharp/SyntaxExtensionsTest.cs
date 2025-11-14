@@ -1,10 +1,10 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace Maestria.Extensions.Test.CSharp;
 
 public class SyntaxExtensionsTest
 {
-    [Test]
+    [Fact]
     public void OutVar()
     {
         var executionPipelineResult = "abc123def"
@@ -12,23 +12,23 @@ public class SyntaxExtensionsTest
             .OutVar(out var onlyNumbers)
             .Substring(0, 1);
 
-        Assert.AreEqual("123", onlyNumbers);
-        Assert.AreEqual("1", executionPipelineResult);
+        Assert.Equal("123", onlyNumbers);
+        Assert.Equal("1", executionPipelineResult);
     }
 
-    [Test]
+    [Fact]
     public void LimitMaxAtTest()
     {
-        Assert.AreEqual(10, 10.LimitMaxAt(15));
-        Assert.AreEqual(15, 15.LimitMaxAt(15));
-        Assert.AreEqual(15, 20.LimitMaxAt(15));
+        Assert.Equal(10, 10.LimitMaxAt(15));
+        Assert.Equal(15, 15.LimitMaxAt(15));
+        Assert.Equal(15, 20.LimitMaxAt(15));
     }
 
-    [Test]
+    [Fact]
     public void LimitMinAtTest()
     {
-        Assert.AreEqual(15, 10.LimitMinAt(15));
-        Assert.AreEqual(15, 15.LimitMinAt(15));
-        Assert.AreEqual(20, 20.LimitMinAt(15));
+        Assert.Equal(15, 10.LimitMinAt(15));
+        Assert.Equal(15, 15.LimitMinAt(15));
+        Assert.Equal(20, 20.LimitMinAt(15));
     }
 }

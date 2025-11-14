@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using NUnit.Framework;
+using Xunit;
 
 namespace Maestria.Extensions.Test.CSharp;
 
@@ -20,21 +20,28 @@ public enum Color
 
 public class EnumTest
 {
-    [TestCase(Color.Red, "Red color")]
-    [TestCase(Color.Blue, "Blue")]
-    [TestCase(Color.Green, "Green color")]
-    public void GetDisplayName(Color value, string expected) => Assert.AreEqual(expected, value.GetDisplayName());
+    [Theory]
+    [InlineData(Color.Red, "Red color")]
+    [InlineData(Color.Blue, "Blue")]
+    [InlineData(Color.Green, "Green color")]
+    public void GetDisplayName(Color value, string expected) => Assert.Equal(expected, value.GetDisplayName());
 
-    [TestCase(Color.Red, "Red color description")]
-    [TestCase(Color.Blue, "Blue color description")]
-    [TestCase(Color.Green, "Green color description from DescriptionAttribute")]
-    public void GetDescription(Color value, string expected) => Assert.AreEqual(expected, value.GetDescription());
+    [Theory]
+    [InlineData(Color.Red, "Red color description")]
+    [InlineData(Color.Blue, "Blue color description")]
+    [InlineData(Color.Green, "Green color description from DescriptionAttribute")]
+    public void GetDescription(Color value, string expected) => Assert.Equal(expected, value.GetDescription());
 
-    [Test]
+    [Fact]
     public void GetValues_GenericOverload() =>
-        Assert.AreEqual(new[] {Color.Red, Color.Blue, Color.Green}, EnumExtensions.GetValues<Color>());
+        Assert.Equal(new[] {Color.Red, Color.Blue, Color.Green}, EnumExtensions.GetValues<Color>());
 
-    [Test]
-    public void GetValues() =>
-        Assert.AreEqual(new[] {Color.Red, Color.Blue, Color.Green}, EnumExtensions.GetValues(typeof(Color)));
+    [Fact]
+    public void GetValues()
+    {
+        var values = EnumExtensions.GetValues(typeof(Color));
+        Assert.Equal(Color.Red, values[0]);
+        Assert.Equal(Color.Blue, values[1]);
+        Assert.Equal(Color.Green, values[2]);
+    }
 }
