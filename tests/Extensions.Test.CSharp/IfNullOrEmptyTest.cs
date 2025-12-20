@@ -1,8 +1,9 @@
 using NUnit.Framework;
 using Maestria.Extensions;
 using System;
+using Extensions.Test.CSharp;
 
-namespace Extensions.Test.CSharp;
+namespace Maestria.Extensions.Test.CSharp;
 
 public class IfNullOrEmptyTest
 {
