@@ -1,7 +1,8 @@
+using Extensions.Test.CSharp;
 using Maestria.Extensions;
 using NUnit.Framework;
 
-namespace Extensions.Test.CSharp;
+namespace Maestria.Extensions.Test.CSharp;
 
 public class NullIfTest
 {

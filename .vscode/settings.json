@@ -1,0 +1,10 @@
+{
+    // Configure the test explorer to find test projects ending in 'Tests.csproj' anywhere in the workspace
+    "dotnet-test-explorer.testProjectPath": "tests/**/*.fsproj",
+
+    // Optional: add arguments for code coverage collection
+    "dotnet-test-explorer.testArguments": "/p:CollectCoverage=true /p:CoverletOutputFormat=lcov",
+
+    // Use the Testing Platform Protocol for newer test frameworks (if using C# Dev Kit)
+    "dotnet.testWindow.useTestingPlatformProtocol": true
+}
