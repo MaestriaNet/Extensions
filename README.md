@@ -4,6 +4,17 @@
 [![NuGet Downloads](https://img.shields.io/nuget/dt/Maestria.Extensions)](https://www.nuget.org/packages/Maestria.Extensions/)
 [![Apimundo](https://img.shields.io/badge/Maestria.Extensions%20API-Apimundo-728199.svg)](https://apimundo.com/organizations/nuget-org/nuget-feeds/public/packages/Maestria.Extensions/versions/latest?tab=types)
 
+---
+
+[![buy-me-a-coffee](https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/buy-me-a-coffee.png)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)
+[![smile.png](https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/smile.png)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)
+
+If my contributions helped you, please help me buy a coffee :D
+
+[![donate](https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/btn_donate.gif)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)
+
+---
+
 ## What is Maestria.Extensions?
 
 Extension function pack to increase productivity and improve source code writing.
