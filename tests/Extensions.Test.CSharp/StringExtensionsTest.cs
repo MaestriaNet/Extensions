@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Linq;
 using NUnit.Framework;
 
@@ -275,4 +276,152 @@ public class StringExtensionsTest
     [TestCase("Value-Test-1", "value-test-1")]
     [TestCase("Value-Test-123", "value-test-123")]
     public void KebabCaseToKebabCaseTest(string value, string expected) => Assert.AreEqual(expected, value.ToKebabCase());
+
+    // Tests from F# StringExtensionsTest
+    [Test]
+    public void TrimStart_Test()
+    {
+        Assert.AreEqual("Value", "TestValue".TrimStart("Test"));
+        Assert.AreEqual("TestValue", "TestValue".TrimStart("Value"));
+        Assert.AreEqual("TestValue", "TestValue".TrimStart(Consts.NullString));
+        Assert.AreEqual("", Consts.NullString.TrimStart("Test"));
+        Assert.AreEqual("", Consts.NullString.TrimStart(Consts.NullString));
+        Assert.AreEqual("Value", "TestTestValue".TrimStart("Test"));
+    }
+
+    [Test]
+    public void TrimEnd_Test()
+    {
+        Assert.AreEqual("Test", "TestValue".TrimEnd("Value"));
+        Assert.AreEqual("TestValue", "TestValue".TrimEnd("Test"));
+        Assert.AreEqual("TestValue", "TestValue".TrimEnd(Consts.NullString));
+        Assert.AreEqual("", Consts.NullString.TrimEnd("Value"));
+        Assert.AreEqual("", Consts.NullString.TrimEnd(Consts.NullString));
+        Assert.AreEqual("Test", "TestValueValue".TrimEnd("Value"));
+    }
+
+    [Test]
+    public void AddToBeginningIfNotStartsWith_Test()
+    {
+        Assert.AreEqual("TestValue", "TestValue".AddToBeginningIfNotStartsWith("Test"));
+        Assert.AreEqual("TestValue", "Value".AddToBeginningIfNotStartsWith("Test"));
+        Assert.AreEqual("TestValue", Consts.NullString.AddToBeginningIfNotStartsWith("TestValue"));
+        Assert.AreEqual("TestValue", "TestValue".AddToBeginningIfNotStartsWith(Consts.NullString));
+        Assert.AreEqual("", Consts.NullString.AddToBeginningIfNotStartsWith(Consts.NullString));
+    }
+
+    [Test]
+    public void AddToEndIfNotEndsWith_Test()
+    {
+        Assert.AreEqual("TestValue", "TestValue".AddToEndIfNotEndsWith("Value"));
+        Assert.AreEqual("TestValue", "Test".AddToEndIfNotEndsWith("Value"));
+        Assert.AreEqual("TestValue", Consts.NullString.AddToEndIfNotEndsWith("TestValue"));
+        Assert.AreEqual("TestValue", "TestValue".AddToEndIfNotEndsWith(Consts.NullString));
+        Assert.AreEqual("", Consts.NullString.AddToEndIfNotEndsWith(Consts.NullString));
+    }
+
+    [Test]
+    public void AddToBeginningIfHasValue_Test()
+    {
+        Assert.AreEqual("", "".AddToBeginningIfHasValue("Mrs."));
+        Assert.AreEqual("Mrs. Jhon", "Jhon".AddToBeginningIfHasValue("Mrs. "));
+        Assert.AreEqual("", Consts.NullString.AddToBeginningIfHasValue("Mrs."));
+    }
+
+    [Test]
+    public void AddToEndIfHasValue_Test()
+    {
+        Assert.AreEqual("", "".AddToEndIfHasValue("Jhon"));
+        Assert.AreEqual("Mrs. Jhon", "Mrs. ".AddToEndIfHasValue("Jhon"));
+        Assert.AreEqual("", Consts.NullString.AddToEndIfHasValue("Jhon"));
+    }
+
+    [Test]
+    public void Format_Test()
+    {
+        Assert.AreEqual("My first name is Jhon and my last name is Smith",
+            "My first name is {0} and my last name is {1}".Format("Jhon", "Smith"));
+        Assert.AreEqual("My first name is {0} and my last name is {1}",
+            "My first name is {0} and my last name is {1}".Format());
+        Assert.AreEqual("", Consts.NullString.Format("Jhon", "Smith"));
+    }
+
+    [Test]
+    public void IsNullOrEmpty_Test()
+    {
+        Assert.IsTrue(Consts.NullString.IsNullOrEmpty());
+        Assert.IsTrue("".IsNullOrEmpty());
+        Assert.IsFalse(" ".IsNullOrEmpty());
+    }
+
+    [Test]
+    public void IsNullOrWhiteSpace_Test()
+    {
+        Assert.IsTrue(Consts.NullString.IsNullOrWhiteSpace());
+        Assert.IsTrue("".IsNullOrWhiteSpace());
+        Assert.IsTrue(" ".IsNullOrWhiteSpace());
+        Assert.IsFalse("-".IsNullOrWhiteSpace());
+    }
+
+    [Test]
+    public void HasValue_Test()
+    {
+        Assert.IsFalse(Consts.NullString.HasValue());
+        Assert.IsFalse("".HasValue());
+        Assert.IsFalse(" ".HasValue());
+        Assert.IsTrue("-".HasValue());
+    }
+
+    [Test]
+    public void EqualsIgnoreCase_Test()
+    {
+        Assert.IsTrue("Test".EqualsIgnoreCase("Test"));
+        Assert.IsTrue("Test".EqualsIgnoreCase("test"));
+        Assert.IsTrue("Test".EqualsIgnoreCase("test "));
+        Assert.IsFalse("Test".EqualsIgnoreCase("test ", false));
+        Assert.IsFalse("Test".EqualsIgnoreCase(Consts.NullString, false));
+        Assert.IsTrue(Consts.NullString.EqualsIgnoreCase(Consts.NullString, false));
+        Assert.IsTrue(Consts.NullString.EqualsIgnoreCase("", false));
+        Assert.IsTrue("".EqualsIgnoreCase(Consts.NullString, false));
+    }
+
+    [TestCase("0123456789", "0123456789")]
+    [TestCase("a0a1a2a3a4a5a6a7a8a9", "0123456789")]
+    [TestCase(null, "")]
+    [TestCase("123.456", "123456")]
+    public void OnlyNumbers_Test(string value, string expected)
+    {
+        Assert.AreEqual(expected, value.OnlyNumbers());
+    }
+
+    [TestCase("1a23.45a6", "123.456")]
+    [TestCase("1,234.56", "1234.56")]
+    public void OnlyNumbers_WithFloatingPoint(string value, string expected)
+    {
+        Assert.AreEqual(expected, value.OnlyNumbers(true));
+    }
+
+    [TestCase("-1a2a3a456", "-123456")]
+    public void OnlyNumbers_WithNegativeSign(string value, string expected)
+    {
+        Assert.AreEqual(expected, value.OnlyNumbers(allowNegativeSign: true));
+    }
+
+    [Test]
+    public void OnlyNumbers_WithFloatingPointAndNegativeSign()
+    {
+        Assert.AreEqual("-1234.56", "-1,234.56".OnlyNumbers(true, true, CultureInfo.InvariantCulture));
+        Assert.AreEqual("-1234.56", "-1,234.56".OnlyNumbers(true, true, Consts.CultureEnUs));
+        Assert.AreEqual("-1234,56", "-1.234,56".OnlyNumbers(true, true, Consts.CulturePtBr));
+    }
+
+    [TestCase("áéíóú", "aeiou")]
+    [TestCase("âêîôû", "aeiou")]
+    [TestCase("ãẽĩõũ", "aeiou")]
+    [TestCase("àèìòù", "aeiou")]
+    [TestCase("abc !@#$%&*()[]{}:;<>", "abc !@#$%&*()[]{}:;<>")]
+    public void RemoveAccents_Test(string value, string expected)
+    {
+        Assert.AreEqual(expected, value.RemoveAccents());
+    }
 }
