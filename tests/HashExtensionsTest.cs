@@ -1,5 +1,5 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 using Maestria.Extensions;
 
 namespace Maestria.Extensions.Test.CSharp;
@@ -15,37 +15,37 @@ public class HashExtensionsTest
     private const string Sha384Expected = "25c8c1a053eff04f331d43434fcffe022a2747ba3d61c2406468d9cdfd6e329115f814bf3d6e2d9ddeb2cf1964cd1f89";
     private const string Sha512Expected = "782be31c425eff35b3028fc0a2b3535392605821467c713370f16fa96c94eb07309dc19575d819b11fe42d387d211c2caf404d2b46ee9cfe0333dd96bb6a3029";
 
-    [Test]
+    [Fact]
     public void MD5HashTest()
     {
-        Assert.AreEqual(Md5Expected, InputValue.GetHashMd5());
+        Assert.Equal(Md5Expected, InputValue.GetHashMd5());
     }
 
-    [Test]
+    [Fact]
     public void SHA1HashTest()
     {
-        Assert.AreEqual(Sha1Expected, InputValue.GetHashSha1());
+        Assert.Equal(Sha1Expected, InputValue.GetHashSha1());
     }
 
-    [Test]
+    [Fact]
     public void SHA256HashTest()
     {
-        Assert.AreEqual(Sha256Expected, InputValue.GetHashSha256());
+        Assert.Equal(Sha256Expected, InputValue.GetHashSha256());
     }
 
-    [Test]
+    [Fact]
     public void SHA384HashTest()
     {
-        Assert.AreEqual(Sha384Expected, InputValue.GetHashSha384());
+        Assert.Equal(Sha384Expected, InputValue.GetHashSha384());
     }
 
-    [Test]
+    [Fact]
     public void SHA512HashTest()
     {
-        Assert.AreEqual(Sha512Expected, InputValue.GetHashSha512());
+        Assert.Equal(Sha512Expected, InputValue.GetHashSha512());
     }
 
-    [Test]
+    [Fact]
     public void NullNotSupportedException()
     {
         Assert.Throws<ArgumentNullException>(() =>

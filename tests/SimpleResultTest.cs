@@ -1,5 +1,5 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 
 namespace Maestria.Extensions.Test.CSharp;
 
@@ -7,58 +7,58 @@ public class SimpleResultTest
 {
     const string ErrorMessage = "Test";
 
-    [Test]
+    [Fact]
     public void FailConstructorTest()
     {
         var result = new SimpleResult();
         Assert.False(result.Success);
         Assert.False(result);
-        Assert.IsNull(result.Message);
+        Assert.Null(result.Message);
 
         result = new SimpleResult(new Exception(ErrorMessage));
         Assert.False(result.Success);
         Assert.False(result);
-        Assert.AreEqual(ErrorMessage, result.Message);
+        Assert.Equal(ErrorMessage, result.Message);
     }
 
-    [Test]
+    [Fact]
     public void SuccessConstructorTest()
     {
         var result = new SimpleResult(true);
         Assert.True(result.Success);
         Assert.True(result);
-        Assert.IsNull(result.Message);
+        Assert.Null(result.Message);
     }
 
-    [Test]
+    [Fact]
     public void SuccessImplicitTest()
     {
         SimpleResult result = true;
         Assert.True(result.Success);
         Assert.True(result);
-        Assert.IsNull(result.Message);
+        Assert.Null(result.Message);
     }
 
-    [Test]
+    [Fact]
     public void FailImplicitTest()
     {
         SimpleResult result = false;
         Assert.False(result.Success);
         Assert.False(result);
-        Assert.IsNull(result.Message);
+        Assert.Null(result.Message);
 
         result = ErrorMessage;
         Assert.False(result.Success);
         Assert.False(result);
-        Assert.AreEqual(ErrorMessage, result.Message);
+        Assert.Equal(ErrorMessage, result.Message);
 
         result = new Exception(ErrorMessage);
         Assert.False(result.Success);
         Assert.False(result);
-        Assert.AreEqual(ErrorMessage, result.Message);
+        Assert.Equal(ErrorMessage, result.Message);
     }
 
-    [Test]
+    [Fact]
     public void ImplicitConversionTest()
     {
         var source = new SimpleResult(true, "Test");
@@ -67,10 +67,10 @@ public class SimpleResultTest
         SimpleResult<int> destinationLostingValue = source;
         SimpleResult destinationWhitoutValue = sourceValue;
 
-        Assert.IsTrue(destinationLostingValue.Success);
-        Assert.IsTrue(destinationWhitoutValue.Success);
-        Assert.AreEqual("Test", destinationLostingValue.Message);
-        Assert.AreEqual("Test", destinationWhitoutValue.Message);
-        Assert.AreEqual(0, destinationLostingValue.Value);
+        Assert.True(destinationLostingValue.Success);
+        Assert.True(destinationWhitoutValue.Success);
+        Assert.Equal("Test", destinationLostingValue.Message);
+        Assert.Equal("Test", destinationWhitoutValue.Message);
+        Assert.Equal(0, destinationLostingValue.Value);
     }
 }
