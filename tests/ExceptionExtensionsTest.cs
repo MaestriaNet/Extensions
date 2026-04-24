@@ -42,10 +42,10 @@ Type: System.FormatException
 StackTrace:    at System.Number.StringToNumber(ReadOnlySpan`1 str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
    at System.Number.ParseInt32(ReadOnlySpan`1 s, NumberStyles style, NumberFormatInfo info)
    at System.Int32.Parse(String s)
-   at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest.Execute(String value) in {_currentFilePath}:line 13
-   at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest2.Execute(String value) in {_currentFilePath}:line 18
-   at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest3.Execute(String value) in {_currentFilePath}:line 23
-   at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogString() in {_currentFilePath}:line 34";
+   at Maestria.Extensions.Tests.ExceptionExtensionsTest.MyExceptionTest.Execute(String value) in {_currentFilePath}:line 13
+   at Maestria.Extensions.Tests.ExceptionExtensionsTest.MyExceptionTest2.Execute(String value) in {_currentFilePath}:line 18
+   at Maestria.Extensions.Tests.ExceptionExtensionsTest.MyExceptionTest3.Execute(String value) in {_currentFilePath}:line 23
+   at Maestria.Extensions.Tests.ExceptionExtensionsTest.ToLogString() in {_currentFilePath}:line 34";
             Assert.AreEqual(expected.Replace("\r\n", "\n"), logMsg.Replace("\r\n", "\n"));
         }
     }
@@ -70,14 +70,14 @@ StackTrace:    at System.Number.StringToNumber(ReadOnlySpan`1 str, NumberStyles 
                 string expected = $@"Error to execute my method
 Type: System.Exception
 Inner: System.FormatException -> Input string was not in a correct format.
-StackTrace:    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogString_OneInner() in {_currentFilePath}:line 64
+StackTrace:    at Maestria.Extensions.Tests.ExceptionExtensionsTest.ToLogString_OneInner() in {_currentFilePath}:line 64
    at System.Number.StringToNumber(ReadOnlySpan`1 str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
    at System.Number.ParseInt32(ReadOnlySpan`1 s, NumberStyles style, NumberFormatInfo info)
    at System.Int32.Parse(String s)
-   at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest.Execute(String value) in {_currentFilePath}:line 13
-   at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest2.Execute(String value) in {_currentFilePath}:line 18
-   at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest3.Execute(String value) in {_currentFilePath}:line 23
-   at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogString_OneInner() in {_currentFilePath}:line 58";
+   at Maestria.Extensions.Tests.ExceptionExtensionsTest.MyExceptionTest.Execute(String value) in {_currentFilePath}:line 13
+   at Maestria.Extensions.Tests.ExceptionExtensionsTest.MyExceptionTest2.Execute(String value) in {_currentFilePath}:line 18
+   at Maestria.Extensions.Tests.ExceptionExtensionsTest.MyExceptionTest3.Execute(String value) in {_currentFilePath}:line 23
+   at Maestria.Extensions.Tests.ExceptionExtensionsTest.ToLogString_OneInner() in {_currentFilePath}:line 58";
                 Assert.AreEqual(expected.Replace("\r\n", "\n"), logMsg.Replace("\r\n", "\n"));
             }
         }
@@ -111,15 +111,15 @@ StackTrace:    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogS
 Type: System.Exception
 Inner 1: System.Exception -> First exception
 Inner 0: System.FormatException -> Input string was not in a correct format.
-StackTrace:    at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogString_TwoInner() in {_currentFilePath}:line 103
-   at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogString_TwoInner() in {_currentFilePath}:line 99
+StackTrace:    at Maestria.Extensions.Tests.ExceptionExtensionsTest.ToLogString_TwoInner() in {_currentFilePath}:line 103
+   at Maestria.Extensions.Tests.ExceptionExtensionsTest.ToLogString_TwoInner() in {_currentFilePath}:line 99
    at System.Number.StringToNumber(ReadOnlySpan`1 str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
    at System.Number.ParseInt32(ReadOnlySpan`1 s, NumberStyles style, NumberFormatInfo info)
    at System.Int32.Parse(String s)
-   at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest.Execute(String value) in {_currentFilePath}:line 13
-   at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest2.Execute(String value) in {_currentFilePath}:line 18
-   at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.MyExceptionTest3.Execute(String value) in {_currentFilePath}:line 23
-   at Maestria.Extensions.Test.CSharp.ExceptionExtensionsTest.ToLogString_TwoInner() in {_currentFilePath}:line 91";
+   at Maestria.Extensions.Tests.ExceptionExtensionsTest.MyExceptionTest.Execute(String value) in {_currentFilePath}:line 13
+   at Maestria.Extensions.Tests.ExceptionExtensionsTest.MyExceptionTest2.Execute(String value) in {_currentFilePath}:line 18
+   at Maestria.Extensions.Tests.ExceptionExtensionsTest.MyExceptionTest3.Execute(String value) in {_currentFilePath}:line 23
+   at Maestria.Extensions.Tests.ExceptionExtensionsTest.ToLogString_TwoInner() in {_currentFilePath}:line 91";
                 Assert.AreEqual(expected.Replace("\r\n", "\n"), logMsg.Replace("\r\n", "\n"));
             }
         }

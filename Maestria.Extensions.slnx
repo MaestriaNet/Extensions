@@ -5,8 +5,6 @@
     <File Path="CLAUDE.md" />
     <File Path="README.md" />
   </Folder>
-  <Folder Name="/tests/">
-    <Project Path="tests/Extensions.Test.CSharp/Extensions.Test.CSharp.csproj" />
-  </Folder>
   <Project Path="src/Extensions.csproj" />
+  <Project Path="tests/Extensions.Tests.csproj" />
 </Solution>
