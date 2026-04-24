@@ -41,10 +41,12 @@ jobs:
           echo "github.event.pull_request.head.sha: ${{ github.event.pull_request.head.sha }}"
 
       - name: Checkout code - Preview version
+        id: checkout-code-preview
         if: startsWith(github.ref_name, 'release/')
         uses: actions/checkout@v5
 
       - name: Checkout code - Stable version building from release branch merged to main
+        id: checkout-code-stable
         if: |
           github.event_name == 'pull_request' &&
           github.base_ref == 'main' &&
@@ -56,13 +58,18 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Show branch and commit
+        if: |
+          (steps.checkout-code-preview.outcome == 'success') ||
+          (steps.checkout-code-stable.outcome == 'success')
         run: |
           git rev-parse --abbrev-ref HEAD
           git rev-parse HEAD
 
       - name: "Determine version: preview - Publish release branch"
         id: version-preview
-        if: startsWith(github.ref_name, 'release/')
+        if: |
+          success() &&
+          startsWith(github.ref_name, 'release/')
         run: |
           # Obtém o prefixo da versão a partir do nome do branch de release
           VERSION_PREFIX="${GITHUB_REF_NAME##*/}"          
@@ -78,6 +85,7 @@ jobs:
       - name: "Determine version: stable - Publish main branch, after release pull request is merged"
         id: version-stable
         if: |
+          success() &&
           github.event_name == 'pull_request' &&
           github.base_ref == 'main' &&
           startsWith(github.head_ref, 'release/') &&
@@ -95,12 +103,16 @@ jobs:
           echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
 
       - name: Abort if version was indeterminate
-        if: steps.version-preview.outputs.version_determined == '' && steps.version-stable.outputs.version_determined == ''
+        if: |
+          success() &&
+          steps.version-preview.outputs.version_determined == '' && 
+          steps.version-stable.outputs.version_determined == ''
         uses: actions/github-script@v8
         with:
           script: core.setFailed("Version could not be determined to branch workflow.");
 
       - name: Validate determined version prefix with csproj file # Validação de segurança
+        if: success()
         run: |
           CSPROJ_VERSION_PREFIX=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" src/Version.props)
           echo "CSPROJ_VERSION_PREFIX: $CSPROJ_VERSION_PREFIX"
@@ -111,33 +123,42 @@ jobs:
           fi
 
       - name: Setup .NET
+        if: success()
         uses: actions/setup-dotnet@v5
         with:
           dotnet-version: "10.0"
 
       - name: Display .NET Version
+        if: success()
         run: dotnet --version
 
       - name: Build
+        if: success()
         run: dotnet build --configuration Release
 
       - name: Test
+        if: success()
         run: dotnet test --configuration Release --no-build
 
       - name: Pack
+        if: success()
         run: dotnet pack src/Extensions.csproj --configuration Release --no-build -p:VersionPrefix="$VERSION_PREFIX" -p:VersionSuffix="$VERSION_SUFFIX"
 
       - name: Upload nupkg artifact to github
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: nuget-package
           path: src/bin/Release/*.nupkg
 
       - name: Publish version to MyGet (preview)
+        if: success()
         run: dotnet nuget push src/bin/Release/*.nupkg --source https://www.myget.org/F/maestrianet/api/v3/index.json --api-key "${{ secrets.MYGET_API_KEY }}"
 
       - name: Create pull request
-        if: startsWith(github.ref_name, 'release/')
+        if: |
+          success() &&
+          startsWith(github.ref_name, 'release/')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -154,6 +175,7 @@ jobs:
 
       - name: Publish version to NuGet (stable)
         if: |
+          success() &&
           github.event_name == 'pull_request' &&
           github.base_ref == 'main' &&
           startsWith(github.head_ref, 'release/') &&
@@ -162,6 +184,7 @@ jobs:
 
       - name: Create release
         if: |
+          success() &&
           github.event_name == 'pull_request' &&
           github.base_ref == 'main' &&
           startsWith(github.head_ref, 'release/') &&
