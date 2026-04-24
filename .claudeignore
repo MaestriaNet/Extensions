@@ -1,0 +1,163 @@
+# =============================================================================
+# .claudeignore — C# / .NET Project
+# =============================================================================
+# Reduz o consumo de tokens excluindo arquivos irrelevantes do contexto do
+# Claude Code. Funciona como .gitignore: padrões de glob, diretorios com /.
+#
+# IMPORTANTE: .claudeignore NÃO bloqueia acesso — Claude ainda pode ler esses
+# arquivos se solicitado explicitamente. Para bloquear acesso a segredos de
+# verdade (API keys, credenciais), use .claude/settings.json com
+# "permissions.deny". Veja: https://docs.claude.com/en/docs/claude-code/settings
+# =============================================================================
+
+
+# -----------------------------------------------------------------------------
+# Build outputs & intermediários
+# -----------------------------------------------------------------------------
+**/bin/
+**/obj/
+**/out/
+**/.vs/
+**/_ReSharper*/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+
+# -----------------------------------------------------------------------------
+# Pacotes restaurados (NuGet)
+# -----------------------------------------------------------------------------
+**/packages/
+**/.nuget/
+**/nuget.cache
+
+
+# -----------------------------------------------------------------------------
+# Publicação / deploy artifacts
+# -----------------------------------------------------------------------------
+**/publish/
+**/artifacts/
+**/drop/
+**/*.nupkg
+**/*.snupkg
+
+
+# -----------------------------------------------------------------------------
+# Cobertura de testes & relatórios
+# -----------------------------------------------------------------------------
+**/TestResults/
+**/coverage/
+**/*.trx
+**/*.coverage
+**/*.coveragexml
+**/lcov.info
+**/opencover.xml
+
+
+# -----------------------------------------------------------------------------
+# Logs e arquivos temporários
+# -----------------------------------------------------------------------------
+**/*.log
+**/*.tmp
+**/*.temp
+**/logs/
+**/tmp/
+**/*.bak
+**/*.orig
+
+
+# -----------------------------------------------------------------------------
+# Segredos & configurações de ambiente local
+# Prefira usar .claude/settings.json → permissions.deny para bloqueio real
+# -----------------------------------------------------------------------------
+.env
+.env.*
+**/appsettings.Local.json
+**/appsettings.Development.json
+**/secrets.json
+**/*.pfx
+**/*.p12
+**/*.key
+**/*.pem
+
+
+# -----------------------------------------------------------------------------
+# Docker
+# -----------------------------------------------------------------------------
+.dockerignore
+**/docker-compose.override.yml
+
+
+# -----------------------------------------------------------------------------
+# Terraform state & cache (se infra estiver no mesmo repo)
+# -----------------------------------------------------------------------------
+**/.terraform/
+**/terraform.tfstate
+**/terraform.tfstate.backup
+**/*.tfvars
+**/.terraformrc
+
+
+# -----------------------------------------------------------------------------
+# IDE / Editor
+# -----------------------------------------------------------------------------
+.idea/
+.vscode/settings.json
+.vscode/launch.json
+.vscode/*.code-workspace
+**/.editorconfig
+
+
+# -----------------------------------------------------------------------------
+# Git internals
+# -----------------------------------------------------------------------------
+.git/
+.gitignore
+
+
+# -----------------------------------------------------------------------------
+# CI/CD — pipelines raramente precisam de contexto para edição de código
+# Remova esta seção se Claude precisar editar workflows do GitHub Actions
+# -----------------------------------------------------------------------------
+.github/
+
+
+# -----------------------------------------------------------------------------
+# Documentação gerada automaticamente
+# -----------------------------------------------------------------------------
+**/docs/_site/
+**/site/
+**/*.xml.doc
+**/DocFX/
+
+
+# -----------------------------------------------------------------------------
+# Assets binários (imagens, fontes, certificados de teste)
+# -----------------------------------------------------------------------------
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.ico
+**/*.svg
+**/*.woff
+**/*.woff2
+**/*.ttf
+**/*.eot
+**/*.pdf
+
+
+# -----------------------------------------------------------------------------
+# Bancos de dados locais / SQLite de desenvolvimento
+# -----------------------------------------------------------------------------
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+**/*.mdf
+**/*.ldf
+
+# -----------------------------------------------------------------------------
+# Outros assistentes de código
+# -----------------------------------------------------------------------------
+.qwen/

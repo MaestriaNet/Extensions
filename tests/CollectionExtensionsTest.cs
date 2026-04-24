@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
@@ -9,6 +10,9 @@ public class CollectionExtensionsTest
 {
     private readonly IEnumerable _enumerable = new List<int> {10, 20, 30};
     private readonly IEnumerable<int> _enumerableTyped = new List<int> {10, 20, 30};
+    private readonly int[] _array = {1, 2, 3, 4, 5};
+    private readonly int[] _emptyArray = System.Array.Empty<int>();
+    private readonly List<int> _nullList = null;
 
     private readonly IDictionary<string, int> _dictionary = new Dictionary<string, int>
     {
@@ -226,5 +230,65 @@ public class CollectionExtensionsTest
                     break;
             }
         }
+    }
+
+    // Tests from F# CollectionExtensionsTest
+    [Test]
+    public void Iterate_ArrayForEachExecute()
+    {
+        _array.Iterate(i => Assert.IsTrue(new[] {1, 2, 3, 4, 5}.Contains(i)));
+    }
+
+    [Test]
+    public void Iterate_EmptyCollectionForEachExecute()
+    {
+        var result = _emptyArray.Iterate(i => { });
+        Assert.AreEqual(_emptyArray, result);
+    }
+
+    [Test]
+    public void Iterate_NullCollectionForEachExecute()
+    {
+        Assert.DoesNotThrow(() =>
+        {
+            var result = _nullList.Iterate(i => { });
+            Assert.AreEqual(_nullList, result);
+        });
+    }
+
+    [Test]
+    public void IsNullOrEmpty_AnyCollectionIsEmptyCheck()
+    {
+        Assert.IsFalse(_array.IsNullOrEmpty());
+    }
+
+    [Test]
+    public void IsNullOrEmpty_EmptyCollectionIsEmptyCheck()
+    {
+        Assert.IsTrue(_emptyArray.IsNullOrEmpty());
+    }
+
+    [Test]
+    public void IsNullOrEmpty_NullCollectionIsEmptyCheck()
+    {
+        Assert.IsTrue(_nullList.IsNullOrEmpty());
+    }
+
+    [Test]
+    public void HasItems_AnyCollectionHasItemsCheck()
+    {
+        Assert.IsTrue(_array.HasItems());
+    }
+
+    [Test]
+    public void HasItems_EmptyCollectionHasItemsCheck()
+    {
+        Assert.IsFalse(_emptyArray.HasItems());
+    }
+
+    [Test]
+    public void HasItems_NullCollectionHasItemsCheck()
+    {
+        Assert.IsFalse(_nullList.HasItems());
     }
 }
