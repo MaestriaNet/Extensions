@@ -104,7 +104,6 @@ jobs:
 
       - name: Abort if version was indeterminate
         if: |
-          success() &&
           steps.version-preview.outputs.version_determined == '' && 
           steps.version-stable.outputs.version_determined == ''
         uses: actions/github-script@v8
@@ -112,7 +111,6 @@ jobs:
           script: core.setFailed("Version could not be determined to branch workflow.");
 
       - name: Validate determined version prefix with csproj file # Validação de segurança
-        if: success()
         run: |
           CSPROJ_VERSION_PREFIX=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" src/Version.props)
           echo "CSPROJ_VERSION_PREFIX: $CSPROJ_VERSION_PREFIX"
@@ -123,42 +121,33 @@ jobs:
           fi
 
       - name: Setup .NET
-        if: success()
         uses: actions/setup-dotnet@v5
         with:
           dotnet-version: "10.0"
 
       - name: Display .NET Version
-        if: success()
         run: dotnet --version
 
       - name: Build
-        if: success()
         run: dotnet build --configuration Release
 
       - name: Test
-        if: success()
         run: dotnet test --configuration Release --no-build
 
       - name: Pack
-        if: success()
         run: dotnet pack src/Extensions.csproj --configuration Release --no-build -p:VersionPrefix="$VERSION_PREFIX" -p:VersionSuffix="$VERSION_SUFFIX"
 
       - name: Upload nupkg artifact to github
-        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: nuget-package
           path: src/bin/Release/*.nupkg
 
       - name: Publish version to MyGet (preview)
-        if: success()
         run: dotnet nuget push src/bin/Release/*.nupkg --source https://www.myget.org/F/maestrianet/api/v3/index.json --api-key "${{ secrets.MYGET_API_KEY }}"
 
       - name: Create pull request
-        if: |
-          success() &&
-          startsWith(github.ref_name, 'release/')
+        if: startsWith(github.ref_name, 'release/')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -175,7 +164,6 @@ jobs:
 
       - name: Publish version to NuGet (stable)
         if: |
-          success() &&
           github.event_name == 'pull_request' &&
           github.base_ref == 'main' &&
           startsWith(github.head_ref, 'release/') &&
@@ -184,7 +172,6 @@ jobs:
 
       - name: Create release
         if: |
-          success() &&
           github.event_name == 'pull_request' &&
           github.base_ref == 'main' &&
           startsWith(github.head_ref, 'release/') &&
