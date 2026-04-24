@@ -1,11 +1,11 @@
 ﻿using System;
-using NUnit.Framework;
+using Xunit;
 
 namespace Maestria.Extensions.Test.CSharp;
 
 public class SyntaxExtensionsTest
 {
-    [Test]
+    [Fact]
     public void OutVar()
     {
         var executionPipelineResult = "abc123def"
@@ -13,86 +13,94 @@ public class SyntaxExtensionsTest
             .OutVar(out var onlyNumbers)
             .Substring(0, 1);
 
-        Assert.AreEqual("123", onlyNumbers);
-        Assert.AreEqual("1", executionPipelineResult);
+        Assert.Equal("123", onlyNumbers);
+        Assert.Equal("1", executionPipelineResult);
     }
 
-    [Test]
+    [Fact]
     public void LimitMaxAtTest()
     {
-        Assert.AreEqual(10, 10.LimitMaxAt(15));
-        Assert.AreEqual(15, 15.LimitMaxAt(15));
-        Assert.AreEqual(15, 20.LimitMaxAt(15));
+        Assert.Equal(10, 10.LimitMaxAt(15));
+        Assert.Equal(15, 15.LimitMaxAt(15));
+        Assert.Equal(15, 20.LimitMaxAt(15));
     }
 
-    [Test]
+    [Fact]
     public void LimitMinAtTest()
     {
-        Assert.AreEqual(15, 10.LimitMinAt(15));
-        Assert.AreEqual(15, 15.LimitMinAt(15));
-        Assert.AreEqual(20, 20.LimitMinAt(15));
+        Assert.Equal(15, 10.LimitMinAt(15));
+        Assert.Equal(15, 15.LimitMinAt(15));
+        Assert.Equal(20, 20.LimitMinAt(15));
     }
 
     // Tests from F# SyntaxExtensionsTest - In
-    [TestCase(MyColor.Red, new[] { MyColor.Red, MyColor.Green, MyColor.Blue })]
-    [TestCase(MyColor.Green, new[] { MyColor.Red, MyColor.Green, MyColor.Blue })]
-    [TestCase(MyColor.Blue, new[] { MyColor.Red, MyColor.Green, MyColor.Blue })]
+    [Theory]
+    [InlineData(MyColor.Red, new[] { MyColor.Red, MyColor.Green, MyColor.Blue })]
+    [InlineData(MyColor.Green, new[] { MyColor.Red, MyColor.Green, MyColor.Blue })]
+    [InlineData(MyColor.Blue, new[] { MyColor.Red, MyColor.Green, MyColor.Blue })]
     public void EnumInArrayGroup(MyColor value, MyColor[] values)
     {
-        Assert.IsTrue(value.In(values));
+        Assert.True(value.In(values));
     }
 
-    [TestCase(MyColor.Yellow, new[] { MyColor.Red, MyColor.Green, MyColor.Blue })]
+    [Theory]
+    [InlineData(MyColor.Yellow, new[] { MyColor.Red, MyColor.Green, MyColor.Blue })]
     public void EnumNotInArrayGroup(MyColor value, MyColor[] values)
     {
-        Assert.IsFalse(value.In(values));
+        Assert.False(value.In(values));
     }
 
-    [TestCase(5, new[] { 5, 10, 15 })]
-    [TestCase(10, new[] { 5, 10, 15 })]
-    [TestCase(15, new[] { 5, 10, 15 })]
+    [Theory]
+    [InlineData(5, new[] { 5, 10, 15 })]
+    [InlineData(10, new[] { 5, 10, 15 })]
+    [InlineData(15, new[] { 5, 10, 15 })]
     public void ValueInArrayGroup(int value, int[] values)
     {
-        Assert.IsTrue(value.In(values));
+        Assert.True(value.In(values));
     }
 
-    [TestCase(4, new[] { 5, 10, 15 })]
-    [TestCase(8, new[] { 5, 10, 15 })]
-    [TestCase(12, new[] { 5, 10, 15 })]
-    [TestCase(16, new[] { 5, 10, 15 })]
+    [Theory]
+    [InlineData(4, new[] { 5, 10, 15 })]
+    [InlineData(8, new[] { 5, 10, 15 })]
+    [InlineData(12, new[] { 5, 10, 15 })]
+    [InlineData(16, new[] { 5, 10, 15 })]
     public void ValueNotInArrayGroup(int value, int[] values)
     {
-        Assert.IsFalse(value.In(values));
+        Assert.False(value.In(values));
     }
 
     // Between tests
-    [TestCase("2019-07-23", "2019-07-20", "2019-07-25")]
-    [TestCase("2019-07-23", "2019-07-20", "2019-07-23")]
-    [TestCase("2019-07-23", "2019-07-23", "2019-07-25")]
+    [Theory]
+    [InlineData("2019-07-23", "2019-07-20", "2019-07-25")]
+    [InlineData("2019-07-23", "2019-07-20", "2019-07-23")]
+    [InlineData("2019-07-23", "2019-07-23", "2019-07-25")]
     public void DateBetweenInterval(DateTime value, DateTime min, DateTime max)
     {
-        Assert.IsTrue(value.Between(min, max));
+        Assert.True(value.Between(min, max));
     }
 
-    [TestCase("2019-07-23", "2019-07-21", "2019-07-22")]
-    [TestCase("2019-07-23", "2019-07-24", "2019-07-25")]
+    [Theory]
+    [InlineData("2019-07-23", "2019-07-21", "2019-07-22")]
+    [InlineData("2019-07-23", "2019-07-24", "2019-07-25")]
     public void DateNotBetweenInterval(DateTime value, DateTime starting, DateTime ending)
     {
-        Assert.IsFalse(value.Between(starting, ending));
+        Assert.False(value.Between(starting, ending));
     }
 
-    [TestCase(10, 5, 15)]
-    [TestCase(10, 10, 15)]
-    [TestCase(10, 5, 10)]
+    [Theory]
+    [InlineData(10, 5, 15)]
+    [InlineData(10, 10, 15)]
+    [InlineData(10, 5, 10)]
     public void ValueBetweenInterval(int value, int min, int max)
     {
-        Assert.IsTrue(value.Between(min, max));
+        Assert.True(value.Between(min, max));
     }
 
-    [TestCase(10, 11, 15)]
-    [TestCase(10, 5, 9)]
+    [Theory]
+    [InlineData(10, 11, 15)]
+    [InlineData(10, 5, 9)]
     public void ValueNotBetweenInterval(int value, int starting, int ending)
     {
-        Assert.IsFalse(value.Between(starting, ending));
+        Assert.False(value.Between(starting, ending));
     }
 }

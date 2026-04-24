@@ -1,10 +1,10 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace Maestria.Extensions.Test.CSharp;
 
 public class DataType_Try_Test
 {
-    [Test]
+    [Fact]
     public void Try_Test_Ok()
     {
         var result = TryTestMock(true);
@@ -12,19 +12,19 @@ public class DataType_Try_Test
         {
             Assert.NotNull(result.Value);
             Assert.Null(result.Failure);
-            Assert.AreEqual(true, result.Success);
-            Assert.AreEqual(false, result.Failed);
+            Assert.Equal(true, result.Success);
+            Assert.Equal(false, result.Failed);
 
             TestOk implicitCastSuccess = result;
             TestError implicitCastFailure = result;
-            Assert.AreEqual(result.Value, implicitCastSuccess);
-            Assert.AreEqual(result.Failure, implicitCastFailure);
+            Assert.Equal(result.Value, implicitCastSuccess);
+            Assert.Equal(result.Failure, implicitCastFailure);
         }
         else
             Assert.Fail();
     }
 
-    [Test]
+    [Fact]
     public void Try_Test_Failure()
     {
         var result = TryTestMock(false);
@@ -34,35 +34,35 @@ public class DataType_Try_Test
         {
             Assert.Null(result.Value);
             Assert.NotNull(result.Failure);
-            Assert.AreEqual(false, result.Success);
-            Assert.AreEqual(true, result.Failed);
+            Assert.Equal(false, result.Success);
+            Assert.Equal(true, result.Failed);
 
             TestOk implicitCastSuccess = result;
             TestError implicitCastFailure = result;
-            Assert.AreEqual(result.Value, implicitCastSuccess);
-            Assert.AreEqual(result.Failure, implicitCastFailure);
+            Assert.Equal(result.Value, implicitCastSuccess);
+            Assert.Equal(result.Failure, implicitCastFailure);
         }
     }
 
-    [Test]
+    [Fact]
     public void Try_Test_Struct_Ok()
     {
         var result = TryTestMockStruct(true);
         if (result)
         {
-            Assert.AreEqual(true, result.Success);
-            Assert.AreEqual(false, result.Failed);
+            Assert.Equal(true, result.Success);
+            Assert.Equal(false, result.Failed);
 
             TestOkStruct implicitCastSuccess = result;
             TestErrorStruct implicitCastFailure = result;
-            Assert.AreEqual(result.Value, implicitCastSuccess);
-            Assert.AreEqual(result.Failure, implicitCastFailure);
+            Assert.Equal(result.Value, implicitCastSuccess);
+            Assert.Equal(result.Failure, implicitCastFailure);
         }
         else
             Assert.Fail();
     }
 
-    [Test]
+    [Fact]
     public void Try_Test_Struct_Failure()
     {
         var result = TryTestMockStruct(false);
@@ -70,13 +70,13 @@ public class DataType_Try_Test
             Assert.Fail();
         else
         {
-            Assert.AreEqual(false, result.Success);
-            Assert.AreEqual(true, result.Failed);
+            Assert.Equal(false, result.Success);
+            Assert.Equal(true, result.Failed);
 
             TestOkStruct implicitCastSuccess = result;
             TestErrorStruct implicitCastFailure = result;
-            Assert.AreEqual(result.Value, implicitCastSuccess);
-            Assert.AreEqual(result.Failure, implicitCastFailure);
+            Assert.Equal(result.Value, implicitCastSuccess);
+            Assert.Equal(result.Failure, implicitCastFailure);
         }
     }
 
