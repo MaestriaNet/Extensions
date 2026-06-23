@@ -2,13 +2,13 @@
 # Publish on MyGet when pushed on branch "release/x.x.x"
 #
 
-name: publish-versions
+name: publish-preview-version
 
 on:
   push:
     branches: [ "release/**" ]
-#    paths:
-#      - src/**
+    paths:
+      - src/**
 
 jobs:
   publish:

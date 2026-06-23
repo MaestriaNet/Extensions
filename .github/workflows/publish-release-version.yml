@@ -2,7 +2,7 @@
 # Publish on NuGet when merge branch "release/x.x.x" into "main"
 #
 
-name: publish-versions
+name: publish-release-version
 
 on:
   pull_request:
