@@ -8,8 +8,8 @@ on:
   pull_request:
     types: [ closed ]
     branches: [ "main" ]
-    paths:
-      - src/**
+#    paths:
+#      - src/**
 
 jobs:
   publish:
@@ -109,7 +109,7 @@ jobs:
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "src/bin/Release/*.nupkg" # Path to the file(s) you want to attach
+          artifacts: "src/bin/Release/*.nupkg"
           tag: "${{ steps.version.outputs.version_prefix }}"
           generateReleaseNotes: true
             
