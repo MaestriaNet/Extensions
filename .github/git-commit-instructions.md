@@ -1,4 +1,9 @@
-- Give preference to the English language, except for technical terms, untranslated terms, or acronyms.
+- Preferably use English, except for untranslated terms or acronyms.
 - Use "conventional commits" to format the message: https://www.conventionalcommits.org/en/v1.0.0/.
-- The first line must be a short and objective summary.
-- The second line must be blank, and the following lines must contain a detailed description of the change.
+- Layout:
+    - Line 1: Short and objective summary.
+    - Line 2: Blank.
+    - Remaining lines:
+        - Short bullet summary of the changes.
+        - Do not create a log; simply organize the identified objectives of the change into bullet points.
+        - If nothing relevant is found, write nothing.
