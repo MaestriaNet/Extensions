@@ -93,25 +93,17 @@ jobs:
       - name: Publish preview version to MyGet
         run: dotnet nuget push src/bin/Release/*.nupkg --source https://www.myget.org/F/maestrianet/api/v3/index.json --api-key "${{ secrets.MYGET_API_KEY }}"
         
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v8
-        with:          
-          base: main
-          branch: "${{ github.ref_name }}"
-          title: "Merge \"${{ github.ref_name }}\" into main"
-          body: "Automated by GitHub action"
-
-#      - name: Create pull request
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        run: |
-#          pr_url=$(gh pr list --head "${GITHUB_REF_NAME}" --base "main" --state open --json url --jq .[].url)
-#          if [[ -n "${pr_url}" ]]; then
-#            echo "Pull Request already exists for branch '${GITHUB_REF_NAME}' to 'main': ${pr_url}"
-#          else
-#            gh pr create \
-#              -B main \
-#              -H "$GITHUB_REF_NAME" \
-#              --title "Merge \"$GITHUB_REF_NAME\" into main" \
-#              --body "Created by Github action"
-#          fi
+      - name: Create pull request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pr_url=$(gh pr list --head "${GITHUB_REF_NAME}" --base "main" --state open --json url --jq .[].url)
+          if [[ -n "${pr_url}" ]]; then
+            echo "Pull Request already exists for branch '${GITHUB_REF_NAME}' to 'main': ${pr_url}"
+          else
+            gh pr create \
+              -B main \
+              -H "$GITHUB_REF_NAME" \
+              --title "Merge \"$GITHUB_REF_NAME\" into main" \
+              --body "Created by Github action"
+          fi
