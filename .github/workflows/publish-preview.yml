@@ -100,6 +100,7 @@ jobs:
           source_branch: ${{ github.ref_name }}
           target_branch: main
           title: "Merge \"${{ github.ref_name }}\" into \"main\""
+          body: "Created by Github action"
           label: "automatic"
         
 #      - name: Create pull request
