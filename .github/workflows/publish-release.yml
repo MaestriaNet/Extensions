@@ -35,7 +35,6 @@ jobs:
           echo "github.head_ref: ${{ github.head_ref }}"
 
       - name: Checkout code - Stable version for publish release
-        id: checkout-code-stable
         uses: actions/checkout@v5
         with:
           # branch name  (head_ref) já foi excluída devido a configurações de merge do repositório, então faz checkout no commit id
@@ -47,7 +46,7 @@ jobs:
           git rev-parse HEAD
 
       - name: "Determine version: stable"
-        id: version-stable
+        id: version
         run: |
           # Obtém o prefixo da versão a partir do nome do branch de origem do pull request
           VERSION_PREFIX="${GITHUB_HEAD_REF##*/}"          
@@ -61,7 +60,7 @@ jobs:
           echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
 
       - name: Abort if version indeterminate
-        if: steps.version-stable.outputs.version_determined == ''
+        if: steps.version.outputs.version_determined == ''
         uses: actions/github-script@v8
         with:
           script: core.setFailed("Version could not be determined to branch workflow.");

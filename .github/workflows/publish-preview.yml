@@ -29,7 +29,6 @@ jobs:
           echo "github.repository: ${{ github.repository }}"
 
       - name: Checkout code - Preview version for release branch build
-        id: checkout-code-preview
         if: startsWith(github.ref_name, 'release/')
         uses: actions/checkout@v5
 
@@ -39,7 +38,7 @@ jobs:
           git rev-parse HEAD
 
       - name: "Determine version: preview"
-        id: version-preview
+        id: version
         run: |
           # Obtém o prefixo da versão a partir do nome do branch de release
           VERSION_PREFIX="${GITHUB_REF_NAME##*/}"          
@@ -53,7 +52,7 @@ jobs:
           echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
 
       - name: Abort if version indeterminate
-        if: steps.version-preview.outputs.version_determined == ''
+        if: steps.version.outputs.version_determined == ''
         uses: actions/github-script@v8
         with:
           script: core.setFailed("Version could not be determined to branch workflow.");
