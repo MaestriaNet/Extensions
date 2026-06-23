@@ -26,7 +26,7 @@ jobs:
         github.event.pull_request.merged == true &&
         github.event.pull_request.head.repo.full_name == github.repository
       )
-    
+
     steps:
       - name: Display github actions variables
         run: |
@@ -39,13 +39,16 @@ jobs:
           echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
           echo "github.event.pull_request.head.ref: ${{ github.event.pull_request.head.ref }}"
           echo "github.event.pull_request.head.sha: ${{ github.event.pull_request.head.sha }}"
+          echo "github.event.pull_request.head.repo.full_name: ${{ github.event.pull_request.head.repo.full_name }}"
+          echo "github.repository: ${{ github.repository }}"
+          echo "github.head_ref: ${{ github.head_ref }}"
 
-      - name: Checkout code - Preview version
+      - name: Checkout code - Preview version for release build
         id: checkout-code-preview
         if: startsWith(github.ref_name, 'release/')
         uses: actions/checkout@v5
 
-      - name: Checkout code - Stable version building from release branch merged to main
+      - name: Checkout code - Stable version for main build
         id: checkout-code-stable
         if: |
           github.event_name == 'pull_request' &&
@@ -74,10 +77,10 @@ jobs:
           # Obtém o prefixo da versão a partir do nome do branch de release
           VERSION_PREFIX="${GITHUB_REF_NAME##*/}"          
           VERSION_SUFFIX="preview.${GITHUB_RUN_NUMBER}"
-          
+
           echo "VERSION_PREFIX: $VERSION_PREFIX"
           echo "VERSION_SUFFIX: $VERSION_SUFFIX"
-          
+
           echo "version_determined=true" >> $GITHUB_OUTPUT
           echo "VERSION_PREFIX=$VERSION_PREFIX" >> $GITHUB_ENV
           echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
@@ -94,10 +97,10 @@ jobs:
           # Obtém o prefixo da versão a partir do nome do branch de origem do pull request
           VERSION_PREFIX="${GITHUB_HEAD_REF##*/}"          
           VERSION_SUFFIX=""
-          
+
           echo "VERSION_PREFIX: $VERSION_PREFIX"
           echo "VERSION_SUFFIX: $VERSION_SUFFIX"
-          
+
           echo "version_determined=true" >> $GITHUB_OUTPUT
           echo "VERSION_PREFIX=$VERSION_PREFIX" >> $GITHUB_ENV
           echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
@@ -114,7 +117,7 @@ jobs:
         run: |
           CSPROJ_VERSION_PREFIX=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" src/Version.props)
           echo "CSPROJ_VERSION_PREFIX: $CSPROJ_VERSION_PREFIX"
-          
+
           if [ "$CSPROJ_VERSION_PREFIX" != "$VERSION_PREFIX" ]; then
             echo "::error::Version prefix in csproj file ($CSPROJ_VERSION_PREFIX) does not match witch the determined version prefix from branch name ($VERSION_PREFIX)."
             exit 1

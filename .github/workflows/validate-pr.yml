@@ -8,7 +8,6 @@ on:
 jobs:
   validate-pr:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Display github actions variables
         run: |
@@ -21,7 +20,9 @@ jobs:
           echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
           echo "github.event.pull_request.head.ref: ${{ github.event.pull_request.head.ref }}"
           echo "github.event.pull_request.head.sha: ${{ github.event.pull_request.head.sha }}"
-        
+          echo "github.event.pull_request.head.repo.full_name: ${{ github.event.pull_request.head.repo.full_name }}"
+          echo "github.repository: ${{ github.repository }}"
+
       - name: Checkout code
         uses: actions/checkout@v5
         

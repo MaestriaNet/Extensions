@@ -1,0 +1,110 @@
+#
+# Publish on MyGet when pushed on branch "release/x.x.x"
+#
+
+name: publish-versions
+
+on:
+  push:
+    branches: [ "release/**" ]
+    paths:
+      - src/**
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest   
+    steps:
+      - name: Display github actions variables
+        run: |
+          echo "GITHUB_REF: $GITHUB_REF"
+          echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
+          echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
+          echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
+          echo "GITHUB_SHA: $GITHUB_SHA"
+          echo "GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER"
+          echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
+          echo "github.event.pull_request.head.ref: ${{ github.event.pull_request.head.ref }}"
+          echo "github.event.pull_request.head.sha: ${{ github.event.pull_request.head.sha }}"
+          echo "github.event.pull_request.head.repo.full_name: ${{ github.event.pull_request.head.repo.full_name }}"
+          echo "github.repository: ${{ github.repository }}"
+
+      - name: Checkout code - Preview version for release branch build
+        id: checkout-code-preview
+        if: startsWith(github.ref_name, 'release/')
+        uses: actions/checkout@v5
+
+      - name: Show branch and commit
+        run: |
+          git rev-parse --abbrev-ref HEAD
+          git rev-parse HEAD
+
+      - name: "Determine version: preview"
+        id: version-preview
+        run: |
+          # Obtém o prefixo da versão a partir do nome do branch de release
+          VERSION_PREFIX="${GITHUB_REF_NAME##*/}"          
+          VERSION_SUFFIX="preview.${GITHUB_RUN_NUMBER}"
+          
+          echo "VERSION_PREFIX: $VERSION_PREFIX"
+          echo "VERSION_SUFFIX: $VERSION_SUFFIX"
+          
+          echo "version_determined=true" >> $GITHUB_OUTPUT
+          echo "VERSION_PREFIX=$VERSION_PREFIX" >> $GITHUB_ENV
+          echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
+
+      - name: Abort if version indeterminate
+        if: steps.version-preview.outputs.version_determined == ''
+        uses: actions/github-script@v8
+        with:
+          script: core.setFailed("Version could not be determined to branch workflow.");
+
+      - name: Validate determined version prefix with csproj file # Validação de segurança
+        run: |
+          CSPROJ_VERSION_PREFIX=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" src/Version.props)
+          echo "CSPROJ_VERSION_PREFIX: $CSPROJ_VERSION_PREFIX"
+          
+          if [ "$CSPROJ_VERSION_PREFIX" != "$VERSION_PREFIX" ]; then
+            echo "::error::Version prefix in csproj file ($CSPROJ_VERSION_PREFIX) does not match witch the determined version prefix from branch name ($VERSION_PREFIX)."
+            exit 1
+          fi
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: "10.0"
+
+      - name: Display .NET Version
+        run: dotnet --version
+
+      - name: Build
+        run: dotnet build --configuration Release
+
+      - name: Test
+        run: dotnet test --configuration Release --no-build
+
+      - name: Pack
+        run: dotnet pack src/Extensions.csproj --configuration Release --no-build -p:VersionPrefix="$VERSION_PREFIX" -p:VersionSuffix="$VERSION_SUFFIX"
+
+      - name: Upload nupkg artifact to github
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-package
+          path: src/bin/Release/*.nupkg
+
+      - name: Publish version to MyGet (preview)
+        run: dotnet nuget push src/bin/Release/*.nupkg --source https://www.myget.org/F/maestrianet/api/v3/index.json --api-key "${{ secrets.MYGET_API_KEY }}"
+
+      - name: Create pull request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pr_url=$(gh pr list --head "${GITHUB_REF_NAME}" --base "main" --state open --json url --jq .[].url)
+          if [[ -n "${pr_url}" ]]; then
+            echo "Pull Request already exists for branch '${GITHUB_REF_NAME}' to 'main': ${pr_url}"
+          else
+            gh pr create \
+              -B main \
+              -H "$GITHUB_REF_NAME" \
+              --title "Merge \"$GITHUB_REF_NAME\" into main" \
+              --body "Created by Github action"
+          fi
