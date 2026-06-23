@@ -102,6 +102,8 @@ jobs:
           title: "Merge \"${{ github.ref_name }}\" into \"main\""
           body: "Created by Github action"
           label: "automatic"
+          get_diff: false
+          allow_no_diff: false
         
 #      - name: Create pull request
 #        env:
