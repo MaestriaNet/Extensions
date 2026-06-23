@@ -92,18 +92,14 @@ jobs:
 
       - name: Publish preview version to MyGet
         run: dotnet nuget push src/bin/Release/*.nupkg --source https://www.myget.org/F/maestrianet/api/v3/index.json --api-key "${{ secrets.MYGET_API_KEY }}"
-        
-      - name: Create pull request
-        uses: devops-infra/action-pull-request@v1
+
+      - name: 'Create Pull'
+        uses: cssnr/create-pull-action@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: ${{ github.ref_name }}
-          target_branch: main
+          head: ${{ github.ref_name }}
+          base: main
           title: "Merge \"${{ github.ref_name }}\" into \"main\""
           body: "Created by Github action"
-          label: "automatic"
-          get_diff: false
-          allow_no_diff: false
         
 #      - name: Create pull request
 #        env:
