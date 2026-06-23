@@ -1,18 +1,23 @@
 #
-# Publish on MyGet when pushed on branch "release/x.x.x"
+# Publish on NuGet when merge branch "release/x.x.x" into "main"
 #
 
-name: publish-preview-version
+name: publish-release
 
 on:
-  push:
-    branches: [ "release/**" ]
+  pull_request:
+    types: [ closed ]
+    branches: [ "main" ]
     paths:
       - src/**
 
 jobs:
   publish:
-    runs-on: ubuntu-latest   
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.head.ref, 'release/')
+
     steps:
       - name: Display github actions variables
         run: |
@@ -27,33 +32,35 @@ jobs:
           echo "github.event.pull_request.head.sha: ${{ github.event.pull_request.head.sha }}"
           echo "github.event.pull_request.head.repo.full_name: ${{ github.event.pull_request.head.repo.full_name }}"
           echo "github.repository: ${{ github.repository }}"
+          echo "github.head_ref: ${{ github.head_ref }}"
 
-      - name: Checkout code - Preview version for release branch build
-        id: checkout-code-preview
-        if: startsWith(github.ref_name, 'release/')
+      - name: Checkout code - Stable version for publish release
         uses: actions/checkout@v5
+        with:
+          # branch name  (head_ref) já foi excluída devido a configurações de merge do repositório, então faz checkout no commit id
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Show branch and commit
         run: |
           git rev-parse --abbrev-ref HEAD
           git rev-parse HEAD
 
-      - name: "Determine version: preview"
-        id: version-preview
+      - name: "Determine version: stable"
+        id: version
         run: |
-          # Obtém o prefixo da versão a partir do nome do branch de release
-          VERSION_PREFIX="${GITHUB_REF_NAME##*/}"          
-          VERSION_SUFFIX="preview.${GITHUB_RUN_NUMBER}"
-          
+          # Obtém o prefixo da versão a partir do nome do branch de origem do pull request
+          VERSION_PREFIX="${GITHUB_HEAD_REF##*/}"          
+          VERSION_SUFFIX=""
+
           echo "VERSION_PREFIX: $VERSION_PREFIX"
           echo "VERSION_SUFFIX: $VERSION_SUFFIX"
-          
+
           echo "version_determined=true" >> $GITHUB_OUTPUT
           echo "VERSION_PREFIX=$VERSION_PREFIX" >> $GITHUB_ENV
           echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
 
       - name: Abort if version indeterminate
-        if: steps.version-preview.outputs.version_determined == ''
+        if: steps.version.outputs.version_determined == ''
         uses: actions/github-script@v8
         with:
           script: core.setFailed("Version could not be determined to branch workflow.");
@@ -62,7 +69,7 @@ jobs:
         run: |
           CSPROJ_VERSION_PREFIX=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" src/Version.props)
           echo "CSPROJ_VERSION_PREFIX: $CSPROJ_VERSION_PREFIX"
-          
+
           if [ "$CSPROJ_VERSION_PREFIX" != "$VERSION_PREFIX" ]; then
             echo "::error::Version prefix in csproj file ($CSPROJ_VERSION_PREFIX) does not match witch the determined version prefix from branch name ($VERSION_PREFIX)."
             exit 1
@@ -91,20 +98,26 @@ jobs:
           name: nuget-package
           path: src/bin/Release/*.nupkg
 
-      - name: Publish preview version to MyGet
+      - name: Publish stable version to MyGet
         run: dotnet nuget push src/bin/Release/*.nupkg --source https://www.myget.org/F/maestrianet/api/v3/index.json --api-key "${{ secrets.MYGET_API_KEY }}"
+        
+      - name: Publish stable version to NuGet
+        run: dotnet nuget push src/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
 
-      - name: Create pull request
+      - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pr_url=$(gh pr list --head "${GITHUB_REF_NAME}" --base "main" --state open --json url --jq .[].url)
-          if [[ -n "${pr_url}" ]]; then
-            echo "Pull Request already exists for branch '${GITHUB_REF_NAME}' to 'main': ${pr_url}"
-          else
-            gh pr create \
-              -B main \
-              -H "$GITHUB_REF_NAME" \
-              --title "Merge \"$GITHUB_REF_NAME\" into main" \
-              --body "Created by Github action"
-          fi
+          gh release create "$VERSION_PREFIX" \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="v${VERSION_PREFIX}" \
+              --target="${{ github.event.pull_request.head.sha }}" \
+              --generate-notes
+
+  validate-pr:
+    # Validate that publish completed successfully and allow merge to main (branch gate requirement on GitHub setting)
+    runs-on: ubuntu-latest
+    needs: [ publish ]
+    steps:
+      - name: OK
+        run: echo "The publish job has completed successfully and allowed do merge into main."
