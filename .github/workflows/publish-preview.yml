@@ -92,15 +92,15 @@ jobs:
 
       - name: Publish preview version to MyGet
         run: dotnet nuget push src/bin/Release/*.nupkg --source https://www.myget.org/F/maestrianet/api/v3/index.json --api-key "${{ secrets.MYGET_API_KEY }}"
-        
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v8
-        with:          
-          base: main
-          branch: "${{ github.ref_name }}"
-          title: "Merge \"${{ github.ref_name }}\" into main"
-          body: "Automated by GitHub action"
 
+      - name: 'Create Pull'
+        uses: cssnr/create-pull-action@v1
+        with:
+          head: ${{ github.ref_name }}
+          base: main
+          title: "Merge \"${{ github.ref_name }}\" into \"main\""
+          body: "Created by Github action"
+        
 #      - name: Create pull request
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
