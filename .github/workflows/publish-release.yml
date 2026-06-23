@@ -56,6 +56,8 @@ jobs:
           echo "VERSION_SUFFIX: $VERSION_SUFFIX"
 
           echo "version_determined=true" >> $GITHUB_OUTPUT
+          echo "version_prefix=$VERSION_PREFIX" >> $GITHUB_OUTPUT
+          
           echo "VERSION_PREFIX=$VERSION_PREFIX" >> $GITHUB_ENV
           echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
 
@@ -105,11 +107,18 @@ jobs:
         run: dotnet nuget push src/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
 
       - name: Create release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release create "$VERSION_PREFIX" \
-              --repo="$GITHUB_REPOSITORY" \
-              --title="v${VERSION_PREFIX}" \
-              --target="${{ github.event.pull_request.head.sha }}" \
-              --generate-notes
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "src/bin/Release/*.nupkg" # Path to the file(s) you want to attach
+          tag: "${{ steps.version.outputs.version_prefix }}"
+          generateReleaseNotes: true
+            
+#      - name: Create release
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          gh release create "$VERSION_PREFIX" \
+#              --repo="$GITHUB_REPOSITORY" \
+#              --title="v${VERSION_PREFIX}" \
+#              --target="${{ github.event.pull_request.head.sha }}" \
+#              --generate-notes
