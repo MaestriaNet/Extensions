@@ -8,8 +8,8 @@ on:
   pull_request:
     types: [ closed ]
     branches: [ "main" ]
-    paths:
-      - src/**
+#    paths:
+#      - src/**
 
 jobs:
   publish:
@@ -56,6 +56,8 @@ jobs:
           echo "VERSION_SUFFIX: $VERSION_SUFFIX"
 
           echo "version_determined=true" >> $GITHUB_OUTPUT
+          echo "version_prefix=$VERSION_PREFIX" >> $GITHUB_OUTPUT
+          
           echo "VERSION_PREFIX=$VERSION_PREFIX" >> $GITHUB_ENV
           echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
 
@@ -105,19 +107,18 @@ jobs:
         run: dotnet nuget push src/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
 
       - name: Create release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release create "$VERSION_PREFIX" \
-              --repo="$GITHUB_REPOSITORY" \
-              --title="v${VERSION_PREFIX}" \
-              --target="${{ github.event.pull_request.head.sha }}" \
-              --generate-notes
-
-  validate-pr:
-    # Validate that publish completed successfully and allow merge to main (branch gate requirement on GitHub setting)
-    runs-on: ubuntu-latest
-    needs: [ publish ]
-    steps:
-      - name: OK
-        run: echo "The publish job has completed successfully and allowed do merge into main."
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "src/bin/Release/*.nupkg"
+          tag: "${{ steps.version.outputs.version_prefix }}"
+          generateReleaseNotes: true
+            
+#      - name: Create release
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          gh release create "$VERSION_PREFIX" \
+#              --repo="$GITHUB_REPOSITORY" \
+#              --title="v${VERSION_PREFIX}" \
+#              --target="${{ github.event.pull_request.head.sha }}" \
+#              --generate-notes

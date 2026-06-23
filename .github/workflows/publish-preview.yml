@@ -7,8 +7,8 @@ name: publish-preview
 on:
   push:
     branches: [ "release/**" ]
-    paths:
-      - src/**
+#    paths:
+#      - src/**
 
 jobs:
   publish:
