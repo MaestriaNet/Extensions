@@ -1,7 +1,7 @@
 ---
 name: Diff Explainer
 description: Analisar alterações estritamente pelo código fonte e, ao final, auditar se a implementação real resolve o que foi descrito no PR/Issues.
-tools: [code_search, file_viewer]
+tools: ['code_search', 'file_viewer', 'run_in_terminal', 'ask_questions', 'list_dir', 'read_file', 'file_search']
 ---
 
 # Papel e Objetivo
