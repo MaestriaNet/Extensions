@@ -2,7 +2,7 @@
 # Publish on MyGet when pushed on branch "release/x.x.x"
 #
 
-name: publish-preview-version
+name: publish-preview
 
 on:
   push:
