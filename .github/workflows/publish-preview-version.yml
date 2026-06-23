@@ -91,7 +91,7 @@ jobs:
           name: nuget-package
           path: src/bin/Release/*.nupkg
 
-      - name: Publish version to MyGet (preview)
+      - name: Publish preview version to MyGet
         run: dotnet nuget push src/bin/Release/*.nupkg --source https://www.myget.org/F/maestrianet/api/v3/index.json --api-key "${{ secrets.MYGET_API_KEY }}"
 
       - name: Create pull request
