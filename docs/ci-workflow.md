@@ -18,3 +18,7 @@ O utilizar o modelo um modelo de gestão de branchs baseado no **trunk-based**.
    - Será publicada versão **oficial no Nuget**.
    - Build da versão ocorre com o commit id da branch release origem do merge, não com código da main.
    - Será criado release e tag no GitHub.
+
+---
+
+teste
