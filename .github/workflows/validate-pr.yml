@@ -9,20 +9,6 @@ jobs:
   validate-pr:
     runs-on: ubuntu-latest
     steps:
-      - name: Display github actions variables
-        run: |
-          echo "GITHUB_REF: $GITHUB_REF"
-          echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
-          echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
-          echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
-          echo "GITHUB_SHA: $GITHUB_SHA"
-          echo "GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER"
-          echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
-          echo "github.event.pull_request.head.ref: ${{ github.event.pull_request.head.ref }}"
-          echo "github.event.pull_request.head.sha: ${{ github.event.pull_request.head.sha }}"
-          echo "github.event.pull_request.head.repo.full_name: ${{ github.event.pull_request.head.repo.full_name }}"
-          echo "github.repository: ${{ github.repository }}"
-
       - name: Checkout code
         uses: actions/checkout@v5
         

@@ -8,8 +8,8 @@ on:
   pull_request:
     types: [ closed ]
     branches: [ "main" ]
-#    paths:
-#      - src/**
+    paths:
+      - src/**
 
 jobs:
   publish:
@@ -19,21 +19,6 @@ jobs:
       startsWith(github.event.pull_request.head.ref, 'release/')
 
     steps:
-      - name: Display github actions variables
-        run: |
-          echo "GITHUB_REF: $GITHUB_REF"
-          echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
-          echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
-          echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
-          echo "GITHUB_SHA: $GITHUB_SHA"
-          echo "GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER"
-          echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
-          echo "github.event.pull_request.head.ref: ${{ github.event.pull_request.head.ref }}"
-          echo "github.event.pull_request.head.sha: ${{ github.event.pull_request.head.sha }}"
-          echo "github.event.pull_request.head.repo.full_name: ${{ github.event.pull_request.head.repo.full_name }}"
-          echo "github.repository: ${{ github.repository }}"
-          echo "github.head_ref: ${{ github.head_ref }}"
-
       - name: Checkout code - Stable version for publish release
         uses: actions/checkout@v5
         with:
@@ -69,11 +54,11 @@ jobs:
 
       - name: Determine if the version is the same as the one in the "Version.props" file # Security validation
         run: |
-          CSPROJ_VERSION_PREFIX=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" src/Version.props)
-          echo "CSPROJ_VERSION_PREFIX: $CSPROJ_VERSION_PREFIX"
+          VERSION_FILE_PREFIX=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" src/Version.props)
+          echo "VERSION_FILE_PREFIX: $VERSION_FILE_PREFIX"
 
-          if [ "$CSPROJ_VERSION_PREFIX" != "$VERSION_PREFIX" ]; then
-            echo "::error::Version prefix in csproj file ($CSPROJ_VERSION_PREFIX) does not match witch the determined version prefix from branch name ($VERSION_PREFIX)."
+          if [ "$VERSION_FILE_PREFIX" != "$VERSION_PREFIX" ]; then
+            echo "::error::Version prefix in csproj file ($VERSION_FILE_PREFIX) does not match witch the determined version prefix from branch name ($VERSION_PREFIX)."
             exit 1
           fi
 
