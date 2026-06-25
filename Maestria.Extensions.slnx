@@ -3,6 +3,7 @@
     <File Path=".claudeignore" />
     <File Path=".gitignore" />
     <File Path="CLAUDE.md" />
+    <File Path="LICENSE" />
     <File Path="README.md" />
   </Folder>
   <Project Path="src/Extensions.csproj" />
