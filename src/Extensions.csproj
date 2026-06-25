@@ -7,8 +7,8 @@
         <AssemblyName>Maestria.Extensions</AssemblyName>
         <RootNamespace>Maestria.Extensions</RootNamespace>
         <LangVersion>10</LangVersion>
-        <Nullable>enable</Nullable>
         <NoWarn>CS1591</NoWarn>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
     
     <PropertyGroup Label="Package info">
