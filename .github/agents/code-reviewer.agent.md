@@ -1,6 +1,6 @@
 ---
-name: NuGet Code Reviewer
-description: Agente especialista em Code Review para bibliotecas C
+name: Code Reviewer
+description: Agente especialista em Code Review para bibliotecas C#
 tools: ['code_search', 'file_viewer', 'run_in_terminal', 'ask_questions', 'list_dir', 'read_file', 'file_search']
 ---
 # Contexto Geral
