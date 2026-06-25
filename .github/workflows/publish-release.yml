@@ -58,7 +58,7 @@ jobs:
           echo "VERSION_FILE_PREFIX: $VERSION_FILE_PREFIX"
 
           if [ "$VERSION_FILE_PREFIX" != "$VERSION_PREFIX" ]; then
-            echo "::error::Version prefix in csproj file ($VERSION_FILE_PREFIX) does not match witch the determined version prefix from branch name ($VERSION_PREFIX)."
+            echo "::error::Version prefix in 'Version.props' file ($VERSION_FILE_PREFIX) does not match witch the determined version prefix from branch name ($VERSION_PREFIX)."
             exit 1
           fi
 
