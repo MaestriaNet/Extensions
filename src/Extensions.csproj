@@ -4,7 +4,7 @@
         <TargetFrameworks>net10.0;net9.0;net8.0;net6.0;net5.0;netstandard2.0</TargetFrameworks>
         <AssemblyName>Maestria.Extensions</AssemblyName>
         <RootNamespace>Maestria.Extensions</RootNamespace>
-        <LangVersion>10</LangVersion>
+        <LangVersion>14</LangVersion>
         <NoWarn>CS1591</NoWarn>
         <Nullable>enable</Nullable>
     </PropertyGroup>
