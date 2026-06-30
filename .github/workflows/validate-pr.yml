@@ -2,8 +2,11 @@ name: validate-pr
 
 on:
   pull_request:
-    types: [ opened, synchronize ]
-    branches: [ "main" ]
+    types:
+      - opened
+      - synchronize
+    branches:
+      - main
 
 jobs:
   validate-pr:
@@ -14,8 +17,8 @@ jobs:
         
       - name: Show branch and commit
         run: |
-          git rev-parse --abbrev-ref HEAD
-          git rev-parse HEAD
+          echo "Branch: $(git rev-parse --abbrev-ref HEAD)"
+          echo "Commit hash: $(git rev-parse HEAD)"
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
