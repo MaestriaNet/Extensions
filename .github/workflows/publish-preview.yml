@@ -40,7 +40,7 @@ jobs:
         id: version
         run: |
           # Gets the latest tag pointing to the current or previous commit, matching only tags starting with 'v'
-          LAST_TAG=$(git describe --tags --abbrev=0 --match 'v*')
+          LAST_TAG=$(git describe --tags --abbrev=0 --match "v*" 2>/dev/null || true)
           
           # Verifica se a variável LAST_TAG está vazia ou nula
           if [ -z "$LAST_TAG" ]; then
