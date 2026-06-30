@@ -1,66 +1,72 @@
 #
-# Publish on NuGet when merge branch "release/x.x.x" into "main"
+# Publish on NuGet when tag generated.
 #
 
 name: publish-release
 
 on:
-  pull_request:
-    types: [ closed ]
-    branches: [ "main" ]
-    paths:
-      - src/**
+  push:
+    tags:
+      - 'v*.*.*' # Triggers only when a tag matching the pattern (e.g., v1.0.0) is pushed
+
+permissions:
+  contents: write
 
 jobs:
-  publish:
+  publish-release:
     runs-on: ubuntu-latest
-    if: |
-      github.event.pull_request.merged == true &&
-      startsWith(github.event.pull_request.head.ref, 'release/')
-
     steps:
-      - name: Checkout code - Stable version for publish release
+      - name: Checkout code
         uses: actions/checkout@v5
         with:
-          # branch name  (head_ref) já foi excluída devido a configurações de merge do repositório, então faz checkout no commit id
-          ref: ${{ github.event.pull_request.head.sha }}
+          # IMPORTANT: fetch-depth 0 downloads the entire history and tags.
+          # The default (1) does not download tags, causing the next step to fail.
+          fetch-depth: 0
 
-      - name: Show branch and commit
+      - name: Show git information
         run: |
-          git rev-parse --abbrev-ref HEAD
-          git rev-parse HEAD
+          echo "Branch: $(git rev-parse --abbrev-ref HEAD)"
+          echo "Commit hash: $(git rev-parse HEAD)"
+          echo "Current tag: $GITHUB_REF_NAME"
+
+      - name: Check if tag is on the latest main commit
+        # Informational step to validate if the tag points to the absolute HEAD of the main branch
+        run: |
+          # Gets the commit SHA that triggered this tag creation
+          TAG_COMMIT=${GITHUB_SHA}
+          
+          # Gets the latest commit SHA from the local origin/main reference
+          MAIN_COMMIT=$(git rev-parse origin/main)
+          
+          echo "Commit triggered by tag: $TAG_COMMIT"
+          echo "Latest commit on main:   $MAIN_COMMIT"
+          
+          if [ "$TAG_COMMIT" = "$MAIN_COMMIT" ]; then
+            echo "✅ Validation passed: The tag is correctly pointing to the latest commit on the main branch."
+          else
+            echo "::error::❌ The tag was NOT created on the latest commit of the main branch."
+            echo "Aborting the process to prevent publishing from an outdated state."
+            exit 1
+          fi
 
       - name: "Determine version: stable"
         id: version
         run: |
-          # Obtém o prefixo da versão a partir do nome do branch de origem do pull request
-          VERSION_PREFIX="${GITHUB_HEAD_REF##*/}"          
-          VERSION_SUFFIX=""
-
-          echo "VERSION_PREFIX: $VERSION_PREFIX"
-          echo "VERSION_SUFFIX: $VERSION_SUFFIX"
-
-          echo "version_determined=true" >> $GITHUB_OUTPUT
-          echo "version_prefix=$VERSION_PREFIX" >> $GITHUB_OUTPUT
+          # GITHUB_REF_NAME contains the tag name (e.g., v1.2.0)
+          # We remove the leading 'v' to get the clean semantic version (1.2.0)
+          CLEAN_TAG=${GITHUB_REF_NAME#v}
           
-          echo "VERSION_PREFIX=$VERSION_PREFIX" >> $GITHUB_ENV
-          echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
+          echo "Extracted version: $CLEAN_TAG"
+          echo "PACKAGE_VERSION=$CLEAN_TAG" >> $GITHUB_ENV
+          echo "package_version=$CLEAN_TAG" >> $GITHUB_OUTPUT
+          
+          echo "::notice::Version: $CLEAN_TAG"
 
       - name: Abort if version indeterminate
-        if: steps.version.outputs.version_determined == ''
-        uses: actions/github-script@v8
+        if: steps.version.outputs.package_version == ''
+        uses: actions/github-script@v9
         with:
-          script: core.setFailed("Version could not be determined to branch workflow.");
-
-      - name: Determine if the version is the same as the one in the "Version.props" file # Security validation
-        run: |
-          VERSION_FILE_PREFIX=$(grep -oPm1 "(?<=<VersionPrefix>)[^<]+" src/Version.props)
-          echo "VERSION_FILE_PREFIX: $VERSION_FILE_PREFIX"
-
-          if [ "$VERSION_FILE_PREFIX" != "$VERSION_PREFIX" ]; then
-            echo "::error::Version prefix in 'Version.props' file ($VERSION_FILE_PREFIX) does not match witch the determined version prefix from branch name ($VERSION_PREFIX)."
-            exit 1
-          fi
+          script: core.setFailed("Version could not be determined to workflow.");
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
@@ -77,12 +83,12 @@ jobs:
         run: dotnet test --configuration Release --no-build
 
       - name: Pack
-        run: dotnet pack src/Extensions.csproj --configuration Release --no-build -p:VersionPrefix="$VERSION_PREFIX" -p:VersionSuffix="$VERSION_SUFFIX"
+        run: dotnet pack src/Extensions.Reflection.csproj --configuration Release --no-build -p:Version=${{ env.PACKAGE_VERSION }}
 
       - name: Upload nupkg artifact to github
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: nuget-package
+          name: Maestria.Extensions.Reflection.${{ env.PACKAGE_VERSION }}
           path: src/bin/Release/*.nupkg
 
       - name: Publish stable version to MyGet
@@ -94,6 +100,16 @@ jobs:
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
+          name: "v${{ steps.version.outputs.package_version }}"
+          tag: "v${{ steps.version.outputs.package_version }}"
           artifacts: "src/bin/Release/*.nupkg"
-          tag: "${{ steps.version.outputs.version_prefix }}"
           generateReleaseNotes: true
+          
+          # Allow create release from github interface.
+          # Github interface create release and tag, that start this workflow and update artifacts of created releases.
+          # When workflow starts from tag push, this execute all from here and create release linking a existing tag.
+          allowUpdates: true
+          omitBodyDuringUpdate: true
+          omitDraftDuringUpdate: true
+          omitNameDuringUpdate: true
+          omitPrereleaseDuringUpdate: true
