@@ -83,12 +83,12 @@ jobs:
         run: dotnet test --configuration Release --no-build
 
       - name: Pack
-        run: dotnet pack src/Extensions.Reflection.csproj --configuration Release --no-build -p:Version=${{ env.PACKAGE_VERSION }}
+        run: dotnet pack src/Extensions.csproj --configuration Release --no-build -p:Version=${{ env.PACKAGE_VERSION }}
 
       - name: Upload nupkg artifact to github
         uses: actions/upload-artifact@v7
         with:
-          name: Maestria.Extensions.Reflection.${{ env.PACKAGE_VERSION }}
+          name: Maestria.Extensions.${{ env.PACKAGE_VERSION }}
           path: src/bin/Release/*.nupkg
 
       - name: Publish stable version to MyGet
