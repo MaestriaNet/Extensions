@@ -6,6 +6,19 @@
 
 ---
 
+- [What is Maestria.Extensions?](#what-is-maestriaextensions)
+- [What is Maestria Project?](#what-is-maestria-project)
+- [Where can I get it?](#where-can-i-get-it)
+- [How do I get started?](#how-do-i-get-started)
+- [Data Types](#data-types)
+  - [SimpleResult and SimpleResult<TValue>](#simpleresult-and-simpleresulttvalue)
+  - [Try<TSuccess, TFailure>](#trytsuccess-tfailure)
+- [Settings](#settings)
+- [Full usage documentations](#full-usage-documentations)
+- [Extra documentations](#extra-documentations)
+
+---
+
 [![buy-me-a-coffee](https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/buy-me-a-coffee.png)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)
 [![smile.png](https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/smile.png)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)
 
@@ -20,11 +33,15 @@ If my contributions helped you, please help me buy a coffee :D
 Extension function pack to increase productivity and improve source code writing.
 By default, all extension methods are safe.
 
+---
+
 ## What is Maestria Project?
 
 This library is part of Maestria Project.
 
 Maestria is a project to provide productivity and elegance to your source code writing.
+
+---
 
 ## Where can I get it?
 
@@ -104,23 +121,13 @@ var result = "12345"
 // Detailed: [String extensions](docs/usage/string.md)
 ```
 
-There are many more extension methods available. See the full documentation:
-
-| Topic | Description |
-|---|---|
-| [Number extensions](docs/usage/number.md) | `Round`, `RoundUp`, `Truncate` for numeric types |
-| [Comparable extensions](docs/usage/comparable.md) | `Between`, `In`, `LimitMinAt`, `LimitMaxAt`, fluent `If...Then`, `NullIf` |
-| [Enum extensions](docs/usage/enum.md) | `GetDisplayName`, `GetDescription`, `GetValues` |
-| [Enumerable extensions](docs/usage/enumerable.md) | `HasItems`, `IsNullOrEmpty`, `Iterate`, `TryGetValue`, `WithIndex` |
-| [Exception extensions](docs/usage/exception.md) | `GetAllMessages`, `GetMostInner` |
-| [String extensions](docs/usage/string.md) | Trimming, substring, hashing, Base64, encoding, and more |
-| [Other extensions](docs/usage/other.md) | `OutVar` and pipeline helpers |
-| [Data types](docs/usage/datatypes.md) | `SimpleResult`, `Try<TSuccess, TFailure>` |
-
+---
 
 ## Data Types
 
 The library ships with two expressive result types that eliminate boilerplate error handling:
+
+### SimpleResult and SimpleResult\<TValue\>
 
 ```csharp
 // SimpleResult — implicit conversions keep method signatures clean
@@ -134,7 +141,11 @@ public SimpleResult Save(Order order)
 var result = Save(order);
 if (result) Console.WriteLine("Saved!");
 else        Console.WriteLine(result.Message);
+```
 
+### Try\<TSuccess, TFailure\>
+
+```csharp
 // Try<TSuccess, TFailure> — distinct types for success and failure
 public Try<OrderCreated, ValidationError> Submit(Order order) { ... }
 
@@ -145,6 +156,8 @@ else   Console.WriteLine($"Error {r.Failure.Code}: {r.Failure.Message}");
 
 > See [docs/usage/datatypes.md](docs/usage/datatypes.md) for full documentation, implicit conversion rules, `SimpleResult<T>`, and advanced usage.
 
+---
+
 ## Settings
 
 It's possible set default settings for library:
@@ -154,26 +167,31 @@ Extensions.GlobalSettings.Configure(cfg => cfg
     .FloatAndDoubleTolerance(default-float-and-double-comparasion-tolerance) // Default is 0.00001f
 ```
 
+---
+
+## Full usage documentations
+
+There are many more extension methods available. See the full documentation:
+
+| Topic                                                          | Samples methods                                                           |
+|----------------------------------------------------------------|---------------------------------------------------------------------------|
+| [Comparable & fluent expressions](docs/usage/comparable.md)    | `Between`, `In`, `LimitMinAt`, `LimitMaxAt`, fluent `If...Then`, `NullIf` |
+| [Data types](docs/usage/datatypes.md)                          | `SimpleResult`, `Try<TSuccess, TFailure>`                                 |
+| [Enum extensions](docs/usage/enum.md)                          | `GetDisplayName`, `GetDescription`, `GetValues`                           |
+| [Enumerable & collection extensions](docs/usage/enumerable.md) | `HasItems`, `IsNullOrEmpty`, `Iterate`, `TryGetValue`, `WithIndex`        |
+| [Exception extensions](docs/usage/exception.md)                | `GetAllMessages`, `GetMostInner`                                          |
+| [Number extensions](docs/usage/number.md)                      | `Round`, `RoundUp`, `Truncate` for numeric types                          |
+| [Other extensions](docs/usage/other.md)                        | `OutVar` and pipeline helpers                                             |
+| [String extensions](docs/usage/string.md)                      | Trimming, substring, hashing, Base64, encoding, and more                  |
 
 
-## Documentations
+## Extra documentations
 
 See additional documentations at [docs](docs) folder.
 
 - [changelog.md](docs/changelog.md): List of changes by version and breaking changes.
 - [ci-workflow.md](docs/ci-workflow.md): Description of the CI workflow used in the project.
 - [contributing.md](docs/contributing.md): How to contribute to the project.
-
-### Usage Guides
-
-- [Number extensions](docs/usage/number.md)
-- [Comparable & fluent expressions](docs/usage/comparable.md)
-- [Enum extensions](docs/usage/enum.md)
-- [Enumerable & collection extensions](docs/usage/enumerable.md)
-- [Exception extensions](docs/usage/exception.md)
-- [String extensions](docs/usage/string.md)
-- [Other extensions](docs/usage/other.md)
-- [Data types](docs/usage/datatypes.md)
 
 ---
 
