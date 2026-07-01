@@ -1,6 +1,6 @@
 ---
 name: documentation
-description: Guidelines and instructions for generating C# extension methods usage documentation for the Maestria.Extensions project.
+description: Guidelines and instructions for generating C# extension methods usage documentation for the Maestria.Extensions project in `docs/usage`.
 ---
 
 # Maestria.Extensions Documentation Skill
@@ -14,4 +14,4 @@ Use this skill when the user requests to create, update, or expand documentation
 - **Scope & Exclusivity**: Document every extension method from the source folder matching the documentation file name. Never group unrelated namespaces.
 - **Example Coverage Requirement**: Every single method cited or listed in the documentation file **MUST** have a corresponding, functional, and clear code example showing it in action (both synchronous/asynchronous if applicable, and showing null-safe properties where relevant).
 - **Null Safety Notice**: Always call out that extensions are null-safe and present examples showing input as `null` returning `null` safely without exception.
-- **Progress Tracking**: Keep the `docs/readme-checkpoint.json` file updated with the methods documentation status, utilizing the absolute files list.
+- **Progress Tracking**: Keep the `.agents/checkpoints/doc-usage-checkpoint.md` file updated with the documented methods, utilizing the absolute files list.
