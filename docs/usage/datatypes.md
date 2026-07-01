@@ -95,3 +95,11 @@ else
     Console.WriteLine($"Failed ({signupResult.Failure.Code}): {signupResult.Failure.Error}");
 }
 ```
+
+#### Implicit Conversions Support
+
+- **From** `TSuccess`: Automatically maps to a `Value` instance and sets the `Success` property to `true`.
+- **From** `TFailure`: Automatically maps to a `Failure` instance and sets the `Success` property to `false`.
+- **To** `bool`: Returns the value of the `Success` property.
+- **To** `TSuccess`: Returns the value of the `Value` property if the result is a success.
+- **To** `TFailure`: Returns the value of the `Failure` property if the result is a failure.
