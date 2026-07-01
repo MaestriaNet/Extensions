@@ -48,7 +48,7 @@ jobs:
           fi
           
           # 2. If not on main, check if the commit belongs to a hotfix branch
-          # The command lists the remote branches that contain the tag's commit     
+          # The command lists the remote branches that contain the tag's commit
           BRANCHES=$(git branch -r --contains $TAG_COMMIT)
           
           if echo "$BRANCHES" | grep -q "origin/hotfix/"; then
@@ -59,7 +59,7 @@ jobs:
             echo "::error::❌ The tag was NOT created on the latest main commit, nor on a hotfix branch."
             echo "::error::Aborting the process to prevent publishing from an unauthorized state."
             exit 1
-          fi  
+          fi
 
       - name: "Determine version: stable"
         id: version
