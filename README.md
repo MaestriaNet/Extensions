@@ -114,7 +114,7 @@ There are many more extension methods available. See the full documentation:
 | [Enumerable extensions](docs/usage/enumerable.md) | `HasItems`, `IsNullOrEmpty`, `Iterate`, `TryGetValue`, `WithIndex` |
 | [Exception extensions](docs/usage/exception.md) | `GetAllMessages`, `GetMostInner` |
 | [String extensions](docs/usage/string.md) | Trimming, substring, hashing, Base64, encoding, and more |
-| [Other extensions](docs/usage/other.md) | Guid, `OutVar`, `DetachedCall`, and pipeline helpers |
+| [Other extensions](docs/usage/other.md) | `OutVar` and pipeline helpers |
 | [Data types](docs/usage/datatypes.md) | `SimpleResult`, `Try<TSuccess, TFailure>` |
 
 
