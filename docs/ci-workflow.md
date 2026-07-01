@@ -1,5 +1,14 @@
 # CI/CD Workflow Documentation
 
+## Index
+
+- [Overview](#overview)
+- [Branching Model & Release Process](#branching-model--release-process)
+- [1️⃣ Validate PR – `validate‑pr.yml`](#1️⃣-validate-pr--validateprymll)
+- [2️⃣ Publish Preview – `publish‑preview.yml`](#2️⃣-publish-preview--publishpreviewymll)
+- [3️⃣ Publish Release – `publish‑release.yml`](#3️⃣-publish-release--publishreleaseymll)
+- [Summary Flow](#summary-flow)
+
 ## Overview
 
 This repository follows a **trunk‑based development** model with `main` as the stable branch. All new work starts from `main` in a short‑lived feature branch, goes through a Pull Request (PR) validation pipeline, and is merged back into `main`. The CI system automatically creates **preview packages** for every merged PR and **stable releases** when a version tag is pushed.

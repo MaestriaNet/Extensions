@@ -2,6 +2,15 @@
 
 This module provides fluent-syntax expressions for comparing values, range checks, containment checks (`In`), value limiting, and conditional returns.
 
+## Index
+
+- [1. Range & Containment Checks (`Between`, `In`)](#1-range--containment-checks-between-in)
+- [2. Value Limiting (`LimitMinAt`, `LimitMaxAt`)](#2-value-limiting-limitminat-limitmaxat)
+- [3. Fluent Conditional Expressions (`If...Then...`)](#3-fluent-conditional-expressions-ifthen)
+- [4. `NullIf` Expressions](#4-nullif-expressions)
+- [5. Type & Nullability Checks (`IsNull`, `IsNotNull`, `IsNullOrEmpty`, `IsNullOrWhiteSpace`, `HasValue`)](#5-type--nullability-checks-isnull-isnotnull-isnullorempty-isnullorwhitespace-hasvalue)
+- [6. `EmptyIf` Extensions](#6-emptyif-extensions)
+
 ---
 
 ### 1. Range & Containment Checks (`Between`, `In`)

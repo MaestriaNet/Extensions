@@ -2,6 +2,11 @@
 
 This module provides extension methods to inspect, extract, and format exceptions and inner exception details.
 
+## Index
+
+- [1. `GetMostInner`](#1-getmostinner)
+- [2. `GetAllMessages`](#2-getallmessages)
+
 ---
 
 ### 1. `GetMostInner`

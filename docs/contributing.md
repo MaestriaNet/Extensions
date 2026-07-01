@@ -1,5 +1,16 @@
 # CONTRIBUTING TO MAESTRIA EXTENSIONS
 
+## Index
+
+- [Development Guidelines](#development-guidelines)
+- [CI/CD Workflow Overview](#cicd-workflow-overview)
+- [Building and Testing Locally](#building-and-testing-locally)
+- [Pull Request Process](#pull-request-process)
+- [Preview Packages](#preview-packages)
+- [Releasing a Stable Version - For Maintainers](#releasing-a-stable-version---for-maintainers)
+
+---
+
 ## Development Guidelines
 
 - Create file with extensions method name

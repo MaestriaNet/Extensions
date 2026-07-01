@@ -2,6 +2,11 @@
 
 This module provides utility classes (`SimpleResult` and `Try`) to make method results and error reporting much more expressive and clean, avoiding excessive exceptions.
 
+## Index
+
+- [1. `SimpleResult` & `SimpleResult<T>`](#1-simpleresult--simpleresultt)
+- [2. `Try<TSuccess, TFailure>`](#2-trytsuccess-tfailure)
+
 ---
 
 ### 1. `SimpleResult` & `SimpleResult<T>`
