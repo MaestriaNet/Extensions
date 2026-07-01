@@ -72,11 +72,22 @@ Instead of evaluating the `Then` value immediately, you can pass a delegate (`Fu
 <value>.IfGreater(10).Then(() => CalculateExpensiveValue())
 ```
 
+#### Rules
+
+- When the condition is `false`, the original `<value>` is returned unchanged.
+- When `<value>` or `<value-to-compare>` is `null`:
+  - Returns `true` only if **both** are `null` and the comparison is the equality operation `If`.
+  - Returns `true` if only one side is `null` and the operation is `IfNot` (not-equal).
+  - When `<value>` is `Nullable<T>`, `<result-if-compare-is-true>` is always of type `Nullable<T>`.
+  - When `<value>` is not `Nullable<T>`, `<result-if-compare-is-true>` may be either `Nullable<T>` or non-nullable.
+  - All other comparison operations return `false` when a value is `null`.
+- To return `null` from a comparison, use `<value>.NullIf(<value-to-compare>)` instead of `If(...).Then(null)`.
+
 #### Examples
+
 ```csharp
 using Maestria.Extensions;
 
-#### Examples
 ```csharp
 using Maestria.Extensions;
 
