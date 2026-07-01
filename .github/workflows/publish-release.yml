@@ -29,7 +29,7 @@ jobs:
           echo "Commit hash: $(git rev-parse HEAD)"
           echo "Current tag: $GITHUB_REF_NAME"
 
-      - name: Check if tag is on the latest main commit
+      - name: Check if tag is on the latest main commit or a hotfix branch
         # Informational step to validate if the tag points to the absolute HEAD of the main branch
         run: |
           # Gets the commit SHA that triggered this tag creation
@@ -41,13 +41,25 @@ jobs:
           echo "Commit triggered by tag: $TAG_COMMIT"
           echo "Latest commit on main:   $MAIN_COMMIT"
           
+          # 1. Check if the tag is on the HEAD of the main branch
           if [ "$TAG_COMMIT" = "$MAIN_COMMIT" ]; then
-            echo "✅ Validation passed: The tag is correctly pointing to the latest commit on the main branch."
-          else
-            echo "::error::❌ The tag was NOT created on the latest commit of the main branch."
-            echo "Aborting the process to prevent publishing from an outdated state."
-            exit 1
+            echo "✅ Validation passed: Tag is on the latest commit of the main branch."
+            exit 0
           fi
+          
+          # 2. If not on main, check if the commit belongs to a hotfix branch
+          # The command lists the remote branches that contain the tag's commit     
+          BRANCHES=$(git branch -r --contains $TAG_COMMIT)
+          
+          if echo "$BRANCHES" | grep -q "origin/hotfix/"; then
+            echo "✅ Validation passed: Tag is on a hotfix branch."
+            echo "Branches found: $BRANCHES"
+            exit 0
+          else
+            echo "::error::❌ The tag was NOT created on the latest main commit, nor on a hotfix branch."
+            echo "::error::Aborting the process to prevent publishing from an unauthorized state."
+            exit 1
+          fi  
 
       - name: "Determine version: stable"
         id: version
