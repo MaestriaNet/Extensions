@@ -2,6 +2,10 @@
 
 This module provides utility extension methods that assist in fluent code flow and local variable handling.
 
+## Index
+
+- [1. Variable Out-scoping (`OutVar`)](#1-variable-out-scoping-outvar)
+
 ---
 
 ### 1. Variable Out-scoping (`OutVar`)

@@ -2,6 +2,13 @@
 
 This module provides extension methods to simplify working with `IEnumerable`, arrays, dictionaries, and collections.
 
+## Index
+
+- [1. `HasItems`](#1-hasitems)
+- [2. Dictionaries (`TryGetValue`)](#2-dictionaries-trygetvalue)
+- [3. Iteration Helpers (`Iterate`)](#3-iteration-helpers-iterate)
+- [4. Indexing & String Joining (`WithIndex`, `Join`)](#4-indexing--string-joining-withindex-join)
+
 ---
 
 ### 1. `HasItems`

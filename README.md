@@ -6,6 +6,19 @@
 
 ---
 
+- [What is Maestria.Extensions?](#what-is-maestriaextensions)
+- [What is Maestria Project?](#what-is-maestria-project)
+- [Where can I get it?](#where-can-i-get-it)
+- [How do I get started?](#how-do-i-get-started)
+- [Data Types](#data-types)
+  - [SimpleResult and SimpleResult<TValue>](#simpleresult-and-simpleresulttvalue)
+  - [Try<TSuccess, TFailure>](#trytsuccess-tfailure)
+- [Settings](#settings)
+- [Full usage documentations](#full-usage-documentations)
+- [Extra documentations](#extra-documentations)
+
+---
+
 [![buy-me-a-coffee](https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/buy-me-a-coffee.png)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)
 [![smile.png](https://raw.githubusercontent.com/MaestriaNet/Extensions/master/resources/smile.png)](https://www.paypal.com/donate?hosted_button_id=8RSES6GAYH9BL)
 
@@ -20,11 +33,15 @@ If my contributions helped you, please help me buy a coffee :D
 Extension function pack to increase productivity and improve source code writing.
 By default, all extension methods are safe.
 
+---
+
 ## What is Maestria Project?
 
 This library is part of Maestria Project.
 
 Maestria is a project to provide productivity and elegance to your source code writing.
+
+---
 
 ## Where can I get it?
 
@@ -48,284 +65,98 @@ First, import "Maestria.Extensions" reference:
 using Maestria.Extensions;
 ```
 
-Then in your application code, use fluent syntax
+Then in your application code, use fluent syntax:
 
 ```csharp
-// AggregateExtenions
-<Array>.Max();
-<Array>.Min();
+// 1. Numeric rounding
+using Maestria.Extensions;
+decimal value = 3.14159m;
+var rounded = value.Round(2); // 3.14
+// Detailed: [Number extensions](docs/usage/number.md)
 
-// Base64Extensions
-<byte[]>.ToBase64(<byte[]>)
-<string>.ToBase64(<string>, <Encoding>)
+// 2. Range check
+int score = 85;
+bool isGradeB = score.Between(80, 89); // true
+// Detailed: [Comparable extensions](docs/usage/comparable.md)
 
-var decoded = <byte[]>.FromBase64(<encoded-byte[]>, <Encoding>)
-var decoded = <string>.FromBase64(<encoded-string>, <Encoding>)
+// 3. Enum display name
+DayOfWeek day = DayOfWeek.Monday;
+string name = day.GetDisplayName(); // "Monday"
+// Detailed: [Enum extensions](docs/usage/enum.md)
 
-// CollectionExtensions
-<IEnumerable>.IsNullOrEmpty()
-<IEnumerable>.HasItems()
-<IDictionary>.TryGetValue(<key>, <@default-value>)
-<IEnumerable>.Iterate(item => <action>)
-await <IEnumerable>.Iterate(async item => await <action>)
-<IEnumerable>.Iterate((item, index) => <action>)
-await <IEnumerable>.Iterate(async (item, index) => await <action>)
+// 4. Collection has items
+var list = new[] { 1, 2, 3 };
+bool has = list.HasItems(); // true
+// Detailed: [Enumerable extensions](docs/usage/enumerable.md)
 
-// EnumExtensions
-<Enum>.GetDisplayName()
-<Enum>.GetDescription()
-EnumExtensions.GetValues<TEnum>()
-EnumExtensions.GetValues(typeof(<TEnum>))
+// 5. Exception messages
+try { throw new InvalidOperationException("Invalid"); }
+catch (Exception ex) { var msg = ex.GetAllMessages(); }
+// Detailed: [Exception extensions](docs/usage/exception.md)
 
-// ExceptionExtensions
-<Exception>.GetAllMessages()
-<Exception>.GetMostInner()
+// 6. String trimming
+string path = "/folder/";
+var trimmed = path.TrimEnd("/"); // "/folder"
+// Detailed: [String extensions](docs/usage/string.md)
 
-// HashExtensions
-"value".GetHashMd5()
-"value".GetHashSha1()
-"value".GetHashSha256()
-"value".GetHashSha384()
-"value".GetHashSha512()
-HashExtensions.ComputeHash(<HashAlgorithm>, "value")
+// 7. XML escaping
+string xml = "<tag>\"Value\" & More</tag>";
+var escaped = xml.EscapeXml(); // "&lt;tag&gt;&quot;Value&quot; &amp; More&lt;/tag&gt;"
+// Detailed: [String extensions](docs/usage/string.md)
 
-// RoundExtensions
-<floating-point>.Round(<digits>)
-<floating-point>.Round(<digits>, <MidpointRounding>)
-<floating-point>.RoundUp(<digits>)
+// 8. Base64 encoding
+string text = "hello";
+var b64 = text.ToBase64(); // "aGVsbG8="
+// Detailed: [String extensions](docs/usage/string.md)
 
-// TruncateExtensions
-<floating-point>.Truncate(<digits>)
+// 9. Guid handling
+Guid guid = Guid.Empty;
+var newGuid = guid.IfEmpty().Then(Guid.NewGuid());
+// Detailed: [Other extensions](docs/usage/other.md)
 
-// StringExtensions
-<string>.TrimStart(<start-comparison>, <ignore-case>)
-<string>.TrimEnd(<start-comparison>, <ignore-case>)
-<string>.AddToBeginningIfNotStartsWith(<start-comparison>, <ignore-case>)
-<string>.AddToBeginningIfHasValue(<start-comparison>, <prefix>)
-<string>.AddToEndIfNotEndsWith(<start-comparison>, <ignore-case>)
-<string>.AddToEndIfHasValue(<start-comparison>, <prefix>)
-<string>.EscapeXml()
-<string>.Format(<values-to-format>)
-<string>.IsNullOrEmpty()
-<string>.IsNullOrWhiteSpace()
-<string>.EmptyIf(<string>)
-<string>.EmptyIfNull()
-<string>.EmptyIfNullOrWhiteSpace()
-<string>.HasValue() // Check if text is not null and not white space
-<string>.EqualsIgnoreCase(<camparison-value>, <auto-trim>)
-<string>.OnlyNumbers()
-<string>.RemoveAccents()
-<string>.Join(<separator>)
-<string>.SubstringBeforeFirstOccurrence("-")
-<string>.SubstringBeforeLastOccurrence("-")
-<string>.SubstringAfterFirstOccurrence("-")
-<string>.SubstringAfterLastOccurrence("-")
-<string>.SubstringAtOccurrenceIndex("-", 1)
-<string>.SubstringSafe(<start-index>, <length>)
-<string>.Truncate(<length>)
-<string>.TruncateStart(<length>)
-<string>.OnlyLettersOrNumbersOrUnderscoresOrHyphensTest(<string>)
-<string>.ToSnakeCase()
-
-// Guid
-<Guid>.IsEmpty()
-<Guid?>.IsNullOrEmpty()
-<string>.IsNullOrWhiteSpace()
-<Guid>.IfEmpty(<value>)
-<Guid?>.IfNullOrEmpty(<value>)
-
-// SyntaxExtensions
-<object>.IsNull()
-<object>.HasValue() or <object>.IsNotNull() // Same result
-<object>.In(<array-of-values>)
-<IComparable>.Between(<starting-value>, <ending-value>)
-<IComparable>.LimitMaxAt(<max-value>)
-<IComparable>.LimitMinAt(<min-value>)
-
-// Pipelines
-var value = <string>
+// 10. Pipeline example
+var result = "12345"
     .OnlyNumbers()
-    .DetachedCall(x => Console.WriteLine(x)) // <<< Call a method with current value and continue execution pipeline
-    .Format("mask"); // value is only the number of string formatted and only numbers are written on console
-
-<string>
-    .OnlyNumbers()
-    .OutVar(out var variableToExternalFromScopeAccess) // <<< Create variable with current value on external scope and continua execution pipeline
-    .Format("mask"); // value is only the number of string formatted and only numbers are written on console
+    .Format("{0:###-##}"); // "123-45"
+// Detailed: [String extensions](docs/usage/string.md)
 ```
 
-## If fluent expressions
-
-It's possible to execute fluent comparisons expression with the syntax: `<value>.IfGreater(<value-to-compare>).Then(<result-if-compare-is-true>)`.
-
-The methods for comparison operations are: `IfGreater`,` IfGreaterOrEqual`, `IfLest`. `IfLessOrEqual`,` If` and `IfNot`.
-
-Rules:
-
-- When condition it's `false`, result the pipeline is `<value>`.
-- When `<value>` or `<value-to-compare>` is null:
-    - Result only `true` if both are `null` and comparison is equality operation `If`.
-    - When an only value is `null`, the result is `true` if the operation is not equality comparison `IfNot`.
-    - When `<value>` is `Nullable<>`, `<result-if-compare-is-true>` always if `Nullable<>` data type.
-    - But when `<value>` is not `Nullable<>`, `<result-if-compare-is-true>` allow use `Nullable<>` and not `Nullable<>` data type.
-    - All other operations comparisons result in `false`.
-- It's possible return `null` value at `<result-if-compare-is-true>`, but then indicated syntax is `<value>.NullIf(<value-to-compare>)`.
-
-Examples:
-
-```csharp
-<IComparable>.IfGreater(10).Then(5)
-<IComparable>.IfGreaterOrEqual(10).Then(5)
-<IComparable>.IfLest(10).Then(5)
-<IComparable>.IfLessOrEqual(10).Then(5)
-<IComparable>.If(10).Then(5)
-<IComparable>.IfNot(10).Then(5)
-```
-
-Delegates expression only executes when the condition it's true.
-
-```csharp
-<IComparable>.IfGreater(10).Then(() => 5)
-<IComparable>.IfGreaterOrEqual(10).Then(() => 5)
-<IComparable>.IfLest(10).Then(() => 5)
-<IComparable>.IfLessOrEqual(10).Then(() => 5)
-<IComparable>.If(10).Then(() => 5)
-<IComparable>.IfNot(10).Then(() => 5)
-```
-
-Other fluent comparison operations:
-
-```csharp
-// IfNullExtensions
-<object>.IfNull(<output-value-when-null>)
-<string>.IfNullOrEmpty(<output-value-when-null-or-empty-string>)
-<string>.IfNullOrWhiteSpace(<output-value-when-null-or-empty-white-space>)
-
-// NullIfExtensions
-<object>.NullIf(<comparison-value>)
-<floating-point>.NullIf(<comparison-value>, <tolerance-to-comparasion>)
-
-<string>.NullIf(<comparison-value>, <ignore-case>)
-<string>.NullIfEmpty(<comparison-value>)
-<string>.NullIfWhiteSpace(<comparison-value>)
-
-<IComparable>.NullIfIn(<comparison-value>)
-<IComparable>.NullIfBetween(<comparison-value>)
-```
+---
 
 ## Data Types
 
-### ISimpleResult, SimpleResult and SimpleResult< TValue>
+The library ships with two expressive result types that eliminate boilerplate error handling:
 
-This structure has success and message for simple method result, extensible with generic TValue on "Value" property.
-
-
-```csharp
-SimpleResult ok = SimpleResult.Ok(<optional-message>);
-SimpleResult fail = SimpleResult.Fail("Fail message");
-
-// Implict conversions
-SimpleResult ok = true;
-SimpleResult fail = "Fail message"
-SimpleResult fail = new Exception("Fail message")
-
-
-// Initializer
-var result = new SimpleResult
-{
-    Success = true,
-    Message = "Successfully processed"
-}
-```
-
-To improve then development experience, there are implicit conversions to assign data **from**:
-
-- `bool`: To set or verify property `Success`.
-- `string`: To set fail message and `Success` to `false`.
-- `Exception`: To set fail message, Exception and `Success` to `false`.
-- `TValue`: To set value and `Success` to `true` (Even if null).
-
-And implicit conversions to assingn data **to**:
-
-- `bool`:
-    - `SimpleResult`: Get data from property `Success`.
-    - `SimpleResult<TValue>`: Get data from property `Success`
-- `Exception`: Get data from property `Exception`
-- `TValue`: Get data from property `Value`
-
-> *The property `SuccessAndHasValue` check if `Success == true and Value != null` in `SimpleResult<TValue>`.*
-
-> ***Caution on `SimpleResult<TValue>`:*** *Implicit comparison `if (mySimpleResultVariable)` is equivalent to `if (mySimpleResultVariable.Success)`.*  
-*Use explicit `if (mySimpleResultVariable.SuccessAndHasValue)` when result value can be null with success is true*
-
-Use cases:
+### SimpleResult and SimpleResult\<TValue\>
 
 ```csharp
-public SimpleResult Execute(Args args)
+// SimpleResult — implicit conversions keep method signatures clean
+public SimpleResult Save(Order order)
 {
-    if (args == null)
-        return "Argument cannot be null";  // <===== Implicit cast to failure result
-    try
-    {
-        // Execute actions
-        return true; // <===== Implicit cast success result
-    }
-    catch (Exception e)
-    {
-        return e; // <===== Implicit cast to failure result
-    }
-}
-
-public SimpleResult<int> Execute2(Args args)
-{
-    if (args == null)
-        return "Argument cannot be null";  // <===== Implicit cast to failure result
-    try
-    {
-        // Execute actions
-        return 10; // <===== Implicit cast success result
-    }
-    catch (Exception e)
-    {
-        return e; // <===== Implicit cast to failure result
-    }
-}
-
-// ...
-
-var result = Execute(...);
-var result2 = Execute2(...);
-
-if (result && result2) // <===== Implicit cast to boolean
-{
+    if (order == null) return "Order cannot be null"; // implicit failure
     // ...
+    return true; // implicit success
 }
 
-
+var result = Save(order);
+if (result) Console.WriteLine("Saved!");
+else        Console.WriteLine(result.Message);
 ```
 
-### Try<TSuccess, TFailure>
-
-Auxiliary data type to increment the expressibility of method results when success and failure need different structures.  
-To facilitate development there is support for implicit conversion.  
+### Try\<TSuccess, TFailure\>
 
 ```csharp
-public void Try<PersonCreated, CustomError> Save(Person value) 
-{
-    ...
-    if (condition)
-        return new CustomError() { Code = 999, Message = "Failure message" }
-    return new PersonCreated { Id = 123 };
-}
+// Try<TSuccess, TFailure> — distinct types for success and failure
+public Try<OrderCreated, ValidationError> Submit(Order order) { ... }
 
-...
-
-var result = Save(person);
-if (result)
-    Console.WriteLine(result.Value.Id);
-else
-    Console.WriteLine($"Error {result.Failure.Code}: {result.Failure.Message}");
+var r = Submit(order);
+if (r) Console.WriteLine($"Order ID: {r.Value.Id}");
+else   Console.WriteLine($"Error {r.Failure.Code}: {r.Failure.Message}");
 ```
+
+> See [docs/usage/datatypes.md](docs/usage/datatypes.md) for full documentation, implicit conversion rules, `SimpleResult<T>`, and advanced usage.
+
+---
 
 ## Settings
 
@@ -336,9 +167,25 @@ Extensions.GlobalSettings.Configure(cfg => cfg
     .FloatAndDoubleTolerance(default-float-and-double-comparasion-tolerance) // Default is 0.00001f
 ```
 
+---
+
+## Full usage documentations
+
+There are many more extension methods available. See the full documentation:
+
+| Topic                                                          | Samples methods                                                           |
+|----------------------------------------------------------------|---------------------------------------------------------------------------|
+| [Comparable & fluent expressions](docs/usage/comparable.md)    | `Between`, `In`, `LimitMinAt`, `LimitMaxAt`, fluent `If...Then`, `NullIf` |
+| [Data types](docs/usage/datatypes.md)                          | `SimpleResult`, `Try<TSuccess, TFailure>`                                 |
+| [Enum extensions](docs/usage/enum.md)                          | `GetDisplayName`, `GetDescription`, `GetValues`                           |
+| [Enumerable & collection extensions](docs/usage/enumerable.md) | `HasItems`, `IsNullOrEmpty`, `Iterate`, `TryGetValue`, `WithIndex`        |
+| [Exception extensions](docs/usage/exception.md)                | `GetAllMessages`, `GetMostInner`                                          |
+| [Number extensions](docs/usage/number.md)                      | `Round`, `RoundUp`, `Truncate` for numeric types                          |
+| [Other extensions](docs/usage/other.md)                        | `OutVar` and pipeline helpers                                             |
+| [String extensions](docs/usage/string.md)                      | Trimming, substring, hashing, Base64, encoding, and more                  |
 
 
-## Documentations
+## Extra documentations
 
 See additional documentations at [docs](docs) folder.
 

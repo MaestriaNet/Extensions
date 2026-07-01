@@ -2,6 +2,11 @@
 
 This module provides extension methods to retrieve display text, descriptions, and list values from enums.
 
+## Index
+
+- [1. Retrieve Metadata (`GetDisplayName`, `GetDescription`)](#1-retrieve-metadata-getdisplayname-getdescription)
+- [2. Retrieve All Enum Values (`GetValues`)](#2-retrieve-all-enum-values-getvalues)
+
 ---
 
 ### 1. Retrieve Metadata (`GetDisplayName`, `GetDescription`)

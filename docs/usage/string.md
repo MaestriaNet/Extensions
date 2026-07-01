@@ -2,6 +2,17 @@
 
 This module provides a rich set of string manipulation, encoding, validation, and cryptographic hashing helper methods.
 
+## Index
+
+- [1. Case & Styling Conversions](#1-case--styling-conversions)
+- [2. Substring & Truncate Safely](#2-substring--truncate-safely)
+- [3. Add to Boundaries & Trimming](#3-add-to-boundaries--trimming)
+- [4. Text Validations & Cleaning](#4-text-validations--cleaning)
+- [5. String Comparisons (`EqualsIgnoreCase`)](#5-string-comparisons-equalsignorecase)
+- [6. File Saving (`SaveAs`, `SaveAsAsync`)](#6-file-saving-saveas-saveasasync)
+- [7. Base64 & Web Encodings](#7-base64--web-encodings)
+- [8. Cryptographic Hashing (`src/Extensions/String/Hash`)](#8-cryptographic-hashing-srcextensionsstringhash)
+
 ---
 
 ### 1. Case & Styling Conversions

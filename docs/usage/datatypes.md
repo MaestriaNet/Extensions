@@ -2,17 +2,16 @@
 
 This module provides utility classes (`SimpleResult` and `Try`) to make method results and error reporting much more expressive and clean, avoiding excessive exceptions.
 
+## Index
+
+- [1. `SimpleResult` & `SimpleResult<T>`](#1-simpleresult--simpleresultt)
+- [2. `Try<TSuccess, TFailure>`](#2-trytsuccess-tfailure)
+
 ---
 
 ### 1. `SimpleResult` & `SimpleResult<T>`
 
 A lightweight model holding a `Success` status, an optional `Message`, and an optional `Exception`. It also includes implicit conversions to and from common primitives like `bool`, `string`, `Exception`, and the underlying generic value.
-
-#### Implicit Conversions Support
-- **From `bool`**: Automatically maps to `Success = value`.
-- **From `string`**: Automatically sets `Success = false` and assigns the string to `Message` (representing a failure message).
-- **From `Exception`**: Automatically sets `Success = false` and assigns the exception message and object.
-- **From `TValue`** (in `SimpleResult<TValue>`): Sets `Success = true` and assigns the value to the `Value` property.
 
 #### Examples
 ```csharp
@@ -46,6 +45,21 @@ else
     Console.WriteLine($"Error: {result.Message}");
 }
 ```
+
+#### Implicit Conversions Support
+
+- **From `bool`**: Automatically maps to `Success = value`.
+- **From `string`**: Automatically sets `Success = false` and assigns the string to `Message` (representing a failure message).
+- **From `Exception`**: Automatically sets `Success = false` and assigns the exception message and object.
+- **From `TValue`** (in `SimpleResult<TValue>`): Sets `Success = true` and assigns the value to the `Value` property.
+- **To** `bool`, `Exception`, or `TValue`: Gets data from respective property.
+
+**SimpleResult\<TValue\>:**
+
+There is a property `SuccessAndHasValue` for check if `Success == true and Value != null`, but implicit cast always is from/to `Success`.
+
+> ***Caution on `SimpleResult<TValue>`:*** *Implicit comparison `if (mySimpleResultVariable)` is equivalent to `if (mySimpleResultVariable.Success)`.*  
+*Use explicit `if (mySimpleResultVariable.SuccessAndHasValue)` when result value can be null with success is true*
 
 ---
 

@@ -2,6 +2,15 @@
 
 This module provides fluent-syntax expressions for comparing values, range checks, containment checks (`In`), value limiting, and conditional returns.
 
+## Index
+
+- [1. Range & Containment Checks (`Between`, `In`)](#1-range--containment-checks-between-in)
+- [2. Value Limiting (`LimitMinAt`, `LimitMaxAt`)](#2-value-limiting-limitminat-limitmaxat)
+- [3. Fluent Conditional Expressions (`If...Then...`)](#3-fluent-conditional-expressions-ifthen)
+- [4. `NullIf` Expressions](#4-nullif-expressions)
+- [5. Type & Nullability Checks (`IsNull`, `IsNotNull`, `IsNullOrEmpty`, `IsNullOrWhiteSpace`, `HasValue`)](#5-type--nullability-checks-isnull-isnotnull-isnullorempty-isnullorwhitespace-hasvalue)
+- [6. `EmptyIf` Extensions](#6-emptyif-extensions)
+
 ---
 
 ### 1. Range & Containment Checks (`Between`, `In`)
@@ -72,11 +81,22 @@ Instead of evaluating the `Then` value immediately, you can pass a delegate (`Fu
 <value>.IfGreater(10).Then(() => CalculateExpensiveValue())
 ```
 
+#### Rules
+
+- When the condition is `false`, the original `<value>` is returned unchanged.
+- When `<value>` or `<value-to-compare>` is `null`:
+  - Returns `true` only if **both** are `null` and the comparison is the equality operation `If`.
+  - Returns `true` if only one side is `null` and the operation is `IfNot` (not-equal).
+  - When `<value>` is `Nullable<T>`, `<result-if-compare-is-true>` is always of type `Nullable<T>`.
+  - When `<value>` is not `Nullable<T>`, `<result-if-compare-is-true>` may be either `Nullable<T>` or non-nullable.
+  - All other comparison operations return `false` when a value is `null`.
+- To return `null` from a comparison, use `<value>.NullIf(<value-to-compare>)` instead of `If(...).Then(null)`.
+
 #### Examples
+
 ```csharp
 using Maestria.Extensions;
 
-#### Examples
 ```csharp
 using Maestria.Extensions;
 

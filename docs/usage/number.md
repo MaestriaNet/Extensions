@@ -5,6 +5,12 @@ This module provides extension methods to simplify the manipulation, rounding, a
 > [!NOTE]
 > All extension methods in Maestria.Extensions are **null-safe** by design. If the input value is `null`, the method will return `null` without throwing a `NullReferenceException`.
 
+## Index
+
+- [1. `Round`](#1-round)
+- [2. `RoundUp`](#2-roundup)
+- [3. `Truncate`](#3-truncate)
+
 ---
 
 ### 1. `Round`
