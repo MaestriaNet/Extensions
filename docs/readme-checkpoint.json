@@ -1,0 +1,15 @@
+# Checkpoint: Documentation Migration status
+
+- Language: English
+- Target Directory: docs/usage/
+
+## Progress Tracking
+
+- [x] **docs/usage/number.md** (Finished - Numeric extensions)
+- [x] **docs/usage/comparable.md** (Finished - Comparable/If/In/Between expressions)
+- [x] **docs/usage/enum.md** (Finished - Enum extensions)
+- [x] **docs/usage/enumerable.md** (Finished - IEnumerable/Collection extensions)
+- [x] **docs/usage/exception.md** (Finished - Exception extensions)
+- [x] **docs/usage/string.md** (Finished - String extensions)
+- [x] **docs/usage/other.md** (Finished - Base64, Guid, Hash, etc.)
+- [x] **docs/usage/datatypes.md** (Finished - SimpleResult, Try)
