@@ -15,7 +15,7 @@ public static partial class MaestriaExtensions
         if (value.IsNullOrWhiteSpace())
             return value ?? string.Empty;
 
-        value = value.Replace('_', '-');
+        value = value!.Replace('_', '-');
         return value.Select((x, i) =>
         {
             if (i > 0 && value![i - 1] != '-')
