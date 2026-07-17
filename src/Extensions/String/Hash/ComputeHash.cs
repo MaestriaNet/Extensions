@@ -1,6 +1,9 @@
 using System;
-using System.Security.Cryptography;
 using System.Text;
+
+#if NET5_0_OR_GREATER
+using System.Security.Cryptography;
+#endif
 
 namespace Maestria.Extensions;
 
