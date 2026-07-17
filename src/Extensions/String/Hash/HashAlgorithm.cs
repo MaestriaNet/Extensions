@@ -24,7 +24,7 @@ public static partial class MaestriaExtensions
         HashAlgorithm.Sha256 => SHA256.Create(),
         HashAlgorithm.Sha384 => SHA384.Create(),
         HashAlgorithm.Sha512 => SHA512.Create(),
-        _ => throw new ArgumentOutOfRangeException(nameof(value)),
+        _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Invalid hash algorithm specified.")
     };
 
     public static System.Security.Cryptography.HashAlgorithm GetHasher(this HashAlgorithm value)
