@@ -9,6 +9,8 @@ namespace Maestria.Extensions;
 
 public static partial class MaestriaExtensions
 {
+    private const string UnsupportedPlatformForHasher = "{0} is not supported on this platform. Requires OpenSSL 1.1.1+ on Linux or Windows 11 (Build 25324+).";
+    
     /// <summary>
     /// Calculates the hash for the given string.
     /// </summary>
@@ -24,7 +26,7 @@ public static partial class MaestriaExtensions
 
         encoding ??= GlobalSettings.Properties.DefaultEncoding;
 
-#if NET5_0_OR_GREATER
+#if NET8_0_OR_GREATER
         var hashBytes = algorithm switch
         {
             HashAlgorithm.Md5 => MD5.HashData(encoding.GetBytes(value)),
@@ -32,6 +34,28 @@ public static partial class MaestriaExtensions
             HashAlgorithm.Sha256 => SHA256.HashData(encoding.GetBytes(value)),
             HashAlgorithm.Sha384 => SHA384.HashData(encoding.GetBytes(value)),
             HashAlgorithm.Sha512 => SHA512.HashData(encoding.GetBytes(value)),
+            HashAlgorithm.Sha3_256 => SHA3_256.IsSupported
+                ? SHA3_256.HashData(encoding.GetBytes(value))
+                : throw new PlatformNotSupportedException(UnsupportedPlatformForHasher.Format("SHA3-256")),
+            HashAlgorithm.Sha3_384 => SHA3_384.IsSupported
+                ? SHA3_384.HashData(encoding.GetBytes(value))
+                : throw new PlatformNotSupportedException(UnsupportedPlatformForHasher.Format( "SHA3-384")),
+            HashAlgorithm.Sha3_512 => SHA3_512.IsSupported
+                ? SHA3_512.HashData(encoding.GetBytes(value))
+                : throw new PlatformNotSupportedException(UnsupportedPlatformForHasher.Format("SHA3-512")),
+            _ => throw new ArgumentOutOfRangeException(nameof(algorithm)),
+        };
+        return hashBytes.HashBytesToString();
+#elif NET5_0_OR_GREATER
+        var hashBytes = algorithm switch
+        {
+            HashAlgorithm.Md5 => MD5.HashData(encoding.GetBytes(value)),
+            HashAlgorithm.Sha1 => SHA1.HashData(encoding.GetBytes(value)),
+            HashAlgorithm.Sha256 => SHA256.HashData(encoding.GetBytes(value)),
+            HashAlgorithm.Sha384 => SHA384.HashData(encoding.GetBytes(value)),
+            HashAlgorithm.Sha512 => SHA512.HashData(encoding.GetBytes(value)),
+            HashAlgorithm.Sha3_256 or HashAlgorithm.Sha3_384 or HashAlgorithm.Sha3_512
+                => throw new PlatformNotSupportedException("SHA3 algorithms require .NET 8 or later."),
             _ => throw new ArgumentOutOfRangeException(nameof(algorithm)),
         };
         return hashBytes.HashBytesToString();
