@@ -55,7 +55,14 @@ public class HashExtensionsTest
     {
         Assert.Throws<ArgumentNullException>(() =>
         {
+            MaestriaExtensions.ToHash(null, HashAlgorithm.Md5);
+        });
+
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+#pragma warning disable CS0618
             MaestriaExtensions.ComputeHash(null, HashAlgorithm.Md5);
+#pragma warning restore CS0618
         });
     }
 }

@@ -6,7 +6,7 @@ public static partial class MaestriaExtensions
     /// Calculates the SHA-384 hash for the given string.
     /// </summary>
     /// <returns>A 96 char long hash.</returns>
-    public static string ToHashSha384(this string value) => value.ComputeHash(HashAlgorithm.Sha384);
+    public static string ToHashSha384(this string value) => value.ToHash(HashAlgorithm.Sha384);
 
     /// <summary>
     /// Calculates the SHA-384 hash for the given string.

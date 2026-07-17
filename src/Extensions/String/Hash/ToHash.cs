@@ -17,7 +17,7 @@ public static partial class MaestriaExtensions
     /// <param name="encoding"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static string ComputeHash(this string value, HashAlgorithm algorithm, Encoding? encoding = null)
+    public static string ToHash(this string value, HashAlgorithm algorithm, Encoding? encoding = null)
     {
         if (value == null)
             throw new ArgumentNullException(nameof(value), "Null value to encrypt not supported.");
@@ -36,7 +36,7 @@ public static partial class MaestriaExtensions
         };
         return hashBytes.HashBytesToString();
 #else
-        return value.ComputeHash(algorithm.GetHasher(), encoding);
+        return value.ToHash(algorithm.GetHasher(), encoding);
 #endif
     }
 
@@ -48,7 +48,19 @@ public static partial class MaestriaExtensions
     /// <param name="encoding"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static string ComputeHash(this string value, System.Security.Cryptography.HashAlgorithm algorithm, Encoding? encoding = null)
+    [Obsolete("Use ToHash instead.")]
+    public static string ComputeHash(this string value, HashAlgorithm algorithm, Encoding? encoding = null) =>
+        value.ToHash(algorithm, encoding);
+
+    /// <summary>
+    /// Calculates the hash for the given string.
+    /// </summary>
+    /// <param name="algorithm"></param>
+    /// <param name="value"></param>
+    /// <param name="encoding"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    public static string ToHash(this string value, System.Security.Cryptography.HashAlgorithm algorithm, Encoding? encoding = null)
     {
         if (value == null)
             throw new ArgumentNullException(nameof(value), "Null value to encrypt not supported.");
@@ -58,6 +70,18 @@ public static partial class MaestriaExtensions
         var hashBytes = algorithm.ComputeHash(inputBytes);
         return hashBytes.HashBytesToString();
     }
+
+    /// <summary>
+    /// Calculates the hash for the given string.
+    /// </summary>
+    /// <param name="algorithm"></param>
+    /// <param name="value"></param>
+    /// <param name="encoding"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    [Obsolete("Use ToHash instead.")]
+    public static string ComputeHash(this string value, System.Security.Cryptography.HashAlgorithm algorithm, Encoding? encoding = null) =>
+        value.ToHash(algorithm, encoding);
     
     private static string HashBytesToString(this byte[] hashBytes)
     {
