@@ -10,7 +10,7 @@ namespace Maestria.Extensions;
 public static partial class MaestriaExtensions
 {
     private const string UnsupportedPlatformForHasher = "{0} is not supported on this platform. Requires OpenSSL 1.1.1+ on Linux or Windows 11 (Build 25324+).";
-    
+
     /// <summary>
     /// Calculates the hash for the given string.
     /// </summary>
@@ -88,7 +88,7 @@ public static partial class MaestriaExtensions
     {
         if (value == null)
             throw new ArgumentNullException(nameof(value), "Null value to encrypt not supported.");
-        
+
         encoding ??= GlobalSettings.Properties.DefaultEncoding;
         var inputBytes = encoding.GetBytes(value);
         var hashBytes = algorithm.ComputeHash(inputBytes);
@@ -106,12 +106,18 @@ public static partial class MaestriaExtensions
     [Obsolete("Use ToHash instead.")]
     public static string ComputeHash(this string value, System.Security.Cryptography.HashAlgorithm algorithm, Encoding? encoding = null) =>
         value.ToHash(algorithm, encoding);
-    
+
     private static string HashBytesToString(this byte[] hashBytes)
     {
-        var hash = new StringBuilder();
+#if NET9_0_OR_GREATER
+        return Convert.ToHexStringLower(hashBytes);
+#elif NET5_0_OR_GREATER
+        return Convert.ToHexString(hashBytes).ToLowerInvariant();
+#else
+        var hash = new StringBuilder(hashBytes.Length * 2);
         foreach (var b in hashBytes)
-            hash.Append($"{b:x2}");
+            hash.AppendFormat("{0:x2}", b);
         return hash.ToString();
+#endif
     }
 }
