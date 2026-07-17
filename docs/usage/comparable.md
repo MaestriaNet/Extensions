@@ -5,7 +5,7 @@ This module provides fluent-syntax expressions for comparing values, range check
 ## Index
 
 - [1. Range & Containment Checks (`Between`, `In`)](#1-range--containment-checks-between-in)
-- [2. Value Limiting (`LimitMinAt`, `LimitMaxAt`)](#2-value-limiting-limitminat-limitmaxat)
+- [2. Value Limiting (`LimitToMin`, `LimitToMax`)](#2-value-limiting-limittomin-limittomax)
 - [3. Fluent Conditional Expressions (`If...Then...`)](#3-fluent-conditional-expressions-ifthen)
 - [4. `NullIf` Expressions](#4-nullif-expressions)
 - [5. Type & Nullability Checks (`IsNull`, `IsNotNull`, `IsNullOrEmpty`, `IsNullOrWhiteSpace`, `HasValue`)](#5-type--nullability-checks-isnull-isnotnull-isnullorempty-isnullorwhitespace-hasvalue)
@@ -44,20 +44,27 @@ bool isSouthAmerica = country.In("Brazil", "Argentina", "Chile", "Uruguay"); // 
 
 ---
 
-### 2. Value Limiting (`LimitMinAt`, `LimitMaxAt`)
+### 2. Value Limiting (`LimitToMin`, `LimitToMax`)
 
 Allows you to easily constrain comparable values to defined boundaries.
 
-- **`LimitMinAt`**: Restricts a value to a minimum threshold (returns the threshold if the value is lower).
-- **`LimitMaxAt`**: Restricts a value to a maximum threshold (returns the threshold if the value is higher).
+- **`LimitToMin`**: Restricts a value to a minimum threshold (returns the threshold if the value is lower).
+- **`LimitToMax`**: Restricts a value to a maximum threshold (returns the threshold if the value is higher).
+
+> [!NOTE]
+> `LimitMinAt` and `LimitMaxAt` are obsolete and have been renamed to `LimitToMin` and `LimitToMax` to maintain naming consistency.
 
 #### Examples
 ```csharp
 using Maestria.Extensions;
 
 int value = 150;
-int maxCapped = value.LimitMaxAt(100); // Returns 100
-int minCapped = value.LimitMinAt(200); // Returns 200
+int maxCapped = value.LimitToMax(100); // Returns 100
+int minCapped = value.LimitToMin(200); // Returns 200
+
+// Obsolete methods still work but trigger compiler warnings:
+int oldMax = value.LimitMaxAt(100); // Returns 100
+int oldMin = value.LimitMinAt(200); // Returns 200
 ```
 
 ---

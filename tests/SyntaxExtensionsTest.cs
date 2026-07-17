@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xunit;
 
 namespace Maestria.Extensions.Test.CSharp;
@@ -18,19 +18,39 @@ public class SyntaxExtensionsTest
     }
 
     [Fact]
+    public void LimitToMaxTest()
+    {
+        Assert.Equal(10, 10.LimitToMax(15));
+        Assert.Equal(15, 15.LimitToMax(15));
+        Assert.Equal(15, 20.LimitToMax(15));
+    }
+
+    [Fact]
+    public void LimitToMinTest()
+    {
+        Assert.Equal(15, 10.LimitToMin(15));
+        Assert.Equal(15, 15.LimitToMin(15));
+        Assert.Equal(20, 20.LimitToMin(15));
+    }
+
+    [Fact]
     public void LimitMaxAtTest()
     {
+#pragma warning disable CS0618
         Assert.Equal(10, 10.LimitMaxAt(15));
         Assert.Equal(15, 15.LimitMaxAt(15));
         Assert.Equal(15, 20.LimitMaxAt(15));
+#pragma warning restore CS0618
     }
 
     [Fact]
     public void LimitMinAtTest()
     {
+#pragma warning disable CS0618
         Assert.Equal(15, 10.LimitMinAt(15));
         Assert.Equal(15, 15.LimitMinAt(15));
         Assert.Equal(20, 20.LimitMinAt(15));
+#pragma warning restore CS0618
     }
 
     // Tests from F# SyntaxExtensionsTest - In

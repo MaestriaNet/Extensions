@@ -11,7 +11,7 @@ This module provides a rich set of string manipulation, encoding, validation, an
 - [5. String Comparisons (`EqualsIgnoreCase`)](#5-string-comparisons-equalsignorecase)
 - [6. File Saving (`SaveAs`, `SaveAsAsync`)](#6-file-saving-saveas-saveasasync)
 - [7. Base64 & Web Encodings](#7-base64--web-encodings)
-- [8. Cryptographic Hashing (`src/Extensions/String/Hash`)](#8-cryptographic-hashing-srcextensionsstringhash)
+- [8. Cryptographic Hashing (`ToHash*`) (`src/Extensions/String/Hash`)](#8-cryptographic-hashing-tohash-srcextensionsstringhash)
 
 ---
 
@@ -192,21 +192,49 @@ string rawQuery = query.UrlDecode();      // "hello world"
 
 ---
 
-### 8. Cryptographic Hashing (`src/Extensions/String/Hash`)
+### 8. Cryptographic Hashing (`ToHash*`) (`src/Extensions/String/Hash`)
 
 Retrieve common cryptographic hash signatures fluently from strings or byte arrays.
 
 #### Hash Methods
-- **`GetHashMd5()`**
-- **`GetHashSha1()`**
-- **`GetHashSha256()`**
-- **`GetHashSha384()`**
-- **`GetHashSha512()`**
+- **`ToHash(algorithm, encoding)`**: Calculates the hash for the given string using a specified `HashAlgorithm` enum value.
+- **`ToHashMd5()`**: Returns MD5 hash (32 hex chars).
+- **`ToHashSha1()`**: Returns SHA-1 hash (40 hex chars).
+- **`ToHashSha256()`**: Returns SHA-256 hash (64 hex chars).
+- **`ToHashSha384()`**: Returns SHA-384 hash (96 hex chars).
+- **`ToHashSha512()`**: Returns SHA-512 hash (128 hex chars).
+- **`ToHashSha3_256()`**: Returns SHA3-256 hash (64 hex chars). *Requires .NET 8+ and OS support.*
+- **`ToHashSha3_384()`**: Returns SHA3-384 hash (96 hex chars). *Requires .NET 8+ and OS support.*
+- **`ToHashSha3_512()`**: Returns SHA3-512 hash (128 hex chars). *Requires .NET 8+ and OS support.*
+
+> [!NOTE]
+> `ComputeHash` and the older `GetHash*` methods are obsolete and have been renamed to `ToHash` and `ToHash*` for consistency. They still work but trigger compiler warnings.
+> Cryptographic hashing methods do not accept `null` input and will throw `ArgumentNullException`.
 
 #### Examples
 ```csharp
 using Maestria.Extensions;
 
 string secret = "password123";
-string sha256Signature = secret.GetHashSha256(); // Returns hex hash representation
+
+// Direct algorithm methods
+string md5 = secret.ToHashMd5();
+string sha256 = secret.ToHashSha256();
+
+// General ToHash method
+string sha384 = secret.ToHash(HashAlgorithm.Sha384);
+
+// SHA-3 (Guarded by .NET 8+ and OS platform support)
+#if NET8_0_OR_GREATER
+if (System.Security.Cryptography.SHA3_256.IsSupported)
+{
+    string sha3_256 = secret.ToHashSha3_256();
+}
+#endif
+
+// Obsolete methods still work but trigger warnings:
+#pragma warning disable CS0618
+string oldSha256 = secret.GetHashSha256();
+string oldCompute = secret.ComputeHash(HashAlgorithm.Sha256);
+#pragma warning restore CS0618
 ```
