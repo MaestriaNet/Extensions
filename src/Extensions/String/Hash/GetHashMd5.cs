@@ -6,5 +6,5 @@ public static partial class MaestriaExtensions
     /// Calculates the MD5 hash for the given string.
     /// </summary>
     /// <returns>A 32 char long hash.</returns>
-    public static string GetHashMd5(this string value) => ComputeHash(value, HashAlgorithm.Md5);
+    public static string GetHashMd5(this string value) => value.ComputeHash(HashAlgorithm.Md5);
 }
