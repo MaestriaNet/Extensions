@@ -43,7 +43,7 @@ public static partial class MaestriaExtensions
             HashAlgorithm.Sha3_512 => SHA3_512.IsSupported
                 ? SHA3_512.HashData(encoding.GetBytes(value))
                 : throw new PlatformNotSupportedException(UnsupportedPlatformForHasher.Format("SHA3-512")),
-            _ => throw new ArgumentOutOfRangeException(nameof(algorithm)),
+            _ => throw new ArgumentOutOfRangeException(nameof(algorithm), algorithm, "Invalid hash algorithm specified."),
         };
         return hashBytes.HashBytesToString();
 #elif NET5_0_OR_GREATER
@@ -56,7 +56,7 @@ public static partial class MaestriaExtensions
             HashAlgorithm.Sha512 => SHA512.HashData(encoding.GetBytes(value)),
             HashAlgorithm.Sha3_256 or HashAlgorithm.Sha3_384 or HashAlgorithm.Sha3_512
                 => throw new PlatformNotSupportedException("SHA3 algorithms require .NET 8 or later."),
-            _ => throw new ArgumentOutOfRangeException(nameof(algorithm)),
+            _ => throw new ArgumentOutOfRangeException(nameof(algorithm), algorithm, "Invalid hash algorithm specified."),
         };
         return hashBytes.HashBytesToString();
 #else
