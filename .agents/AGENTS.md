@@ -19,3 +19,7 @@ This file defines global behaviors, coding styles, and project rules for AI codi
 - Ensure new extension methods has documentation in folder `docs/usage`.
 - If need create checkpoint file, put in folder `./.agents/checkpoints`.
 - Ensure that the markdown file has an index section.
+
+## The Engineer (@engineer)
+
+- Always test application with command: `dotnet test` on the root directory.
