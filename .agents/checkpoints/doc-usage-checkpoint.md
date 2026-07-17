@@ -14,7 +14,7 @@ Keep the directory structure organized and consistent with document method by ma
 ## Tracking
 
 - [x] **docs/usage/comparable.md**: `Between`, `EmptyIf`, `EmptyIfNull`, `EmptyIfNullOrWhiteSpace`, `HasValue`, `If`, `IfEmpty`, `IfGreater`, `IfGreaterOrEqual`, `IfLess`, `IfLessOrEqual`, `IfNotEqual`, `IfNull`, `IfNullOrEmpty`, `IfNullOrWhiteSpace`, `In`, `IsNotNull`, `IsNull`, `IsNullOrEmpty`, `IsNullOrWhiteSpace`, `LimitToMax`, `LimitToMin`, `NullIf`, `NullIfBetween`, `NullIfEmpty`, `NullIfIn`, `NullIfWhiteSpace`
-- [x] **docs/usage/datatypes.md**: `SimpleResult`, `Try`
+- [x] **docs/usage/datatypes.md**: `Result`, `SimpleResult`, `Try`
 - [x] **docs/usage/enum.md**: `GetDescription`, `GetDisplayName`, `GetValues`
 - [x] **docs/usage/enumerable.md**: `HasItems`, `Iterate`, `Join`, `TryGetValue`, `WithIndex`
 - [x] **docs/usage/exception.md**: `GetAllMessages`, `GetMostInner`

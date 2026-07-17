@@ -4,62 +4,71 @@ This module provides utility classes (`SimpleResult` and `Try`) to make method r
 
 ## Index
 
-- [1. `SimpleResult` & `SimpleResult<T>`](#1-simpleresult--simpleresultt)
+- [1. `Result` & `Result<T>` (Obsoleted `SimpleResult`)](#1-result--resultt-obsoleted-simpleresult)
 - [2. `Try<TSuccess, TFailure>`](#2-trytsuccess-tfailure)
 
 ---
 
-### 1. `SimpleResult` & `SimpleResult<T>`
+### 1. `Result` & `Result<T>` (Obsoleted `SimpleResult`)
 
-A lightweight model holding a `Success` status, an optional `Message`, and an optional `Exception`. It also includes implicit conversions to and from common primitives like `bool`, `string`, `Exception`, and the underlying generic value.
+An immutable, lightweight structure containing a `Success` status, an optional `Message`, and an optional `Exception`. It provides deconstruction support, and implicit primitive conversions.
+
+> [!IMPORTANT]
+> `SimpleResult` and `ISimpleResult` are deprecated. Use `Result` and `IResult` instead.
+> Unlike `SimpleResult`, the new `Result` struct is strictly immutable (`readonly struct`), which prevents bugs related to mutable structs.
 
 #### Examples
 ```csharp
 using Maestria.Extensions;
 
-// Implicit casting to return SimpleResult
-public SimpleResult ProcessOrder(int orderId)
+// 1. Fluent Creation & Deconstruction
+public Result<int> GetUserAge(string userId)
 {
-    if (orderId <= 0)
-        return "Invalid Order ID"; // Implicit cast to Failure with message
-        
-    try 
+    if (string.IsNullOrWhiteSpace(userId))
+        return "User ID cannot be empty"; // Implicitly cast to Failure
+
+    try
     {
-        // Processing...
-        return true; // Implicit cast to Success
+        int age = FetchAgeFromDb(userId);
+        return age; // Implicitly cast to Success (Result<int>)
     }
     catch (Exception ex)
     {
-        return ex; // Implicit cast to Failure with Exception details
+        return ex; // Implicitly cast to Failure with Exception details
     }
 }
 
-// Consuming results fluently
-var result = ProcessOrder(10);
-if (result) // Implicitly casts to bool (result.Success)
-{
-    Console.WriteLine("Processed!");
-}
+// Verify success by implicitly operator
+var result = GetUserAge("user_123");
+if (result)
+    Console.WriteLine($"Age: {age}");
 else
-{
-    Console.WriteLine($"Error: {result.Message}");
-}
+    Console.WriteLine($"Error: {message}");
+
+// Consuming with Deconstruction:
+var (success, age, message) = result;
+
+// 2. Functional Mapping & Binding
+var finalizedResult = GetUserAge("user_123")
+    .Map(age => $"User is {age} years old")               // Result<int> -> Result<string>
+    .Bind(text => SendNotification(text));                // Result<string> -> Result (void)
 ```
 
 #### Implicit Conversions Support
 
-- **From `bool`**: Automatically maps to `Success = value`.
-- **From `string`**: Automatically sets `Success = false` and assigns the string to `Message` (representing a failure message).
-- **From `Exception`**: Automatically sets `Success = false` and assigns the exception message and object.
-- **From `TValue`** (in `SimpleResult<TValue>`): Sets `Success = true` and assigns the value to the `Value` property.
-- **To** `bool`, `Exception`, or `TValue`: Gets data from respective property.
+- **From `bool`**: Maps to `Success = value`.
+- **From `string`** (only on non-generic `Result`): Sets `Success = false` and assigns the string to `Message` (representing a failure).
+- **From `Exception`**: Sets `Success = false` and assigns the exception details.
+- **From `TValue`** (in `Result<TValue>`): Sets `Success = true` and assigns the value to `Value`.
+- **To `bool`**: Returns `Success` for `Result`. For `Result<TValue>`, it returns `SuccessAndHasValue` (guaranteeing that the value is not null when `true`).
+- **To `TValue`**: Returns the `Value`.
+- **To `Exception`**: Returns the `Exception`.
 
-**SimpleResult\<TValue\>:**
+> ***Caution on string ambiguity resolved:*** *In `Result<TValue>`, the implicit conversion from `string` to Failure is removed to prevent compiler errors when `TValue` is a `string` (which would conflict with the conversion to Success). Use `Result<string>.Fail(message)` explicitly when returning a string-based failure.*
 
-There is a property `SuccessAndHasValue` for check if `Success == true and Value != null`, but implicit cast always is from/to `Success`.
+#### Operations
 
-> ***Caution on `SimpleResult<TValue>`:*** *Implicit comparison `if (mySimpleResultVariable)` is equivalent to `if (mySimpleResultVariable.Success)`.*  
-*Use explicit `if (mySimpleResultVariable.SuccessAndHasValue)` when result value can be null with success is true*
+- **`Deconstruct`**: Allows destructuring a Result into tuple patterns (e.g. `var (success, value, message) = result;`).
 
 ---
 
@@ -71,8 +80,16 @@ A discriminated union type for expressing method outputs that can yield two comp
 ```csharp
 using Maestria.Extensions;
 
-public class UserCreated { public int Id { get; set; } }
-public class ErrorDetail { public int Code { get; set; } public string Error { get; set; } }
+public class UserCreated 
+{
+    public int Id { get; set; }
+}
+
+public class ErrorDetail 
+{
+    public int Code { get; set; }
+    public string Error { get; set; }
+}
 
 public Try<UserCreated, ErrorDetail> RegisterUser(string username)
 {

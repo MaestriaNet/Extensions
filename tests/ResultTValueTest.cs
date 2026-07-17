@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Maestria.Extensions.Test.CSharp;
 
-public class SimpleResultTValueTest
+public class ResultTValueTest
 {
     const string ErrorMessage = "Test";
 
@@ -14,14 +14,14 @@ public class SimpleResultTValueTest
     [Fact]
     public void FailConstructorTest()
     {
-        var result = new SimpleResult<PersonEntity>();
+        var result = new Result<PersonEntity>();
         Assert.False(result.Success);
         Assert.False(result);
         Assert.Null(result.Message);
         Assert.Null(result.Value);
         Assert.False(result.HasValue);
 
-        result = new SimpleResult<PersonEntity>(new Exception(ErrorMessage));
+        result = new Result<PersonEntity>(new Exception(ErrorMessage));
         Assert.False(result.Success);
         Assert.False(result);
         Assert.Equal(ErrorMessage, result.Message);
@@ -32,7 +32,7 @@ public class SimpleResultTValueTest
     [Fact]
     public void SuccessConstructorTest()
     {
-        var result = new SimpleResult<PersonEntity>(_person);
+        var result = new Result<PersonEntity>(_person);
         Assert.True(result.Success);
         Assert.True(result);
         Assert.Null(result.Message);
@@ -40,7 +40,7 @@ public class SimpleResultTValueTest
         Assert.True(result.HasValue);
         Assert.True(result.SuccessAndHasValue);
 
-        result = new SimpleResult<PersonEntity>(true, _person);
+        result = new Result<PersonEntity>(true, _person);
         Assert.True(result.Success);
         Assert.True(result);
         Assert.Null(result.Message);
@@ -52,7 +52,7 @@ public class SimpleResultTValueTest
     [Fact]
     public void SuccessImplicitTest()
     {
-        SimpleResult<PersonEntity> result = true;
+        Result<PersonEntity> result = true;
         Assert.True(result.Success);
         Assert.True(result);
         Assert.Null(result.Message);
@@ -72,7 +72,7 @@ public class SimpleResultTValueTest
     [Fact]
     public void SuccessImpliciWithNullValueTest()
     {
-        SimpleResult<PersonEntity> result = _nullPerson;
+        Result<PersonEntity> result = _nullPerson;
         Assert.True(result.Success);
         Assert.True(result);
         Assert.Null(result.Message);
@@ -92,7 +92,7 @@ public class SimpleResultTValueTest
     [Fact]
     public void FailImplicitTest()
     {
-        SimpleResult<PersonEntity> result = false;
+        Result<PersonEntity> result = false;
         Assert.False(result.Success);
         Assert.False(result);
         Assert.Null(result.Message);
@@ -100,28 +100,28 @@ public class SimpleResultTValueTest
         Assert.False(result.HasValue);
         Assert.False(result.SuccessAndHasValue);
 
-        result = ErrorMessage;
-        Assert.False(result.Success);
-        Assert.False(result);
-        Assert.Equal(ErrorMessage, result.Message);
-        Assert.Null(result.Value);
-        Assert.False(result.HasValue);
-        Assert.False(result.SuccessAndHasValue);
+        Result<PersonEntity> result2 = ErrorMessage;
+        Assert.False(result2.Success);
+        Assert.False(result2);
+        Assert.Equal(ErrorMessage, result2.Message);
+        Assert.Null(result2.Value);
+        Assert.False(result2.HasValue);
+        Assert.False(result2.SuccessAndHasValue);
 
-        result = new Exception(ErrorMessage);
-        Assert.False(result.Success);
-        Assert.False(result);
-        Assert.Equal(ErrorMessage, result.Message);
-        Assert.Null(result.Value);
-        Assert.False(result.HasValue);
-        Assert.False(result.SuccessAndHasValue);
+        Result<PersonEntity> result3 = new Exception(ErrorMessage);
+        Assert.False(result3.Success);
+        Assert.False(result3);
+        Assert.Equal(ErrorMessage, result3.Message);
+        Assert.Null(result3.Value);
+        Assert.False(result3.HasValue);
+        Assert.False(result3.SuccessAndHasValue);
     }
 
     [Fact]
     public void SuccessImplicitTValueToSimpleTest()
     {
-        SimpleResult<PersonEntity> result1 = _person;
-        SimpleResult result2 = result1;
+        Result<PersonEntity> result1 = _person;
+        Result result2 = result1;
         Assert.Equal(result1.Success, result2.Success);
         Assert.Equal(result1.Message, result2.Message);
         Assert.Equal(result1.Exception, result2.Exception);
@@ -134,8 +134,8 @@ public class SimpleResultTValueTest
     [Fact]
     public void FailImplicitTValueToSimpleTest()
     {
-        SimpleResult<PersonEntity> result1 = new Exception(ErrorMessage);
-        SimpleResult result2 = result1;
+        Result<PersonEntity> result1 = new Exception(ErrorMessage);
+        Result result2 = result1;
         Assert.Equal(result1.Success, result2.Success);
         Assert.Equal(result1.Message, result2.Message);
         Assert.Equal(result1.Exception, result2.Exception);
@@ -144,5 +144,21 @@ public class SimpleResultTValueTest
         Assert.Equal(ErrorMessage, result2.Message);
         Assert.NotNull(result2.Exception);
     }
+}
+
+public class PersonEntity
+{
+    public PersonEntity()
+    {
+    }
+
+    public PersonEntity(int id, string nome)
+    {
+        Id = id;
+        Nome = nome;
+    }
+
+    public int Id { get; set; }
+    public string Nome { get; set; }
 }
 #pragma warning restore CS0618
