@@ -18,30 +18,35 @@ public class HashExtensionsTest
     [Fact]
     public void MD5HashTest()
     {
+        Assert.Equal(Md5Expected, InputValue.ToHashMd5());
         Assert.Equal(Md5Expected, InputValue.GetHashMd5());
     }
 
     [Fact]
     public void SHA1HashTest()
     {
+        Assert.Equal(Sha1Expected, InputValue.ToHashSha1());
         Assert.Equal(Sha1Expected, InputValue.GetHashSha1());
     }
 
     [Fact]
     public void SHA256HashTest()
     {
+        Assert.Equal(Sha256Expected, InputValue.ToHashSha256());
         Assert.Equal(Sha256Expected, InputValue.GetHashSha256());
     }
 
     [Fact]
     public void SHA384HashTest()
     {
+        Assert.Equal(Sha384Expected, InputValue.ToHashSha384());
         Assert.Equal(Sha384Expected, InputValue.GetHashSha384());
     }
 
     [Fact]
     public void SHA512HashTest()
     {
+        Assert.Equal(Sha512Expected, InputValue.ToHashSha512());
         Assert.Equal(Sha512Expected, InputValue.GetHashSha512());
     }
 
