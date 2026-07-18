@@ -1,3 +1,4 @@
+#pragma warning disable CS0618
 using System;
 using Xunit;
 
@@ -74,3 +75,4 @@ public class SimpleResultTest
         Assert.Equal(0, destinationLostingValue.Value);
     }
 }
+#pragma warning restore CS0618

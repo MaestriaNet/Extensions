@@ -22,4 +22,5 @@ This file defines global behaviors, coding styles, and project rules for AI codi
 
 ## The Engineer (@engineer)
 
-- Always test application with command: `dotnet test` on the root directory.
+- If you create, remove, or change the signature of methods, you must update the corresponding tests and documentation.
+- Always validate changes by testing the application with command `dotnet test` on the root directory.

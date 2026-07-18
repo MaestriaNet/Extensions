@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 
 namespace Maestria.Extensions;
 
 /// <summary>
 /// This structure has success and message for simple method result.
 /// </summary>
+[Obsolete("Use IResult instead.")]
 public interface ISimpleResult
 {
     bool Success { get; }
@@ -15,6 +16,7 @@ public interface ISimpleResult
 /// <summary>
 /// This structure has success and message for simple method result, extensible with generic TValue on "Value" property.
 /// </summary>
+[Obsolete("Use IResult<TValue> instead.")]
 public interface ISimpleResult<TValue> : ISimpleResult
 {
     TValue? Value { get; }
@@ -23,6 +25,7 @@ public interface ISimpleResult<TValue> : ISimpleResult
 }
 
 /// <inheritdoc/>>
+[Obsolete("Use Result instead.")]
 public struct SimpleResult : ISimpleResult
 {
     public SimpleResult(bool success, string? message = null, Exception? exception = null)
@@ -54,6 +57,7 @@ public struct SimpleResult : ISimpleResult
 }
 
 /// <inheritdoc/>>
+[Obsolete("Use Result<TValue> instead.")]
 public struct SimpleResult<TValue> : ISimpleResult<TValue>
 {
     public SimpleResult(TValue? value, string? message = null)

@@ -10,6 +10,7 @@ public static partial class MaestriaExtensions
     /// </summary>
     /// <param name="value">Source Exception</param>
     /// <returns></returns>
+    [Obsolete("Use default method GetBaseException from the native exception class.")]
     public static Exception? GetMostInner(this Exception? value) =>
         value?.InnerException == null ? value : value.InnerException.GetMostInner();
 }
