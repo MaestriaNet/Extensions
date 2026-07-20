@@ -1,5 +1,6 @@
 #pragma warning disable CS0618
 using System;
+using Maestria.Extensions.Test.CSharp.TestEntities;
 using Xunit;
 
 namespace Maestria.Extensions.Test.CSharp;
@@ -146,19 +147,4 @@ public class ResultTValueTest
     }
 }
 
-public class PersonEntity
-{
-    public PersonEntity()
-    {
-    }
-
-    public PersonEntity(int id, string nome)
-    {
-        Id = id;
-        Nome = nome;
-    }
-
-    public int Id { get; set; }
-    public string Nome { get; set; }
-}
 #pragma warning restore CS0618

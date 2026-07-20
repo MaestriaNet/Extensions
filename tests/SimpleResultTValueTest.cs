@@ -1,5 +1,6 @@
 #pragma warning disable CS0618
 using System;
+using Maestria.Extensions.Test.CSharp.TestEntities;
 using Xunit;
 
 namespace Maestria.Extensions.Test.CSharp;

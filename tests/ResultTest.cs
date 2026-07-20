@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using Maestria.Extensions;
+using Maestria.Extensions.Test.CSharp.TestEntities;
 
 namespace Maestria.Extensions.Test.CSharp;
 
