@@ -17,8 +17,6 @@ Keep the directory structure organized and consistent with document method by ma
 - [x] **docs/usage/datatypes.md**: `Result`, `SimpleResult`, `Try`
 - [x] **docs/usage/enum.md**: `GetDescription`, `GetDisplayName`, `GetValues`
 - [x] **docs/usage/enumerable.md**: `HasItems`, `Iterate`, `Join`, `TryGetValue`, `WithIndex`
-- [x] **docs/usage/exception.md**: `GetAllMessages`, `GetMostInner`
 - [x] **docs/usage/number.md**: `Round`, `RoundUp`, `Truncate`
 - [x] **docs/usage/other.md**: `OutVar`
 - [x] **docs/usage/string.md**: `AddToBeginningIfHasValue`, `AddToBeginningIfNotStartsWith`, `AddToEndIfHasValue`, `AddToEndIfNotEndsWith`, `EscapeXml`, `EqualsIgnoreCase`, `FromBase64`, `OnlyLettersOrNumbersOrUnderscoresOrHyphens`, `OnlyLettersOrNumbersOrUnderscoresOrHyphensOrSpaces`, `OnlyNumbers`, `RemoveAccents`, `SaveAs`, `SaveAsAsync`, `SubstringAfterFirstOccurrence`, `SubstringAfterLastOccurrence`, `SubstringAtOccurrenceIndex`, `SubstringBeforeFirstOccurrence`, `SubstringBeforeLastOccurrence`, `SubstringSafe`, `ToBase64`, `ToHash`, `ToHashMd5`, `ToHashSha1`, `ToHashSha256`, `ToHashSha384`, `ToHashSha512`, `ToHashSha3_256`, `ToHashSha3_384`, `ToHashSha3_512`, `ToKebabCase`, `ToSnakeCase`, `TrimEnd`, `TrimStart`, `Truncate`, `TruncateStart`, `UrlDecode`, `UrlEncode`
-

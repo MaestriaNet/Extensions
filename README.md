@@ -11,7 +11,7 @@
 - [Where can I get it?](#where-can-i-get-it)
 - [How do I get started?](#how-do-i-get-started)
 - [Data Types](#data-types)
-  - [SimpleResult and SimpleResult<TValue>](#simpleresult-and-simpleresulttvalue)
+  - [Result and Result<TValue>](#result-and-resulttvalue)
   - [Try<TSuccess, TFailure>](#trytsuccess-tfailure)
 - [Settings](#settings)
 - [Full usage documentations](#full-usage-documentations)
@@ -127,11 +127,11 @@ var result = "12345"
 
 The library ships with two expressive result types that eliminate boilerplate error handling:
 
-### SimpleResult and SimpleResult\<TValue\>
+### Result and Result\<TValue\>
 
 ```csharp
-// SimpleResult — implicit conversions keep method signatures clean
-public SimpleResult Save(Order order)
+// Result — implicit conversions keep method signatures clean
+public Result Save(Order order)
 {
     if (order == null) return "Order cannot be null"; // implicit failure
     // ...
@@ -154,7 +154,7 @@ if (r) Console.WriteLine($"Order ID: {r.Value.Id}");
 else   Console.WriteLine($"Error {r.Failure.Code}: {r.Failure.Message}");
 ```
 
-> See [docs/usage/datatypes.md](docs/usage/datatypes.md) for full documentation, implicit conversion rules, `SimpleResult<T>`, and advanced usage.
+> See [docs/usage/datatypes.md](docs/usage/datatypes.md) for full documentation, implicit conversion rules, `Result<T>`, and advanced usage.
 
 ---
 
@@ -175,11 +175,10 @@ There are many more extension methods available. See the full documentation:
 
 | Topic                                                          | Samples methods                                                           |
 |----------------------------------------------------------------|---------------------------------------------------------------------------|
-| [Comparable & fluent expressions](docs/usage/comparable.md)    | `Between`, `In`, `LimitMinAt`, `LimitMaxAt`, fluent `If...Then`, `NullIf` |
-| [Data types](docs/usage/datatypes.md)                          | `SimpleResult`, `Try<TSuccess, TFailure>`                                 |
+| [Comparable & fluent expressions](docs/usage/comparable.md)    | `Between`, `In`, `LimitToMin`, `LimitToMax`, fluent `If...Then`, `NullIf` |
+| [Data types](docs/usage/datatypes.md)                          | `Result`, `Try<TSuccess, TFailure>`                                       |
 | [Enum extensions](docs/usage/enum.md)                          | `GetDisplayName`, `GetDescription`, `GetValues`                           |
 | [Enumerable & collection extensions](docs/usage/enumerable.md) | `HasItems`, `IsNullOrEmpty`, `Iterate`, `TryGetValue`, `WithIndex`        |
-| [Exception extensions](docs/usage/exception.md)                | `GetAllMessages`, `GetMostInner`                                          |
 | [Number extensions](docs/usage/number.md)                      | `Round`, `RoundUp`, `Truncate` for numeric types                          |
 | [Other extensions](docs/usage/other.md)                        | `OutVar` and pipeline helpers                                             |
 | [String extensions](docs/usage/string.md)                      | Trimming, substring, hashing, Base64, encoding, and more                  |

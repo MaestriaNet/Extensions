@@ -33,26 +33,6 @@ public class SyntaxExtensionsTest
         Assert.Equal(20, 20.LimitToMin(15));
     }
 
-    [Fact]
-    public void LimitMaxAtTest()
-    {
-#pragma warning disable CS0618
-        Assert.Equal(10, 10.LimitMaxAt(15));
-        Assert.Equal(15, 15.LimitMaxAt(15));
-        Assert.Equal(15, 20.LimitMaxAt(15));
-#pragma warning restore CS0618
-    }
-
-    [Fact]
-    public void LimitMinAtTest()
-    {
-#pragma warning disable CS0618
-        Assert.Equal(15, 10.LimitMinAt(15));
-        Assert.Equal(15, 15.LimitMinAt(15));
-        Assert.Equal(20, 20.LimitMinAt(15));
-#pragma warning restore CS0618
-    }
-
     // Tests from F# SyntaxExtensionsTest - In
     [Theory]
     [InlineData(MyColor.Red, new[] { MyColor.Red, MyColor.Green, MyColor.Blue })]
