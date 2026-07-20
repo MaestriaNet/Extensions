@@ -152,9 +152,9 @@ else   Console.WriteLine($"Error {r.Failure.Code}: {r.Failure.Message}");
 It's possible set default settings for library:
 
 ```csharp
-MaestriaExtensionsSettings.Configure(cfg => cfg
-    .FloatingPointTolerance(default-float-and-double-comparasion-tolerance) // Default is 0.00001f.
-    .DefaultEncoding(encoding) // Default if Encoding.UTF8.
+MaestriaExtensionsSettings.Configure(config => config
+    .FloatingPointTolerance(<default-float-and-double-comparasion-tolerance>) // Default is 0.00001f
+    .DefaultEncoding(<encoding>) // Default if Encoding.UTF8
 ```
 
 ---
