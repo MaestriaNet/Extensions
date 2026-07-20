@@ -16,8 +16,8 @@ This repository follows a **trunk‑based development** model with `main` as the
 The workflow is driven by three GitHub Actions:
 
 1. **Validate PR** – runs on every PR opened or updated to ensure the code builds and tests successfully.
-2. **Publish Preview** – triggered when a PR is merged into `main`; it builds a preview NuGet package and pushes it to MyGet.
-3. **Publish Release** – triggered by a tag push (e.g., `v1.2.3`); it validates the tag location, builds the stable package, publishes to MyGet and NuGet, and creates a GitHub Release.
+2. **Publish Preview** – triggered when a PR is merged into `main`; it builds a preview NuGet package and pushes it to [MyGet](https://www.myget.org/feed/Packages/maestrianet).
+3. **Publish Release** – triggered by a tag push (e.g., `v1.2.3`); it validates the tag location, builds the stable package, publishes to [MyGet](https://www.myget.org/feed/Packages/maestrianet) and NuGet, and creates a GitHub Release.
 
 Below each section describes the purpose, trigger conditions, and key steps of these workflows.
 
