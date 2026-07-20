@@ -234,12 +234,11 @@ public class CollectionExtensionsTest
             }
         }
     }
-
-    // Tests from F# CollectionExtensionsTest
+    
     [Fact]
     public void Iterate_ArrayForEachExecute()
     {
-        _array.Iterate(i => Assert.True(new[] {1, 2, 3, 4, 5}.Contains(i)));
+        _array.Iterate(i => Assert.Contains(i, new[] {1, 2, 3, 4, 5}));
     }
 
     [Fact]

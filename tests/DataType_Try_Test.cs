@@ -12,8 +12,8 @@ public class DataType_Try_Test
         {
             Assert.NotNull(result.Value);
             Assert.Null(result.Failure);
-            Assert.Equal(true, result.Success);
-            Assert.Equal(false, result.Failed);
+            Assert.True(result.Success);
+            Assert.False(result.Failed);
 
             TestOk implicitCastSuccess = result;
             TestError implicitCastFailure = result;
@@ -34,8 +34,8 @@ public class DataType_Try_Test
         {
             Assert.Null(result.Value);
             Assert.NotNull(result.Failure);
-            Assert.Equal(false, result.Success);
-            Assert.Equal(true, result.Failed);
+            Assert.False(result.Success);
+            Assert.True(result.Failed);
 
             TestOk implicitCastSuccess = result;
             TestError implicitCastFailure = result;
@@ -50,8 +50,8 @@ public class DataType_Try_Test
         var result = TryTestMockStruct(true);
         if (result)
         {
-            Assert.Equal(true, result.Success);
-            Assert.Equal(false, result.Failed);
+            Assert.True(result.Success);
+            Assert.False(result.Failed);
 
             TestOkStruct implicitCastSuccess = result;
             TestErrorStruct implicitCastFailure = result;
@@ -70,8 +70,8 @@ public class DataType_Try_Test
             Assert.Fail();
         else
         {
-            Assert.Equal(false, result.Success);
-            Assert.Equal(true, result.Failed);
+            Assert.False(result.Success);
+            Assert.True(result.Failed);
 
             TestOkStruct implicitCastSuccess = result;
             TestErrorStruct implicitCastFailure = result;
