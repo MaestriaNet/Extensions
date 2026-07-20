@@ -1,4 +1,4 @@
-#if !NET5_0_OR_GREATER
+#if NETSTANDARD2_0
 using System;
 
 namespace Maestria.Extensions.Attributes;
@@ -13,5 +13,4 @@ internal sealed class NotNullWhenFakeAttribute : Attribute
     {
     }
 }
-
 #endif
