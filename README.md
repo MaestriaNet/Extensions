@@ -45,16 +45,10 @@ Maestria is a project to provide productivity and elegance to your source code w
 
 ## Where can I get it?
 
-First, [install NuGet](http://docs.nuget.org/docs/start-here/installing-nuget). Then, install [Maestria.Extensions](https://www.nuget.org/packages/Maestria.Extensions/) from the package manager console:
+Install the [Maestria.Extensions](https://www.nuget.org/packages/Maestria.Extensions/) using the command line:
 
 ```bash
-PM> Install-Package Maestria.Extensions
-```
-
-or install from the dotnet cli command line:
-
-```bash
-> dotnet add package Maestria.Extensions
+dotnet add package Maestria.Extensions
 ```
 
 ## How do I get started?
@@ -89,32 +83,27 @@ var list = new[] { 1, 2, 3 };
 bool has = list.HasItems(); // true
 // Detailed: [Enumerable extensions](docs/usage/enumerable.md)
 
-// 5. Exception messages
-try { throw new InvalidOperationException("Invalid"); }
-catch (Exception ex) { var msg = ex.GetAllMessages(); }
-// Detailed: [Exception extensions](docs/usage/exception.md)
-
-// 6. String trimming
+// 5. String trimming
 string path = "/folder/";
 var trimmed = path.TrimEnd("/"); // "/folder"
 // Detailed: [String extensions](docs/usage/string.md)
 
-// 7. XML escaping
+// 6. XML escaping
 string xml = "<tag>\"Value\" & More</tag>";
 var escaped = xml.EscapeXml(); // "&lt;tag&gt;&quot;Value&quot; &amp; More&lt;/tag&gt;"
 // Detailed: [String extensions](docs/usage/string.md)
 
-// 8. Base64 encoding
+// 7. Base64 encoding
 string text = "hello";
 var b64 = text.ToBase64(); // "aGVsbG8="
 // Detailed: [String extensions](docs/usage/string.md)
 
-// 9. Guid handling
+// 8. Guid handling
 Guid guid = Guid.Empty;
 var newGuid = guid.IfEmpty().Then(Guid.NewGuid());
 // Detailed: [Other extensions](docs/usage/other.md)
 
-// 10. Pipeline example
+// 9. Pipeline example
 var result = "12345"
     .OnlyNumbers()
     .Format("{0:###-##}"); // "123-45"

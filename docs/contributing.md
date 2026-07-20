@@ -29,8 +29,8 @@ The project follows a **trunk‑based development** model with `main` as the sta
 ### Main Pipelines
 
 1. **Validate PR** – Runs on every PR opened or updated. It checks out the code, sets up .NET 10.0, builds the solution, and runs the test suite. The PR cannot be merged until this workflow succeeds.
-2. **Publish Preview** – Triggered when a PR is merged into `main`. It determines a preview version (e.g., `2.1.2-preview.pr-61`), builds the package and publishes it to the MyGet feed for downstream testing.
-3. **Publish Release** – Triggered by pushing a tag matching `vX.Y.Z`. It validates that the tag is on the latest `main` commit (or a `hotfix/*` branch), builds the stable package and publishes it to both MyGet and NuGet, then creates a GitHub Release.
+2. **Publish Preview** – Triggered when a PR is merged into `main`. It determines a preview version (e.g., `2.1.2-preview.pr-61`), builds the package and publishes it to the [MyGet](https://www.myget.org/feed/Packages/maestrianet) for downstream testing.
+3. **Publish Release** – Triggered by pushing a tag matching `vX.Y.Z`. It validates that the tag is on the latest `main` commit (or a `hotfix/*` branch), builds the stable package and publishes it to both [MyGet](https://www.myget.org/feed/Packages/maestrianet) and NuGet, then creates a GitHub Release.
 
 ## Building and Testing Locally
 
