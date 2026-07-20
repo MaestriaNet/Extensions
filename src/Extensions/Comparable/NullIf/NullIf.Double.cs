@@ -5,13 +5,13 @@ namespace Maestria.Extensions;
 public static partial class MaestriaExtensions
 {
     public static double? NullIf(this double value, double equalityValue) =>
-        NullIf(value, equalityValue, GlobalSettings.Properties.FloatAndDoubleTolerance);
+        NullIf(value, equalityValue, MaestriaExtensionsSettings.Properties.FloatingPointTolerance);
 
     public static double? NullIf(this double value, double equalityValue, double tolerance) =>
         Math.Abs(value - equalityValue) < tolerance ? (double?) null : value;
 
     public static double? NullIf(this double? value, double? equalityValue) =>
-        NullIf(value, equalityValue, GlobalSettings.Properties.FloatAndDoubleTolerance);
+        NullIf(value, equalityValue, MaestriaExtensionsSettings.Properties.FloatingPointTolerance);
 
     public static double? NullIf(this double? value, double? equalityValue, double tolerance) =>
         value.HasValue && equalityValue.HasValue
