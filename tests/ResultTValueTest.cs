@@ -1,5 +1,6 @@
 #pragma warning disable CS0618
 using System;
+using Maestria.Extensions.Test.CSharp.TestEntities;
 using Xunit;
 
 namespace Maestria.Extensions.Test.CSharp;
@@ -100,21 +101,21 @@ public class ResultTValueTest
         Assert.False(result.HasValue);
         Assert.False(result.SuccessAndHasValue);
 
-        Result<PersonEntity> result2 = ErrorMessage;
-        Assert.False(result2.Success);
-        Assert.False(result2);
-        Assert.Equal(ErrorMessage, result2.Message);
-        Assert.Null(result2.Value);
-        Assert.False(result2.HasValue);
-        Assert.False(result2.SuccessAndHasValue);
+        result = ErrorMessage;
+        Assert.False(result.Success);
+        Assert.False(result);
+        Assert.Equal(ErrorMessage, result.Message);
+        Assert.Null(result.Value);
+        Assert.False(result.HasValue);
+        Assert.False(result.SuccessAndHasValue);
 
-        Result<PersonEntity> result3 = new Exception(ErrorMessage);
-        Assert.False(result3.Success);
-        Assert.False(result3);
-        Assert.Equal(ErrorMessage, result3.Message);
-        Assert.Null(result3.Value);
-        Assert.False(result3.HasValue);
-        Assert.False(result3.SuccessAndHasValue);
+        result = new Exception(ErrorMessage);
+        Assert.False(result.Success);
+        Assert.False(result);
+        Assert.Equal(ErrorMessage, result.Message);
+        Assert.Null(result.Value);
+        Assert.False(result.HasValue);
+        Assert.False(result.SuccessAndHasValue);
     }
 
     [Fact]
@@ -126,7 +127,7 @@ public class ResultTValueTest
         Assert.Equal(result1.Message, result2.Message);
         Assert.Equal(result1.Exception, result2.Exception);
 
-        Assert.Equal(true, result2.Success);
+        Assert.True(result2.Success);
         Assert.Null(result2.Message);
         Assert.Null(result2.Exception);
     }
@@ -140,25 +141,9 @@ public class ResultTValueTest
         Assert.Equal(result1.Message, result2.Message);
         Assert.Equal(result1.Exception, result2.Exception);
 
-        Assert.Equal(false, result2.Success);
+        Assert.False(result2.Success);
         Assert.Equal(ErrorMessage, result2.Message);
         Assert.NotNull(result2.Exception);
     }
-}
-
-public class PersonEntity
-{
-    public PersonEntity()
-    {
-    }
-
-    public PersonEntity(int id, string nome)
-    {
-        Id = id;
-        Nome = nome;
-    }
-
-    public int Id { get; set; }
-    public string Nome { get; set; }
 }
 #pragma warning restore CS0618

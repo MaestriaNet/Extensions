@@ -13,14 +13,4 @@ public static partial class MaestriaExtensions
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
     public static T LimitToMin<T>(this T value, T minValue) where T : IComparable => value.CompareTo(minValue) < 0 ? minValue : value;
-
-    /// <summary>
-    /// If <paramref name="minValue"/> it's smaller of <paramref name="value"/> return <paramref name="minValue"/>
-    /// </summary>
-    /// <param name="value"></param>
-    /// <param name="minValue">Lower value limit</param>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    [Obsolete("Use LimitToMin instead.")]
-    public static T LimitMinAt<T>(this T value, T minValue) where T : IComparable => value.LimitToMin(minValue);
 }
