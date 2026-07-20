@@ -24,7 +24,7 @@ public static partial class MaestriaExtensions
         if (value == null)
             throw new ArgumentNullException(nameof(value), "Null value to encrypt not supported.");
 
-        encoding ??= GlobalSettings.Properties.DefaultEncoding;
+        encoding ??= MaestriaExtensionsSettings.Properties.DefaultEncoding;
 
 #if NET8_0_OR_GREATER
         var hashBytes = algorithm switch
@@ -77,7 +77,7 @@ public static partial class MaestriaExtensions
         if (value == null)
             throw new ArgumentNullException(nameof(value), "Null value to encrypt not supported.");
 
-        encoding ??= GlobalSettings.Properties.DefaultEncoding;
+        encoding ??= MaestriaExtensionsSettings.Properties.DefaultEncoding;
         var inputBytes = encoding.GetBytes(value);
         var hashBytes = algorithm.ComputeHash(inputBytes);
         return hashBytes.HashBytesToString();
