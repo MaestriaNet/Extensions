@@ -1,8 +1,9 @@
 using System;
 using Xunit;
+
 // ReSharper disable InconsistentNaming
 
-namespace Maestria.Extensions.Test.CSharp;
+namespace Maestria.Extensions.Tests;
 
 #region Not nullable
 

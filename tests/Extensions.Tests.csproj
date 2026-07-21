@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <AssemblyName>Maestria.Extensions.Test.CSharp</AssemblyName>
+        <AssemblyName>Maestria.Extensions.Tests</AssemblyName>
         <IsPackable>false</IsPackable>
         <LangVersion>14</LangVersion>
         <OutputType>Exe</OutputType>
-        <RootNamespace>Maestria.Extensions.Test.CSharp</RootNamespace>
+        <RootNamespace>Maestria.Extensions.Tests</RootNamespace>
         <TargetFrameworks>net10.0;net9.0;net8.0</TargetFrameworks>
         <RollForward>LatestMajor</RollForward>
     </PropertyGroup>

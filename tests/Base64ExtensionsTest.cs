@@ -1,8 +1,7 @@
 using System.Text;
 using Xunit;
-using Maestria.Extensions;
 
-namespace Maestria.Extensions.Test.CSharp;
+namespace Maestria.Extensions.Tests;
 
 public class Base64ExtensionsTest
 {

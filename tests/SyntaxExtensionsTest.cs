@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace Maestria.Extensions.Test.CSharp;
+namespace Maestria.Extensions.Tests;
 
 public class SyntaxExtensionsTest
 {
