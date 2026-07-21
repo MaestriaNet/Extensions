@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Xunit;
 
-namespace Maestria.Extensions.Test.CSharp;
+namespace Maestria.Extensions.Tests;
 
 public enum Color
 {

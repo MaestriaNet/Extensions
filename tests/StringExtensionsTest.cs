@@ -2,7 +2,7 @@ using System.Globalization;
 using System.Linq;
 using Xunit;
 
-namespace Maestria.Extensions.Test.CSharp;
+namespace Maestria.Extensions.Tests;
 
 public class StringExtensionsTest
 {

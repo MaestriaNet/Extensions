@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace Maestria.Extensions.Test.CSharp;
+namespace Maestria.Extensions.Tests;
 
 public class Consts
 {

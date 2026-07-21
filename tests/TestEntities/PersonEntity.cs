@@ -1,4 +1,4 @@
-namespace Maestria.Extensions.Test.CSharp.TestEntities;
+namespace Maestria.Extensions.Tests.TestEntities;
 
 public class PersonEntity
 {

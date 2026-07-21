@@ -1,9 +1,9 @@
 #pragma warning disable CS0618
 using System;
-using Maestria.Extensions.Test.CSharp.TestEntities;
+using Maestria.Extensions.Tests.TestEntities;
 using Xunit;
 
-namespace Maestria.Extensions.Test.CSharp;
+namespace Maestria.Extensions.Tests;
 
 public class ResultTValueTest
 {

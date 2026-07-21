@@ -1,8 +1,7 @@
 using System;
-using Maestria.Extensions;
 using Xunit;
 
-namespace Maestria.Extensions.Test.CSharp;
+namespace Maestria.Extensions.Tests;
 
 public class NullIfTest
 {
